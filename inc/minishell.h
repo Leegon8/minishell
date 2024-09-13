@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/09 11:31:49 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:46:02 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@
 
 /******************************** Structs Simplification ******************/
 
-typedef struct s_history t_hist;
-typedef	struct s_env t_env;
+typedef struct s_history	t_hist;
+typedef struct s_env		t_env;
+typedef struct s_mshll		t_mshll;
 
 /******************************** Structs *********************************/
 
@@ -56,26 +57,26 @@ struct	s_env
 	char	*home;
 };
 
-/******************************* Functions ********************************/
+/******************************* ms_init **********************************/
+
+int		init_structs(t_env *env, t_hist *hist, t_mshll *msh);
+
+/******************************* ms_parser ********************************/
+
+char	*parse_path(char **env);
+char	*parse_pwd(char **env);
+
+/******************************* ms_tokenizer *****************************/
+
+char	*ft_strtok(char *str, const char *separator);
+
+/******************************* ms_rline *********************************/
 
 char	*command_generator(const char *text, int state);
 char	**command_completion(const char *text, int start, int end);
 char	*file_generator(const char *text, int state);
-char	*parse_path(char **env);
 
-/******************************* Parsing **********************************/
-
-char	*ft_strtok(char *str, const char *separator);
-char	*parse_pwd(char **env);
-
-/******************************* Tokenizer ********************************/
-
-/******************************* Initialize *******************************/
-
-int	init_structs(t_env *env, t_hist *hist, t_mshll *msh);
-
-/******************************* Executor *********************************/
-
+/******************************* ms_executor ******************************/
 
 /******************************* Error macros *****************************/
 
