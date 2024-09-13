@@ -6,7 +6,7 @@
 #    By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2024/09/12 17:31:20 by lprieto-         ###   ########.fr        #
+#    Updated: 2024/09/13 22:48:19 by lauriago         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ RM = rm -rf
 # **************************************************************************** #
 
 SRCS = minishell.c ms_init.c ms_tokenizer.c ms_parser.c ms_lexer.c ms_rline.c \
+	ms_build.c \
 
 SRC_PATH := ./src/
 OBJ_PATH := ./tmp/

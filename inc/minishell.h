@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/13 16:46:02 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/13 22:45:14 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ char	**command_completion(const char *text, int start, int end);
 char	*file_generator(const char *text, int state);
 
 /******************************* ms_executor ******************************/
+
+
+/********************************** echo *********************************/
+int	num_arg(char **av);
+char	*ft_echo(char **av);
 
 /******************************* Error macros *****************************/
 

@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/13 16:48:49 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/13 22:49:48 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	main(int argc, char **argv, char **envs)
 			rl_clear_history();
 		if (ft_strncmp("clear", input, 5) == 0) /* clear :D */
 			printf("%s", CLEAR);
+		if (ft_strncmp("echo", input, 4) == 0)
+			ft_echo(argv);
 	//	if (ft_strncmp("ls", input, 2))     /* execve rompe el bucle */
 	//		execve("/bin/ls", argv, NULL);
 		free(input);
