@@ -158,6 +158,10 @@ int main(int argc, char **argv, char **envs)
 		//*tokens = ft_strtok(argv[1], " ");
         if (*input)
             add_history(input);
+		if (ft_strncmp("clearh", input, 6) == 0) /* Este condicional borra el historial en base al comando clear */
+			rl_clear_history();
+		if (ft_strncmp("clear", input, 5) == 0) /* Este comando hace exactamente lo que hace clear :D */
+			printf("\033[2J\033[H");
 		//execve("/bin/ls", argv, NULL);
         free(input);
     }
