@@ -126,10 +126,11 @@ char	*ft_strtok(char *str, const char *separator)
 	return (start);
 }
 
-int	init_structs(t_env *env, t_hist *hist)
+int	init_structs(t_env *env, t_hist *hist, t_mshll *msh)
 {
 	ft_bzero(env, sizeof(t_env));
-	ft_bzero(hist, sizeof(t_hist));	
+	ft_bzero(hist, sizeof(t_hist));
+	ft_bzero(msh, sizeof(t_mshll));
 	return (0);
 }
 
@@ -138,6 +139,7 @@ int main(int argc, char **argv, char **envs)
 	char *input;
 	t_hist	hist;
 	t_env	env;
+	t_mshll	msh;
 	//char **tokens = NULL;
 	char	*pwd;
 
@@ -146,10 +148,10 @@ int main(int argc, char **argv, char **envs)
 		ft_fd_printf(2, "%s", E_EXECARG);
 		exit (0);
 	}
-	init_structs(&env, &hist);
+	init_structs(&env, &hist, &msh);
 	pwd = parse_pwd(envs);
 	printf("pwd: %s\n", pwd);
-	while(1)
+	while(msh.end_sig == 0)
 	{
 		rl_attempted_completion_function = command_completion;
 		input = readline("\033[1;96m 👽 Space 🛸 shell $\e[0m> ");
@@ -161,8 +163,9 @@ int main(int argc, char **argv, char **envs)
 		if (ft_strncmp("clearh", input, 6) == 0) /* Este condicional borra el historial en base al comando clear */
 			rl_clear_history();
 		if (ft_strncmp("clear", input, 5) == 0) /* Este comando hace exactamente lo que hace clear :D */
-			printf("\033[2J\033[H");
-		//execve("/bin/ls", argv, NULL);
+			printf("%s", CLEAR);
+	//	if (ft_strncmp("ls", input, 2))     /* Este if rompe el bucle pase lo que pase, aun no se por que, pero da igual es de test */
+	//		execve("/bin/ls", argv, NULL);
         free(input);
     }
 

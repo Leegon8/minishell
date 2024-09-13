@@ -44,6 +44,11 @@ struct	s_history
 	int		capacity;
 };
 
+struct	s_mshll
+{
+	int		end_sig;
+};
+
 struct	s_env
 {
 	char	*path;
@@ -67,7 +72,7 @@ char	*parse_pwd(char **env);
 
 /******************************* Initialize *******************************/
 
-int	init_structs(t_env *env, t_hist *hist);
+int	init_structs(t_env *env, t_hist *hist, t_mshll *msh);
 
 /******************************* Executor *********************************/
 
@@ -96,6 +101,7 @@ int	init_structs(t_env *env, t_hist *hist);
 # define PK		"\033[0;35m"
 # define PP		"\033[1;35m"
 # define CY		"\033[1;36m"
+# define CLEAR	"\033[2J\033[H"
 # define F		"\033[0m"
 
 #endif
