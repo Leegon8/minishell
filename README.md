@@ -7,25 +7,25 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
   
 <table>
   <tr>
-    <td align="center" width="400">Lauriane González</td>
-    <td align="center" width="400">Luis Prieto</td>
+    <td align="center" width="260">Lauriane González</td>
+    <td align="center" width="260">Luis Prieto</td>
   </tr>
   <tr>
-    <td align="center" width="400"><img width="150" src="https://github.com/user-attachments/assets/56c69eeb-005d-48fd-b0b5-8ff97d3dc170" /></td>
-    <td align="center" width="400"><img width="150" src="https://github.com/LLuisPP/ONCE-scalian/assets/116104082/18bf3bbf-ec5f-489b-82e6-ca878ecdde1d" /></td>
+    <td align="center"><br><img width="150" src="https://github.com/user-attachments/assets/2e57f619-5dd7-4a7c-8f43-2a05d8d82722" /><br><br></td>
+    <td align="center"><br><img width="150" src="https://github.com/user-attachments/assets/e9a907a4-e31e-458f-a8c5-823420e87756" /><br><br></td>
   </tr>
-    <td align="center" width="400">Desarrolladora</td>
-    <td align="center" width="400">Desarrollador</td>
+    <td align="center">Desarrolladora</td>
+    <td align="center">Desarrollador</td>
   </tr>
   <tr>
-    <td align="center" width="400">42 login: lauriago</td>
-    <td align="center" width="400">42 login: lprieto-</td>
+    <td align="center">42 login: lauriago</td>
+    <td align="center">42 login: lprieto-</td>
   </tr>
 </table>
 
 </div>
 
-# Descriptión and requirements
+# Description and requirements
 
 <h3 weight="bold">The proyect consists in develop a bash shell like program.</h3>
 
@@ -37,22 +37,21 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
 <div align="center">
 <table>
   <tr>
-    <td align="center" width="130">Language</td>
+    <td align="center" width="100">Language</td>
     <td align="center">Builtins</td>
-    <td align="center" width="700">Functions allowed</td>
+    <td align="center" width="550">Functions allowed</td>
   </tr>
   <tr>
-    <td align="center"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="70" height="70"/><br><br><br><img src="https://github.com/user-attachments/assets/bd668d04-50d1-496a-beb6-2190b1fe9241" alt="makefile" width="50" height="60"/><br>Makefile<br>
+    <td align="center"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="70" height="70"/><br><br><img src="https://github.com/user-attachments/assets/bd668d04-50d1-496a-beb6-2190b1fe9241" alt="makefile" width="50" height="60"/><br>Makefile<br>
     </td>
-    <td align="center" width="100">• echo <br><br> • cd <br><br> • pwd <br><br> • export <br><br> • unset <br><br> • env <br><br> • exit <br> </td>
-    <td width="330">
-      <br>
-      • readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay <br><br>
-      • add_history, printf, malloc, free, write, access, open, read, close, fork<br><br>
-      • wait, waitpid, wait3, wait4signal, sigaction, sigemptyset, sigaddset, kill<br><br>
-      • exit, getcwd, chdir, stat, lstat, fstat, unlink, execve, dup, dup2, pipe<br><br>
-      • opendir, readdir, closedir, strerror, perror, isatty, ttyname, ttyslot<br><br>
-      • ioctl, getenv, tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum<br><br>
+    <td align="center" width="100">• echo <br> • cd <br> • pwd <br> • export <br> • unset <br> • env <br> • exit <br> </td>
+    <td align="left" width="330"><br>
+      • readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay <br>
+      • add_history, printf, malloc, free, write, access, open, read, close, fork<br>
+      • wait, waitpid, wait3, wait4signal, sigaction, sigemptyset, sigaddset, kill<br>
+      • exit, getcwd, chdir, stat, lstat, fstat, unlink, execve, dup, dup2, pipe<br>
+      • opendir, readdir, closedir, strerror, perror, isatty, ttyname, ttyslot<br>
+      • ioctl, getenv, tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum<br>
       • tgetstr, tgoto, tputs<br><br>
       <br>
       </td>
@@ -61,10 +60,11 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
 </div>
 <br>
 
-<h3 weight="bold">Basic workflow chart for a comand:</h3>
+# Initial approach and proposal
+
+<h3 weight="bold">Main loop workflow chart for a comand input:</h3>
 
 <img align="center" src="https://github.com/user-attachments/assets/d1577d14-d5cb-4d15-a416-b1d55b44ad54"></img>
-
 
 # Organization
 
