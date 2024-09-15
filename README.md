@@ -69,6 +69,116 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
 
 <h3 weight="bold">Task schedule distribution</h3>
 
+<div align="center">
+
+| Week | Member 🅰 | Member 🅱 | 📍 Milestones  📅 |
+|--:|---|---|---|
+| 1️ | - Estructs                ✅ | - Estudiar señales        ⭕ | Milestone 1:                |
+|| - Bucle in con readline   ✅ | - Gestión de señales      ⭕ | - Entrada de comando     ✅ |
+|| - Configurar entorno      ❌ | - Escribir tests básicos  ⭕ | - manejo simple señales  ⭕ |
+| 2️ | - Implementar tokenizador ⭕ | - Implementar parser      ⭕ | Milestone 2:                |
+|| - Tests tokenizador       ❌ | - Tests para parser       ⭕ | - Tokenización y parsing ❌ |
+|| - Entrada con tokenizer   ❌ | - Documentar data y funct ❌ | - Integración inicial    ❌ |
+| 3️ | - Implementar built ins   ⭕ | - Exec cmds externos      ❌ | Milestone 3:                |
+|| - Gestionar add_history   ✅ | - Manejar errores básicos ⭕ | - Cmds int y ext         ❌ |
+|| - Tests history / builts  ❌ | - Tests history / builts  ❌ | - Historial funcional    ✅ |
+| 4️ | - Redirects E/S (`>`, `<`)❌ | - Exec cmds ext con pipes ❌ | Milestone 4:                |
+|| - Redirect errors         ❌ | - Tests pipes             ❌ | - Redirect pipes y funct ❌ |
+|| - Documentar data y funct ❌ | - Opt memoria leaks-frees ❌ |                             |
+| 5️ | - Manejo advanced señales ❌ | - Code optimize leak-free ❌ | Milestone 5:                |
+|| - Env vars getenv         ❌ | - Error handling strerror ❌ | - Advcd sig, vars env    ❌ |
+|| - Tests env/signs/funct   ❌ | - Error handle p/strerror ❌ | - Código optimizado      ❌ |
+| 6️ | - Integrar funcionalidades   | - Rendimiento y optimización | Milestone 6:                |
+|| - Pruebas exhaustivas        | - Verificar Makefile y       | - testeado y document       |
+|| - Documentar proyecto final  | - Verificar Makefile y exec  | - norminette, norma,        |
+  
+</div>
+
+<div align="center">
+
+<table>
+  <tr>
+    <th>Semana</th>
+    <th>Member 🅰</th>
+    <th>Member 🅱</th>
+    <th>📍 Milestones 📅</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td>- Estructs ✅</td>
+    <td>- Estudiar señales ⭕</td>
+    <td>Milestone 1:</td>
+  </tr>
+  <tr>
+    <td>Week 1️⃣</td>
+    <td>- Bucle in con readline ✅<br>- Configurar entorno ❌</td>
+    <td>- Gestión de señales ⭕<br>- Escribir tests básicos ⭕</td>
+    <td>- Entrada de comando ✅<br>- Manejo simple señales ⭕</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>- Implementar tokenizador ⭕<br>- Tests tokenizador ❌</td>
+    <td>- Implementar parser ⭕<br>- Tests para parser ⭕</td>
+    <td>Milestone 2:<br>- Tokenización y parsing ❌<br>- Integración inicial ❌</td>
+  </tr>
+  <tr>
+    <td>Week 2️⃣</td>
+    <td>- Entrada con tokenizer ❌</td>
+    <td>- Documentar data y funct ❌</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>- Implementar built ins ⭕<br>- Gestionar add_history ✅</td>
+    <td>- Exec cmds externos ❌<br>- Manejar errores básicos ⭕</td>
+    <td>Milestone 3:<br>- Cmds int y ext ❌<br>- Historial funcional ✅</td>
+  </tr>
+  <tr>
+    <td>Week 3️⃣</td>
+    <td>- Tests history / builts ❌</td>
+    <td>- Tests history / builts ❌</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>- Redirects E/S (`>`, `<`) ❌<br>- Redirect errors ❌</td>
+    <td>- Exec cmds ext con pipes ❌<br>- Tests pipes ❌</td>
+    <td>Milestone 4:<br>- Redirect pipes y funct ❌</td>
+  </tr>
+  <tr>
+    <td>Week 4️⃣</td>
+    <td>- Documentar data y funct ❌</td>
+    <td>- Opt memoria leaks-frees ❌</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>- Manejo advanced señales ❌<br>- Env vars getenv ❌</td>
+    <td>- Code optimize leak-free ❌<br>- Error handling strerror ❌</td>
+    <td>Milestone 5:<br>- Advcd sig, vars env ❌<br>- Código optimizado ❌</td>
+  </tr>
+  <tr>
+    <td>Week 5️⃣</td>
+    <td>- Tests env/signs/funct ❌</td>
+    <td>- Error handle p/strerror ❌</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>- Integrar funcionalidades</td>
+    <td>- Rendimiento y optimización</td>
+    <td>Milestone 6:<br>- testeado y document<br>- norminette, norma</td>
+  </tr>
+  <tr>
+    <td>Week 6️⃣</td>
+    <td>- Pruebas exhaustivas<br>- Documentar proyecto final</td>
+    <td>- Verificar Makefile y exec</td>
+    <td></td>
+  </tr>
+</table>
+
+  
+</div>
 
 ```
 +------------+------------------------------+------------------------------+-----------------------------+
