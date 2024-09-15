@@ -42,9 +42,9 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
     <td align="center" width="700">Functions allowed</td>
   </tr>
   <tr>
-    <td align="center"><br><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="70" height="70"/><br><br><br><img src="https://github.com/user-attachments/assets/bd668d04-50d1-496a-beb6-2190b1fe9241" alt="makefile" width="50" height="60"/><br>Makefile<br>
+    <td align="center"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="70" height="70"/><br><br><br><img src="https://github.com/user-attachments/assets/bd668d04-50d1-496a-beb6-2190b1fe9241" alt="makefile" width="50" height="60"/><br>Makefile<br>
     </td>
-    <td align="center" width="120">• echo <br><br> • cd <br><br> • pwd <br><br> • export <br><br> • unset <br><br> • env <br><br> • exit <br> </td>
+    <td align="center" width="100">• echo <br><br> • cd <br><br> • pwd <br><br> • export <br><br> • unset <br><br> • env <br><br> • exit <br> </td>
     <td width="330">
       <br>
       • readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay <br><br>
