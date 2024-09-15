@@ -47,12 +47,13 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
     <td align="center" width="120">• echo <br><br> • cd <br><br> • pwd <br><br> • export <br><br> • unset <br><br> • env <br><br> • exit <br> </td>
     <td width="330">
       <br>
-      • readline • rl_clear_history • rl_on_new_line • rl_replace_line • rl_redisplay • add_history <br><br>
-      • printf, malloc, free, write, access, open • read, close, fork, wait, waitpid, wait3, wait4 <br><br>
-      • signal, sigaction, sigemptyset, sigaddset, kill • exit, getcwd, chdir, stat, lstat <br><br>
-      • fstat, unlink, execve, dup, dup2, pipe, opendir, readdir, closedir • strerror, perror <br><br>
-      • isatty, ttyname, ttyslot • ioctl, getenv, tcsetattr, tcgetattr, tgetent<br><br>
-      • tgetflag, tgetnum, tgetstr, tgoto, tputs<br><br><br>
+      • readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay <br><br>
+      • add_history, printf, malloc, free, write, access, open, read, close, fork<br><br>
+      • wait, waitpid, wait3, wait4signal, sigaction, sigemptyset, sigaddset, kill<br><br>
+      • exit, getcwd, chdir, stat, lstat, fstat, unlink, execve, dup, dup2, pipe<br><br>
+      • opendir, readdir, closedir, strerror, perror, isatty, ttyname, ttyslot<br><br>
+      • ioctl, getenv, tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum<br><br>
+      • tgetstr, tgoto, tputs<br><br>
       <br>
       </td>
   </tr>
