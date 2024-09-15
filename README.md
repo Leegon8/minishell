@@ -71,141 +71,49 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
 
 <div align="center">
 
-| Week | Member 🅰 | Member 🅱 | 📍 Milestones  📅 |
-|--:|---|---|---|
-| 1️ | - Estructs                ✅ | - Estudiar señales        ⭕ | Milestone 1:                |
-|| - Bucle in con readline   ✅ | - Gestión de señales      ⭕ | - Entrada de comando     ✅ |
-|| - Configurar entorno      ❌ | - Escribir tests básicos  ⭕ | - manejo simple señales  ⭕ |
-| 2️ | - Implementar tokenizador ⭕ | - Implementar parser      ⭕ | Milestone 2:                |
-|| - Tests tokenizador       ❌ | - Tests para parser       ⭕ | - Tokenización y parsing ❌ |
-|| - Entrada con tokenizer   ❌ | - Documentar data y funct ❌ | - Integración inicial    ❌ |
-| 3️ | - Implementar built ins   ⭕ | - Exec cmds externos      ❌ | Milestone 3:                |
-|| - Gestionar add_history   ✅ | - Manejar errores básicos ⭕ | - Cmds int y ext         ❌ |
-|| - Tests history / builts  ❌ | - Tests history / builts  ❌ | - Historial funcional    ✅ |
-| 4️ | - Redirects E/S (`>`, `<`)❌ | - Exec cmds ext con pipes ❌ | Milestone 4:                |
-|| - Redirect errors         ❌ | - Tests pipes             ❌ | - Redirect pipes y funct ❌ |
-|| - Documentar data y funct ❌ | - Opt memoria leaks-frees ❌ |                             |
-| 5️ | - Manejo advanced señales ❌ | - Code optimize leak-free ❌ | Milestone 5:                |
-|| - Env vars getenv         ❌ | - Error handling strerror ❌ | - Advcd sig, vars env    ❌ |
-|| - Tests env/signs/funct   ❌ | - Error handle p/strerror ❌ | - Código optimizado      ❌ |
-| 6️ | - Integrar funcionalidades   | - Rendimiento y optimización | Milestone 6:                |
-|| - Pruebas exhaustivas        | - Verificar Makefile y       | - testeado y document       |
-|| - Documentar proyecto final  | - Verificar Makefile y exec  | - norminette, norma,        |
-  
-</div>
-
-<div align="center">
-
 <table>
   <tr>
-    <th>Semana</th>
-    <th>Member 🅰</th>
-    <th>Member 🅱</th>
+    <th>Week</th>
+    <th>Member 🅰️</th>
+    <th>Member 🅱️</th>
     <th>📍 Milestones 📅</th>
   </tr>
   <tr>
-    <td></td>
-    <td>- Estructs ✅</td>
-    <td>- Estudiar señales ⭕</td>
-    <td>Milestone 1:</td>
+    <td align="center">1</td>
+    <td>- Estructs ✅<br>- Bucle in con readline ✅<br>- Configurar entorno ❌</td>
+    <td>- Estudiar señales ⭕<br>- Gestión de señales ⭕<br>- Escribir tests básicos ⭕</td>
+    <td>Milestone 1:<br>- Entrada de comando ✅<br>- Manejo simple señales ⭕</td>
   </tr>
   <tr>
-    <td>Week 1️⃣</td>
-    <td>- Bucle in con readline ✅<br>- Configurar entorno ❌</td>
-    <td>- Gestión de señales ⭕<br>- Escribir tests básicos ⭕</td>
-    <td>- Entrada de comando ✅<br>- Manejo simple señales ⭕</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>- Implementar tokenizador ⭕<br>- Tests tokenizador ❌</td>
-    <td>- Implementar parser ⭕<br>- Tests para parser ⭕</td>
+    <td align="center">2</td>
+    <td>- Entrada con tokenizer ❌<br>- Implementar tokenizador ⭕<br>- Tests tokenizador ❌</td>
+    <td>- Documentar data y funct ❌<br>- Implementar parser ⭕<br>- Tests para parser ⭕</td>
     <td>Milestone 2:<br>- Tokenización y parsing ❌<br>- Integración inicial ❌</td>
   </tr>
   <tr>
-    <td>Week 2️⃣</td>
-    <td>- Entrada con tokenizer ❌</td>
-    <td>- Documentar data y funct ❌</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>- Implementar built ins ⭕<br>- Gestionar add_history ✅</td>
-    <td>- Exec cmds externos ❌<br>- Manejar errores básicos ⭕</td>
+    <td align="center">3</td>
+    <td>- Implementar built ins ⭕<br>- Gestionar add_history ✅<br>- Tests history / builts ❌</td>
+    <td>- Exec cmds externos ❌<br>- Manejar errores básicos ⭕<br>- Tests history / builts ❌</td>
     <td>Milestone 3:<br>- Cmds int y ext ❌<br>- Historial funcional ✅</td>
   </tr>
   <tr>
-    <td>Week 3️⃣</td>
-    <td>- Tests history / builts ❌</td>
-    <td>- Tests history / builts ❌</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>- Redirects E/S (`>`, `<`) ❌<br>- Redirect errors ❌</td>
-    <td>- Exec cmds ext con pipes ❌<br>- Tests pipes ❌</td>
+    <td align="center">4</td>
+    <td>- Redirects E/S (`>`, `<`) ❌<br>- Redirect errors ❌<br>- Documentar data y funct ❌</td>
+    <td>- Exec cmds ext con pipes ❌<br>- Tests pipes ❌<br>- Opt memoria leaks-frees ❌</td>
     <td>Milestone 4:<br>- Redirect pipes y funct ❌</td>
   </tr>
   <tr>
-    <td>Week 4️⃣</td>
-    <td>- Documentar data y funct ❌</td>
-    <td>- Opt memoria leaks-frees ❌</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>- Manejo advanced señales ❌<br>- Env vars getenv ❌</td>
-    <td>- Code optimize leak-free ❌<br>- Error handling strerror ❌</td>
+    <td align="center">5</td>
+    <td>- Manejo advanced señales ❌<br>- Env vars getenv ❌<br>- Tests env/signs/funct ❌</td>
+    <td>- Code optimize leak-free ❌<br>- Error handling strerror ❌<br>- Error handle p/strerror ❌</td>
     <td>Milestone 5:<br>- Advcd sig, vars env ❌<br>- Código optimizado ❌</td>
   </tr>
   <tr>
-    <td>Week 5️⃣</td>
-    <td>- Tests env/signs/funct ❌</td>
-    <td>- Error handle p/strerror ❌</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>- Integrar funcionalidades</td>
-    <td>- Rendimiento y optimización</td>
+    <td align="center">6</td>
+    <td>- Integrar funcionalidades<br>- Pruebas exhaustivas<br>- Documentar proyecto final</td>
+    <td>- Rendimiento y optimización<br>- Verificar Makefile y exec</td>
     <td>Milestone 6:<br>- testeado y document<br>- norminette, norma</td>
-  </tr>
-  <tr>
-    <td>Week 6️⃣</td>
-    <td>- Pruebas exhaustivas<br>- Documentar proyecto final</td>
-    <td>- Verificar Makefile y exec</td>
-    <td></td>
   </tr>
 </table>
 
-  
 </div>
-
-```
-+------------+------------------------------+------------------------------+-----------------------------+
-|   Semana   |          Member 🅰           |           Member 🅱          |       📍 Milestones  📅     |
-+------------+------------------------------+------------------------------+-----------------------------+
-|            | - Estructs                ✅ | - Estudiar señales        ⭕ | Milestone 1:                |
-|  Week  1️⃣  | - Bucle in con readline   ✅ | - Gestión de señales      ⭕ | - Entrada de comando     ✅ |
-|            | - Configurar entorno      ❌ | - Escribir tests básicos  ⭕ | - manejo simple señales  ⭕ |
-+------------+------------------------------+------------------------------+-----------------------------+
-|            | - Implementar tokenizador ⭕ | - Implementar parser      ⭕ | Milestone 2:                |
-|  Week  2️⃣  | - Tests tokenizador       ❌ | - Tests para parser       ⭕ | - Tokenización y parsing ❌ |
-|            | - Entrada con tokenizer   ❌ | - Documentar data y funct ❌ | - Integración inicial    ❌ |
-+------------+------------------------------+------------------------------+-----------------------------+
-|            | - Implementar built ins   ⭕ | - Exec cmds externos      ❌ | Milestone 3:                |
-|  Week  3️⃣  | - Gestionar add_history   ✅ | - Manejar errores básicos ⭕ | - Cmds int y ext         ❌ |
-|            | - Tests history / builts  ❌ | - Tests history / builts  ❌ | - Historial funcional    ✅ |
-+------------+------------------------------+------------------------------+-----------------------------+
-|            | - Redirects E/S (`>`, `<`)❌ | - Exec cmds ext con pipes ❌ | Milestone 4:                |
-|  Week  4️⃣  | - Redirect errors         ❌ | - Tests pipes             ❌ | - Redirect pipes y funct ❌ |
-|            | - Documentar data y funct ❌ | - Opt memoria leaks-frees ❌ |                             |
-+------------+------------------------------+------------------------------+-----------------------------+
-|            | - Manejo advanced señales ❌ | - Code optimize leak-free ❌ | Milestone 5:                |
-|  Week  5️⃣  | - Env vars getenv         ❌ | - Error handling strerror ❌ | - Advcd sig, vars env    ❌ |
-|            | - Tests env/signs/funct   ❌ | - Error handle p/strerror ❌ | - Código optimizado      ❌ |
-+------------+------------------------------+------------------------------+-----------------------------+
-|            | - Integrar funcionalidades   | - Rendimiento y optimización | Milestone 6:                |
-|  Week  6️⃣  | - Pruebas exhaustivas        | - Verificar Makefile y       | - testeado y document       |
-|            | - Documentar proyecto final  | - Verificar Makefile y exec  | - norminette, norma,        |
-+------------+------------------------------+------------------------------+-----------------------------+
-```
