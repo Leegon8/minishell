@@ -7,19 +7,19 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
   
 <table>
   <tr>
-    <td align="center" width="500">Lauriane González</td>
-    <td align="center" width="500">Luis Prieto</td>
+    <td align="center" width="400">Lauriane González</td>
+    <td align="center" width="400">Luis Prieto</td>
   </tr>
   <tr>
-    <td align="center" width="500"><img width="150" src="https://github.com/user-attachments/assets/56c69eeb-005d-48fd-b0b5-8ff97d3dc170" /></td>
-    <td align="center" width="500"><img width="150" src="https://github.com/LLuisPP/ONCE-scalian/assets/116104082/18bf3bbf-ec5f-489b-82e6-ca878ecdde1d" /></td>
+    <td align="center" width="400"><img width="150" src="https://github.com/user-attachments/assets/56c69eeb-005d-48fd-b0b5-8ff97d3dc170" /></td>
+    <td align="center" width="400"><img width="150" src="https://github.com/LLuisPP/ONCE-scalian/assets/116104082/18bf3bbf-ec5f-489b-82e6-ca878ecdde1d" /></td>
   </tr>
-    <td align="center" width="500">Desarrolladora</td>
-    <td align="center" width="500">Desarrollador</td>
+    <td align="center" width="400">Desarrolladora</td>
+    <td align="center" width="400">Desarrollador</td>
   </tr>
   <tr>
-    <td align="center" width="500">42 login: lauriago</td>
-    <td align="center" width="500">42 login: lprieto-</td>
+    <td align="center" width="400">42 login: lauriago</td>
+    <td align="center" width="400">42 login: lprieto-</td>
   </tr>
 </table>
 
