@@ -56,6 +56,7 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
       • opendir, readdir, closedir, strerror, perror, isatty, ttyname, ttyslot<br>
       • ioctl, getenv, tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum<br>
       • tgetstr, tgoto, tputs<br><br>
+      • Your own libft and any other functions you've programmed<br>
       <br>
       </td>
   </tr>
