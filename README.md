@@ -85,7 +85,7 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
   </tr>
   <tr>
     <td align="center">1</td>
-    <td>- Estructs ✅<br>- Bucle in con readline ✅<br>- Configurar entorno ❌</td>
+    <td>- Estructs ✅<br>- Bucle in con readline ✅<br>- Configurar entorno ⭕✅</td>
     <td>- Estudiar señales ⭕<br>- Gestión de señales ⭕<br>- Escribir tests básicos ⭕</td>
     <td>Milestone 1:<br>- Entrada de comando ✅<br>- Manejo simple señales ⭕</td>
   </tr>
