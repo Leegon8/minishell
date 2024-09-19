@@ -6,15 +6,15 @@
 #    By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2024/09/13 22:48:19 by lauriago         ###   ########.fr        #
+#    Updated: 2024/09/19 18:41:53 by lprieto-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = gcc -g
-LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lreadline #   LINUX    #
-#LDFLAGS = -L/usr/local/opt/readline/lib -lreadline #   MACOS   #
+#LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lreadline #   LINUX    #
+LDFLAGS = -L/usr/local/opt/readline/lib -lreadline #   MACOS   #
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 AR = ar -rcs
@@ -23,7 +23,7 @@ RM = rm -rf
 # **************************************************************************** #
 
 SRCS = minishell.c ms_init.c ms_tokenizer.c ms_parser.c ms_lexer.c ms_rline.c \
-	ms_build.c \
+	ms_echo.c ms_env.c \
 
 SRC_PATH := ./src/
 OBJ_PATH := ./tmp/
@@ -128,7 +128,7 @@ define show_progress
 	printf "\n\n  $(Y)▄████▄   $(BW)lauriago   $(BB)▄█████▄  ${R}▄█████▄  ${BC}▄█████▄  ${OR}▄█████▄  $(PP)▄█████▄\n \
 $(Y)████▄███   $(BW)lprieto-  $(BB)██${PHA}▄${RES}$(BB)█$(PHA)▄${RES}$(BB)██  ${R}█${EYE}▄ ${R}█$(EYE)▄ ${R}█  ${BC}█$(EYE) ▄${RES}${BC}█$(EYE) ▄${BC}█${RES}  ${OR}█$(EYE) ▀${OR}█$(EYE) ▀${OR}█${RES}  ${PP}█$(EYE)▀ ${PP}█$(EYE)▀ ${RES}${PP}█\n \
 $(Y)████▄    $(W)  · · · ·   $(BB)█${PHA}▀▄▀▄▀${RES}${BB}█${RES}  ${R}███████  ${BC}███████  ${OR}███████  ${PP}███████\n \
-$(Y) ▀████▀   $(G)$(BD)$(NAME)  $(BB)█▀█▀█▀█  ${R}█▀█▀█▀█  ${BC}█▀█▀█▀█  ${OR}█▀█▀█▀█  ${PP}█▀█▀█▀█\n\n"; \
+$(Y) ▀████▀   $(G)$(BD)$(NAME)  $(BB)█▀█▀█▀█  ${R}█▀█▀█▀█  ${BC}█▀█▀█▀█  ${OR}█▀█▀█▀█  ${PP}█▀█▀█▀█$(RES)\n\n"; \
 
 endef
 

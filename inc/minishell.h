@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/13 22:45:14 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:53:20 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,14 @@ char	*file_generator(const char *text, int state);
 
 /******************************* ms_executor ******************************/
 
+/******************************* ms_env ******************************/
 
-/********************************** echo *********************************/
-int	num_arg(char **av);
-char	*ft_echo(char **av);
+int		env_var_count(char **envs);
+int		set_env_vars(t_env env, char **envs);
+
+/******************************* ms_echo *********************************/
+int		num_arg(char **argv);
+char	*ft_echo(char **argv);
 
 /******************************* Error macros *****************************/
 
