@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/19 15:57:27 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/19 21:25:43 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ int	main(int argc, char **argv, char **envs)
 	holii = getcwd(env.pwd, sizeof(env));
 	// printf("pwd: %s\n", pwd);
 	printf("%d\n", env_var_count(envs));
+	init_env(&env, envs);
 	while (msh.end_sig == 0)
 	{
 		rl_attempted_completion_function = command_completion;
-		input = readline("\033[1;96m 👽 Space 🛸 shell $\e[0m> ");
+		input = readline("\033[1;96m👽 Space 🛸 shell $\e[0m> ");
 		if (input == NULL)
 			break ;
 		if (*input)

@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/19 18:53:20 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/19 21:20:36 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ struct	s_mshll
 
 struct	s_env
 {
-	char	*path;
+	char	*name;
+	char	*value;
 	char	*pwd;
 	char	*home;
 };
@@ -82,6 +83,8 @@ char	*file_generator(const char *text, int state);
 
 int		env_var_count(char **envs);
 int		set_env_vars(t_env env, char **envs);
+int		init_env(t_env *env, char **envs);
+
 
 /******************************* ms_echo *********************************/
 int		num_arg(char **argv);
