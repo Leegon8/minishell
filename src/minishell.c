@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/19 21:25:43 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/19 21:52:32 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	main(int argc, char **argv, char **envs)
 	t_hist	hist;
 	t_env	env;
 	t_mshll	msh;
-	// char	*pwd;
-	char	*holii;
 
 	if (argc != 1 || argv[1])
 	{
@@ -27,11 +25,7 @@ int	main(int argc, char **argv, char **envs)
 		exit (0);
 	}
 	init_structs(&env, &hist, &msh);
-	// pwd = parse_pwd(envs);
-	set_env_vars(env, envs);
-	holii = getcwd(env.pwd, sizeof(env));
-	// printf("pwd: %s\n", pwd);
-	printf("%d\n", env_var_count(envs));
+	printf("Numero de variables en env: %d\n", env_var_count(envs));
 	init_env(&env, envs);
 	while (msh.end_sig == 0)
 	{
@@ -42,14 +36,14 @@ int	main(int argc, char **argv, char **envs)
 		if (*input)
 			add_history(input);
 		if (ft_strcmp("pwd", input) == 0) /* pwd */
-			printf("%s\n", holii);
+			printf("%s\n", env.pwd);
 		if (ft_strncmp("clearh", input, 6) == 0) /* borra el historial */
 			clear_history();
 		if (ft_strncmp("clear", input, 5) == 0) /* clear :D */
 			printf("%s", CLEAR);
 		if (ft_strncmp("echo", input, 4) == 0)
 			ft_echo(argv);
-	//	if (ft_strncmp("ls", input, 2))     /* execve rompe el bucle */
+	//	if (ft_strncmp("ls", input, 2))     /* execve rompe el bucle, hace exit */
 	//		execve("/bin/ls", argv, NULL);
 		free(input);
 	}

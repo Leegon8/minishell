@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/19 21:39:34 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/19 22:05:07 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,55 +28,19 @@ int env_var_count(char **envs)
     return (i);
 }
 
-char    *ft_strndup(const char *s, size_t len)
-{
-    char    *dup;
-    size_t  slen;
-    
-    slen = ft_strlen(s);
-    if (len > slen)
-        len = slen;
-    dup = malloc(len + 1);
-    if (dup)
-        ft_strlcpy(dup, s, len + 1);
-    return (dup);
-}
-
-
+/* Inicializa las variables de entorno con los valores del env (si existe) */
 int init_env(t_env *env, char **envs)
 {
     int     i;
     char    *eq_sep;
     
     i = 0;
-    env->pwd = getenv("PWD");
+    env->pwd = getcwd(env->pwd, sizeof(env));
+    printf("PEUVEDOBLE: %s\n",env->pwd);
     env->home = getenv("HOME");
-    while (envs[i])
+    if (!envs || envs == NULL || env_var_count(envs) != 36)
     {
-        eq_sep = ft_strchr(envs[i], '=');
-        if (eq_sep)
-        {
-            env->name = ft_strndup(envs[i], (eq_sep - envs[i]));
-            env->value = ft_strdup(eq_sep + 1);
-            printf("nombre: %s, valor: %s\n", env->name, env->value);
-        }
-        i++;
-    }
-    return (0);
-}
-
-
-int set_env_vars(t_env env, char **envs)
-{
-    int     i;
-    char    *eq_sep = NULL;
-    int     vlen;
-    
-    i = 0;
-    vlen = 0;
-    if (!envs || envs == NULL)
-    {
-        getcwd(env.pwd, sizeof(env));
+        getcwd(env->pwd, sizeof(env));
         printf("NO HAY ENV 2\n");
         return (0);
     }
@@ -84,14 +48,16 @@ int set_env_vars(t_env env, char **envs)
     {
         while (envs[i])
         {
+            eq_sep = ft_strchr(envs[i], '=');
             if (eq_sep)
             {
-                vlen = eq_sep - envs[i];
-                env.name = ft_strndup(envs[i], vlen);
-                env.value = ft_strdup(eq_sep + 1);
+                env->name = ft_strndup(envs[i], (eq_sep - envs[i]));
+                env->value = ft_strdup(eq_sep + 1);
+                printf("nombre: %s, valor: %s\n", env->name, env->value);
             }
             i++;
         }
     }
-    return (1);
+    return (0);
 }
+

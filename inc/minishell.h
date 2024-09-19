@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/19 21:20:36 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/19 21:49:26 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char	*file_generator(const char *text, int state);
 /******************************* ms_env ******************************/
 
 int		env_var_count(char **envs);
-int		set_env_vars(t_env env, char **envs);
 int		init_env(t_env *env, char **envs);
 
 
