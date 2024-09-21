@@ -6,7 +6,7 @@
 #    By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2024/09/19 18:41:53 by lprieto-         ###   ########.fr        #
+#    Updated: 2024/09/21 09:55:34 by lprieto-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,12 +105,12 @@ TOTAL_ITEMS := $(words $(OBJS))
 
 define show_progress
 	@echo; \
-	printf " $(W)eeeeeee \n \
-8  8  8 e  eeeee e  eeee e   e eeee e    e      ▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄ \n \
-8e 8  8 8  8   8 8  8    8   8 8    8    8      █  ▄             █ \n \
-88 8  8 8e 8e  8 8e 8ee8 8eee8 eee8 8e   8e     █   █            █ \n \
-88 8  8 88 88  8 88    8 88  8 88   88   88     █  ▀   ▀▀▀       █ \n \
-88 8  8 88 88  8 88 8888 88  8 88e8 88ee 88ee   ▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀ \n\n"; \
+	printf " $(W)eeeeeee                                         ▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄ \n \
+8  8  8 e  eeeee e  eeee e   e eeee e    e      █               █ \n \
+8e 8  8 8  8   8 8  8    8   8 8    8    8      █  ▄            █ \n \
+88 8  8 8e 8e  8 8e 8ee8 8eee8 eee8 8e   8e     █   █           █ \n \
+88 8  8 88 88  8 88    8 88  8 88   88   88     █  ▀   ▀▀▀      █ \n \
+88 8  8 88 88  8 88 8888 88  8 88e8 88ee 88ee   ▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀ \n\n"; \
 
 	total_ticks=$$((PROGRESS_DURATION * 10)); # 20 ticks por segundo para una actualización fluida
 	item_progress=0; \

@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/19 21:49:26 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/20 21:39:01 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,10 @@
 
 /******************************** Structs Simplification ******************/
 
-typedef struct s_history	t_hist;
 typedef struct s_env		t_env;
 typedef struct s_mshll		t_mshll;
 
 /******************************** Structs *********************************/
-
-struct	s_history
-{
-	char	**commands;
-	int		count;
-	int		capacity;
-};
 
 struct	s_mshll
 {
@@ -60,7 +52,7 @@ struct	s_env
 
 /******************************* ms_init **********************************/
 
-int		init_structs(t_env *env, t_hist *hist, t_mshll *msh);
+int		init_structs(t_env *env, t_mshll *msh);
 
 /******************************* ms_parser ********************************/
 

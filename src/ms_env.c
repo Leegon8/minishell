@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/19 22:05:07 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/20 21:42:19 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int init_env(t_env *env, char **envs)
     env->pwd = getcwd(env->pwd, sizeof(env));
     printf("PEUVEDOBLE: %s\n",env->pwd);
     env->home = getenv("HOME");
-    if (!envs || envs == NULL || env_var_count(envs) != 36)
+    if (!envs || envs == NULL || env_var_count(envs) != 65)
     {
         getcwd(env->pwd, sizeof(env));
         printf("NO HAY ENV 2\n");
