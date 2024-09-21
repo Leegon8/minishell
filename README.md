@@ -91,7 +91,7 @@ Este proyecto consiste en recrear una versión simplificada del funcionamiento d
   </tr>
   <tr>
     <td align="center">2</td>
-    <td>- Entrada con tokenizer ❌<br>- Implementar tokenizador ⭕<br>- Tests tokenizador ❌</td>
+    <td>- Tokenizer input ⭕<br>- Implement tokenizer ⭕<br>- Tests tokenizer ⭕</td>
     <td>- Documentar data y funct ❌<br>- Implementar parser ⭕<br>- Tests para parser ⭕</td>
     <td>Milestone 2:<br>- Tokenización y parsing ❌<br>- Integración inicial ❌</td>
   </tr>
