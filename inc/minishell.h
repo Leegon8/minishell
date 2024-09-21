@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/20 21:39:01 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/21 11:02:09 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ char	*ft_echo(char **argv);
 # define E_NOFILE "No such file or directory\n"
 # define E_DIRECTORY "Is a directory\n"
 # define E_EXECARG "Error: minishell doesn't accept arguments\n"
+
+/******************************** Other macros ***************************/
+
+# define PATH_MAX	4096
 
 /******************************** Color macros ***************************/
 
