@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/21 22:40:08 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:36:49 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@
 # include <string.h>
 
 /******************************** Structs Simplification ******************/
-
 typedef struct s_env		t_env;
 typedef struct s_mshll		t_mshll;
 typedef struct s_token		t_tok;
+typedef struct s_pipe		t_pip;
 
 /******************************** Structs *********************************/
 
@@ -48,24 +48,42 @@ struct	s_env
 
 struct	s_token
 {
+	char	*cmd;
+	char	**args;
 	char	*value;
 	size_t	t_len;
 };
 
+struct s_pipe
+{
+	int		fd_1[2];
+	int		status_1;
+	int		status_2;
+	int		fd_inp;
+	int		fd_outp;
+};
+
+
 struct	s_mshll
 {
+	t_tok	*token;
+	t_env	*env;
+	t_pip	*mpip;
 	int		end_sig;
+	char	*path;
+	char	**cmd;
 };
 
 /******************************* minishell ********************************/
 void	shell_loop(t_env *env, t_mshll *msh);
 
 /******************************* ms_init **********************************/
-int		init_structs(t_env *env, t_mshll *msh);
+int		init_structs(t_env *env, t_mshll *msh, t_pip *mpip);
 
 /******************************* ms_parser ********************************/
 char	*parse_path(char **env);
 char	*parse_pwd(char **env);
+int		parse_input(char *input, t_mshll *mshll);
 
 /******************************* ms_tokenizer *****************************/
 char	*ft_strtok(char *str, const char *separator);
@@ -79,18 +97,20 @@ char	*file_generator(const char *text, int state);
 int		env_var_count(char **envs);
 int		init_env(t_env *env, char **envs);
 
+/******************************* ms_executor ******************************/
+
+
 /******************************* ms_echo **********************************/
 int		num_arg(char **argv);
 char	*ft_echo(char **argv);
 
-/******************************* ms_tools ******************************/
+/******************************* ms_tools *********************************/
 void	ft_pts(char *s);
 
 /******************************* ms_free **********************************/
-void    free_structs(t_env *env, t_tok *tok);
+void    free_structs(t_env *env, t_tok *tok, t_pip *mpip);
 
 /******************************* Error macros *****************************/
-
 # define E_ARG "Invalid number of parameters\n"
 # define E_MALLOC "Malloc failure\n"
 # define E_ENV "Error: No environment\n"
@@ -105,8 +125,8 @@ void    free_structs(t_env *env, t_tok *tok);
 # define E_EXECARG "Error: minishell doesn't accept arguments\n"
 
 /******************************** Other macros ***************************/
-
 # define PATH_MAX	4096
+# define MAX_ARGS	4096
 
 /******************************** Color macros ***************************/
 

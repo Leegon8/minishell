@@ -6,13 +6,13 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:41:30 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/21 22:07:47 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/22 12:26:12 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    free_structs(t_env *env, t_tok *tok)
+void    free_structs(t_env *env, t_tok *tok, t_pip *mpip)
 {
     if (env)
     {
@@ -21,4 +21,6 @@ void    free_structs(t_env *env, t_tok *tok)
     }
     if (tok)
         free(tok);
+    if (mpip)
+        free(mpip);
 }
