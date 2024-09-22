@@ -7,7 +7,9 @@ This project involves recreating a simplified version of how the terminal works 
   
 <table>
   <td rowspan="5">
-    <a href="https://github.com/Leegon8/minishell"><img width="200" align="center" src="https://github.com/user-attachments/assets/a13492f8-ed80-4d05-996c-9752a4427a32"></a><br><a href="https://github.com/Leegon8/minishell"><img width="200" align="center" src="https://github.com/user-attachments/assets/2d7e0e6c-d78b-41d2-9207-996469406a5d"></a>
+    <div align="center"<a href="#"><img width="200" align="center" src="https://github.com/user-attachments/assets/a13492f8-ed80-4d05-996c-9752a4427a32"></a><br><a href="#"><img width="200" align="center" src="https://github.com/user-attachments/assets/2d7e0e6c-d78b-41d2-9207-996469406a5d"></a></div>
+    <div align="center"><a href="#"><img width="65" src="https://github.com/user-attachments/assets/862ed238-2624-453a-a5cd-c3a8ce3617d3"></a>
+    <a href="#"><img width="70" src="https://github.com/LLuisPP/42Cursus/assets/116104082/0df7dd81-56fb-4929-a023-67c7386906dc"></a><br>Project  -  Bonus</div>
   </td>
   <tr>
     <td align="center" width="260">Lauriane González</td>
