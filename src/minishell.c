@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/22 21:32:15 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:41:12 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	shell_loop(t_env *env, t_mshll *msh)
 
 	while (msh->end_sig == 0)
 	{
-		rl_attempted_completion_function = command_completion;
+		rl_attempted_completion_function = cmd_comp;
 		input = readline("\033[1;96m👽 Space 🛸 shell $\e[0m> ");
 		if (input == NULL)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/22 21:36:49 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:39:02 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ int		parse_input(char *input, t_mshll *mshll);
 char	*ft_strtok(char *str, const char *separator);
 
 /******************************* ms_rline *********************************/
-char	*command_generator(const char *text, int state);
-char	**command_completion(const char *text, int start, int end);
-char	*file_generator(const char *text, int state);
+char	*cmd_gen(const char *text, int state);
+char	**cmd_comp(const char *text, int start, int end);
+char	*cmd_match(const char *text, int state);
 
 /******************************* ms_env ***********************************/
 int		env_var_count(char **envs);
