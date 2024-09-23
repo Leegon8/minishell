@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/23 19:05:25 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:54:59 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ struct	s_tok
 {
 	char	*cmd;
 	char	**args;
+	int		is_heredoc;
+	char	*heredoc_delim;
 	size_t	t_len;
 };
 
@@ -94,6 +96,9 @@ char	*cmd_match(const char *text, int state);
 int		env_var_count(char **envs);
 int		init_env(t_env *env, char **envs);
 
+/******************************* ms_lexer *********************************/
+int		lexer(char **tokens, t_msh *msh);
+
 /******************************* ms_executor ******************************/
 
 
@@ -121,6 +126,7 @@ void    free_structs(t_env *env, t_tok *tok, t_pip *mpip);
 # define E_DIRECTORY "Is a directory\n"
 # define E_EXECARG "Error: minishell doesn't accept arguments\n"
 # define E_MEMASF "Error: memory assignment failed\n"
+# define E_ENVGET "Error: env var retrieval failed\n"
 
 /******************************** Other macros ***************************/
 # define PATH_MAX		4096
