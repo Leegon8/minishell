@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/23 18:38:44 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:08:49 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ int	main(int argc, char **argv, char **envs)
 	t_env	*env;
 	t_msh	msh;
 	t_pip	*mpip;
-	// t_tok	*tok;
+	t_tok	*tok;
 
 	if (argc != 1 || argv[1])
 		exit (ft_fd_printf(2, "%s", E_EXECARG) * 0);
-	ft_memset(&msh, 0, sizeof(struct s_msh));
-
+	ft_memset(&msh, 0, sizeof(t_msh));
+	ft_memset(&tok, 0, sizeof(t_tok));
+	
 	if (init_structs(&env, envs, &msh, &mpip) != 0)
 	{
 		// free_structs();
@@ -71,6 +72,6 @@ int	main(int argc, char **argv, char **envs)
 
 	init_env(env, envs);
 	shell_loop(env, &msh); /* Este es el loop principal, que esta en la funcion shell_loop */
-	// free_structs(env, mpip); /* Libera las estructuras que le pasemos */
+	free_structs(env, tok, mpip); /* Libera las estructuras que le pasemos */
 	return (0);
 }
