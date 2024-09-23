@@ -6,12 +6,13 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:41:30 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/22 12:26:12 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:09:16 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* libera la memoria reservada para las estructuras. Al final del programa */
 void    free_structs(t_env *env, t_tok *tok, t_pip *mpip)
 {
     if (env)

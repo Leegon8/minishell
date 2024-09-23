@@ -6,12 +6,13 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/23 10:41:12 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:13:13 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Bucle principal del shell que gestiona la entrada del usuario y ejecuta comandos */
 void	shell_loop(t_env *env, t_mshll *msh)
 {
 	char	*input;
@@ -50,6 +51,7 @@ void	shell_loop(t_env *env, t_mshll *msh)
 	}
 }
 
+/* Función principal que inicializa el entorno y estructuras, y lanza el bucle del shell */
 int	main(int argc, char **argv, char **envs)
 {
 	t_env	*env;

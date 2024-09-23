@@ -6,13 +6,13 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:35:57 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/21 22:09:59 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:06:38 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* corta el str de entrada con un separador (no modificar) estoy trabajando en ella */
+/* corta el str de entrada con un separador (no modificar) trabajando en ella */
 char	*ft_strtok(char *str, const char *separator)
 {
 	static char	*ptr = NULL;

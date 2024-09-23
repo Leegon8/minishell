@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:37:32 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/22 20:49:52 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:07:18 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*parse_pwd(char **envs)
 	return (*pwd);
 }
 
+/* parsea el input dentro del loop principal y lo guarda en la estructura */
 int	parse_input(char *input, t_mshll *mshll)
 {
     char *token;

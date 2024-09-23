@@ -6,12 +6,13 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 22:28:01 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/21 22:30:08 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:05:20 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+/* Imprime cada carácter de la cadena dada putstring */
 void	ft_pts(char *s)
 {
 	int	i;
