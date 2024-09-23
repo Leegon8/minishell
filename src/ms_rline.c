@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 16:34:50 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/23 10:35:57 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:46:18 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ char	**cmd_comp(const char *cmnd, int start, int end)
 	return (matches);
 }
 
-/* Compara directorios y archivos para encontrar coincidencia con el input */
+
+/* Busca coincidencias entre los cmds y el input del usuario */
 char	*cmd_match(const char *cmnd, int state)
 {
 	static DIR				*dir;
