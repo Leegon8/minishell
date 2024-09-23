@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:37:32 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/23 11:07:18 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:37:13 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,25 @@ char	*parse_pwd(char **envs)
 }
 
 /* parsea el input dentro del loop principal y lo guarda en la estructura */
-int	parse_input(char *input, t_mshll *mshll)
+int	parse_input(char *input, t_msh *msh)
 {
-    char *token;
+    char *tkns;
     int i;
 	
 	i = 0;
-    // mshll->token->cmd = NULL;
-    mshll->token->args = malloc(sizeof(char *) * (MAX_ARGS + 1));
+    // msh->tkns->cmd = NULL;
+    msh->tkns->args = malloc(sizeof(char *) * (MAX_ARGS + 1));
     if (input == NULL || *input == '\0')
         return (0);
-    token = ft_strtok(input, " \t\n");
-    while (token != NULL && i < MAX_ARGS)
+    tkns = ft_strtok(input, " \t\n");
+    while (tkns != NULL && i < MAX_ARGS)
     {
-        mshll->token->args[i++] = token;
-        token = ft_strtok(NULL, " \t\n");
+        msh->tkns->args[i++] = tkns;
+        tkns = ft_strtok(NULL, " \t\n");
     }
-    mshll->token->args[i] = NULL;
-    if (mshll->token->args[0])
-        mshll->token->cmd = mshll->token->args[0];
+    msh->tkns->args[i] = NULL;
+    if (msh->tkns->args[0])
+        msh->tkns->cmd = msh->tkns->args[0];
 
     return (0);
 }
