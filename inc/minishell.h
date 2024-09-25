@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/24 19:19:36 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:47:26 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int		lexer(char **tokens, t_msh *msh);
 
 /******************************* ms_executor ******************************/
 
-
 /******************************* ms_echo **********************************/
 int		num_arg(char **argv);
 char	*ft_echo(char **argv);
@@ -114,7 +113,7 @@ char	*ft_echo(char **argv);
 void	ft_pts(char *s);
 
 /******************************* ms_free **********************************/
-void    free_structs(t_env *env, t_tok *tok, t_exe *mpip);
+void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 
 /******************************* Error macros *****************************/
 # define E_ARG "Invalid number of parameters\n"
