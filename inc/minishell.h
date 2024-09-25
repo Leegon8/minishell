@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/25 09:47:26 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:59:41 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	shell_loop(t_env *env, t_msh *msh);
 int		init_envi(t_env **env, char **envs);
 int		init_tok(t_tok **tok);
 int		init_mpip(t_exe **mpip);
-int		init_structs(t_env **env, char **envs, t_msh *msh, t_exe **mpip, t_tok **tok);
+int		init_strc(t_env **env, char **envs, t_msh *msh, t_exe **mpip, t_tok **tok);
 
 /******************************* ms_parser ********************************/
 char	*parse_path(char **env);
