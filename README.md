@@ -70,7 +70,7 @@ This project involves recreating a simplified version of how the terminal works 
 
 <h3 weight="bold">Main loop workflow chart for a comand input:</h3>
 
-<img align="center" src="https://github.com/user-attachments/assets/8f0daa0b-07ee-4330-87da-a35d9aeb0c7f"></img>
+<img align="center" src="https://github.com/user-attachments/assets/a9ac53f9-7504-4321-a2e1-415df6b5c343"></img>
 
 # Organization
 
