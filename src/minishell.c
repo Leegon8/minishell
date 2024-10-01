@@ -28,22 +28,12 @@ void	shell_loop(t_msh *msh)
 			break ;
 		if (*input)
 			add_history(input);
-		
 		tokenize_input(input, msh);
-
-		if (ft_strcmp("pwd", msh->tkns[0].cmd) == 0) /* pwd */
-			printf("%s\n", msh->env->pwd);			
-		else if (ft_strcmp("clear", msh->tkns[0].cmd) == 0) /* clear :D */
-		 	printf("%s", CLEAR);
-		else if (ft_strcmp("exit", msh->tkns[0].cmd) == 0) /* para hacer exit sin ctrl+C */
-			msh->end_sig = 1;
-		else
+		while (msh->tkns[i].cmd != NULL) /* este bucle hace print de tods los tokens */
 		{
-			while (msh->tkns[i].cmd != NULL) /* este bucle hace print de tods los tokens */
-			{
-				printf("%s\n", msh->tkns[i].cmd);
-				i++;
-			}
+			cmd_exec(msh);
+			printf("%s\n", msh->tkns[i].cmd);
+			i++;
 		}
 		free(input);
 		j = 0;
