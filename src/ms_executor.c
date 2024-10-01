@@ -11,3 +11,16 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	cmd_exec(t_msh *msh)
+{
+	if (ft_strcmp("pwd", msh->tkns[0].cmd) == 0) /* pwd */
+			printf("%s\n", msh->env->pwd);			
+	else if (ft_strcmp("clear", msh->tkns[0].cmd) == 0) /* clear :D */
+		 	printf("%s", CLEAR);
+	else if (ft_strcmp("exit", msh->tkns[0].cmd) == 0) /* para hacer exit sin ctrl+C */
+	{
+		msh->end_sig = 1;
+		exit(msh->end_sig);
+	}
+}
