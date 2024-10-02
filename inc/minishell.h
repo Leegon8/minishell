@@ -102,7 +102,7 @@ int		env_var_count(char **envs);
 int		init_env(t_env *env, t_msh *msh);
 
 /******************************* ms_lexer *********************************/
-int		lexer(char **tokens, t_msh *msh);
+int		lexer(t_msh *msh);
 
 /******************************* ms_executor ******************************/
 

@@ -13,30 +13,30 @@
 #include "minishell.h"
 
 /* Comprueba cada token y su siguiente para operador (incompleta) */
-int	lexer(char **tokens, t_msh *msh)
+int	lexer(t_msh *msh)
 {
 	int	i;
 
 	i = 0;
-	while (tokens[i])
+	while (msh->tkns[i].cmd)
 	{
-		if (ft_strcmp(tokens[i], "|") == 0)
+		if (ft_strcmp(msh->tkns[i].cmd, "|") == 0)
 		{
-			if (i == 0 || tokens[i + 1] == NULL)
+			if (i == 0 || msh->tkns[i + 1].cmd == NULL)
 			{
-				perror("syntax error with | operator\n");
+				perror("syntax error near unexpected token `|'\n");
 				return (-1);
 			}
 		}
-		if (ft_strcmp(tokens[i], "<<") == 0)
+		if (ft_strcmp(msh->tkns[i].cmd, "<<") == 0)
 		{
-			if (tokens[i + 1] == NULL)
+			if (msh->tkns[i + 1].cmd == NULL)
 			{
-				perror("syntax error: missing delimiter for heredoc\n");
+				perror("syntax error near unexpected token `newline'\n");
 				return (-1);
 			}
 			msh->tkns->is_heredoc = 1;
-			msh->tkns->heredoc_delim = ft_strdup(tokens[i + 1]);
+			msh->tkns->heredoc_delim = ft_strdup(msh->tkns[i + 1].cmd);
 			i++;
 		}
 		i++;

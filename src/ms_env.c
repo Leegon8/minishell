@@ -18,13 +18,8 @@ int	env_var_count(char **envs)
 	int	i;
 
 	i = 0;
-	if (!envs || envs == NULL)
-		printf("THERE IS NO ENV\n");
-	else
-	{
-		while (envs && envs[i])
-			i++;
-	}
+	while (envs && envs[i])
+		i++;
 	return (i);
 }
 
@@ -45,8 +40,8 @@ int	init_env(t_env *env, t_msh *msh)
 	i = 0;
 	env->home = getenv("HOME");
 	getcwd(env->pwd, PATH_MAX);
-	// if (check_envs() != 0)
-	// 	return (0);
+	if (check_envs() != 0)
+		return (0);
 	while (msh->envs[i])
 	{
 		eq_sep = ft_strchr(msh->envs[i], '=');
@@ -57,7 +52,6 @@ int	init_env(t_env *env, t_msh *msh)
 			if (!env->names[i] || !env->values[i])
 				return (ft_fd_printf(2, "%s", E_ENVGET) * -1);
 		}
-		printf("nombre: %s, valor: %s\n", env->names[i], env->values[i]);
 		i++;
 	}
 	return (0);

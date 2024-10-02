@@ -18,7 +18,7 @@ char	*cmd_gen(const char *cmnd, int state)
 	static int	lst_idx;
 	static int	len;
 	char		*name;
-	static char	*cmd_lst[] = {"cd", "exit", "ls", "echo", "touch", "clear",
+	static char	*cmd_lst[] = {"exit", "pwd", "echo", "touch", "clear",
 		"mkdir", NULL};
 
 	if (!state)
