@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/30 18:42:22 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:24:49 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,19 @@ int		init_env(t_env *env, t_msh *msh);
 int		lexer(char **tokens, t_msh *msh);
 
 /******************************* ms_executor ******************************/
-
 /******************************* ms_echo **********************************/
 int		num_arg(char **argv);
 char	*ft_echo(char **argv);
 
-/******************************* ms_tools *********************************/
+/******************************* ms_builtins ******************************/
+int		ft_env(t_msh *msh);
+int		ft_exit(t_msh *msh);
+int		ft_pwd(t_msh *msh);
+int		is_builtin(t_msh *msh);
 
+void    cmd_not_found(t_msh *msh);
+
+/******************************* ms_tools *********************************/
 /******************************* ms_free **********************************/
 void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 

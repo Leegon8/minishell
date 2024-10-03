@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/28 19:51:48 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:46:10 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	init_env(t_env *env, t_msh *msh)
 			if (!env->names[i] || !env->values[i])
 				return (ft_fd_printf(2, "%s", E_ENVGET) * -1);
 		}
-		printf("nombre: %s, valor: %s\n", env->names[i], env->values[i]);
+		// printf("nombre: %s, valor: %s\n", env->names[i], env->values[i]);
 		i++;
 	}
 	return (0);

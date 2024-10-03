@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/30 19:00:54 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:09:55 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	shell_loop(t_msh *msh)
 	while (msh->end_sig == 0)
 	{
 		i = 0;
+		
 		rl_attempted_completion_function = cmd_comp;
 		input = readline("\033[0;96mspace 🛸 shell 👽\e[0m ");
 		if (input == NULL)
@@ -30,20 +31,12 @@ void	shell_loop(t_msh *msh)
 			add_history(input);
 		
 		tokenize_input(input, msh);
+		is_builtin(msh);
 
-		if (ft_strcmp("pwd", msh->tkns[0].cmd) == 0) /* pwd */
-			printf("%s\n", msh->env->pwd);			
-		else if (ft_strcmp("clear", msh->tkns[0].cmd) == 0) /* clear :D */
-		 	printf("%s", CLEAR);
-		else if (ft_strcmp("exit", msh->tkns[0].cmd) == 0) /* para hacer exit sin ctrl+C */
-			msh->end_sig = 1;
-		else
+		while (msh->tkns[i].cmd != NULL) /* este bucle hace print de tods los tokens */
 		{
-			while (msh->tkns[i].cmd != NULL) /* este bucle hace print de tods los tokens */
-			{
-				printf("%s\n", msh->tkns[i].cmd);
-				i++;
-			}
+			printf("%s\n", msh->tkns[i].cmd);
+			i++;
 		}
 		free(input);
 		j = 0;
