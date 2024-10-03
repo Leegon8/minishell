@@ -18,7 +18,6 @@ void	free_env(t_env *env)
 	int	i;
 
 	free(env->pwd);
-	free(env->home);
 	if (env->names)
 	{
 		i = 0;

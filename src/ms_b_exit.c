@@ -14,7 +14,6 @@
 
 int ft_exit(t_msh *msh)
 {
-    
     msh->end_sig = 1;
 	exit(msh->end_sig);
 }

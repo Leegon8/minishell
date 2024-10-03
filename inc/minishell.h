@@ -43,7 +43,6 @@ struct	s_environment
 	char	**names;
 	char	**values;
 	char	*pwd;
-	char	*home;
 };
 
 struct	s_tokenizer
