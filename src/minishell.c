@@ -23,18 +23,29 @@ void	shell_loop(t_msh *msh)
 	{
 		i = 0;
 		rl_attempted_completion_function = cmd_comp;
-		input = readline("\033[0;96mspace 🛸 shell 👽\e[0m ");
+		input = readline("\033[0;96mspace_shell 👽:\e[0m");//🛸
 		if (input == NULL)
 			break ;
 		if (*input)
 			add_history(input);
-		tokenize_input(input, msh);
-		while (msh->tkns[i].cmd != NULL) /* este bucle hace print de tods los tokens */
+		
+		check_tokens(input, msh);
+		cmd_exec(msh);
+		/*=================================================================================
+		if (tokenize_input(input, msh) == 0) // En caso de que se tokenize bien los argumentos
 		{
-			cmd_exec(msh);
-			printf("%s\n", msh->tkns[i].cmd);
-			i++;
+			while (msh->tkns[i].cmd != NULL) // Cuenta num tokens
+				i++;
 		}
+		int num_tok = i;
+		i = 0;
+		cmd_exec(msh);
+		if (is_echo(msh->tkns[i].cmd) == 0)
+		{
+			ft_echo(msh, num_tok);
+		}
+		================================================================================= */
+
 		free(input);
 		j = 0;
 		while (j < i)

@@ -57,7 +57,7 @@ int	init_env(t_env *env, t_msh *msh)
 			if (!env->names[i] || !env->values[i])
 				return (ft_fd_printf(2, "%s", E_ENVGET) * -1);
 		}
-		printf("nombre: %s, valor: %s\n", env->names[i], env->values[i]);
+		//printf("nombre: %s, valor: %s\n", env->names[i], env->values[i]);
 		i++;
 	}
 	return (0);

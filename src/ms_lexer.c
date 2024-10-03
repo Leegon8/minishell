@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:45:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/30 09:21:57 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:42:18 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,26 @@ int	lexer(char **tokens, t_msh *msh)
 		i++;
 	}
 	return (0);
+}
+
+void	check_tokens(char *input, t_msh *msh)
+{
+	int		i;
+	int		count_tok;
+
+	i = 0;
+	count_tok = 0;
+	if (tokenize_input(input, msh) == 0)
+	{
+		while (msh->tkns[count_tok].cmd)
+			count_tok++;
+		while (msh->tkns[i].cmd)
+		{
+			if (ft_strcmp(msh->tkns[i].cmd, "echo") == 0)
+				ft_echo(msh, count_tok);
+			if (ft_strcmp(msh->tkns[i].cmd, "cd") == 0)
+				ft_cd(msh, count_tok);
+			i++;
+		}
+	}
 }

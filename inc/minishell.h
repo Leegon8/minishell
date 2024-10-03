@@ -103,12 +103,16 @@ int		init_env(t_env *env, t_msh *msh);
 
 /******************************* ms_lexer *********************************/
 int		lexer(char **tokens, t_msh *msh);
+void	check_tokens(char *input, t_msh *msh);
 
 /******************************* ms_executor ******************************/
+void	cmd_exec(t_msh *msh);
 
 /******************************* ms_echo **********************************/
-int		num_arg(char **argv);
-char	*ft_echo(char **argv);
+void	ft_echo(t_msh *msh, int num_cmd);
+
+/******************************** ms_cd ***********************************/
+void	ft_cd(t_msh *msh, int num_cmd);
 
 /******************************* ms_tools *********************************/
 
@@ -132,6 +136,7 @@ void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 # define E_ENVGET "Error: env var retrieval failed\n"
 # define E_TOKMEM "Error: tok mem asignation failed\n"
 # define E_PIPMEM "Error: mpip mem asignation failed\n"
+# define E_CDARG "cd: $ARG: No such file or directory\n"
 
 /******************************** Other macros ***************************/
 # define PATH_MAX		4096

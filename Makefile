@@ -23,7 +23,7 @@ RM = rm -rf
 # **************************************************************************** #
 
 SRCS = minishell.c ms_init.c ms_tokenizer.c ms_parser.c ms_lexer.c ms_rline.c \
-	ms_echo.c ms_env.c ms_free.c ms_tools.c \
+	ms_echo.c ms_env.c ms_free.c ms_tools.c ms_executor.c ms_cd.c \
 
 SRC_PATH := ./src/
 OBJ_PATH := ./tmp/
