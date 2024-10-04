@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 21:46:16 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/25 09:44:42 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 10:10:02 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*ft_strndup(const char *s, size_t len)
 	if (len > slen)
 		len = slen;
 	dup = malloc(len + 1);
-	if (dup)
-		ft_strlcpy(dup, s, len + 1);
+	if (!dup)
+		return (NULL);
+	ft_strlcpy(dup, s, len + 1);
 	return (dup);
 }

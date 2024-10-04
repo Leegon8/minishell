@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:09:34 by lprieto-          #+#    #+#             */
-/*   Updated: 2023/10/12 07:09:03 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 10:14:50 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,16 @@
 char	*ft_strdup(char *str)
 {
 	char	*dest;
-	int		i;
 	int		l;
 
-	i = 0;
 	l = 0;
-	while (str[l] != 0)
+	while (str[l] != '\0')
 		l++;
 	dest = (char *)malloc(l + 1);
-	if (dest == ((char *) 0))
+	if (dest == NULL)
 		return (0);
-	while (str[i])
-	{
-		dest[i] = str[i];
-		++i;
-	}
-	dest[i] = '\0';
+	ft_memcpy(dest, str, l);
+	dest[l] = '\0';
 	return (dest);
 }
 
@@ -44,7 +38,12 @@ char	*ft_strdup(char *str)
 	printf("strdup:%s", resultado_strdup);
 	return(0);
 }*/
-
+//memcopyloop
+	// while (str[i])
+	// {
+	// 	dest[i] = str[i];
+	// 	++i;
+	// }
 /* ************************************************************************** *
  *								FT_STRDUP
  *
