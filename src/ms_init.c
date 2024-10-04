@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:49:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/28 19:45:10 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 09:47:31 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	init_envi(t_env **env, t_msh *msh)
 	(*env)->values = malloc(sizeof(char *) * env_count);
 	if (!(*env)->values)
 		return (-1);
+	(*env)->names[env_count] = NULL;
+	(*env)->values[env_count] = NULL;
 	return (0);
 }
 
