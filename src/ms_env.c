@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/04 12:40:46 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:15:27 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	env_var_count(t_msh *msh)
 		return (printf("THERE IS NO ENV\n"), 0);
 	while (msh->envs[i])
 		i++;
-	ft_fd_printf(1, " # # # # ENV VARS # > %d\n", i);
+	ft_fd_printf(1, " # ENV VARS # > %d\n", i);
 	return (i);
 }
 
@@ -46,6 +46,7 @@ int	init_env(t_env *env, t_msh *msh)
 		eq_sep = ft_strchr(msh->envs[i], '=');
 		if (eq_sep)
 		{
+			ft_fd_printf(1, "%d\n", i);
 			env->names[i] = ft_strndup(msh->envs[i], (eq_sep - msh->envs[i]));
 			env->values[i] = ft_strdup(eq_sep + 1);
 			
@@ -57,7 +58,7 @@ int	init_env(t_env *env, t_msh *msh)
 			ft_fd_printf(2, "Error: no hay '=' en %s\n", msh->env[i]);
 			return (-1);
 		}
-		printf("Saved > %s, = %s\n", env->names[i], env->values[i]);
+	//	printf("Saved > %s, = %s\n", env->names[i], env->values[i]);
 		i++;
 	}
 	return (0);

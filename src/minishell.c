@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/04 12:42:08 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:34:28 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	shell_loop(t_msh *msh)
 {
 	char	*input;
 	int		i;
-	int		j;
+	// int		j;
 
 	while (msh->end_sig == 0)
 	{
@@ -39,12 +39,12 @@ void	shell_loop(t_msh *msh)
 			i++;
 		}
 		free(input);
-		j = 0;
-		while (j < i)
-		{	
-			free(msh->tkns[j].cmd);
-			j++;	
-		}
+		// j = 0;
+		// while (j < i)
+		// {	
+		// 	free(msh->tkns[j].cmd);
+		// 	j++;	
+		// }
 	}
 }
 
@@ -62,17 +62,6 @@ int	main(int argc, char **argv, char **envs)
 	msh.envs = envs;
 	if (init_strc(&env, &msh, &mpip, &tok) != 0)
 		return (ft_fd_printf(2, "%s", E_MEMASF)* -1);
-	msh.envs = envs;
-	if (envs != NULL)
-	{
-		msh.envs = envs;
-		for (int i = 0; msh.envs[i]; i++)
-        printf("Env[%d]: %s\n", i, msh.envs[i]);
-	}
-	else
-	{
-		printf("No hay variables de entorno disponibles.\n");
-	}
 	init_env(env, &msh); /* inicia el env, ya sea con el env del sistema o sin el */
 	shell_loop(&msh); /* Este es el loop principal, que esta en la funcion shell_loop */
 	free_structs(env, tok, mpip); /* Libera las estructuras que le pasemos */

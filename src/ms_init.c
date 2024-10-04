@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:49:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/04 12:03:36 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:27:44 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ int	init_envi(t_env **env, t_msh *msh, int envnbr)
 	if (!(*env)->pwd)
 		return (-1);
 	ft_fd_printf(1, "msh->envs address: %p\n", (void *)msh->envs);
-	if (msh->envs) 
-	{
-		for (int j = 0; msh->envs[j]; j++)
-   	    ft_fd_printf(1, "nEnv[%d]: %s\n", j, msh->envs[j]);
-	}
-	// ft_fd_printf(1, "aqui tovia no peta\n");
-	// envnbr = env_var_count(msh);
-	// ft_fd_printf(1, "Ya pasa el boquete\n");
+	// if (msh->envs) 
+	// {
+	// 	for (int j = 0; msh->envs[j]; j++)
+   	//     ft_fd_printf(1, "nEnv[%d]: %s\n", j, msh->envs[j]);
+	// }
+	// // ft_fd_printf(1, "aqui tovia no peta\n");
+	// // envnbr = env_var_count(msh);
+	// // ft_fd_printf(1, "Ya pasa el boquete\n");
 	(*env)->names = malloc(sizeof(char *) * envnbr);
 	if (!(*env)->names)
 		return (-1);
@@ -67,7 +67,9 @@ int	init_mpip(t_exe **mpip)
 /* inicia las estructuras por separado y las enlaza a msh */
 int	init_strc(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok)
 {
-	int envnbr = env_var_count(msh);
+	int envnbr;
+	
+	envnbr = env_var_count(msh);
 	if (init_envi(env, msh, envnbr))
 		return (ft_fd_printf(2, "%s", E_ENVGET) * -1);
 	msh->env = *env;
