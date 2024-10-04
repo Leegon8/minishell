@@ -98,7 +98,7 @@ char	**cmd_comp(const char *text, int start, int end);
 char	*cmd_match(const char *text, int state);
 
 /******************************* ms_environment ***************************/
-int		env_var_count(char **envs);
+int		env_var_count(t_msh *msh);
 int		init_env(t_env *env, t_msh *msh);
 
 /******************************* ms_lexer *********************************/
@@ -113,6 +113,13 @@ void	ft_echo(t_msh *msh, int num_cmd);
 
 /******************************** ms_cd ***********************************/
 void	ft_cd(t_msh *msh, int num_cmd);
+
+/******************************* ms_builtins ******************************/
+int		ft_env(t_msh *msh);
+int		ft_exit(t_msh *msh);
+int		ft_pwd(t_msh *msh);
+int		is_builtin(t_msh *msh);
+void    cmd_not_found(t_msh *msh);
 
 /******************************* ms_tools *********************************/
 

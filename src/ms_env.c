@@ -13,18 +13,16 @@
 #include "minishell.h"
 
 /* Cuenta las variables que hay en env (No modificar) trabajando en ella */
-int	env_var_count(char **envs)
+int	env_var_count(t_msh *msh)
 {
 	int	i;
 
 	i = 0;
-	if (!envs || envs == NULL)
-		printf("THERE IS NO ENV\n");
-	else
-	{
-		while (envs && envs[i])
-			i++;
-	}
+	if (!msh->env)
+		return (printf("THERE IS NO ENV\n"), 0);
+	while (msh->envs[i])
+		i++;
+	ft_fd_printf(1, " # # # # ENV VARS # > %d\n", i);
 	return (i);
 }
 
@@ -45,6 +43,30 @@ int	init_env(t_env *env, t_msh *msh)
 	i = 0;
 	env->home = getenv("HOME");
 	getcwd(env->pwd, PATH_MAX);
+	if (check_envs() != 0)
+		return (0);
+	while (msh->envs[i])
+	{
+		eq_sep = ft_strchr(msh->envs[i], '=');
+		if (eq_sep)
+		{
+			env->names[i] = ft_strndup(msh->envs[i], (eq_sep - msh->envs[i]));
+			env->values[i] = ft_strdup(eq_sep + 1);
+			if (!env->names[i] || !env->values[i])
+				return (ft_fd_printf(2, "%s", E_ENVGET) * -1);
+		}
+		i++;
+	}
+	return (0);
+}
+/*int	init_env(t_env *env, t_msh *msh)
+{
+	int		i;
+	char	*eq_sep;
+
+	i = 0;
+	env->home = getenv("HOME");
+	getcwd(env->pwd, PATH_MAX);
 	// if (check_envs() != 0)
 	// 	return (0);
 	while (msh->envs[i])
@@ -57,8 +79,7 @@ int	init_env(t_env *env, t_msh *msh)
 			if (!env->names[i] || !env->values[i])
 				return (ft_fd_printf(2, "%s", E_ENVGET) * -1);
 		}
-		//printf("nombre: %s, valor: %s\n", env->names[i], env->values[i]);
 		i++;
 	}
 	return (0);
-}
+}*/

@@ -16,6 +16,7 @@
 void	ft_echo(t_msh *msh, int num_cmd)
 {
 	int		i;
+//	int		j;
 	int		n_option;
 
 	i = 1;
@@ -31,6 +32,8 @@ void	ft_echo(t_msh *msh, int num_cmd)
 		}
 		while (msh->tkns[i].cmd)
 		{
+			//if (msh->tkns[i].cmd == '\'' || msh->tkns[i].cmd == '\"')
+			//	i++;
 			printf("%s", msh->tkns[i].cmd);
 			if (msh->tkns[i + 1].cmd != NULL)
 				printf(" ");
