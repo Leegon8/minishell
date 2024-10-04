@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:28:03 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/03 11:26:10 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 11:38:50 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int  is_builtin(t_msh *msh)
         ft_env(msh);
     else if (ft_strcmp(msh->tkns->cmd, "exit") == 0)
         ft_exit(msh);
+    else if (ft_strcmp(msh->tkns->cmd, "clear") == 0)
+        ft_fd_printf(1, "%s", CLEAR);
     else
         return (-1);
     return (1);

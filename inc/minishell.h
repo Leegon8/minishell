@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/03 11:24:49 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 11:05:28 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	**cmd_comp(const char *text, int start, int end);
 char	*cmd_match(const char *text, int state);
 
 /******************************* ms_environment ***************************/
-int		env_var_count(char **envs);
+int		env_var_count(t_msh *msh);
 int		init_env(t_env *env, t_msh *msh);
 
 /******************************* ms_lexer *********************************/

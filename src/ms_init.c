@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:49:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/04 09:47:31 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 11:24:41 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,15 @@ int	init_envi(t_env **env, t_msh *msh)
 	(*env)->pwd = malloc(PATH_MAX);
 	if (!(*env)->pwd)
 		return (-1);
-	env_count = env_var_count(msh->envs) + 1;
+	ft_fd_printf(1, "msh->envs address: %p\n", (void *)msh->envs);
+	if (msh->envs) 
+	{
+		for (int j = 0; msh->envs[j]; j++)
+   	    ft_fd_printf(1, "Env[%d]: %s\n", j, msh->envs[j]);
+	}
+	ft_fd_printf(1, "aqui tovia no peta\n");
+	env_count = env_var_count(msh);
+	ft_fd_printf(1, "Ya pasa el boquete\n");
 	(*env)->names = malloc(sizeof(char *) * env_count);
 	if (!(*env)->names)
 		return (-1);
@@ -61,19 +69,19 @@ int	init_strc(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok)
 {
 	if (init_envi(env, msh))
 		return (ft_fd_printf(2, "%s", E_ENVGET) * -1);
+	msh->env = *env;
 	if (init_tok(tok))
 	{
 		free(*env);
 		return (ft_fd_printf(2, "%s", E_TOKMEM) * -1);
 	}
+	msh->tkns = *tok;
 	if (init_mpip(mpip))
 	{
 		free(*env);
 		free(*tok);
 		return (ft_fd_printf(2, "%s", E_PIPMEM) * -1);
 	}
-	msh->env = *env;
-	msh->tkns = *tok;
 	msh->mpip = *mpip;
 	return (0);
 }

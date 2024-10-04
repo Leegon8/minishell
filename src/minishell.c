@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/03 12:09:55 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 11:34:56 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	shell_loop(t_msh *msh)
 		i = 0;
 		
 		rl_attempted_completion_function = cmd_comp;
-		input = readline("\033[0;96mspace 🛸 shell 👽\e[0m ");
+		input = readline("\033[0;96mspace_shell 👽 >\e[0m ");
 		if (input == NULL)
 			break ;
 		if (*input)
@@ -59,10 +59,21 @@ int	main(int argc, char **argv, char **envs)
 	if (argc != 1 || argv[1])
 		exit (ft_fd_printf(2, "%s", E_EXECARG) * 0);
 	ft_memset(&msh, 0, sizeof(t_msh));
+	msh.envs = envs;
 	if (init_strc(&env, &msh, &mpip, &tok) != 0)
 		return (ft_fd_printf(2, "%s", E_MEMASF)* -1);
+	msh.envs = envs;
 	if (envs != NULL)
+	{
 		msh.envs = envs;
+		env_var_count(&msh);
+		for (int i = 0; msh.envs[i]; i++)
+        printf("Env[%d]: %s\n", i, msh.envs[i]);
+	}
+	else
+	{
+		printf("No hay variables de entorno disponibles.\n");
+	}
 	init_env(env, &msh); /* inicia el env, ya sea con el env del sistema o sin el */
 	shell_loop(&msh); /* Este es el loop principal, que esta en la funcion shell_loop */
 	free_structs(env, tok, mpip); /* Libera las estructuras que le pasemos */
