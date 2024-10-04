@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/04 11:26:13 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:40:46 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	init_env(t_env *env, t_msh *msh)
 		if (eq_sep)
 		{
 			env->names[i] = ft_strndup(msh->envs[i], (eq_sep - msh->envs[i]));
-			env->values[i] = ft_strdup(eq_sep + 2);
+			env->values[i] = ft_strdup(eq_sep + 1);
+			
 			if (!env->names[i] || !env->values[i])
 				return (ft_fd_printf(2, "%s", E_ENVGET), -1);
 		}
@@ -56,7 +57,7 @@ int	init_env(t_env *env, t_msh *msh)
 			ft_fd_printf(2, "Error: no hay '=' en %s\n", msh->env[i]);
 			return (-1);
 		}
-		//printf("Saved > %s, = %s\n", env->names[i], env->values[i]);
+		printf("Saved > %s, = %s\n", env->names[i], env->values[i]);
 		i++;
 	}
 	return (0);

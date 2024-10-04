@@ -6,16 +6,16 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:49:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/04 11:24:41 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:03:36 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* inicia la asignacion de memoria para env en relacion al envs (del sistema) */
-int	init_envi(t_env **env, t_msh *msh)
+int	init_envi(t_env **env, t_msh *msh, int envnbr)
 {
-	size_t	env_count;
+	// size_t	envnbr;
 
 	*env = malloc(sizeof(t_env));
 	if (!*env)
@@ -28,19 +28,19 @@ int	init_envi(t_env **env, t_msh *msh)
 	if (msh->envs) 
 	{
 		for (int j = 0; msh->envs[j]; j++)
-   	    ft_fd_printf(1, "Env[%d]: %s\n", j, msh->envs[j]);
+   	    ft_fd_printf(1, "nEnv[%d]: %s\n", j, msh->envs[j]);
 	}
-	ft_fd_printf(1, "aqui tovia no peta\n");
-	env_count = env_var_count(msh);
-	ft_fd_printf(1, "Ya pasa el boquete\n");
-	(*env)->names = malloc(sizeof(char *) * env_count);
+	// ft_fd_printf(1, "aqui tovia no peta\n");
+	// envnbr = env_var_count(msh);
+	// ft_fd_printf(1, "Ya pasa el boquete\n");
+	(*env)->names = malloc(sizeof(char *) * envnbr);
 	if (!(*env)->names)
 		return (-1);
-	(*env)->values = malloc(sizeof(char *) * env_count);
+	(*env)->values = malloc(sizeof(char *) * envnbr);
 	if (!(*env)->values)
 		return (-1);
-	(*env)->names[env_count] = NULL;
-	(*env)->values[env_count] = NULL;
+	(*env)->names[envnbr] = NULL;
+	(*env)->values[envnbr] = NULL;
 	return (0);
 }
 
@@ -67,7 +67,8 @@ int	init_mpip(t_exe **mpip)
 /* inicia las estructuras por separado y las enlaza a msh */
 int	init_strc(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok)
 {
-	if (init_envi(env, msh))
+	int envnbr = env_var_count(msh);
+	if (init_envi(env, msh, envnbr))
 		return (ft_fd_printf(2, "%s", E_ENVGET) * -1);
 	msh->env = *env;
 	if (init_tok(tok))

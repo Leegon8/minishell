@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/04 11:34:56 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:42:08 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	main(int argc, char **argv, char **envs)
 	if (envs != NULL)
 	{
 		msh.envs = envs;
-		env_var_count(&msh);
 		for (int i = 0; msh.envs[i]; i++)
         printf("Env[%d]: %s\n", i, msh.envs[i]);
 	}

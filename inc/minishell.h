@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/04 11:05:28 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/04 11:57:08 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ struct	s_minishell
 void	shell_loop(t_msh *msh);
 
 /******************************* ms_init **********************************/
-int		init_envi(t_env **env, t_msh *msh);
+int		init_envi(t_env **env, t_msh *msh, int envnbr);
 int		init_tok(t_tok **tok);
 int		init_mpip(t_exe **mpip);
 int		init_strc(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok);
