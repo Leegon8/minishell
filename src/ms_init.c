@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:49:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/28 19:45:10 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:48:29 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,18 @@ int	init_envi(t_env **env, t_msh *msh)
 {
 	size_t	env_count;
 
-	*env = malloc(sizeof(t_env));
+	*env = malloc(sizeof(t_env) + 1);
 	if (!*env)
 		return (-1);
 	ft_memset(*env, 0, sizeof(t_env));
 	(*env)->pwd = malloc(PATH_MAX);
 	if (!(*env)->pwd)
 		return (-1);
-	ft_fd_printf(1, "msh->envs address: %p\n", (void *)msh->envs);
-	if (msh->envs) 
-	{
-		for (int j = 0; msh->envs[j]; j++)
-   	    ft_fd_printf(1, "Env[%d]: %s\n", j, msh->envs[j]);
-	}
-	ft_fd_printf(1, "aqui tovia no peta\n");
 	env_count = env_var_count(msh);
-	ft_fd_printf(1, "Ya pasa el boquete\n");
-	(*env)->names = malloc(sizeof(char *) * env_count);
+	(*env)->names = malloc(sizeof(char *) * env_count + 1);
 	if (!(*env)->names)
 		return (-1);
-	(*env)->values = malloc(sizeof(char *) * env_count);
+	(*env)->values = malloc(sizeof(char *) * env_count + 1);
 	if (!(*env)->values)
 		return (-1);
 	(*env)->names[env_count] = NULL;

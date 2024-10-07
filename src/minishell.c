@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/30 19:00:54 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:09:59 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	shell_loop(t_msh *msh)
 			continue ;
 		}
 		check_tokens(input, msh);
-		cmd_exec(msh);
 		free(input);
 		j = 0;
 		while (j < i)
@@ -54,10 +53,11 @@ int	main(int argc, char **argv, char **envs)
 	if (argc != 1 || argv[1])
 		exit (ft_fd_printf(2, "%s", E_EXECARG) * 0);
 	ft_memset(&msh, 0, sizeof(t_msh));
+	msh.envs = envs;
 	if (init_strc(&env, &msh, &mpip, &tok) != 0)
 		return (ft_fd_printf(2, "%s", E_MEMASF)* -1);
-	if (envs != NULL)
-		msh.envs = envs;
+	//if (envs != NULL)
+	//	msh.envs = envs;
 	init_env(env, &msh); /* inicia el env, ya sea con el env del sistema o sin el */
 	shell_loop(&msh); /* Este es el loop principal, que esta en la funcion shell_loop */
 	free_structs(env, tok, mpip); /* Libera las estructuras que le pasemos */

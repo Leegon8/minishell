@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_echo.c                                          :+:      :+:    :+:   */
+/*   ms_b_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 21:21:27 by lauriago          #+#    #+#             */
-/*   Updated: 2024/10/03 14:40:00 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/10/06 19:24:50 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 void	ft_echo(t_msh *msh, int num_cmd)
 {
 	int		i;
-//	int		j;
 	int		n_option;
 
 	i = 1;
@@ -32,8 +31,6 @@ void	ft_echo(t_msh *msh, int num_cmd)
 		}
 		while (msh->tkns[i].cmd)
 		{
-			//if (msh->tkns[i].cmd == '\'' || msh->tkns[i].cmd == '\"')
-			//	i++;
 			printf("%s", msh->tkns[i].cmd);
 			if (msh->tkns[i + 1].cmd != NULL)
 				printf(" ");
@@ -43,3 +40,6 @@ void	ft_echo(t_msh *msh, int num_cmd)
 			printf("\n");
 	}
 }
+// Hay que gestionar casos con comillas 
+			//if (msh->tkns[i].cmd == '\'' || msh->tkns[i].cmd == '\"')
+			//	i++;

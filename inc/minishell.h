@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/30 18:42:22 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:49:20 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int		lexer(char **tokens, t_msh *msh);
 void	check_tokens(char *input, t_msh *msh);
 
 /******************************* ms_executor ******************************/
-void	cmd_exec(t_msh *msh);
 
 /******************************* ms_echo **********************************/
 void	ft_echo(t_msh *msh, int num_cmd);
@@ -120,6 +119,7 @@ int		ft_exit(t_msh *msh);
 int		ft_pwd(t_msh *msh);
 int		is_builtin(t_msh *msh);
 void    cmd_not_found(t_msh *msh);
+void	exc_cmd(t_msh *msh, int count_tok);
 
 /******************************* ms_tools *********************************/
 

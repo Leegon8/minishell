@@ -43,25 +43,3 @@ int	lexer(char **tokens, t_msh *msh)
 	}
 	return (0);
 }
-
-void	check_tokens(char *input, t_msh *msh)
-{
-	int		i;
-	int		count_tok;
-
-	i = 0;
-	count_tok = 0;
-	if (tokenize_input(input, msh) == 0)
-	{
-		while (msh->tkns[count_tok].cmd)
-			count_tok++;
-		while (msh->tkns[i].cmd)
-		{
-			if (ft_strcmp(msh->tkns[i].cmd, "echo") == 0)
-				ft_echo(msh, count_tok);
-			if (ft_strcmp(msh->tkns[i].cmd, "cd") == 0)
-				ft_cd(msh, count_tok);
-			i++;
-		}
-	}
-}

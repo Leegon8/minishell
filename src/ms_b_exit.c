@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ms_b_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauriago <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:01 by lauriago          #+#    #+#             */
-/*   Updated: 2024/10/04 13:14:07 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/10/06 19:27:21 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_exit(t_msh *msh)
+int	ft_exit(t_msh *msh)
 {
-    msh->end_sig = 1;
+	msh->end_sig = 1;
 	exit(msh->end_sig);
 }
