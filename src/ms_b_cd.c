@@ -12,23 +12,76 @@
 
 #include "minishell.h"
 
-/* Imprime los argumentos de echo, opción -n para suprimir el \n final */
+/* Verifies if it's a relative path & wich relative path type is */
+int	is_relative(char *arg)
+{
+	int	i;
+
+	i = 0;
+
+	while (i < 2)
+	{
+		if (arg[i] == '.')
+			i++;
+		if (arg[i] == '-')
+			return (2);
+		return (1);
+	}
+	return (-1);
+}
+
+/* Converts a relative path to an absolute path */
+char	*built_abspath(char *relative_path, char *pwd)
+{
+	char	*abs_path;
+	int		len;
+	int		i;
+	int		j;
+
+	len = ft_strlen(relative_path) + ft_strlen(pwd) + 2;
+	abs_path = malloc(sizeof(char) * len);
+	i = -1;
+	j = 0;
+	if (!abs_path)
+		return (NULL);
+	while (pwd[++i])
+		abs_path[j++] = pwd[i];
+	abs_path[j++] = '/';
+	i = -1;
+	while (relative_path[++i])
+		abs_path[j++] = relative_path[i];
+	abs_path[j] = '\0';
+//	printf("\nabs_path = %s\n", abs_path);
+	return (abs_path);
+}
+
+/* Verifies the route & acces in case that exists */
 void	ft_cd(t_msh *msh, int num_cmd)
 {
-	DIR	*new_path;
-	int	i;
-	
-	i = 1;
+	char	*new_path;
+
 	new_path = NULL;
 	if (num_cmd > 2)
 		ft_fd_printf(2, "bash: %s: too many arguments\n", msh->tkns->cmd);
 	else if (num_cmd == 1)
 		chdir(msh->env->home);
-	/*else if (num_cmd == 2)
+	else if (num_cmd == 2)
 	{
-		printf("%d, Entra en cd function\n", num_cmd);
-		new_path = opendir(msh->tkns[i].cmd);
-		readdir(new_path);
-		ft_pwd(msh);
-	}*/
+		if (msh->tkns[1].cmd[0] == '/') // Is an absolute path
+			new_path = strdup(msh->tkns[1].cmd);
+		else
+			new_path = built_abspath(msh->tkns[1].cmd, msh->env->pwd);
+		/*else if (is_relative(msh->tkns[1].cmd) == 2)
+		{
+			// Has to access to the before path
+		}*/
+		if (chdir(new_path) == -1)
+			perror("cd");
+		else
+		{
+			free(msh->env->pwd);
+			msh->env->pwd = getcwd(NULL, 0);
+		}
+	}
 }
+// printf("pwd after chdir: %s\n", msh->env->pwd);

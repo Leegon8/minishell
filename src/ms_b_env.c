@@ -20,9 +20,9 @@ int	ft_env(t_msh *msh)
 	i = 0;
 	while (msh->env->names[i] && msh->env->values[i])
 	{
-		ft_fd_printf(1, "C %d > %s=%s\n", i, msh->env->names[i],
+		ft_fd_printf(1, "[%d] %s=%s\n", i, msh->env->names[i],
 			msh->env->values[i]);
-		ft_fd_printf(1, "O %d > %s\n", i, msh->envs[i]);
+		//ft_fd_printf(1, "O %d > %s\n", i, msh->envs[i]);
 		i++;
 	}
 	return (1);
