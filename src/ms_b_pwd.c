@@ -22,6 +22,5 @@ int	ft_pwd(t_msh *msh)
 	getcwd(pwdpath, PATH_MAX);
 	msh->env->pwd = pwdpath;
 	ft_fd_printf(1, "%s\n", pwdpath);
-	free(pwdpath);
 	return (1);
 }

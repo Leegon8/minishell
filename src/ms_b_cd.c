@@ -6,29 +6,12 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:41:10 by lauriago          #+#    #+#             */
-/*   Updated: 2024/10/07 17:43:43 by leegon           ###   ########.fr       */
+/*   Updated: 2024/10/09 01:27:30 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* Verifies if it's a relative path & wich relative path type is */
-int	is_relative(char *arg)
-{
-	int	i;
-
-	i = 0;
-
-	while (i < 2)
-	{
-		if (arg[i] == '.')
-			i++;
-		if (arg[i] == '-')
-			return (2);
-		return (1);
-	}
-	return (-1);
-}
 
 /* Converts a relative path to an absolute path */
 char	*built_abspath(char *relative_path, char *pwd)
@@ -55,6 +38,26 @@ char	*built_abspath(char *relative_path, char *pwd)
 	return (abs_path);
 }
 
+char	*make_relative(char *arg, t_msh *msh)
+{
+	char	*new_path;
+
+	new_path = NULL;
+	if (arg[0] == '-')
+	{
+		new_path = ft_strdup(msh->env->old_pwd);
+		printf("%s\n", msh->env->old_pwd);  // Imprimir el directorio anterior
+	}
+	else if (arg[0] == '.' && (arg[1] == '\0' || arg[1] == '/'))
+		new_path = ft_strdup("..");
+	else if (arg[0] == '.' && arg[1] == '.' && (arg[2] == '\0' ||
+		arg[2] == '/'))
+		new_path = ft_strdup("..");
+	else
+		new_path = built_abspath(msh->tkns[1].cmd, msh->env->pwd);
+	return (new_path);
+}
+
 /* Verifies the route & acces in case that exists */
 void	ft_cd(t_msh *msh, int num_cmd)
 {
@@ -68,20 +71,18 @@ void	ft_cd(t_msh *msh, int num_cmd)
 	else if (num_cmd == 2)
 	{
 		if (msh->tkns[1].cmd[0] == '/') // Is an absolute path
-			new_path = strdup(msh->tkns[1].cmd);
+			new_path = ft_strdup(msh->tkns[1].cmd);
 		else
-			new_path = built_abspath(msh->tkns[1].cmd, msh->env->pwd);
-		/*else if (is_relative(msh->tkns[1].cmd) == 2)
-		{
-			// Has to access to the before path
-		}*/
-		if (chdir(new_path) == -1)
-			perror("cd");
-		else
-		{
-			free(msh->env->pwd);
-			msh->env->pwd = getcwd(NULL, 0);
-		}
+			new_path = make_relative(msh->tkns[1].cmd, msh); //TODO
 	}
+	if (new_path && chdir(new_path) != -1)
+	{
+		//free(msh->env->old_pwd);
+		msh->env->old_pwd = msh->env->pwd;
+		//free(msh->env->pwd);
+		msh->env->pwd = getcwd(NULL, 0);
+	}
+	else
+		perror("cd");
+	free(new_path);
 }
-// printf("pwd after chdir: %s\n", msh->env->pwd);
