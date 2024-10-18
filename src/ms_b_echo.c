@@ -43,3 +43,4 @@ void	ft_echo(t_msh *msh, int num_cmd)
 // Hay que gestionar casos con comillas 
 			//if (msh->tkns[i].cmd == '\'' || msh->tkns[i].cmd == '\"')
 			//	i++;
+// Hay que gestionar variable de entorno

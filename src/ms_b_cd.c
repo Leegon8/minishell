@@ -12,6 +12,27 @@
 
 #include "minishell.h"
 
+static void	is_varenv(char *input)
+{
+	int	i;
+	char	*varenv;
+
+	i = 0;
+	varenv = malloc(sizeof(char) * ft_strlen(input) + 1);
+	while (input[i])
+	{
+		if (input[i] == '$')
+			break;
+		i++;
+	}
+	printf("%c\n", input[i]);
+	if (input[i] != '\0')
+	{
+		while (input[i++])
+			varenv[i] = input[i];
+		printf("%s\n", varenv);
+	}
+}
 
 /* Converts a relative path to an absolute path */
 char	*built_abspath(char *relative_path, char *pwd)
@@ -70,17 +91,19 @@ void	ft_cd(t_msh *msh, int num_cmd)
 		chdir(msh->env->home);
 	else if (num_cmd == 2)
 	{
+		// verify_varenv --> Verificar si se quiere acceder a una variable
+		// de entorno y en caso de ser una variable 
+		verify_varenv(msh->tkns[1].cmd);
 		if (msh->tkns[1].cmd[0] == '/') // Is an absolute path
 			new_path = ft_strdup(msh->tkns[1].cmd);
 		else
-			new_path = make_relative(msh->tkns[1].cmd, msh); //TODO
+			new_path = make_relative(msh->tkns[1].cmd, msh);
 	}
 	if (new_path && chdir(new_path) != -1)
 	{
-		//free(msh->env->old_pwd);
 		msh->env->old_pwd = msh->env->pwd;
-		//free(msh->env->pwd);
 		msh->env->pwd = getcwd(NULL, 0);
+		env_pos(msh);
 	}
 	else
 		perror("cd");

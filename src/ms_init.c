@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:49:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/07 13:48:29 by leegon           ###   ########.fr       */
+/*   Updated: 2024/10/08 22:55:17 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	init_envi(t_env **env, t_msh *msh)
 	if (!(*env)->pwd)
 		return (-1);
 	env_count = env_var_count(msh);
-	(*env)->names = malloc(sizeof(char *) * env_count + 1);
+	(*env)->names = malloc(sizeof(char *) * env_count + 9);
 	if (!(*env)->names)
 		return (-1);
-	(*env)->values = malloc(sizeof(char *) * env_count + 1);
+	(*env)->values = malloc(sizeof(char *) * env_count + 9);
 	if (!(*env)->values)
 		return (-1);
 	(*env)->names[env_count] = NULL;

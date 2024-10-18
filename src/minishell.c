@@ -56,8 +56,8 @@ int	main(int argc, char **argv, char **envs)
 	msh.envs = envs;
 	if (init_strc(&env, &msh, &mpip, &tok) != 0)
 		return (ft_fd_printf(2, "%s", E_MEMASF)* -1);
-	//if (envs != NULL)
-	//	msh.envs = envs;
+	if (envs != NULL)
+		msh.envs = envs;
 	init_env(env, &msh); /* inicia el env, ya sea con el env del sistema o sin el */
 	shell_loop(&msh); /* Este es el loop principal, que esta en la funcion shell_loop */
 	free_structs(env, tok, mpip); /* Libera las estructuras que le pasemos */

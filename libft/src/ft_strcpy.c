@@ -23,6 +23,6 @@ char	*ft_strcpy(char *dest, const char *src)
 		dest++;
 		src++;
 	}
-	dest = '\0';
+	dest = 0;
 	return (orig_ptr);
 }

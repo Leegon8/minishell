@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/07 13:48:55 by leegon           ###   ########.fr       */
+/*   Updated: 2024/10/08 22:54:01 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	init_env(t_env *env, t_msh *msh)
 	i = 0;
 	eq_sep = NULL;
 	env->home = getenv("HOME");
+	env->old_pwd = getenv("OLDPWD");
+	env->path = getenv("PATH");
 	getcwd(env->pwd, PATH_MAX);
 	if (check_envs() != 0)
 		return (0);

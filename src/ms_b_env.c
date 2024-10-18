@@ -13,7 +13,20 @@
 #include "minishell.h"
 
 /* Actualizar env (TO DO) */
+void	env_pos(t_msh *msh)
+{
+	int	i;
 
+	i = 0;
+	while (msh->env->names[i] && msh->env->values[i])
+	{
+		if (ft_strcmp(msh->env->names[i], "PWD") == 0)
+			msh->env->values[i] = msh->env->pwd;
+		if (ft_strcmp(msh->env->names[i], "OLDPWD") == 0)
+			msh->env->values[i] = msh->env->old_pwd;
+		i++;
+	}
+}
 
 /* builtin para imprimir el environment */
 int	ft_env(t_msh *msh)

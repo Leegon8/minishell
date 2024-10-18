@@ -13,8 +13,8 @@
 NAME = minishell
 
 CC = gcc -g
-LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lreadline #   LINUX    #
-#LDFLAGS = -L/usr/local/opt/readline/lib -lreadline #   MACOS   #
+#LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lreadline #   LINUX    #
+LDFLAGS = -L/usr/local/opt/readline/lib -lreadline #   MACOS   #
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 AR = ar -rcs

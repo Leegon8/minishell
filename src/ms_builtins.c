@@ -39,7 +39,8 @@ void	check_tokens(char *input, t_msh *msh)
 			}
 			else
 			{
-				cmd_not_found(msh);
+				find_cmd(msh);
+				//	cmd_not_found(msh);
 				break ;
 			}
 			i++;
@@ -79,26 +80,3 @@ int	is_builtin(t_msh *msh)
 		return (0);
 	return (1);
 }
-/*
-int  is_builtin(t_msh *msh)
-{
-    // if (ft_strcmp(msh->tkns->cmd, "echo") == 0)
-    //     ft_echo(msh);
-    // else if (ft_strcmp(msh->tkns->cmd, "cd") == 0)
-    //     ft_cd(msh);
-    if (ft_strcmp(msh->tkns->cmd, "pwd") == 0)
-        ft_pwd(msh);
-    // else if (ft_strcmp(msh->tkns->cmd, "export") == 0)
-    //     ft_export(msh);
-    // else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
-    //     ft_unset(msh);
-    else if (ft_strcmp(msh->tkns->cmd, "env") == 0)
-        ft_env(msh);
-    else if (ft_strcmp(msh->tkns->cmd, "exit") == 0)
-        ft_exit(msh);
-    else if (ft_strcmp(msh->tkns->cmd, "clear") == 0)
-        ft_fd_printf(1, "%s", CLEAR);
-    else
-        return (-1);
-    return (1);
-}*/
