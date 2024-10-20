@@ -17,10 +17,10 @@ char	*make_path(t_msh *msh)
 	char	*dir;
 	char	*fullpath;
 
-	dir = ft_strtok(msh->env->path, ":");
+	dir = ft_strtok(msh->env->path, "/bin");
 	fullpath = malloc(sizeof(char) * 1024);
 	ft_strcpy(fullpath, dir);
-	ft_strcat(fullpath, dir);
+	//ft_strcat(fullpath, dir);
 	ft_strcat(fullpath, "/");
 	ft_strcat(fullpath, msh->tkns->cmd);
 	return (fullpath);
@@ -30,12 +30,11 @@ int	find_cmd(t_msh *msh)
 {
 	char	*fullpath;
 
-	printf("Hola\n");
+	//printf("Hola\n");
 	fullpath = make_path(msh);
-	printf("fullpath = %s\n", fullpath);
-	if (access(fullpath, F_OK) == 0)
-	{
-		printf("Es accesible\n");
+	//printf("fullpath = %s\n", fullpath);
+	//if (access(fullpath, F_OK) == 0)
+	//{
 		if (execve(fullpath, &msh->tkns->cmd, msh->envs) == -1)
 		{
 			printf("Error execve\n");
@@ -43,6 +42,6 @@ int	find_cmd(t_msh *msh)
 			free(fullpath);
 			return (-1);
 		}
-	}
+//	}
 	return (0);
 }

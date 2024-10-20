@@ -12,27 +12,32 @@
 
 #include "minishell.h"
 
-static void	is_varenv(char *input)
-{
-	int	i;
-	char	*varenv;
+// static void	is_varenv(char *input)
+// {
+// 	int	i;
+// 	int	j;
+// 	char	*varenv;
 
-	i = 0;
-	varenv = malloc(sizeof(char) * ft_strlen(input) + 1);
-	while (input[i])
-	{
-		if (input[i] == '$')
-			break;
-		i++;
-	}
-	printf("%c\n", input[i]);
-	if (input[i] != '\0')
-	{
-		while (input[i++])
-			varenv[i] = input[i];
-		printf("%s\n", varenv);
-	}
-}
+// 	i = 0;
+// 	j = 0;
+// 	varenv = malloc(sizeof(char) * ft_strlen(input) + 1);
+// 	while (input[i])
+// 	{
+// 		if (input[i] == '$')
+// 			break;
+// 		i++;
+// 	}
+// 	if (input[i] != '\0')
+// 	{
+// 		while (input[i])
+// 		{
+// 			varenv[j] = input[i];
+// 			i++;
+// 			j++;
+// 		}
+// 		printf("%s\n", varenv);
+// 	}
+// }
 
 /* Converts a relative path to an absolute path */
 char	*built_abspath(char *relative_path, char *pwd)
@@ -79,7 +84,12 @@ char	*make_relative(char *arg, t_msh *msh)
 	return (new_path);
 }
 
-/* Verifies the route & acces in case that exists */
+/* 
+	Verifies the route & acces in case that exists 
+	If the path starts whith the char '/' is an absolute path
+	otherwise, the function converts the input to an absolute path
+	and try to acces to the path in case that exists. 
+*/
 void	ft_cd(t_msh *msh, int num_cmd)
 {
 	char	*new_path;
@@ -93,8 +103,11 @@ void	ft_cd(t_msh *msh, int num_cmd)
 	{
 		// verify_varenv --> Verificar si se quiere acceder a una variable
 		// de entorno y en caso de ser una variable 
-		verify_varenv(msh->tkns[1].cmd);
-		if (msh->tkns[1].cmd[0] == '/') // Is an absolute path
+
+		varenv_man(msh, "cd", msh->tkns[1].cmd);
+		//is_varenv(msh->tkns[1].cmd, msh);
+
+		if (msh->tkns[1].cmd[0] == '/')
 			new_path = ft_strdup(msh->tkns[1].cmd);
 		else
 			new_path = make_relative(msh->tkns[1].cmd, msh);
@@ -105,7 +118,7 @@ void	ft_cd(t_msh *msh, int num_cmd)
 		msh->env->pwd = getcwd(NULL, 0);
 		env_pos(msh);
 	}
-	else
-		perror("cd");
+	//else
+	//	perror("cd");
 	free(new_path);
 }

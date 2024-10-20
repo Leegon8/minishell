@@ -129,7 +129,10 @@ void	env_pos(t_msh *msh);
 void	check_tokens(char *input, t_msh *msh);
 
 /******************************* ms_tools *********************************/
-//void	verify_varenv(char *input);
+/******************************* ms_varenv *********************************/
+char	*varenv(char *input);
+char	*serach_env(char *var, t_msh *msh);
+int		varenv_man(t_msh *msh, char *builting, char *input);
 
 /******************************* ms_free **********************************/
 void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
