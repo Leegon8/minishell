@@ -87,7 +87,7 @@ This project involves recreating a simplified version of how the terminal works 
   </tr>
   <tr>
     <td align="center">1</td>
-    <td>- Structs ✅<br>- Loop in with readline ✅<br>- Set up environment ⭕✅</td>
+    <td>- Structs ✅<br>- Loop in with readline ✅<br>- Set up environment ✅</td>
     <td>- Study signals ⭕<br>- Signal handling ⭕<br>- Write basic tests ⭕✅</td>
     <td>Milestone 1:<br>- Command input ✅<br>- Basic signal handling ⭕✅</td>
   </tr>
