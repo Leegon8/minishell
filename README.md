@@ -94,8 +94,8 @@ This project involves recreating a simplified version of how the terminal works 
   <tr>
     <td align="center">2</td>
     <td>- Tokenizer input ⭕✅<br>- Implement tokenizer ⭕✅<br>- Tokenizer tests ⭕✅</td>
-    <td>- Document data and functions ⭕✅<br>- Implement parser ⭕✅<br>- Parser tests ⭕</td>
-    <td>Milestone 2:<br>- Tokenization and parsing ⭕✅<br>- Initial integration ⭕✅</td>
+    <td>- Document data and functions ✅<br>- Implement parser ⭕✅<br>- Parser tests ⭕</td>
+    <td>Milestone 2:<br>- Tokenization and parsing ⭕✅<br>- Initial integration ✅</td>
   </tr>
   <tr>
     <td align="center">3</td>
