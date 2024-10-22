@@ -35,13 +35,14 @@ int	find_cmd(t_msh *msh)
 	//printf("fullpath = %s\n", fullpath);
 	//if (access(fullpath, F_OK) == 0)
 	//{
-		if (execve(fullpath, &msh->tkns->cmd, msh->envs) == -1)
-		{
-			printf("Error execve\n");
-			cmd_not_found(msh);
-			free(fullpath);
-			return (-1);
-		}
-//	}
+	execve(fullpath, &msh->tkns->cmd, msh->envs);
+		// if (execve(fullpath, &msh->tkns->cmd, msh->envs) != -1)
+		// {
+		// 	printf("Error execve\n");
+		// 	cmd_not_found(msh);
+		// 	free(fullpath);
+		// 	return (-1);
+		// }
+	// }
 	return (0);
 }
