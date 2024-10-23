@@ -11,25 +11,3 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*static int	verify_varenv(char *input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (input[i] == '$')
-			return (i);
-		i++;
-	}
-    return (-1);
-}
-
-void    acces_varenv(t_msh *msh, char *input)7
-{
-    int pos;
-
-    pos = verify_varenv(input);
-    //Look to env 
-}*/

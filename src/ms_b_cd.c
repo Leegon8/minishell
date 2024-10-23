@@ -12,33 +12,6 @@
 
 #include "minishell.h"
 
-// static void	is_varenv(char *input)
-// {
-// 	int	i;
-// 	int	j;
-// 	char	*varenv;
-
-// 	i = 0;
-// 	j = 0;
-// 	varenv = malloc(sizeof(char) * ft_strlen(input) + 1);
-// 	while (input[i])
-// 	{
-// 		if (input[i] == '$')
-// 			break;
-// 		i++;
-// 	}
-// 	if (input[i] != '\0')
-// 	{
-// 		while (input[i])
-// 		{
-// 			varenv[j] = input[i];
-// 			i++;
-// 			j++;
-// 		}
-// 		printf("%s\n", varenv);
-// 	}
-// }
-
 /* Converts a relative path to an absolute path */
 char	*built_abspath(char *relative_path, char *pwd)
 {
@@ -101,24 +74,26 @@ void	ft_cd(t_msh *msh, int num_cmd)
 		chdir(msh->env->home);
 	else if (num_cmd == 2)
 	{
-		// verify_varenv --> Verificar si se quiere acceder a una variable
-		// de entorno y en caso de ser una variable 
-
-		varenv_man(msh, "cd", msh->tkns[1].cmd);
-		//is_varenv(msh->tkns[1].cmd, msh);
-
-		if (msh->tkns[1].cmd[0] == '/')
-			new_path = ft_strdup(msh->tkns[1].cmd);
-		else
-			new_path = make_relative(msh->tkns[1].cmd, msh);
+		if (varenv_man(msh, "cd", msh->tkns[1].cmd) == 0)
+		{
+			if (msh->tkns[1].cmd[0] == '/')
+				new_path = ft_strdup(msh->tkns[1].cmd);
+			else
+				new_path = make_relative(msh->tkns[1].cmd, msh);
+			if (new_path && chdir(new_path) != -1)
+			{
+				msh->env->old_pwd = msh->env->pwd;
+				msh->env->pwd = getcwd(NULL, 0);
+				env_pos(msh);
+			}
+			else
+			{
+				if (varenv_man(msh, "cd", msh->tkns[1].cmd) == 0)
+					return;
+				else
+					ft_fd_printf(2, "bash: %s: No such file or directory\n", msh->tkns->cmd);
+			}
+			free(new_path);
+		}
 	}
-	if (new_path && chdir(new_path) != -1)
-	{
-		msh->env->old_pwd = msh->env->pwd;
-		msh->env->pwd = getcwd(NULL, 0);
-		env_pos(msh);
-	}
-	//else
-	//	perror("cd");
-	free(new_path);
 }

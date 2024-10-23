@@ -39,8 +39,8 @@ void	check_tokens(char *input, t_msh *msh)
 			}
 			else
 			{
-				find_cmd(msh);
-				//	cmd_not_found(msh);
+				if (find_cmd(msh) == -1)
+					cmd_not_found(msh);
 				break ;
 			}
 			i++;
