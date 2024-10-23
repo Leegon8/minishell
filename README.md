@@ -93,18 +93,18 @@ This project involves recreating a simplified version of how the terminal works 
   </tr>
   <tr>
     <td align="center">2</td>
-    <td>- Tokenizer input ⭕✅<br>- Implement tokenizer ⭕✅<br>- Tokenizer tests ⭕✅</td>
+    <td>- Tokenizer input ✅✅<br>- Implement tokenizer ✅✅<br>- Tokenizer tests ✅✅</td>
     <td>- Document data and functions ✅<br>- Implement parser ⭕✅<br>- Parser tests ⭕</td>
     <td>Milestone 2:<br>- Tokenization and parsing ⭕✅<br>- Initial integration ✅</td>
   </tr>
   <tr>
     <td align="center">3</td>
-    <td>- Implement built-ins ⭕✅<br>- Manage add_history ✅<br>- Built-ins tests ❌</td>
-    <td>- Execute external cmds ❌<br>- Handle basic errors ⭕✅<br>- Built-ins tests ❌</td>
-    <td>Milestone 3:<br>- Internal and external cmds ❌<br>- Functional history ✅</td>
+    <td>- Implement built-ins ⭕✅<br>- Manage add_history ✅<br>- Built-ins tests ✅</td>
+    <td>- Execute external cmds ✅<br>- Handle basic errors ⭕✅<br>- Built-ins tests ❌</td>
+    <td>Milestone 3:<br>- Internal and external cmds ❌✅<br>- Functional history ✅</td>
   </tr>
   <tr>
-    <td align="center">4</td> <td>- I/O redirects (`>`, `<`) ❌<br>- Redirect errors ❌<br>- Document data and functions ❌</td>
+    <td align="center">4</td> <td>- I/O redirects (`>`, `<`) ❌<br>- Redirect errors ❌✅<br>- Document data and functions ❌</td>
     <td>- Exec external cmds with pipes ❌<br>- Pipe tests ❌<br>- Optimize memory leaks-frees ❌</td>
     <td>Milestone 4:<br>- Redirects, pipes, and functions ❌</td>
   </tr>
