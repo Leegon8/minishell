@@ -108,22 +108,24 @@ int		lexer(char **tokens, t_msh *msh);
 int		quote_lexer(t_msh *msh);
 
 /******************************* ms_executor ******************************/
-int		find_cmd(t_msh *msh);
-char	*make_path(t_msh *msh);
+int		find_cmd(char *tkn, t_msh *msh);
+char	*make_path(char *tkn);
 
 /******************************* ms_echo **********************************/
 void	ft_echo(t_msh *msh, int num_cmd);
 
 /******************************** ms_cd ***********************************/
-void	ft_cd(t_msh *msh, int num_cmd);
+char	*built_abspath(char *relative_path, char *pwd);
 char	*make_relative(char *arg, t_msh *msh);
+void	handle_cd_path(t_msh *msh);
+void	ft_cd(t_msh *msh, int num_cmd);
 
 /******************************* ms_builtins ******************************/
 int		ft_env(t_msh *msh);
 int		ft_exit(t_msh *msh);
 int		ft_pwd(t_msh *msh);
 int		is_builtin(t_msh *msh);
-void    cmd_not_found(t_msh *msh);
+void	cmd_not_found(t_msh *msh);
 void	exc_cmd(t_msh *msh, int count_tok);
 void	env_pos(t_msh *msh);
 void	check_tokens(char *input, t_msh *msh);

@@ -33,7 +33,6 @@ char	*built_abspath(char *relative_path, char *pwd)
 	while (relative_path[++i])
 		abs_path[j++] = relative_path[i];
 	abs_path[j] = '\0';
-//	printf("\nabs_path = %s\n", abs_path);
 	return (abs_path);
 }
 
@@ -45,12 +44,12 @@ char	*make_relative(char *arg, t_msh *msh)
 	if (arg[0] == '-')
 	{
 		new_path = ft_strdup(msh->env->old_pwd);
-		printf("%s\n", msh->env->old_pwd);  // Imprimir el directorio anterior
+		printf("%s\n", msh->env->old_pwd);
 	}
 	else if (arg[0] == '.' && (arg[1] == '\0' || arg[1] == '/'))
 		new_path = ft_strdup("..");
-	else if (arg[0] == '.' && arg[1] == '.' && (arg[2] == '\0' ||
-		arg[2] == '/'))
+	else if ((arg[0] == '.' && arg[1] == '.')
+		&& (arg[2] == '\0' || arg[2] == '/'))
 		new_path = ft_strdup("..");
 	else
 		new_path = built_abspath(msh->tkns[1].cmd, msh->env->pwd);
@@ -63,37 +62,41 @@ char	*make_relative(char *arg, t_msh *msh)
 	otherwise, the function converts the input to an absolute path
 	and try to acces to the path in case that exists. 
 */
-void	ft_cd(t_msh *msh, int num_cmd)
+void	handle_cd_path(t_msh *msh)
 {
 	char	*new_path;
 
 	new_path = NULL;
+	if (varenv_man(msh, "cd", msh->tkns[1].cmd) == 0)
+	{
+		if (msh->tkns[1].cmd[0] == '/')
+			new_path = ft_strdup(msh->tkns[1].cmd);
+		else
+			new_path = make_relative(msh->tkns[1].cmd, msh);
+		if (new_path && chdir(new_path) != -1)
+		{
+			msh->env->old_pwd = msh->env->pwd;
+			msh->env->pwd = getcwd(NULL, 0);
+			env_pos(msh);
+		}
+		else
+		{
+			if (varenv_man(msh, "cd", msh->tkns[1].cmd) == 0)
+				return ;
+			else
+				ft_fd_printf(2, "bash: %s: No such file or directory\n",
+					msh->tkns->cmd);
+		}
+		free(new_path);
+	}
+}
+
+void	ft_cd(t_msh *msh, int num_cmd)
+{
 	if (num_cmd > 2)
 		ft_fd_printf(2, "bash: %s: too many arguments\n", msh->tkns->cmd);
 	else if (num_cmd == 1)
 		chdir(msh->env->home);
 	else if (num_cmd == 2)
-	{
-		if (varenv_man(msh, "cd", msh->tkns[1].cmd) == 0)
-		{
-			if (msh->tkns[1].cmd[0] == '/')
-				new_path = ft_strdup(msh->tkns[1].cmd);
-			else
-				new_path = make_relative(msh->tkns[1].cmd, msh);
-			if (new_path && chdir(new_path) != -1)
-			{
-				msh->env->old_pwd = msh->env->pwd;
-				msh->env->pwd = getcwd(NULL, 0);
-				env_pos(msh);
-			}
-			else
-			{
-				if (varenv_man(msh, "cd", msh->tkns[1].cmd) == 0)
-					return;
-				else
-					ft_fd_printf(2, "bash: %s: No such file or directory\n", msh->tkns->cmd);
-			}
-			free(new_path);
-		}
-	}
+		handle_cd_path(msh);
 }

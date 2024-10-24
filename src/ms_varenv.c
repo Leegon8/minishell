@@ -20,8 +20,8 @@
 
 char	*varenv(char *input)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*varenv;
 
 	i = 0;
@@ -30,7 +30,7 @@ char	*varenv(char *input)
 	while (input[i])
 	{
 		if (input[i] == '$')
-			break;
+			break ;
 		i++;
 	}
 	i += 1;
@@ -56,7 +56,7 @@ char	*serach_env(char *var, t_msh *msh)
 	{
 		if (ft_strcmp(msh->env->names[i], var) == 0)
 		{
-			return(msh->env->values[i]);
+			return (msh->env->values[i]);
 		}
 		i++;
 	}
