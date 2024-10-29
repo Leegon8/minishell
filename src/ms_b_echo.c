@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+static int	verify_n(t_msh *msh)
+{
+	int		i;
+	int		n_option;
+
+	i = 1;
+	n_option = 0;
+	if (ft_strcmp(msh->tkns[i].cmd, "-n") == 0)
+	{
+		n_option = 1;
+		i++;
+	}
+	return (n_option);
+}
+
 /* Imprime los argumentos de echo, opción -n para suprimir el \n final */
 void	ft_echo(t_msh *msh, int num_cmd)
 {
@@ -24,11 +39,9 @@ void	ft_echo(t_msh *msh, int num_cmd)
 		printf("\n");
 	else if (num_cmd > 1)
 	{
+		n_option = verify_n(msh);
 		if (ft_strcmp(msh->tkns[i].cmd, "-n") == 0)
-		{
-			n_option = 1;
 			i++;
-		}
 		while (msh->tkns[i].cmd)
 		{
 			if (varenv_man(msh, "echo", msh->tkns[i].cmd))
