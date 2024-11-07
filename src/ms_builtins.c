@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2024/10/06 19:23:18 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/06 17:38:21 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,43 @@ void	exc_cmd(t_msh *msh, int count_tok)
 		ft_env(msh);
 	else if (ft_strcmp(msh->tkns->cmd, "exit") == 0)
 		ft_exit(msh);
-	else if (ft_strcmp(msh->tkns->cmd, "clear") == 0)
-		ft_fd_printf(1, "%s", CLEAR);
+	else if (ft_strcmp(msh->tkns->cmd, "export") == 0)
+	{
+		char *test_args[] = {"export", "TEST=123", NULL};
+		ft_export(msh, test_args);
+	}
+	else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
+	{	
+		char *value[] = {"unset", "SHLVL", NULL};
+		ft_unset(msh, value);
+	}
+	else if (ft_strcmp(msh->tkns->cmd, "test") == 0)
+		ft_fd_printf(1, "Envarcount: %d\n", msh->env_var_count);
+	else if (ft_strcmp(msh->tkns->cmd, "test2") == 0)
+		ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);	
 }
 
 int	is_builtin(t_msh *msh)
 {
-	if (ft_strcmp(msh->tkns->cmd, "echo") == 0)
-		return (0);
-	else if (ft_strcmp(msh->tkns->cmd, "cd") == 0)
-		return (0);
-	else if (ft_strcmp(msh->tkns->cmd, "pwd") == 0)
-		return (0);
-	else if (ft_strcmp(msh->tkns->cmd, "env") == 0)
-		return (0);
-	else if (ft_strcmp(msh->tkns->cmd, "exit") == 0)
-		return (0);
-	else if (ft_strcmp(msh->tkns->cmd, "clear") == 0)
-		return (0);
+	static char	*builtins[9];
+	int			i;
+
+	builtins[0] = "echo";
+	builtins[1] = "cd";
+	builtins[2] = "pwd";
+	builtins[3] = "env";
+	builtins[4] = "exit";
+	builtins[5] = "export";
+	builtins[6] = "unset";
+	builtins[7] = "test";
+	builtins[8] = "test2";
+	builtins[9] = NULL;
+	i = 0;
+	while (builtins[i])
+	{
+		if (ft_strcmp(msh->tkns->cmd, builtins[i]) == 0)
+			return (0);
+		i++;
+	}
 	return (1);
 }

@@ -6,11 +6,28 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:41:30 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/09/25 10:10:43 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/02 19:01:21 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/* libera la memoria reservada en un array */
+void	ft_free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i])
+	{
+		free(array[i]);
+		array[i] = NULL;
+		i++;
+	}
+	free(array);
+}
 
 /* libera la memoria reservada para la estructura de env */
 void	free_env(t_env *env)
@@ -22,14 +39,14 @@ void	free_env(t_env *env)
 	if (env->names)
 	{
 		i = 0;
-		while (env->names[i] != NULL)
+		while (env->names[i])
 			free(env->names[i++]);
 		free(env->names);
 	}
 	if (env->values)
 	{
 		i = 0;
-		while (env->values[i] != NULL)
+		while (env->values[i])
 			free(env->values[i++]);
 		free(env->values);
 	}
@@ -57,9 +74,18 @@ void	free_tok(t_tok *tok)
 void	free_structs(t_env *env, t_tok *tok, t_exe *mpip)
 {
 	if (env)
+	{
 		free_env(env);
+		env = NULL;
+	}
 	if (tok)
+	{
 		free_tok(tok);
+		tok = NULL;
+	}
 	if (mpip)
+	{
 		free(mpip);
+		mpip = NULL;
+	}
 }

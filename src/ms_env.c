@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/10/08 22:54:01 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/06 17:53:35 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,23 @@ int	env_var_count(t_msh *msh)
 	i = 0;
 	while (msh->envs[i])
 		i++;
-	ft_fd_printf(1, " # ENV VARS # > %d\n", i);
+	msh->env_var_count = i;
 	return (i);
+}
+
+/* busca una variable especifica en el env y nos retorna el valor de su indice*/
+int	find_env_var(t_msh *msh, char *var_name)
+{
+	int	i;
+
+	i = 0;
+	while (msh->env->names[i])
+	{
+		if (ft_strcmp(msh->env->names[i], var_name) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
 /* Comprueba que las variables PWD, OLDPWD y HOME existan  */
@@ -32,8 +47,28 @@ int	check_envs(void)
 	return (0);
 }
 
+void	update_shlvl(t_msh *msh)
+{
+	char	*new_level;
+	int		i;
+
+	i = find_env_var(msh, "SHLVL");
+	if (i >= 0)
+		msh->shlvl = msh->shlvl + 1;
+	else
+		msh->shlvl = 1;
+	new_level = ft_itoa(msh->shlvl);
+	if (!new_level)
+		return ;
+	if (i >= 0)
+	{
+		free(msh->env->values[i]);
+		msh->env->values[i] = new_level;
+	}
+}
+
 /* Inicializa las variables de entorno con los valores del env (si existe) */
-int	init_env(t_env *env, t_msh *msh)
+int	env_init_values(t_env *env, t_msh *msh)
 {
 	int		i;
 	char	*eq_sep;
@@ -44,8 +79,7 @@ int	init_env(t_env *env, t_msh *msh)
 	env->old_pwd = getenv("OLDPWD");
 	env->path = getenv("PATH");
 	getcwd(env->pwd, PATH_MAX);
-	if (check_envs() != 0)
-		return (0);
+	check_envs();
 	while (msh->envs[i])
 	{
 		eq_sep = ft_strchr(msh->envs[i], '=');
@@ -54,9 +88,10 @@ int	init_env(t_env *env, t_msh *msh)
 			env->names[i] = ft_strndup(msh->envs[i], (eq_sep - msh->envs[i]));
 			env->values[i] = ft_strdup(eq_sep + 1);
 			if (!env->names[i] || !env->values[i])
-				return (ft_fd_printf(2, "%s", E_ENVGET), -1);
+				return (ft_fd_printf(2, "%s", E_ENVGET), ft_err(msh, -1));
 		}
 		i++;
 	}
-	return (0);
+	update_shlvl(msh);
+	return (TRUE);
 }
