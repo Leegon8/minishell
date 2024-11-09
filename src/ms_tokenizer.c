@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:35:57 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/09 13:36:26 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:53:01 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,76 +85,84 @@ token_type_t	type_token_def(t_tok *tok, char c)
 	return (tok->type);
 }
 
-int	size_token(char *input, t_tok *tok)
+int size_token(char *input, t_tok *tok)
 {
-	int	i;
-	token_type_t curr_type;
-	token_type_t next_type;
-
-	i = 0;
-	curr_type = T_WORD;
-	next_type = T_WORD;
-	tok->len = 1;
-	while (input[i])
-	{
-		curr_type = type_token_def(tok, input[i]);
-		next_type = type_token_def(tok, input[i + 1]);
-		if (next_type == T_WHITESPACE)
-			tok->len++;
-		if (curr_type == next_type)
-			tok->len++;
-		else if ((curr_type != next_type) &&
-			(next_type != T_WHITESPACE && next_type != T_WORD))
-		{
-			//tok->len++;
-			break;
-		}
-		i++;
-	}
-	return (tok->len);
+    int i;
+	
+	(void)tok;
+    i = 0;
+    while (input[i] && !is_whitespace(input[i]))
+    {
+        if (is_operator(input[i]))
+        {
+            if (i == 0)
+                return (1);
+            break ;
+        }
+        if (is_quote(input[i]))
+        {
+            char quote = input[i];
+            i++;
+            while (input[i] && input[i] != quote)
+                i++;
+            if (input[i])
+                i++;
+            continue ;
+        }
+        i++;
+    }
+    return (i);
 }
 
-char	*create_token(char *input, int len, t_tok *tok)
+char    *create_token(char *input, int len, t_tok *tok)
 {
-	int	i;
+    char    *new_token;
+    int     i;
 
-	i = 0;
-	tok->cmd = malloc(sizeof(char) * ft_strlen(input) + 1);
-	if (!input || !tok->cmd)
-		return (NULL);
-	while (i < len)
-	{
-		tok->cmd[i] = input[i];
-		i++;
-	}
-	tok->cmd[i] = '\0';
-	//printf("token --> %s\n", tok->cmd);
-	return (tok->cmd);
+    new_token = malloc(sizeof(char) * (len + 1));
+    if (!new_token)
+        return (NULL);
+    i = 0;
+    while (i < len)
+    {
+        new_token[i] = input[i];
+        i++;
+    }
+    new_token[i] = '\0';
+    tok->cmd = new_token;
+    return (new_token);
 }
 
-// char **ft_token(char *input, t_tok *tok)
-void	ft_token(char *input, t_tok *tok)
-{
-	int	i;
-	int	arg_index;
 
-	tok->args = malloc(MAX_ARGS * sizeof(char*));
-	i = 0;
-	arg_index = 0;
-	if (!tok->args)
-		return;
-	while (input[i] == ' ')
-		i++;
-	while (input[i])
-	{
-		tok->len = size_token(input, tok);
-		tok->args[arg_index] = create_token(&input[i], tok->len, tok);
-		if (!tok->args[arg_index])
-			return;
-		arg_index++;
-		i += tok->len;
-	}
-	tok->args[arg_index] = NULL;
+void    ft_token(char *input, t_tok *tok)
+{
+    int     i;
+    int     arg_index;
+
+    tok->args = malloc(MAX_ARGS * sizeof(char*));
+    if (!tok->args)
+        return;
+    i = 0;
+    arg_index = 0;
+    while (input[i])
+    {
+        while (input[i] && is_whitespace(input[i]))
+            i++;
+        if (!input[i])
+            break;
+        tok->len = size_token(&input[i], tok);
+        if (tok->len > 0)
+        {
+            tok->args[arg_index] = create_token(&input[i], tok->len, tok);
+            if (!tok->args[arg_index])
+                return;
+            arg_index++;
+            i += tok->len;
+        }
+        else
+            i++;
+    }
+    tok->args[arg_index] = NULL;
 	for (int j = 0; j < arg_index; j++) {
         printf("args[%d] --> %s\n", j, tok->args[j]);
     }
