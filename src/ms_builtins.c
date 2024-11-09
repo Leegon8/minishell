@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/09 13:45:01 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 20:40:14 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,51 @@ void	cmd_not_found(t_msh *msh)
 
 void	check_tokens(char *input, t_msh *msh)
 {
-	// int		i;
-	// int		count_tok;
+	int		i;
 
-	// i = 0;
-	// count_tok = 0;
+	i = 0;
+	if (!input || !*input)
+		return ;
 	ft_token(input, msh->tkns);
-	// if (tokenize_input(input, msh) == 0)
-	// {
-		// while (msh->tkns[count_tok].cmd)
-		// 	count_tok++;
-		// while (msh->tkns[i].cmd != NULL)
-		// {
-		// 	if (is_builtin(msh) == 0)
-		// 	{
-		// 		exc_cmd(msh, count_tok);
-		// 		break ;
-		// 	}
-		// 	else if (find_cmd(msh->tkns[i].cmd, msh) == -1)
-		// 	{
-		// 		cmd_not_found(msh);
-		// 		break ;
-		// 	}
-		// 	i++;
-		// }
-	// }
+	if (!msh->tkns->args || !msh->tkns->args[0])
+		return ;
+	msh->cmd_count = parse_and_validate_commands(msh->tkns, &msh->cmds);
+	if (msh->cmd_count > 0)
+	{
+		while (msh->cmds[i].args && i < msh->cmd_count)
+		{
+			msh->tkns->cmd = msh->cmds[i].args[0];
+			msh->tkns->args = msh->cmds[i].args;
+			if (is_builtin(msh) == 0)
+				exc_cmd(msh, msh->cmds[i].arg_count);
+			else if (find_cmd(msh->tkns->cmd, msh) == -1)
+				cmd_not_found(msh);
+			i++;
+		}
+		cleanup_commands(msh);
+	}
+}
+
+void	cleanup_commands(t_msh *msh)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < msh->cmd_count)
+	{
+		j = 0;
+		while (msh->cmds[i].args[j])
+		{
+			free(msh->cmds[i].args[j]);
+			j++;
+		}
+		free(msh->cmds[i].args);
+		i++;
+	}
+	free(msh->cmds);
+	msh->cmds = NULL;
+	msh->cmd_count = 0;
 }
 
 void	exc_cmd(t_msh *msh, int count_tok)

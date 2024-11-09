@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/09 13:56:33 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 20:26:57 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,19 @@ struct s_executor
 	int		fd_out;
 };
 
+typedef struct s_command
+{
+	char	**args;
+	int		arg_count;
+}	t_cmd;
+
 struct	s_minishell
 {
 	t_tok	*tkns;
 	t_env	*env;
 	t_exe	*mpip;
+	t_cmd	*cmds;
+	int			cmd_count;
 	int		end_sig;
 	int		last_exit_code;
 	char	**envs;
@@ -183,6 +191,7 @@ int		ft_unset(t_msh *msh, char **new_var);
 
 void	cmd_not_found(t_msh *msh);
 void	check_tokens(char *input, t_msh *msh);
+void	cleanup_commands(t_msh *msh);
 void	exc_cmd(t_msh *msh, int count_tok);
 int		is_builtin(t_msh *msh);
 
@@ -224,6 +233,7 @@ int		init_structs(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok);
 
 int		quote_lexer(t_msh *msh);
 int		lexer(char **tokens, t_msh *msh);
+int		parse_and_validate_commands(t_tok *tok, t_cmd **commands);
 
 /******************************* ms_parser ********************************/
 

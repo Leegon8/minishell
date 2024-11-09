@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 21:21:27 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/06 17:17:38 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 20:45:36 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 /* Imprime los argumentos de echo, opción -n para suprimir el \n final */
 // Hay que gestionar variable de entorno 
+
 static int	is_n_flag(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
-		return (FALSE);
-	if (str[i] != '-')
+	if (!str || str[0] != '-')
 		return (FALSE);
 	i++;
 	if (!str[i])
@@ -68,21 +67,21 @@ void	ft_echo(t_msh *msh, int num_cmd)
 	int	n_flag;
 	int	has_next;
 
-	i = 0;
+	i = 1;  // Empezamos desde 1 para saltar "echo"
 	if (num_cmd <= 1)
 	{
 		ft_putchar_fd('\n', 1);
 		return ;
 	}
 	n_flag = check_n_flags(msh, &i);
-	while (msh->tkns[i].cmd)
+	while (i < num_cmd)
 	{
 		has_next = FALSE;
-		if (msh->tkns[i + 1].cmd)
+		if (i + 1 < num_cmd)
 			has_next = TRUE;
-		if (varenv_man(msh, "echo", msh->tkns[i].cmd) != FALSE)
+		if (varenv_man(msh, "echo", msh->tkns->args[i]) != FALSE)
 			break ;
-		print_arg(msh->tkns[i].cmd, has_next);
+		print_arg(msh->tkns->args[i], has_next);
 		i++;
 	}
 	if (n_flag == FALSE)
