@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:19:26 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/06 20:03:06 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:50:53 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,20 @@ int	is_quote(char c)
 	return (c == '"' || c == '\'');
 }
 
-t_ttype	get_operator_type(char curr, char next)
-{
-	if (curr == '|')
-		return (T_PIPE);
-	else if (curr == '<' && next == '<')
-		return (T_HEREDOC);
-	else if (curr == '>' && next == '>')
-		return (T_APPEND);
-	else if (curr == '<')
-		return (T_REDIR_IN);
-	else if (curr == '>')
-		return (T_REDIR_OUT);
-	else if (curr == '$')
-		return (T_ENV);
-	return (T_WORD);
-}
+// t_ttype	get_operator_type(char curr, char next)
+// {
+// 	if (curr == '|')
+// 		return (T_PIPE);
+// 	else if (curr == '<' && next == '<')
+// 		return (T_HEREDOC);
+// 	else if (curr == '>' && next == '>')
+// 		return (T_APPEND);
+// 	else if (curr == '<')
+// 		return (T_REDIR_IN);
+// 	else if (curr == '>')
+// 		return (T_REDIR_OUT);
+// 	else if (curr == '$')
+// 		return (T_ENV);
+// 	return (T_WORD);
+// }
+

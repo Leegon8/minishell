@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:37:32 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/02 11:11:10 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:47:39 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,46 +124,46 @@ char	*parse_pwd(char **envs)
 	return (*pwd);
 }
 
-static char	**extract_args(t_tok *tokens)
-{
-	int		i;
-	int		arg_count;
-	char	**args;
+// static char	**extract_args(t_tok *tokens)
+// {
+// 	int		i;
+// 	int		arg_count;
+// 	char	**args;
 
-	arg_count = 0;
-	i = 0;
-	while (tokens[i].cmd != NULL)
-	{
-		if (tokens[i].type == T_WORD)
-			arg_count++;
-		i++;
-	}
-	args = malloc(sizeof(char *) * (arg_count + 1));
-	if (!args)
-		return (NULL);
-	i = 0;
-	arg_count = 0;
-	while (tokens[i].cmd != NULL)
-	{
-		if (tokens[i].type == T_WORD)
-			args[arg_count++] = ft_strdup(tokens[i].cmd);
-		i++;
-	}
-	args[arg_count] = NULL;
-	return (args);
-}
+// 	arg_count = 0;
+// 	i = 0;
+// 	while (tokens[i].cmd != NULL)
+// 	{
+// 		if (tokens[i].type == T_WORD)
+// 			arg_count++;
+// 		i++;
+// 	}
+// 	args = malloc(sizeof(char *) * (arg_count + 1));
+// 	if (!args)
+// 		return (NULL);
+// 	i = 0;
+// 	arg_count = 0;
+// 	while (tokens[i].cmd != NULL)
+// 	{
+// 		if (tokens[i].type == T_WORD)
+// 			args[arg_count++] = ft_strdup(tokens[i].cmd);
+// 		i++;
+// 	}
+// 	args[arg_count] = NULL;
+// 	return (args);
+// }
 
-int	parse_input(char *input, t_msh *msh)
-{
-	if (!input || !*input)
-		return (0);
-	if (tokenize_input(input, msh) != 0)
-		return (-1);
-	if (msh->tkns[0].cmd)
-	{
-		msh->tkns[0].args = extract_args(msh->tkns);
-		if (!msh->tkns[0].args)
-			return (-1);
-	}
-	return (0);
-}
+// int	parse_input(char *input, t_msh *msh)
+// {
+// 	if (!input || !*input)
+// 		return (0);
+// 	if (tokenize_input(input, msh) != 0)
+// 		return (-1);
+// 	if (msh->tkns[0].cmd)
+// 	{
+// 		msh->tkns[0].args = extract_args(msh->tkns);
+// 		if (!msh->tkns[0].args)
+// 			return (-1);
+// 	}
+// 	return (0);
+// }

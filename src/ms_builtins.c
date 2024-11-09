@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/06 17:38:21 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:45:01 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,31 @@ void	cmd_not_found(t_msh *msh)
 
 void	check_tokens(char *input, t_msh *msh)
 {
-	int		i;
-	int		count_tok;
+	// int		i;
+	// int		count_tok;
 
-	i = 0;
-	count_tok = 0;
-	if (tokenize_input(input, msh) == 0)
-	{
-		while (msh->tkns[count_tok].cmd)
-			count_tok++;
-		while (msh->tkns[i].cmd != NULL)
-		{
-			if (is_builtin(msh) == 0)
-			{
-				exc_cmd(msh, count_tok);
-				break ;
-			}
-			else if (find_cmd(msh->tkns[i].cmd, msh) == -1)
-			{
-				cmd_not_found(msh);
-				break ;
-			}
-			i++;
-		}
-	}
+	// i = 0;
+	// count_tok = 0;
+	ft_token(input, msh->tkns);
+	// if (tokenize_input(input, msh) == 0)
+	// {
+		// while (msh->tkns[count_tok].cmd)
+		// 	count_tok++;
+		// while (msh->tkns[i].cmd != NULL)
+		// {
+		// 	if (is_builtin(msh) == 0)
+		// 	{
+		// 		exc_cmd(msh, count_tok);
+		// 		break ;
+		// 	}
+		// 	else if (find_cmd(msh->tkns[i].cmd, msh) == -1)
+		// 	{
+		// 		cmd_not_found(msh);
+		// 		break ;
+		// 	}
+		// 	i++;
+		// }
+	// }
 }
 
 void	exc_cmd(t_msh *msh, int count_tok)
@@ -77,7 +78,7 @@ void	exc_cmd(t_msh *msh, int count_tok)
 
 int	is_builtin(t_msh *msh)
 {
-	static char	*builtins[9];
+	static char	*builtins[10];
 	int			i;
 
 	builtins[0] = "echo";

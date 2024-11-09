@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/07 08:49:30 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:56:33 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "readline/history.h"
 # include <stddef.h>
 # include <stdio.h>
-# include <linux/limits.h>
+# include <limits.h>
 # include <dirent.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -50,27 +50,48 @@ struct	s_environment
 	int		exit_status;
 };
 
-typedef enum	e_type
-{
+// typedef enum	e_type
+// {
+// 	T_WORD,
+// 	T_PIPE,
+// 	T_REDIR_IN,
+// 	T_REDIR_OUT,
+// 	T_APPEND,
+// 	T_HEREDOC,
+// 	T_ENV,
+// }	t_ttype;
+
+// struct	s_tokenizer
+// {
+// 	char	*cmd;
+// 	char	**args;
+// 	int		is_heredoc;
+// 	char	*heredoc_delim;
+// 	size_t	t_len;
+// 	char	*input;
+// 	size_t	position;
+// 	t_ttype	type;
+// };
+
+
+typedef enum {
 	T_WORD,
-	T_PIPE,
-	T_REDIR_IN,
-	T_REDIR_OUT,
-	T_APPEND,
-	T_HEREDOC,
-	T_ENV,
-}	t_ttype;
+	T_OPERATOR,
+	T_WHITESPACE,
+	T_QUOTE
+}	token_type_t;
 
 struct	s_tokenizer
 {
 	char	*cmd;
 	char	**args;
+	int		token_count;
+	int		len;
+	token_type_t	type;
 	int		is_heredoc;
 	char	*heredoc_delim;
-	size_t	t_len;
-	char	*input;
-	size_t	position;
-	t_ttype	type;
+	struct s_tokenizer *prev;
+	struct s_tokenizer *next;
 };
 
 struct s_executor
@@ -124,7 +145,7 @@ void	ft_echo(t_msh *msh, int num_cmd);
 
 int		update_env_var(t_msh *msh, char *name, char *value);
 int		ft_env(t_msh *msh);
-void	debug_env(t_msh *msh);
+// void	debug_env(t_msh *msh); borrar?
 
 /******************************* ms_b_exit ********************************/
 
@@ -225,7 +246,19 @@ void	init_signals(void);
 
 /******************************* ms_tokenizer *****************************/
 
-char	*ft_strtok(char *str, const char *separator);
+void	ft_token(char *input, t_tok *tok);
+char	*create_token(char *input, int len, t_tok *tok);
+int	size_token(char *input, t_tok *tok);
+token_type_t	type_token_def(t_tok *tok, char c);
+int	is_quote(char c);
+int	is_whitespace(char c);
+int	is_operator(char c);
+
+
+
+
+
+// char	*ft_strtok(char *str, const char *separator);
 int		tokenize_input(char *input, t_msh *msh);
 
 /******************************* ms_tokenizer2 ****************************/
@@ -240,7 +273,7 @@ int		tokenize_input(char *input, t_msh *msh);
 
 int	is_operator(char c);
 int	is_whitespace(char c);
-t_ttype	get_operator_type(char curr, char next);
+// t_ttype	get_operator_type(char curr, char next);
 
 /******************************* ms_tools *********************************/
 
@@ -298,7 +331,7 @@ int		varenv_man(t_msh *msh, char *builting, char *input);
 
 /******************************** Other macros ***************************/
 
-# define PATH_MAX		4096
+// # define PATH_MAX		4096
 # define MAX_ARGS		4096
 # define MAX_ENV_VARS	4096
 
