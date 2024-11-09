@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/09 22:35:07 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 23:02:42 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ void    check_tokens(char *input, t_msh *msh)
 
     if (is_builtin(msh) == 0)
         exc_cmd(msh, count_tok);
-    else
-        find_cmd(msh->tkns->cmd, msh);
-
+    else if (find_cmd(&msh->tkns->cmd[0], msh) == -1)
+		cmd_not_found(msh);
     free(msh->tkns->cmd);
     msh->tkns->cmd = NULL;
 }

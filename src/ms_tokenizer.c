@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:35:57 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/09 19:53:01 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 23:03:10 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void    ft_token(char *input, t_tok *tok)
             i++;
     }
     tok->args[arg_index] = NULL;
-	for (int j = 0; j < arg_index; j++) {
-        printf("args[%d] --> %s\n", j, tok->args[j]);
-    }
+	// for (int j = 0; j < arg_index; j++) {
+    //     printf("args[%d] --> %s\n", j, tok->args[j]);
+    // }
 }

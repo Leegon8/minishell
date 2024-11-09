@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:13:40 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/09 21:35:07 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 23:07:49 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	ft_env(t_msh *msh)
 		ft_fd_printf(2, "env: environment not available\n");
 		return (1);
 	}
-	if (msh->tkns[1].cmd)
+	if (msh->tkns->args[1])
 	{
 		ft_fd_printf(2, "env: '%s': No such file or directory\n",
-			msh->tkns[1].cmd);
+			msh->tkns->args[1]);
 		return (ft_err(msh, EXIT_NOFOUND));
 	}
 	i = 0;
