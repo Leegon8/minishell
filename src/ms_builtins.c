@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/09 21:10:30 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 22:35:07 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	cmd_not_found(t_msh *msh)
 {
-	ft_fd_printf(2, "Error: ");
-	ft_fd_printf(2, "%s", msh->tkns->cmd);
-	ft_fd_printf(2, ": command not found\n");
+	ft_fd_printf(2, "Error: %s : command not found\n", msh->tkns->cmd);
 }
 
 void    check_tokens(char *input, t_msh *msh)
@@ -29,21 +27,16 @@ void    check_tokens(char *input, t_msh *msh)
     if (!msh->tkns->args || !msh->tkns->args[0])
         return ;
 
-    printf("DEBUG: Token parsed successfully\n");  // DEBUG
     count_tok = 0;
     while (msh->tkns->args[count_tok])
         count_tok++;
     
     msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
-    printf("DEBUG: Command is: %s\n", msh->tkns->cmd);  // DEBUG
 
     if (is_builtin(msh) == 0)
-    {
-        printf("DEBUG: Is builtin command\n");  // DEBUG
         exc_cmd(msh, count_tok);
-    }
-    else if (find_cmd(msh->tkns->cmd, msh) == -1)
-        cmd_not_found(msh);
+    else
+        find_cmd(msh->tkns->cmd, msh);
 
     free(msh->tkns->cmd);
     msh->tkns->cmd = NULL;

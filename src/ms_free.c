@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:41:30 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/02 19:01:21 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 22:06:33 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,31 @@ void	free_env(t_env *env)
 }
 
 /* libera la memoria reservada para la estructura de token */
-void	free_tok(t_tok *tok)
+void    free_tok(t_tok *tok)
 {
-	int	i;
+    int    i;
 
-	if (tok->cmd)
-		free(tok->cmd);
-	if (tok->args)
-	{
-		i = 0;
-		while (tok->args[i] != NULL)
-			free(tok->args[i++]);
-		free(tok->args);
-	}
-	free(tok);
+    if (!tok)
+        return;
+    
+    if (tok->cmd)
+        free(tok->cmd);
+    if (tok->args)
+    {
+        i = 0;
+        while (tok->args[i])
+        {
+            free(tok->args[i]);
+            i++;
+        }
+        free(tok->args);
+    }
+    if (tok->heredoc_delim)
+        free(tok->heredoc_delim);
+        
+    tok->prev = NULL;
+    tok->next = NULL;
+    free(tok);
 }
 
 /* libera la memoria reservada para las estructuras al final del programa */

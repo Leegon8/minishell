@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/09 20:20:23 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/09 22:02:18 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	shell_loop(t_msh *msh)
 		j = 0;
 		while (j < i)
 		{
-			free(msh->tkns[j].cmd);
+			if (msh->tkns[j].cmd)
+				free(msh->tkns[j].cmd);
 			j++;
 		}
 	}
