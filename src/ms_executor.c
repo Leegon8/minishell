@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:13:10 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/09 22:30:15 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/10 12:50:10 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,22 @@ static int	is_command_executable(char *fullpath)
 	return (0);
 }
 
-static void	child_process(t_msh *msh, char *fullpath)
+static void    child_process(t_msh *msh, char *fullpath)
 {
-	if (execve(fullpath, &msh->tkns->cmd, msh->envs) == -1)
-	{
-		printf("Error execve\n");
-		cmd_not_found(msh);
-		free(fullpath);
-		exit(EXIT_FAILURE);
-	}
+    // printf("Debug args:\n");
+    // printf("cmd = %s\n", msh->tkns->cmd);
+    // printf("args[0] = %s\n", msh->tkns->args ? msh->tkns->args[0] : "NULL");
+    
+    if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
+    {
+        // printf("execve error: %d\n", errno);
+        // perror("execve failed with error");
+        // printf("Command attempted: %s\n", fullpath);
+        // printf("First arg: %p\n", &msh->tkns->cmd);
+        cmd_not_found(msh);
+        free(fullpath);
+        exit(EXIT_FAILURE);
+    }
 }
 
 static void	parent_process(pid_t pid, char *fullpath)
