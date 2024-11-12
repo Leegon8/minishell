@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/09 20:26:57 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/12 12:41:22 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,6 @@ struct	s_environment
 	int		exit_status;
 };
 
-// typedef enum	e_type
-// {
-// 	T_WORD,
-// 	T_PIPE,
-// 	T_REDIR_IN,
-// 	T_REDIR_OUT,
-// 	T_APPEND,
-// 	T_HEREDOC,
-// 	T_ENV,
-// }	t_ttype;
-
-// struct	s_tokenizer
-// {
-// 	char	*cmd;
-// 	char	**args;
-// 	int		is_heredoc;
-// 	char	*heredoc_delim;
-// 	size_t	t_len;
-// 	char	*input;
-// 	size_t	position;
-// 	t_ttype	type;
-// };
-
-
 typedef enum {
 	T_WORD,
 	T_OPERATOR,
@@ -87,9 +63,9 @@ struct	s_tokenizer
 	char	**args;
 	int		token_count;
 	int		len;
-	token_type_t	type;
 	int		is_heredoc;
 	char	*heredoc_delim;
+	token_type_t	type;
 	struct s_tokenizer *prev;
 	struct s_tokenizer *next;
 };
@@ -124,35 +100,28 @@ struct	s_minishell
 };
 
 /******************************* minishell.c ******************************/
-
 void	shell_loop(t_msh *msh);
 
-/******************************* ms_b_cd_utils ****************************/
-
-void	handle_cd_error(char *path, int error_type);
-void	update_pwd_vars(t_msh *msh);
+/******************************** cd_utils ********************************/
 char	*built_abspath(char *relative_path, char *pwd);
 char	*make_relative(char *arg, t_msh *msh);
 
-/******************************* ms_b_cd **********************************/
-
-// static char	*handle_cd_home(t_msh *msh, char *cmd);
-// static char	*handle_cd_minus(t_msh *msh);
-// static void	handle_cd_execute(t_msh *msh, char *path);
+/***************************** cd_builting ********************************/
 void	handle_cd_path(t_msh *msh);
 void	ft_cd(t_msh *msh, int num_cmd);
 
-/******************************* ms_b_echo ********************************/
+/****************************** ms_varenv *********************************/
+char	*search_env(char *var, t_msh *msh);
+int		varenv_man(t_msh *msh, char *builting, char *var_name);
 
-/*static int	is_n_flag(char *str);
-static int	check_n_flags(t_msh *msh, int *i);
-static void	print_arg(char *arg, int has_next);*/
+/******************************* ms_b_echo ********************************/
 void	ft_echo(t_msh *msh, int num_cmd);
 
 /******************************* ms_b_env *********************************/
 
 int		update_env_var(t_msh *msh, char *name, char *value);
 int		ft_env(t_msh *msh);
+char	*update_env(t_msh *msh, char *name, char *value);
 // void	debug_env(t_msh *msh); borrar?
 
 /******************************* ms_b_exit ********************************/
@@ -249,53 +218,26 @@ char	**cmd_comp(const char *text, int start, int end);
 char	*cmd_match(const char *text, int state);
 
 /******************************* ms_signals ********************************/
-
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 void	init_signals(void);
 
 /******************************* ms_tokenizer *****************************/
-
-void	ft_token(char *input, t_tok *tok);
+int		size_token(char *input, t_tok *tok);
 char	*create_token(char *input, int len, t_tok *tok);
-int	size_token(char *input, t_tok *tok);
-token_type_t	type_token_def(t_tok *tok, char c);
+void	ft_token(char *input, t_tok *tok);
+
+/***************************** token_tools.c *******************************/
 int	is_quote(char c);
 int	is_whitespace(char c);
 int	is_operator(char c);
-
-
-
-
-
-// char	*ft_strtok(char *str, const char *separator);
-int		tokenize_input(char *input, t_msh *msh);
-
-/******************************* ms_tokenizer2 ****************************/
-
-void	init_token(t_tok *token);
-void	handle_operator(char *input, size_t *pos, t_tok *token);
-void	handle_word(char *input, size_t *pos, t_tok *token);
-size_t	count_tokens(char *input);
-int		tokenize_input(char *input, t_msh *msh);
-
-/******************************* ms_tokenizer2b ***************************/
-
-int	is_operator(char c);
-int	is_whitespace(char c);
-// t_ttype	get_operator_type(char curr, char next);
+token_type_t	type_token_def(t_tok *tok, char c);
 
 /******************************* ms_tools *********************************/
 
 /******************************* ms_err_handle ****************************/
-
+void	handle_cd_error(char *path, int error_type);
 int	ft_err(t_msh *msh, int err_code);
-
-/******************************* ms_varenv ********************************/
-
-char	*varenv(char *input);
-char	*serach_env(char *var, t_msh *msh);
-int		varenv_man(t_msh *msh, char *builting, char *input);
 
 /******************************* Error macros *****************************/
 
@@ -341,7 +283,7 @@ int		varenv_man(t_msh *msh, char *builting, char *input);
 
 /******************************** Other macros ***************************/
 
-// # define PATH_MAX		4096
+# define PATH_MAX		4096
 # define MAX_ARGS		4096
 # define MAX_ENV_VARS	4096
 

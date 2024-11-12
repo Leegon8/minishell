@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:41:10 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/11 23:25:41 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/12 12:45:51 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	handle_cd_path(t_msh *msh)
 {
 	char	*new_path;
 
-	if (msh->tkns->args[1][0] == '$' && msh->tkns->args[2] != NULL)
+	if (ft_strcmp(msh->tkns->args[1], "$") == 0 && msh->tkns->args[2])
 	{
-		if (varenv_man(msh, "cd", msh->tkns->args[2]) == FALSE)
+		if (!varenv_man(msh, "cd", msh->tkns->args[2]))
 			return ;
 	}
 	else if (msh->tkns->args[1][0] == '/')
@@ -81,7 +81,7 @@ void	ft_cd(t_msh *msh, int num_cmd)
 	{
 		if (msh->tkns->args[1][0] == '-' && msh->tkns->args[1][1] == '\0')
 			handle_cd_minus(msh);
-		if (msh->tkns->args[1][0] == '~' && msh->tkns->args[1][1] == '\0')
+		else if (msh->tkns->args[1][0] == '~' && msh->tkns->args[1][1] == '\0')
 			cd_home(msh);
 		else
 			handle_cd_path(msh);

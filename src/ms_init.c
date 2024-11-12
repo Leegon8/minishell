@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:49:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/09 22:04:22 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:34:34 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ int	env_alloc_struct(t_env **env, t_msh *msh)
 int	tok_alloc_struct(t_tok **tok)
 {
 	*tok = malloc(sizeof(t_tok));
-    if (!*tok)
-        return (-1);
-    ft_memset(*tok, 0, sizeof(t_tok));
-    (*tok)->cmd = NULL;
-    (*tok)->args = NULL;
-    (*tok)->token_count = 0;
-    (*tok)->len = 0;
-    (*tok)->type = T_WORD;
-    (*tok)->is_heredoc = 0;
-    (*tok)->heredoc_delim = NULL;
-    (*tok)->prev = NULL;
-    (*tok)->next = NULL;
-    return (0);
+	if (!*tok)
+		return (-1);
+	ft_memset(*tok, 0, sizeof(t_tok));
+	(*tok)->cmd = NULL;
+	(*tok)->args = NULL;
+	(*tok)->token_count = 0;
+	(*tok)->len = 0;
+	(*tok)->type = T_WORD;
+	(*tok)->is_heredoc = 0;
+	(*tok)->heredoc_delim = NULL;
+	(*tok)->prev = NULL;
+	(*tok)->next = NULL;
+	return (0);
 }
 
 /* inicia la asignacion de memoria  para mpip */

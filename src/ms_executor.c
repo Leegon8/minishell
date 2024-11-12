@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_executor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:13:10 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/10 12:50:10 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/11 11:56:13 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,16 @@ static void    child_process(t_msh *msh, char *fullpath)
     // printf("Debug args:\n");
     // printf("cmd = %s\n", msh->tkns->cmd);
     // printf("args[0] = %s\n", msh->tkns->args ? msh->tkns->args[0] : "NULL");
-    
-    if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
-    {
+	if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
+	{
         // printf("execve error: %d\n", errno);
         // perror("execve failed with error");
         // printf("Command attempted: %s\n", fullpath);
         // printf("First arg: %p\n", &msh->tkns->cmd);
-        cmd_not_found(msh);
-        free(fullpath);
-        exit(EXIT_FAILURE);
-    }
+		cmd_not_found(msh);
+		free(fullpath);
+		exit(EXIT_FAILURE);
+	}
 }
 
 static void	parent_process(pid_t pid, char *fullpath)
@@ -115,7 +114,6 @@ int	find_cmd(char *tkn, t_msh *msh)
 	}
 	return (0);
 }
-/**/
 
 static char	**get_path_dirs(char **envs)
 {

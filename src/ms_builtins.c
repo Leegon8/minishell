@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/10 12:30:14 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/11 11:54:49 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,25 @@ void	cmd_not_found(t_msh *msh)
 	ft_fd_printf(2, "Error: %s : command not found\n", msh->tkns->cmd);
 }
 
-void    check_tokens(char *input, t_msh *msh)
+void	check_tokens(char *input, t_msh *msh)
 {
-    int     count_tok;
+	int	count_tok;
 
-    if (!input || !*input)
-        return ;
-    ft_token(input, msh->tkns);
-    if (!msh->tkns->args || !msh->tkns->args[0])
-        return ;
-
-    count_tok = 0;
-    while (msh->tkns->args[count_tok])
-        count_tok++;
-    
-    msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
-
-    if (is_builtin(msh) == 0)
-        exc_cmd(msh, count_tok);
-    else if (find_cmd(msh->tkns->cmd, msh) == -1)
+	if (!input || !*input)
+		return ;
+	ft_token(input, msh->tkns);
+	if (!msh->tkns->args || !msh->tkns->args[0])
+		return ;
+	count_tok = 0;
+	while (msh->tkns->args[count_tok])
+		count_tok++;
+	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
+	if (is_builtin(msh) == 0)
+		exc_cmd(msh, count_tok);
+	else if (find_cmd(msh->tkns->cmd, msh) == -1)
 		cmd_not_found(msh);
-    free(msh->tkns->cmd);
-    msh->tkns->cmd = NULL;
+	free(msh->tkns->cmd);
+	msh->tkns->cmd = NULL;
 }
 
 void	cleanup_commands(t_msh *msh)
@@ -81,14 +78,14 @@ void	exc_cmd(t_msh *msh, int count_tok)
 		ft_export(msh, test_args);
 	}
 	else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
-	{	
+	{
 		char *value[] = {"unset", "SHLVL", NULL};
 		ft_unset(msh, value);
 	}
 	else if (ft_strcmp(msh->tkns->cmd, "test") == 0)
 		ft_fd_printf(1, "Envarcount: %d\n", msh->env_var_count);
 	else if (ft_strcmp(msh->tkns->cmd, "test2") == 0)
-		ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);	
+		ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);
 }
 
 int	is_builtin(t_msh *msh)

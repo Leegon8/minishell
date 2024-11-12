@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+         #
+#    By: leegon <leegon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2024/11/09 22:35:26 by lprieto-         ###   ########.fr        #
+#    Updated: 2024/11/12 12:24:57 by leegon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = gcc -g
-#LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lreadline #   LINUX    #
-LDFLAGS = -L/usr/local/opt/readline/lib -lreadline #   MACOS   #
+LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lreadline #   LINUX    #
+#LDFLAGS = -L/usr/local/opt/readline/lib -lreadline #   MACOS   #
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 AR = ar -rcs
@@ -22,11 +22,12 @@ RM = rm -rf
  
 # **************************************************************************** #
 
-SRCS = minishell.c ms_b_cd.c ms_b_cd_utils.c ms_b_echo.c ms_b_env.c ms_b_exit.c \
-	ms_b_pwd.c ms_b_unset.c ms_b_export.c ms_b_export_utils.c ms_builtins.c \
-	ms_env.c ms_executor.c ms_free.c ms_init.c ms_lexer.c ms_parser.c ms_rline.c \
-	ms_tools.c ms_tokenizer.c ms_varenv.c ms_signals.c ms_err_handle.c ms_tokenizer2b.c \
-	
+SRCS = minishell.c cd_builting.c cd_utils.c echo_builting.c env_builting.c \
+	exit_builting.c export_builting.c export_utils.c ms_builtins.c ms_env.c \
+	ms_env_tools.c err_handle_ms.c ms_executor.c ms_free.c ms_init.c \
+	ms_lexer.c ms_parser.c ms_rline.c ms_signals.c ms_tokenizer.c ms_b_cd.c \
+	token_tools.c ms_tools.c ms_varenv.c pwd_builting.c unset_builting.c \
+
 SRC_PATH := ./src/
 OBJ_PATH := ./tmp/
 

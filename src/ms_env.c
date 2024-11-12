@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/06 17:53:35 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:46:39 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	find_env_var(t_msh *msh, char *var_name)
 			return (i);
 		i++;
 	}
-	return (-1);
+	return (FALSE);
 }
 
 /* Comprueba que las variables PWD, OLDPWD y HOME existan  */
