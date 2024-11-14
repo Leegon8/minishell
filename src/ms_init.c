@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:49:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/11 12:34:34 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/14 12:29:03 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ int	env_alloc_struct(t_env **env, t_msh *msh)
 
 	*env = malloc(sizeof(t_env));
 	if (!*env)
-		return (-1);
+		return (FALSE);
 	ft_memset(*env, 0, sizeof(t_env));
 	(*env)->pwd = malloc(PATH_MAX);
 	if (!(*env)->pwd)
-		return (-1);
+		return (FALSE);
 	env_count = env_var_count(msh);
 	(*env)->names = malloc(sizeof(char *) * (env_count + 1));
 	if (!(*env)->names)
-		return (-1);
+		return (FALSE);
 	(*env)->values = malloc(sizeof(char *) * (env_count + 1));
 	if (!(*env)->values)
-		return (-1);
+		return (FALSE);
 	(*env)->names[env_count] = NULL;
 	(*env)->values[env_count] = NULL;
-	return (0);
+	return (TRUE);
 }
 
 /* inicia la asignacion de memoria  para tok */
@@ -41,7 +41,7 @@ int	tok_alloc_struct(t_tok **tok)
 {
 	*tok = malloc(sizeof(t_tok));
 	if (!*tok)
-		return (-1);
+		return (FALSE);
 	ft_memset(*tok, 0, sizeof(t_tok));
 	(*tok)->cmd = NULL;
 	(*tok)->args = NULL;
@@ -52,7 +52,7 @@ int	tok_alloc_struct(t_tok **tok)
 	(*tok)->heredoc_delim = NULL;
 	(*tok)->prev = NULL;
 	(*tok)->next = NULL;
-	return (0);
+	return (TRUE);
 }
 
 /* inicia la asignacion de memoria  para mpip */
@@ -60,9 +60,9 @@ int	mpip_alloc_struct(t_exe **mpip)
 {
 	*mpip = malloc(sizeof(t_exe));
 	if (!*mpip)
-		return (-1);
+		return (FALSE);
 	ft_memset(*mpip, 0, sizeof(t_exe));
-	return (0);
+	return (TRUE);
 }
 
 /* inicia las estructuras por separado y las enlaza a msh */
@@ -83,6 +83,9 @@ int	init_structs(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok)
 		free(*tok);
 		return (ft_fd_printf(2, "%s", E_PIPMEM) * -1);
 	}
+	msh->quote = malloc(sizeof(t_quote));
+	if (msh->quote)
+		init_quotes(msh->quote);
 	msh->mpip = *mpip;
 	return (0);
 }

@@ -6,20 +6,20 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:13:10 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/11 11:56:13 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:46:16 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_command_executable(char *fullpath)
+int	is_command_executable(char *fullpath)
 {
 	if (access(fullpath, F_OK) == 0 && access(fullpath, X_OK) == 0)
-		return (1);
-	return (0);
+		return (FALSE);
+	return (TRUE);
 }
 
-static void    child_process(t_msh *msh, char *fullpath)
+static void	child_process(t_msh *msh, char *fullpath)
 {
     // printf("Debug args:\n");
     // printf("cmd = %s\n", msh->tkns->cmd);
@@ -112,7 +112,7 @@ int	find_cmd(char *tkn, t_msh *msh)
 		free(fullpath);
 		return (-1);
 	}
-	return (0);
+	return (TRUE);
 }
 
 static char	**get_path_dirs(char **envs)

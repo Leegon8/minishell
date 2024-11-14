@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:19:26 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/11 12:21:36 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:33:22 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ int	is_whitespace(char c)
 
 int	is_quote(char c)
 {
-	return (c == '"' || c == '\'');
+	return (c == '\"' || c == '\'');
 }
 
-token_type_t	type_token_def(t_tok *tok, char c)
-{
-	if (is_quote(c))
-		tok->type = T_QUOTE;
-	if (is_operator(c))
-		tok->type = T_OPERATOR;
-	if (is_whitespace(c))
-		tok->type = T_WHITESPACE;
-	else if (!is_operator(c) && !is_quote(c) && !is_whitespace(c))
-		tok->type = T_WORD;
-	return (tok->type);
-}
+// token_type_t	type_token_def(t_tok *tok, char c)
+// {
+// 	if (is_quote(c))
+// 		tok->type = T_QUOTE;
+// 	if (is_operator(c))
+// 		tok->type = T_OPERATOR;
+// 	if (is_whitespace(c))
+// 		tok->type = T_WHITESPACE;
+// 	else if (!is_operator(c) && !is_quote(c) && !is_whitespace(c))
+// 		tok->type = T_WORD;
+// 	return (tok->type);
+// }

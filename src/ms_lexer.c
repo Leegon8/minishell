@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ms_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:45:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/09 20:18:43 by lprieto-         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:01:43 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/* Comprueba caso de comillas simples / dobles y si estan bien cerradas o no */
-int	quote_lexer(t_msh *msh)
-{
-	int	quote;
-	int	i;
-	int	len;
-
-	quote = 2;
-	i = 0;
-	len = ft_strlen(msh->tkns->cmd);
-	if ((ft_strcmp(msh->tkns->cmd, "\'") != 0)
-		|| (ft_strcmp(msh->tkns->cmd, "\"") != 0))
-		return (-1);
-	while (msh->tkns[1].cmd[i] && i <= len)
-	{
-		if (msh->tkns->cmd[0] == '\'' || msh->tkns->cmd[0] == '\"')
-			quote -= 1;
-	}
-	return (quote);
-}
 
 /* Comprueba cada token y su siguiente para operador (incompleta) */
 int	lexer(char **tokens, t_msh *msh)

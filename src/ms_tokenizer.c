@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:35:57 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/12 13:02:50 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/13 11:33:25 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_token(char *input, t_tok *tok)
 			i++;
 	}
 	tok->args[arg_index] = NULL;
-	// for (int j = 0; j < arg_index; j++) {
-	// 	printf("args[%d] --> %s\n", j, tok->args[j]);
-	// }
+	for (int j = 0; j < arg_index; j++) {
+		printf("args[%d] --> %s\n", j, tok->args[j]);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/12 12:41:22 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/14 14:04:52 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_environment	t_env;
 typedef struct s_minishell		t_msh;
 typedef struct s_tokenizer		t_tok;
 typedef struct s_executor		t_exe;
+typedef struct s_quote			t_quote;
 
 /******************************** Structs *********************************/
 
@@ -48,6 +49,19 @@ struct	s_environment
 	char	*path;
 	int		env_count;
 	int		exit_status;
+};
+
+typedef enum e_quote_type {
+	NO_QUOTE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE
+} t_quote_type;
+
+struct s_quote {
+	int		single_count;
+	int		double_count;
+	t_quote_type	active_quote;
+	int		is_closed;
 };
 
 typedef enum {
@@ -91,6 +105,7 @@ struct	s_minishell
 	t_env	*env;
 	t_exe	*mpip;
 	t_cmd	*cmds;
+	t_quote	*quote;
 	int			cmd_count;
 	int		end_sig;
 	int		last_exit_code;
@@ -98,6 +113,12 @@ struct	s_minishell
 	int		env_var_count;
 	int		shlvl;
 };
+
+/*	QUOTE_LEXER_MS	*/
+void	init_quotes(t_quote *quote);
+int		analyze_quotes(t_msh *msh, char *arg);
+char	*remove_quotes(char *str, char quote_type);
+void	expand_and_remove_quotes(char *str, t_msh *msh);
 
 /******************************* minishell.c ******************************/
 void	shell_loop(t_msh *msh);
@@ -114,58 +135,42 @@ void	ft_cd(t_msh *msh, int num_cmd);
 char	*search_env(char *var, t_msh *msh);
 int		varenv_man(t_msh *msh, char *builting, char *var_name);
 
-/******************************* ms_b_echo ********************************/
+/******************************* echo_builting ********************************/
+void	handle_quotes(t_msh *msh, t_quote *q, int i);
 void	ft_echo(t_msh *msh, int num_cmd);
 
 /******************************* ms_b_env *********************************/
-
 int		update_env_var(t_msh *msh, char *name, char *value);
 int		ft_env(t_msh *msh);
 char	*update_env(t_msh *msh, char *name, char *value);
 // void	debug_env(t_msh *msh); borrar?
 
 /******************************* ms_b_exit ********************************/
-
-// static int	is_numeric_arg(char *str);
-// static void	handle_numeric_arg(t_msh *msh, char *arg);
-// static void	handle_exit_error(t_msh *msh, char *arg);
 void	ft_exit(t_msh *msh);
 
 /******************************* ms_b_export ******************************/
-
-// static int	is_valid_identifier(char *str);
-// static void	print_export_vars(t_msh *msh);
 int		add_env_var(t_msh *msh, char *name, char *value);
-// static void	handle_export_arg(t_msh *msh, char *arg);
 int		ft_export(t_msh *msh, char **new_var);
 
 /******************************* ms_b_export_utils ************************/
-
 char	*get_var_name(char *var);
 char	*get_var_value(char *var);
 int		update_env_variable(t_msh *msh, char *name, char *value);
 
 /******************************* ms_b_pwd *********************************/
-
 int		ft_pwd(t_msh *msh);
 
 /******************************** ms_b_unset ******************************/
-
-// static int	is_valid_identifier(char *str);
-// static void	remove_var_from_env(t_msh *msh, int pos);
-// static int	find_var_in_env(t_msh *msh, char *var_name);
 int		ft_unset(t_msh *msh, char **new_var);
 
 /******************************* ms_builtins ******************************/
-
 void	cmd_not_found(t_msh *msh);
 void	check_tokens(char *input, t_msh *msh);
 void	cleanup_commands(t_msh *msh);
 void	exc_cmd(t_msh *msh, int count_tok);
-int		is_builtin(t_msh *msh);
+int		is_builtin(char *token);
 
 /******************************* ms_env ***********************************/
-
 int		env_var_count(t_msh *msh);
 int		find_env_var(t_msh *msh, char *var_name);
 int		check_envs(void);
@@ -173,46 +178,34 @@ void	update_shlvl(t_msh *msh);
 int		env_init_values(t_env *env, t_msh *msh);
 
 /******************************* ms_executor ******************************/
-
-// static int	is_command_executable(char *fullpath)
-// static void	child_process(t_msh *msh, char *fullpath)
-// static void	parent_process(pid_t pid, char *fullpath)
+int		is_command_executable(char *fullpath);
 int		execute_command(t_msh *msh, char *fullpath);
 int		find_cmd(char *tkn, t_msh *msh);
-// static char	**get_path_dirs(char **envs);
-// static char	*check_absolute_path(char *cmd);
-// static char	*try_path(char *dir, char *cmd);
 char	*make_path(char *tkn, t_msh *msh);
 
 /******************************* ms_free **********************************/
-
 void	ft_free_array(char **array);
 void	free_tok(t_tok *tok);
 void	free_env(t_env *env);
 void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 
 /******************************* ms_init **********************************/
-
 int		env_alloc_struct(t_env **env, t_msh *msh);
 int		tok_alloc_struct(t_tok **tok);
 int		mpip_alloc_struct(t_exe **mpip);
 int		init_structs(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok);
 
 /******************************* ms_lexer *********************************/
-
-int		quote_lexer(t_msh *msh);
+// int		quote_lexer(char *arg);
 int		lexer(char **tokens, t_msh *msh);
 int		parse_and_validate_commands(t_tok *tok, t_cmd **commands);
 
 /******************************* ms_parser ********************************/
-
 char	*parse_path(char **env);
 char	*parse_pwd(char **env);
-// static char	**extract_args(t_tok *tokens);
 int		parse_input(char *input, t_msh *mshll);
 
 /******************************* ms_rline *********************************/
-
 char	*cmd_gen(const char *text, int state);
 char	**cmd_comp(const char *text, int start, int end);
 char	*cmd_match(const char *text, int state);

@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/11 11:54:49 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/14 11:08:11 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	check_tokens(char *input, t_msh *msh)
 	while (msh->tkns->args[count_tok])
 		count_tok++;
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
-	if (is_builtin(msh) == 0)
+	if (is_builtin(msh->tkns->cmd) == 0)
 		exc_cmd(msh, count_tok);
 	else if (find_cmd(msh->tkns->cmd, msh) == -1)
 		cmd_not_found(msh);
@@ -60,6 +60,30 @@ void	cleanup_commands(t_msh *msh)
 	msh->cmd_count = 0;
 }
 
+int	is_builtin(char	*token)
+{
+	static char	*builtins[10];
+	int			i;
+
+	builtins[0] = "echo";
+	builtins[1] = "cd";
+	builtins[2] = "pwd";
+	builtins[3] = "env";
+	builtins[4] = "exit";
+	builtins[5] = "export";
+	builtins[6] = "unset";
+	builtins[7] = "test";
+	builtins[8] = "test2";
+	builtins[9] = NULL;
+	i = 0;
+	while (builtins[i])
+	{
+		if (ft_strcmp(token, builtins[i]) == 0)
+			return (TRUE);
+		i++;
+	}
+	return (FALSE);
+}
 void	exc_cmd(t_msh *msh, int count_tok)
 {
 	if (ft_strcmp(msh->tkns->cmd, "echo") == 0)
@@ -88,27 +112,3 @@ void	exc_cmd(t_msh *msh, int count_tok)
 		ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);
 }
 
-int	is_builtin(t_msh *msh)
-{
-	static char	*builtins[10];
-	int			i;
-
-	builtins[0] = "echo";
-	builtins[1] = "cd";
-	builtins[2] = "pwd";
-	builtins[3] = "env";
-	builtins[4] = "exit";
-	builtins[5] = "export";
-	builtins[6] = "unset";
-	builtins[7] = "test";
-	builtins[8] = "test2";
-	builtins[9] = NULL;
-	i = 0;
-	while (builtins[i])
-	{
-		if (ft_strcmp(msh->tkns->cmd, builtins[i]) == 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}

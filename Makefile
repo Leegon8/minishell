@@ -6,7 +6,7 @@
 #    By: leegon <leegon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2024/11/12 12:24:57 by leegon           ###   ########.fr        #
+#    Updated: 2024/11/13 20:12:46 by leegon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS = minishell.c cd_builting.c cd_utils.c echo_builting.c env_builting.c \
 	ms_env_tools.c err_handle_ms.c ms_executor.c ms_free.c ms_init.c \
 	ms_lexer.c ms_parser.c ms_rline.c ms_signals.c ms_tokenizer.c ms_b_cd.c \
 	token_tools.c ms_tools.c ms_varenv.c pwd_builting.c unset_builting.c \
+	quote_lexer_ms.c quote_lexer_tools.c \
 
 SRC_PATH := ./src/
 OBJ_PATH := ./tmp/
