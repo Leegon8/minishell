@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/14 14:04:52 by leegon           ###   ########.fr       */
+/*   Updated: 2024/12/12 17:02:40 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ struct	s_environment
 	char	*home;
 	char	*path;
 	int		env_count;
+	int		env_len;
 	int		exit_status;
 };
 
@@ -115,7 +116,7 @@ struct	s_minishell
 };
 
 /*	QUOTE_LEXER_MS	*/
-void	init_quotes(t_quote *quote);
+t_quote	*init_quotes(void);
 int		analyze_quotes(t_msh *msh, char *arg);
 char	*remove_quotes(char *str, char quote_type);
 void	expand_and_remove_quotes(char *str, t_msh *msh);
@@ -136,8 +137,12 @@ char	*search_env(char *var, t_msh *msh);
 int		varenv_man(t_msh *msh, char *builting, char *var_name);
 
 /******************************* echo_builting ********************************/
-void	handle_quotes(t_msh *msh, t_quote *q, int i);
 void	ft_echo(t_msh *msh, int num_cmd);
+
+/***************************** quote_lexer_ms *****************************/
+void	handle_quotes(t_msh *msh, t_quote *q, int i);
+int		analyze_quotes(t_msh *msh, char *arg);
+t_quote	*init_quotes(void);
 
 /******************************* ms_b_env *********************************/
 int		update_env_var(t_msh *msh, char *name, char *value);

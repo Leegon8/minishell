@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:49:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/14 12:29:03 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/22 11:19:35 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ int	init_structs(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok)
 		free(*tok);
 		return (ft_fd_printf(2, "%s", E_PIPMEM) * -1);
 	}
-	msh->quote = malloc(sizeof(t_quote));
-	if (msh->quote)
-		init_quotes(msh->quote);
+	// msh->quote = malloc(sizeof(t_quote));
+	// if (msh->quote)
+	// 	init_quotes(msh->quote);
 	msh->mpip = *mpip;
 	return (0);
 }

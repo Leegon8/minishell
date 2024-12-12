@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:12:17 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/14 14:06:30 by leegon           ###   ########.fr       */
+/*   Updated: 2024/12/12 17:16:17 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,36 @@ char	*remove_quotes(char *str, char quote_type)
 	return (result);
 }
 
+static char	*extract_var(char *str, t_msh *msh)
+{
+	int	i;
+	int	len;
+	char	*envar;
+
+	i = 0;
+	len = 0;
+	envar = malloc(sizeof(char) * ft_strlen(str) + 1);
+	while (str[i])
+	{
+		if (str[i] == '$')
+		{
+			i++;
+			while ((str[i + 1] >= 'A' && str[i + 1] <= 'Z')
+				|| (str[i + 1] == '_'))
+			{
+				envar[len] = str[i];
+				len++;
+				i++;
+			}
+			envar[len] = str[i];
+		}
+		i++;
+	}
+	envar[len + 1] = '\0';
+	msh->env->env_len = len;
+	return (envar);
+}
+
 char	*search_value(t_msh *msh, char *name)
 {
 	char	*value;
@@ -40,7 +70,6 @@ char	*search_value(t_msh *msh, char *name)
 	
 	i = 0;
 	value = NULL;
-
 	if (!msh || !msh->env || !msh->env->names || !msh->env->values || !name)
 		return (NULL);
 	while (msh->env->names[i] && msh->env->values[i])
@@ -48,7 +77,6 @@ char	*search_value(t_msh *msh, char *name)
 		if (ft_strcmp(msh->env->names[i], name) == 0)
 		{
 			value = ft_strdup(msh->env->values[i]);
-			printf("value = %s\n", value);
 			return (value);
 		}
 		i++;
@@ -56,24 +84,49 @@ char	*search_value(t_msh *msh, char *name)
 	return (NULL);
 }
 
+// char	*expand_var(const char *str)
+// {
+// 	char	*result;
+// 	int		len;
+// 	int		i;
+// 	int		j;
+
+// 	len = ft_strlen(str);
+// 	result = malloc(len * 2);
+// 	if (!result)
+// 		return (NULL);
+// 	i = 0;
+// 	j = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == '$')
+// 		{
+// 			i++;
+// 			while ((str[i] >= 'A' && str[i] >= 'Z') || str[i] == '_')
+// 			{
+// 				result[j++] = str[i];
+// 				i++;
+// 			}
+// 		}
+// 	}
+// 	printf("result: expand_var: %s\n", result);
+// 	return (result);
+// }
+
 void	expand_and_remove_quotes(char *str, t_msh *msh)
 {
-	char	*value;
-
-	value = NULL;
-	if (!str || !msh || !msh->env)
-		return ;	
-	if (find_env_var(msh, str))
-	{
-		value = search_value(msh, str);
-		if (value != NULL)
-			return ;
-	}
+	char	*env_var;
+	
 	str = remove_quotes(str, '\"');
-	ft_putstr_fd(str, 1);
-	free (str);
-	//return (str);
+	env_var = extract_var(str, msh);
+	if (!str || !msh || !msh->env)
+		printf("NULL\n");
+	printf("env_var = %s\n", env_var);
+	char *value = search_value(msh, env_var);
+	printf("value of variable = %s\n", value);
+	ft_putstr_fd(value, 1);
 }
+
     // Aquí implementarías la expansión de variables
     // Por ejemplo: $USER -> "username"
     // Esta función debe manejar la expansión de variables

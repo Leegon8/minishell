@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 21:21:27 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/14 13:30:05 by leegon           ###   ########.fr       */
+/*   Updated: 2024/11/21 18:02:11 by leegon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,11 @@ void	ft_echo(t_msh *msh, int num_cmd)
 	n_flag = check_n_flags(msh, &i);
 	while (i < num_cmd)
 	{
-		handle_quotes(msh, msh->quote, i);
+		if (msh->tkns->args[i][0] == '\'' || msh->tkns->args[i][0] == '\"')
+			handle_quotes(msh, msh->quote, i);
+		else
+			ft_putstr_fd(msh->tkns->args[i], 1);
+		//handle_quotes(msh, msh->quote, i);
 		if (i + 1 < num_cmd)
 			ft_putchar_fd(' ', 1);
 		i++;
