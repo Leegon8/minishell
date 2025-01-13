@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:41:10 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/13 17:33:07 by leegon           ###   ########.fr       */
+/*   Updated: 2025/01/13 18:28:22 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	handle_cd_minus(t_msh *msh)
 	char	*new_path;
 
 	if (!msh->tkns->args[1])
-		return;
+		return ;
 	if (!msh->env->old_pwd)
 	{
 		ft_fd_printf(2, "cd: OLDPWD not set\n");
-		return;
+		return ;
 	}
 	new_path = ft_strdup(msh->env->old_pwd);
 	if (chdir(msh->env->old_pwd) == -1)
@@ -37,14 +37,14 @@ static void	handle_cd_minus(t_msh *msh)
 static void	cd_home(t_msh *msh)
 {
 	if (!msh->env->home)
-			ft_fd_printf(2, "cd: HOME not set\n");
-		if (chdir(msh->env->home) == -1)
-			perror("cd");
-		else
-		{
-			msh->env->old_pwd = update_env(msh, "OLDPWD", msh->env->pwd);
-			msh->env->pwd = update_env(msh, "PWD", msh->env->home);
-		}
+		ft_fd_printf(2, "cd: HOME not set\n");
+	if (chdir(msh->env->home) == -1)
+		perror("cd");
+	else
+	{
+		msh->env->old_pwd = update_env(msh, "OLDPWD", msh->env->pwd);
+		msh->env->pwd = update_env(msh, "PWD", msh->env->home);
+	}
 }
 
 void	handle_cd_path(t_msh *msh)
@@ -61,7 +61,7 @@ void	handle_cd_path(t_msh *msh)
 	else
 		new_path = make_relative(msh->tkns->args[1], msh);
 	if (!new_path)
-		return;
+		return ;
 	if (chdir(new_path) == -1)
 		perror("cd");
 	else
@@ -70,7 +70,6 @@ void	handle_cd_path(t_msh *msh)
 		msh->env->pwd = update_env(msh, "PWD", new_path);
 	}
 	free(new_path);
-	
 }
 
 void	ft_cd(t_msh *msh, int num_cmd)

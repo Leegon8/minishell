@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_err_handle.c                                    :+:      :+:    :+:   */
+/*   err_handle_ms.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:32:36 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/11 23:37:13 by leegon           ###   ########.fr       */
+/*   Updated: 2025/01/13 18:30:30 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	handle_cd_error(char *path, int error_type)
 		ft_fd_printf(2, "cd: %s: No such file or directory\n", path);
 }
 
-int ft_err(t_msh *msh, int err_code)
+int	ft_err(t_msh *msh, int err_code)
 {
-	int final_err;
+	int	final_err;
 
 	final_err = err_code % 256;
-	if(err_code < 0)
-	final_err += 256;
+	if (err_code < 0)
+		final_err += 256;
 	msh->last_exit_code = final_err;
 	return (final_err);
 }

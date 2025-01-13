@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:35:57 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/13 11:33:25 by leegon           ###   ########.fr       */
+/*   Updated: 2025/01/13 18:40:11 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	size_token(char *input, t_tok *tok)
 {
-	int i;
-	
+	char	quote;
+	int		i;
+
 	(void)tok;
 	i = 0;
 	while (input[i] && !is_whitespace(input[i]))
@@ -28,7 +29,7 @@ int	size_token(char *input, t_tok *tok)
 		}
 		if (is_quote(input[i]))
 		{
-			char quote = input[i];
+			quote = input[i];
 			i++;
 			while (input[i] && input[i] != quote)
 				i++;
@@ -65,9 +66,9 @@ void	ft_token(char *input, t_tok *tok)
 	int		i;
 	int		arg_index;
 
-	tok->args = malloc(MAX_ARGS * sizeof(char*));
+	tok->args = malloc(MAX_ARGS * sizeof(char *));
 	if (!tok->args)
-		return;
+		return ;
 	i = 0;
 	arg_index = 0;
 	while (input[i])
@@ -75,13 +76,13 @@ void	ft_token(char *input, t_tok *tok)
 		while (input[i] && is_whitespace(input[i]))
 			i++;
 		if (!input[i])
-			break;
+			break ;
 		tok->len = size_token(&input[i], tok);
 		if (tok->len > 0)
 		{
 			tok->args[arg_index] = create_token(&input[i], tok->len, tok);
 			if (!tok->args[arg_index])
-				return;
+				return ;
 			arg_index++;
 			i += tok->len;
 		}
@@ -89,7 +90,4 @@ void	ft_token(char *input, t_tok *tok)
 			i++;
 	}
 	tok->args[arg_index] = NULL;
-	for (int j = 0; j < arg_index; j++) {
-		printf("args[%d] --> %s\n", j, tok->args[j]);
-	}
 }

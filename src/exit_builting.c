@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_b_exit.c                                        :+:      :+:    :+:   */
+/*   exit_builting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:01 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/06 19:05:37 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:32:01 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,26 @@ static void	handle_exit_error(t_msh *msh, char *arg)
 {
 	ft_fd_printf(2, "minishell: exit: %s: numeric argument required\n", arg);
 	if (msh->env)
-        free_structs(msh->env, msh->tkns, msh->mpip);
+		free_structs(msh->env, msh->tkns, msh->mpip);
 	exit(2);
 }
 
 void	ft_exit(t_msh *msh)
 {
 	if (!msh)
-        exit(1);
-    ft_fd_printf(1, "exit\n");
-    if (!msh->tkns[1].cmd)
-        exit(msh->last_exit_code);
-    if (!is_numeric_arg(msh->tkns[1].cmd))
-        handle_exit_error(msh, msh->tkns[1].cmd);
-    if (msh->tkns[2].cmd)
-    {
-        ft_fd_printf(2, "minishell: exit: too many arguments\n");
-        msh->end_sig = 1;
-        return ;
-    }
-    handle_numeric_arg(msh, msh->tkns[1].cmd);
-    free_structs(msh->env, msh->tkns, msh->mpip);
-    exit(msh->end_sig);
+		exit(1);
+	ft_fd_printf(1, "exit\n");
+	if (!msh->tkns[1].cmd)
+		exit(msh->last_exit_code);
+	if (!is_numeric_arg(msh->tkns[1].cmd))
+		handle_exit_error(msh, msh->tkns[1].cmd);
+	if (msh->tkns[2].cmd)
+	{
+		ft_fd_printf(2, "minishell: exit: too many arguments\n");
+		msh->end_sig = 1;
+		return ;
+	}
+	handle_numeric_arg(msh, msh->tkns[1].cmd);
+	free_structs(msh->env, msh->tkns, msh->mpip);
+	exit(msh->end_sig);
 }

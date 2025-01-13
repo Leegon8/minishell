@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/14 11:08:11 by leegon           ###   ########.fr       */
+/*   Updated: 2025/01/13 18:33:58 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	is_builtin(char	*token)
 	}
 	return (FALSE);
 }
+
 void	exc_cmd(t_msh *msh, int count_tok)
 {
 	if (ft_strcmp(msh->tkns->cmd, "echo") == 0)
@@ -98,12 +99,12 @@ void	exc_cmd(t_msh *msh, int count_tok)
 		ft_exit(msh);
 	else if (ft_strcmp(msh->tkns->cmd, "export") == 0)
 	{
-		char *test_args[] = {"export", "TEST=123", NULL};
+		char	*test_args[] = {"export", "TEST=123", NULL};
 		ft_export(msh, test_args);
 	}
 	else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
 	{
-		char *value[] = {"unset", "SHLVL", NULL};
+		char	*value[] = {"unset", "SHLVL", NULL};
 		ft_unset(msh, value);
 	}
 	else if (ft_strcmp(msh->tkns->cmd, "test") == 0)
@@ -111,4 +112,3 @@ void	exc_cmd(t_msh *msh, int count_tok)
 	else if (ft_strcmp(msh->tkns->cmd, "test2") == 0)
 		ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);
 }
-

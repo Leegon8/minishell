@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:12:17 by lauriago          #+#    #+#             */
-/*   Updated: 2025/01/13 17:42:23 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:28:59 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,35 +53,6 @@ char	*search_value(t_msh *msh, char *name)
 	}
 	return (NULL);
 }
-
-// char	*expand_var(const char *str)
-// {
-// 	char	*result;
-// 	int		len;
-// 	int		i;
-// 	int		j;
-
-// 	len = ft_strlen(str);
-// 	result = malloc(len * 2);
-// 	if (!result)
-// 		return (NULL);
-// 	i = 0;
-// 	j = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '$')
-// 		{
-// 			i++;
-// 			while ((str[i] >= 'A' && str[i] >= 'Z') || str[i] == '_')
-// 			{
-// 				result[j++] = str[i];
-// 				i++;
-// 			}
-// 		}
-// 	}
-// 	printf("result: expand_var: %s\n", result);
-// 	return (result);
-// }
 
 /*void	expand_and_remove_quotes(char *str, t_msh *msh)
 {
