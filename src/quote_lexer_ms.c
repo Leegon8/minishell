@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:00:22 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/22 14:54:10 by leegon           ###   ########.fr       */
+/*   Updated: 2025/01/09 16:59:04 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	handle_quotes(t_msh *msh, t_quote *q, int i)
 	if (!q || !msh || !msh->tkns || !msh->tkns->args[i])
 		return;
 	quote_status = analyze_quotes(msh, msh->tkns->args[i]);
-	printf("sigle_count = %d\ndouble_count = %d\n", msh->quote->single_count, msh->quote->double_count);
 	if (quote_status == TRUE)
 	{
 		if (q->single_count == 2)

@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:12:17 by lauriago          #+#    #+#             */
-/*   Updated: 2024/12/12 17:16:17 by leegon           ###   ########.fr       */
+/*   Updated: 2025/01/13 17:42:23 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,6 @@ char	*remove_quotes(char *str, char quote_type)
 	}
 	result[j] = '\0';
 	return (result);
-}
-
-static char	*extract_var(char *str, t_msh *msh)
-{
-	int	i;
-	int	len;
-	char	*envar;
-
-	i = 0;
-	len = 0;
-	envar = malloc(sizeof(char) * ft_strlen(str) + 1);
-	while (str[i])
-	{
-		if (str[i] == '$')
-		{
-			i++;
-			while ((str[i + 1] >= 'A' && str[i + 1] <= 'Z')
-				|| (str[i + 1] == '_'))
-			{
-				envar[len] = str[i];
-				len++;
-				i++;
-			}
-			envar[len] = str[i];
-		}
-		i++;
-	}
-	envar[len + 1] = '\0';
-	msh->env->env_len = len;
-	return (envar);
 }
 
 char	*search_value(t_msh *msh, char *name)
@@ -113,19 +83,16 @@ char	*search_value(t_msh *msh, char *name)
 // 	return (result);
 // }
 
-void	expand_and_remove_quotes(char *str, t_msh *msh)
+/*void	expand_and_remove_quotes(char *str, t_msh *msh)
 {
 	char	*env_var;
-	
 	str = remove_quotes(str, '\"');
 	env_var = extract_var(str, msh);
 	if (!str || !msh || !msh->env)
 		printf("NULL\n");
-	printf("env_var = %s\n", env_var);
 	char *value = search_value(msh, env_var);
-	printf("value of variable = %s\n", value);
 	ft_putstr_fd(value, 1);
-}
+}*/
 
     // Aquí implementarías la expansión de variables
     // Por ejemplo: $USER -> "username"
