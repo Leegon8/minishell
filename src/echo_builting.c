@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 21:21:27 by lauriago          #+#    #+#             */
-/*   Updated: 2025/01/13 18:29:18 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/01/14 15:42:25 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void	ft_echo(t_msh *msh, int num_cmd)
 		i++;
 	}
 	if (n_flag == FALSE)
-		ft_putchar_fd('\n', 1);
+		printf("\n");
 }

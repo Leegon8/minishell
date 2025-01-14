@@ -6,7 +6,7 @@
 /*   By: lauriago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:46:50 by lauriago          #+#    #+#             */
-/*   Updated: 2025/01/13 18:11:42 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:54:22 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,16 @@
 
 */
 
-int	ft_varlen(char *str)
+int	ft_varlen(char *str, int start)
 {
-	int	i;
 	int	len;
 
-	i = 0;
 	len = 0;
-	while (str[i])
+	while (str[start] && ((str[start] >= 'A' && str[start] <= 'Z')
+		|| (str[start] == '_')))
 	{
-		if (str[i] == '$')
-		{
-			i++;
-			while ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] == '_'))
-			{
-				len++;
-				i++;
-			}
-		}
-		i++;
+			len++;
+			start++;
 	}
 	return (len);
 }
@@ -77,7 +68,7 @@ char	*copy_var(char *str, int i, int len)
 	return (result);
 }
 
-void	look_existance(char *var, t_msh *msh)
+void	look_existence(char *var, t_msh *msh)
 {
 	char	*value;
 
@@ -98,25 +89,31 @@ void	expand_and_remove_quotes(char *str, t_msh *msh)
 {
 	int	i;
 	int	varlen;
+	char	*tmp;
 	char	*var_copy;
 
 	i = 0;
 	varlen = 0;
 	if (!str || !msh || !msh->env)
-		printf("NULL\n");
-	str = remove_quotes(str, '\"');
-	while (str[i])
+		return ;
+	tmp = remove_quotes(str, '\"');
+	while (tmp[i])
 	{
-		if (str[i] == '$')
+		if (tmp[i] == '$' && tmp[i + 1])
 		{
 			i++;
-			varlen = ft_varlen(str); // Funcion que calcula longitud del nombre de la variable
-			var_copy = copy_var(str, i, varlen); // Funcion que copia nombre de la variable	
-			look_existance(var_copy, msh);
-			i += varlen;
+			varlen = ft_varlen(tmp, i); // Funcion que calcula longitud del nombre de la variable
+			if (varlen > 0)
+			{
+				var_copy = copy_var(tmp, i, varlen); // Funcion que copia nombre de la variable	
+				look_existence(var_copy, msh);
+				free(var_copy);
+				i += varlen - 1;
+			}
 		}
 		else
-			printf("%c", str[i]);
+			printf("%c", tmp[i]);
 		i++;
 	}
+	free(tmp);
 }
