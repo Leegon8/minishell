@@ -121,52 +121,60 @@ int		analyze_quotes(t_msh *msh, char *arg);
 char	*remove_quotes(char *str, char quote_type);
 void	expand_and_remove_quotes(char *str, t_msh *msh);
 
-/******************************* minishell.c ******************************/
-void	shell_loop(t_msh *msh);
+/*	BUILTINS	*/
 
-/******************************** cd_utils ********************************/
-char	*built_abspath(char *relative_path, char *pwd);
-char	*make_relative(char *arg, t_msh *msh);
-
-/***************************** cd_builting ********************************/
+/***************************** cd.c ********************************/
 void	handle_cd_path(t_msh *msh);
 void	ft_cd(t_msh *msh, int num_cmd);
+/******************************** cd_utils.c ********************************/
+char	*built_abspath(char *relative_path, char *pwd);
+char	*make_relative(char *arg, t_msh *msh);
+/******************************* echo.c *************************************/
+void	ft_echo(t_msh *msh, int num_cmd);
+/******************************* env.c **************************************/
+int		update_env_var(t_msh *msh, char *name, char *value);
+int		ft_env(t_msh *msh);
+char	*update_env(t_msh *msh, char *name, char *value);
+// void	debug_env(t_msh *msh); borrar?
+/******************************* exit.c ***********************************/
+void	ft_exit(t_msh *msh);
+/******************************* export.c **********************************/
+int		add_env_var(t_msh *msh, char *name, char *value);
+int		ft_export(t_msh *msh, char **new_var);
+/**************************** export_utils.c *******************************/
+char	*get_var_name(char *var);
+char	*get_var_value(char *var);
+int		update_env_variable(t_msh *msh, char *name, char *value);
+/******************************* pwd.c ************************************/
+int		ft_pwd(t_msh *msh);
+/******************************** unset.c **********************************/
+int		ft_unset(t_msh *msh, char **new_var);
 
-/****************************** ms_varenv *********************************/
+/*		ENV		*/
+
+/******************************* ms_env.c ***********************************/
+int		env_var_count(t_msh *msh);
+int		find_env_var(t_msh *msh, char *var_name);
+int		check_envs(void);
+void	update_shlvl(t_msh *msh);
+int		env_init_values(t_env *env, t_msh *msh);
+/******************************* ms_env_tools.c *****************************/
+char	*update_env(t_msh *msh, char *name, char *value);
+/****************************** ms_varenv.c *********************************/
 char	*search_env(char *var, t_msh *msh);
 int		varenv_man(t_msh *msh, char *builting, char *var_name);
 
-/******************************* echo_builting ********************************/
-void	ft_echo(t_msh *msh, int num_cmd);
+/*		E		*/
+/******************************* minishell.c ******************************/
+void	shell_loop(t_msh *msh);
+
+
 
 /***************************** quote_lexer_ms *****************************/
 void	handle_quotes(t_msh *msh, t_quote *q, int i);
 int		analyze_quotes(t_msh *msh, char *arg);
 t_quote	*init_quotes(void);
 
-/******************************* ms_b_env *********************************/
-int		update_env_var(t_msh *msh, char *name, char *value);
-int		ft_env(t_msh *msh);
-char	*update_env(t_msh *msh, char *name, char *value);
-// void	debug_env(t_msh *msh); borrar?
-
-/******************************* ms_b_exit ********************************/
-void	ft_exit(t_msh *msh);
-
-/******************************* ms_b_export ******************************/
-int		add_env_var(t_msh *msh, char *name, char *value);
-int		ft_export(t_msh *msh, char **new_var);
-
-/******************************* ms_b_export_utils ************************/
-char	*get_var_name(char *var);
-char	*get_var_value(char *var);
-int		update_env_variable(t_msh *msh, char *name, char *value);
-
-/******************************* ms_b_pwd *********************************/
-int		ft_pwd(t_msh *msh);
-
-/******************************** ms_b_unset ******************************/
-int		ft_unset(t_msh *msh, char **new_var);
 
 /******************************* ms_builtins ******************************/
 void	cmd_not_found(t_msh *msh);
@@ -175,12 +183,6 @@ void	cleanup_commands(t_msh *msh);
 void	exc_cmd(t_msh *msh, int count_tok);
 int		is_builtin(char *token);
 
-/******************************* ms_env ***********************************/
-int		env_var_count(t_msh *msh);
-int		find_env_var(t_msh *msh, char *var_name);
-int		check_envs(void);
-void	update_shlvl(t_msh *msh);
-int		env_init_values(t_env *env, t_msh *msh);
 
 /******************************* ms_executor ******************************/
 int		is_command_executable(char *fullpath);

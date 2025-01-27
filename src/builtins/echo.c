@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo_builting.c                                    :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 21:21:27 by lauriago          #+#    #+#             */
-/*   Updated: 2025/01/14 15:42:25 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:21:21 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	ft_echo(t_msh *msh, int num_cmd)
 	{
 		if (msh->tkns->args[i][0] == '\'' || msh->tkns->args[i][0] == '\"')
 			handle_quotes(msh, msh->quote, i);
+//		if (msh->tkns->args[i] == '$')
+//			handle_var()  //TODO
 		else
 			ft_putstr_fd(msh->tkns->args[i], 1);
 		if (i + 1 < num_cmd)

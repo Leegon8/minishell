@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	redirect_input(char *file)
+/*static int	redirect_input(char *file)
 {
 	int	fd;
 
@@ -133,3 +133,4 @@ int	handle_pipes(t_msh *msh)
 	}
 	return (0);
 }
+*/

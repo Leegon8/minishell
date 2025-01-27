@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	close_pipe_fds(int *pipe_fd)
+/*static void	close_pipe_fds(int *pipe_fd)
 {
 	if (pipe_fd[0] != -1)
 		close(pipe_fd[0]);
@@ -113,4 +113,4 @@ int	execute_command_new(t_msh *msh, int is_piped)
 	if (WIFEXITED(status))
 		msh->last_exit_code = WEXITSTATUS(status);
 	return (msh->last_exit_code);
-}
+}*/
