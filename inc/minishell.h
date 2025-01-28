@@ -117,7 +117,6 @@ struct	s_minishell
 
 /*	QUOTE_LEXER_MS	*/
 t_quote	*init_quotes(void);
-int		analyze_quotes(t_msh *msh, char *arg);
 char	*remove_quotes(char *str, char quote_type);
 void	expand_and_remove_quotes(char *str, t_msh *msh);
 
@@ -171,8 +170,10 @@ void	shell_loop(t_msh *msh);
 
 
 /***************************** quote_lexer_ms *****************************/
-void	handle_quotes(t_msh *msh, t_quote *q, int i);
-int		analyze_quotes(t_msh *msh, char *arg);
+//void	handle_quotes(t_msh *msh, t_quote *q, int i);
+void	handle_single_quotes(t_msh *msh, int i);
+void	handle_double_quotes(t_msh *msh, int i);
+int		analyze_quotes(t_msh *msh, char *arg, char quote);
 t_quote	*init_quotes(void);
 
 
@@ -258,6 +259,7 @@ int	ft_err(t_msh *msh, int err_code);
 # define E_TOKMEM		"Error: tok mem asignation failed\n"
 # define E_PIPMEM		"Error: mpip mem asignation failed\n"
 # define E_CDARG		"cd: $ARG: No such file or directory\n"
+# define E_SYNTX		"Syntax error: Stop inventing shit"
 
 /******************************** Exec macros ****************************/
 

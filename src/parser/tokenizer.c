@@ -89,5 +89,7 @@ void	ft_token(char *input, t_tok *tok)
 		else
 			i++;
 	}
+//	for( i = 0; tok->args[i]; i++){
+//		printf("tok[%d] : %s\n", i, tok->args[i]);}
 	tok->args[arg_index] = NULL;
 }

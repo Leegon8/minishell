@@ -51,6 +51,38 @@ static int	check_n_flags(t_msh *msh, int *i)
 	return (n_flag);
 }
 
+static int	echo_has_2_expand(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	handle_echo_quotes(t_msh *msh, char k, int i)
+{
+	if (k == '\'' || k == '\"')
+	{
+		if (k == '\'')
+			handle_single_quotes(msh, i);
+		if (k == '\"')
+			handle_double_quotes(msh, i);
+	}
+	else if (k != '\'' || k != '\"')
+	{
+		if (echo_has_2_expand(msh->tkns->args[i]))
+				expand_and_remove_quotes(msh->tkns->args[i], msh);
+		else
+			ft_putstr_fd(msh->tkns->args[i], 1);
+	}
+}
+
 void	ft_echo(t_msh *msh, int num_cmd)
 {
 	int	i;
@@ -65,12 +97,20 @@ void	ft_echo(t_msh *msh, int num_cmd)
 	n_flag = check_n_flags(msh, &i);
 	while (i < num_cmd)
 	{
-		if (msh->tkns->args[i][0] == '\'' || msh->tkns->args[i][0] == '\"')
-			handle_quotes(msh, msh->quote, i);
-//		if (msh->tkns->args[i] == '$')
-//			handle_var()  //TODO
-		else
-			ft_putstr_fd(msh->tkns->args[i], 1);
+		if (msh->tkns->args[i][0] == '\'')
+			handle_single_quotes(msh, i);
+		if (msh->tkns->args[i][0] == '\"')
+			handle_double_quotes(msh, i);
+		else if (!is_quote(msh->tkns->args[i][0]))
+		{
+			if (echo_has_2_expand(msh->tkns->args[i]))
+				expand_and_remove_quotes(msh->tkns->args[i], msh);
+			else //if (!echo_has_2_expand(msh->tkns->args[i]))
+				ft_putstr_fd(msh->tkns->args[i], 1);
+			//printf("\nECHO HAS 2 EXPAND??? -----> %d\n", echo_has_2_expand(msh->tkns->args[i]));
+		}	
+//		else
+//			ft_putstr_fd(msh->tkns->args[i], 1);
 		if (i + 1 < num_cmd)
 			ft_putchar_fd(' ', 1);
 		i++;
