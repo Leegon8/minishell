@@ -98,10 +98,7 @@ void	exc_cmd(t_msh *msh, int count_tok)
 	else if (ft_strcmp(msh->tkns->cmd, "exit") == 0)
 		ft_exit(msh);
 	else if (ft_strcmp(msh->tkns->cmd, "export") == 0)
-	{
-		char	*test_args[] = {"export", "TEST=123", NULL};
-		ft_export(msh, test_args);
-	}
+		ft_export(msh, count_tok);
 	else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
 	{
 		char	*value[] = {"unset", "SHLVL", NULL};
