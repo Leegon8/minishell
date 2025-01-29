@@ -6,7 +6,7 @@
 /*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/12/12 17:02:40 by leegon           ###   ########.fr       */
+/*   Updated: 2025/01/29 17:44:52 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ char	*update_env(t_msh *msh, char *name, char *value);
 void	ft_exit(t_msh *msh);
 /******************************* export.c **********************************/
 int		add_env_var(t_msh *msh, char *name, char *value);
-int		ft_export(t_msh *msh, char **new_var);
+int		ft_export(t_msh *msh, int tok_num);
 /**************************** export_utils.c *******************************/
 char	*get_var_name(char *var);
 char	*get_var_value(char *var);
