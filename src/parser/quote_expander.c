@@ -40,8 +40,7 @@ int	ft_varlen(char *str, int start)
 	int	len;
 
 	len = 0;
-	while (str[start] && ((str[start] >= 'A' && str[start] <= 'Z')
-		|| (str[start] == '_')))
+	while (str[start] && (ft_isalpha(str[start]) || (str[start] == '_')))
 	{
 			len++;
 			start++;
