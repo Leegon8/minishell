@@ -98,17 +98,14 @@ void	exc_cmd(t_msh *msh, int count_tok)
 	else if (ft_strcmp(msh->tkns->cmd, "exit") == 0)
 		ft_exit(msh);
 	else if (ft_strcmp(msh->tkns->cmd, "export") == 0)
-	{
-		char	*test_args[] = {"export", "TEST=123", NULL};
-		ft_export(msh, test_args);
-	}
-	else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
-	{
-		char	*value[] = {"unset", "SHLVL", NULL};
-		ft_unset(msh, value);
-	}
+		ft_export(msh, count_tok);
 	else if (ft_strcmp(msh->tkns->cmd, "test") == 0)
 		ft_fd_printf(1, "Envarcount: %d\n", msh->env_var_count);
 	else if (ft_strcmp(msh->tkns->cmd, "test2") == 0)
 		ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);
 }
+	// else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
+	// {
+	// 	char	*value[] = {"unset", "SHLVL", NULL};
+	// 	ft_unset(msh, value);
+	// }

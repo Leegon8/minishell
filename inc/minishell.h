@@ -52,37 +52,40 @@ struct	s_environment
 	int		exit_status;
 };
 
-typedef enum e_quote_type {
+typedef enum e_quote_type
+{
 	NO_QUOTE,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE
-} t_quote_type;
+}	t_quote_type;
 
-struct s_quote {
-	int		single_count;
-	int		double_count;
+struct s_quote
+{
+	int				single_count;
+	int				double_count;
 	t_quote_type	active_quote;
-	int		is_closed;
+	int				is_closed;
 };
 
-typedef enum {
+typedef enum types
+{
 	T_WORD,
 	T_OPERATOR,
 	T_WHITESPACE,
 	T_QUOTE
-}	token_type_t;
+}	t_tokty;
 
 struct	s_tokenizer
 {
-	char	*cmd;
-	char	**args;
-	int		token_count;
-	int		len;
-	int		is_heredoc;
-	char	*heredoc_delim;
-	token_type_t	type;
-	struct s_tokenizer *prev;
-	struct s_tokenizer *next;
+	char				*cmd;
+	char				**args;
+	int					token_count;
+	int					len;
+	int					is_heredoc;
+	char				*heredoc_delim;
+	t_tokty				type;
+	struct s_tokenizer	*prev;
+	struct s_tokenizer	*next;
 };
 
 struct s_executor
@@ -107,7 +110,7 @@ struct	s_minishell
 	t_exe	*mpip;
 	t_cmd	*cmds;
 	t_quote	*quote;
-	int			cmd_count;
+	int		cmd_count;
 	int		end_sig;
 	int		last_exit_code;
 	char	**envs;
@@ -115,127 +118,164 @@ struct	s_minishell
 	int		shlvl;
 };
 
-/*	QUOTE_LEXER_MS	*/
-t_quote	*init_quotes(void);
-int		analyze_quotes(t_msh *msh, char *arg);
-char	*remove_quotes(char *str, char quote_type);
-void	expand_and_remove_quotes(char *str, t_msh *msh);
+/* //////////////////////////////////////////////////////////////////////////////  BUILTINS */
 
-/******************************* minishell.c ******************************/
-void	shell_loop(t_msh *msh);
-
-/******************************** cd_utils ********************************/
+/* -------------------------------------------------------------- cd_utils.c */
 char	*built_abspath(char *relative_path, char *pwd);
+/*static char	*go_back_dir(char *pwd)*/
+/*static char	*handle_multiple_back(char *path, t_msh *msh)*/
 char	*make_relative(char *arg, t_msh *msh);
 
-/***************************** cd_builting ********************************/
+/* ------------------------------------------------------------------- cd.c */
+/*static void	handle_cd_minus(t_msh *msh)*/
+/*static void	cd_home(t_msh *msh)*/
 void	handle_cd_path(t_msh *msh);
 void	ft_cd(t_msh *msh, int num_cmd);
 
-/****************************** ms_varenv *********************************/
-char	*search_env(char *var, t_msh *msh);
-int		varenv_man(t_msh *msh, char *builting, char *var_name);
-
-/******************************* echo_builting ********************************/
+/* ----------------------------------------------------------------- echo.c */
+/*static int	is_n_flag(char *str)*/
+/*static int	check_n_flags(t_msh *msh, int *i)*/
 void	ft_echo(t_msh *msh, int num_cmd);
 
-/***************************** quote_lexer_ms *****************************/
-void	handle_quotes(t_msh *msh, t_quote *q, int i);
-int		analyze_quotes(t_msh *msh, char *arg);
-t_quote	*init_quotes(void);
-
-/******************************* ms_b_env *********************************/
+/* ------------------------------------------------------------------ env.c */
 int		update_env_var(t_msh *msh, char *name, char *value);
 int		ft_env(t_msh *msh);
-char	*update_env(t_msh *msh, char *name, char *value);
-// void	debug_env(t_msh *msh); borrar?
 
-/******************************* ms_b_exit ********************************/
+/* ----------------------------------------------------------------- exit.c */
+/*static int	is_numeric_arg(char *str)*/
+/*static void	handle_numeric_arg(t_msh *msh, char *arg)*/
+/*static void	handle_exit_error(t_msh *msh, char *arg)*/
 void	ft_exit(t_msh *msh);
 
-/******************************* ms_b_export ******************************/
-int		add_env_var(t_msh *msh, char *name, char *value);
-int		ft_export(t_msh *msh, char **new_var);
-
-/******************************* ms_b_export_utils ************************/
+/* --------------------------------------------------------- export_utils.c */
 char	*get_var_name(char *var);
 char	*get_var_value(char *var);
 int		update_env_variable(t_msh *msh, char *name, char *value);
 
-/******************************* ms_b_pwd *********************************/
+/* --------------------------------------------------------------- export.c */
+/*static int	is_valid_identifier(char *str)*/
+int		add_env_var(t_msh *msh, char *name, char *value);
+/*static void	print_export_vars(t_msh *msh)*/
+/*static void	handle_export_arg(t_msh *msh, char *arg)*/
+int		ft_export(t_msh *msh, int tok_num);
+
+/* ------------------------------------------------------------------ pwd.c */
 int		ft_pwd(t_msh *msh);
 
-/******************************** ms_b_unset ******************************/
+/* ---------------------------------------------------------------- unset.c */
+/*static int	is_valid_identifier(char *str)*/
+/*static void	remove_var_from_env(t_msh *msh, int pos)*/
+/*static int	find_var_in_env(t_msh *msh, char *var_name)*/
 int		ft_unset(t_msh *msh, char **new_var);
 
-/******************************* ms_builtins ******************************/
-void	cmd_not_found(t_msh *msh);
-void	check_tokens(char *input, t_msh *msh);
-void	cleanup_commands(t_msh *msh);
-void	exc_cmd(t_msh *msh, int count_tok);
-int		is_builtin(char *token);
+/* //////////////////////////////////////////////////////////////////////////////  ENVIRONM */
 
-/******************************* ms_env ***********************************/
+/* --------------------------------------------------------- ms_env_tools.c */
+char	*update_env(t_msh *msh, char *name, char *value);
+
+/* --------------------------------------------------------------- ms_env.c */
 int		env_var_count(t_msh *msh);
 int		find_env_var(t_msh *msh, char *var_name);
 int		check_envs(void);
 void	update_shlvl(t_msh *msh);
 int		env_init_values(t_env *env, t_msh *msh);
 
-/******************************* ms_executor ******************************/
+/* ----------------------------------------------------------- ms_var_env.c */
+char	*search_env(char *var, t_msh *msh);
+int		varenv_man(t_msh *msh, char *builting, char *var_name);
+
+/* //////////////////////////////////////////////////////////////////////////////  EXECUTOR */
+
+/* ------------------------------------------------------------- executor.c */
 int		is_command_executable(char *fullpath);
+/*static void	child_process(t_msh *msh, char *fullpath)*/
+/*static void	parent_process(pid_t pid, char *fullpath)*/
 int		execute_command(t_msh *msh, char *fullpath);
 int		find_cmd(char *tkn, t_msh *msh);
+/*static char	**get_path_dirs(char **envs)*/
+/*static char	*check_absolute_path(char *cmd)*/
+/*static char	*try_path(char *dir, char *cmd)*/
 char	*make_path(char *tkn, t_msh *msh);
 
-/******************************* ms_free **********************************/
-void	ft_free_array(char **array);
-void	free_tok(t_tok *tok);
-void	free_env(t_env *env);
-void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
+/* //////////////////////////////////////////////////////////////////////////////  MAIN */
 
-/******************************* ms_init **********************************/
+/* ----------------------------------------------------------------- init.c */
 int		env_alloc_struct(t_env **env, t_msh *msh);
 int		tok_alloc_struct(t_tok **tok);
 int		mpip_alloc_struct(t_exe **mpip);
 int		init_structs(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok);
 
-/******************************* ms_lexer *********************************/
-// int		quote_lexer(char *arg);
-int		lexer(char **tokens, t_msh *msh);
-int		parse_and_validate_commands(t_tok *tok, t_cmd **commands);
+/* ----------------------------------------------------------------- main.c */
+void	shell_loop(t_msh *msh);
 
-/******************************* ms_parser ********************************/
-char	*parse_path(char **env);
-char	*parse_pwd(char **env);
-int		parse_input(char *input, t_msh *mshll);
-
-/******************************* ms_rline *********************************/
+/* ---------------------------------------------------------------- rline.c */
 char	*cmd_gen(const char *text, int state);
 char	**cmd_comp(const char *text, int start, int end);
 char	*cmd_match(const char *text, int state);
 
-/******************************* ms_signals ********************************/
+/* -------------------------------------------------------------- signals.c */
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 void	init_signals(void);
 
-/******************************* ms_tokenizer *****************************/
+/* //////////////////////////////////////////////////////////////////////////////  PARSER */
+
+/* ------------------------------------------------------------- builtins.c */
+void	cmd_not_found(t_msh *msh);
+void	check_tokens(char *input, t_msh *msh);
+void	cleanup_commands(t_msh *msh);
+int		is_builtin(char *token);
+void	exc_cmd(t_msh *msh, int count_tok);
+
+/* ---------------------------------------------------------------- lexer.c */
+// int		quote_lexer(char *arg);
+int		lexer(char **tokens, t_msh *msh);
+/*static int	is_pipe(char *token)*/
+/*static int	validate_pipe_syntax(t_tok *tok)*/
+/*static void	init_command_struct(t_cmd *cmd)*/
+/*static int	split_commands(t_tok *tok, t_cmd *cmds)*/
+int		parse_and_validate_commands(t_tok *tok, t_cmd **commands);
+
+/* --------------------------------------------------------------- parser.c */
+char	*parse_path(char **env);
+char	*parse_pwd(char **env);
+
+/* ------------------------------------------------------- quote_expander.c */
+int		ft_varlen(char *str, int start);
+char	*copy_var(char *str, int i, int len);
+void	look_existence(char *var, t_msh *msh);
+void	expand_and_remove_quotes(char *str, t_msh *msh);
+
+/* ---------------------------------------------------- quote_lexer_tools.c */
+char	*remove_quotes(char *str, char quote_type);
+char	*search_value(t_msh *msh, char *name);
+
+/* ---------------------------------------------------------- quote_lexer.c */
+t_quote	*init_quotes(void);
+int		analyze_quotes(t_msh *msh, char *arg);
+void	handle_quotes(t_msh *msh, t_quote *q, int i);
+
+/* ---------------------------------------------------------- token_tools.c */
+int		is_quote(char c);
+int		is_whitespace(char c);
+int		is_operator(char c);
+
+/* ----------------------------------------------------------- tokenizer.c */
 int		size_token(char *input, t_tok *tok);
 char	*create_token(char *input, int len, t_tok *tok);
 void	ft_token(char *input, t_tok *tok);
 
-/***************************** token_tools.c *******************************/
-int	is_quote(char c);
-int	is_whitespace(char c);
-int	is_operator(char c);
-token_type_t	type_token_def(t_tok *tok, char c);
+/* //////////////////////////////////////////////////////////////////////////////  TOOLS */
 
-/******************************* ms_tools *********************************/
-
-/******************************* ms_err_handle ****************************/
+/* ---------------------------------------------------------- err_hanlde.c */
 void	handle_cd_error(char *path, int error_type);
-int	ft_err(t_msh *msh, int err_code);
+int		ft_err(t_msh *msh, int err_code);
+
+/* ---------------------------------------------------------------- free.c */
+void	ft_free_array(char **array);
+void	free_env(t_env *env);
+void	free_tok(t_tok *tok);
+void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 
 /******************************* Error macros *****************************/
 
@@ -256,6 +296,8 @@ int	ft_err(t_msh *msh, int err_code);
 # define E_TOKMEM		"Error: tok mem asignation failed\n"
 # define E_PIPMEM		"Error: mpip mem asignation failed\n"
 # define E_CDARG		"cd: $ARG: No such file or directory\n"
+# define E_SYNTX		"Error: syntax not accepted\n"
+# define E_PIP_SYNTX	"minishell: syntax error near unexpected token `|'\n"
 
 /******************************** Exec macros ****************************/
 

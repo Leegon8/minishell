@@ -47,7 +47,7 @@ int	update_env_variable(t_msh *msh, char *name, char *value)
 	{
 		free(msh->env->values[pos]);
 		msh->env->values[pos] = ft_strdup(value);
-		return (1);
+		return (FALSE);
 	}
 	return (add_env_var(msh, name, value));
 }

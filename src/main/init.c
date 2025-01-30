@@ -83,9 +83,6 @@ int	init_structs(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok)
 		free(*tok);
 		return (ft_fd_printf(2, "%s", E_PIPMEM) * -1);
 	}
-	// msh->quote = malloc(sizeof(t_quote));
-	// if (msh->quote)
-	// 	init_quotes(msh->quote);
 	msh->mpip = *mpip;
 	return (0);
 }

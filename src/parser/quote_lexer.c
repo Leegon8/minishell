@@ -19,14 +19,11 @@ t_quote	*init_quotes(void)
 	quote = malloc(sizeof(t_quote));
 	if (!quote)
 		return (NULL);
-	quote->single_count = 0;
-	quote->double_count = 0;
-	quote->active_quote = NO_QUOTE;
-	quote->is_closed = FALSE;
+	*quote = (t_quote){0, 0, NO_QUOTE, FALSE};
 	return (quote);
 }
 
-static void	quote_status(t_msh *msh, char c)
+/*static void	quote_status(t_msh *msh, char c)
 {
 	if (c == '\'')
 		msh->quote->single_count++;
@@ -46,51 +43,64 @@ static void	quote_status(t_msh *msh, char c)
 		else if (msh->quote->active_quote == DOUBLE_QUOTE)
 			msh->quote->active_quote = NO_QUOTE;
 	}
-}
+}*/
 
 int	analyze_quotes(t_msh *msh, char *arg)
 {
-	int	i;
+	t_quote	*q;
+	int		i;
 
 	i = 0;
+	msh->quote = init_quotes();
+	q = msh->quote;
 	if (!arg || !msh || !msh->quote)
-		return(FALSE);
-	msh->quote->single_count = 0;
-	msh->quote->double_count = 0;
-	msh->quote->is_closed = FALSE;
-	msh->quote->active_quote = NO_QUOTE;
-
+		return (FALSE);
 	while (arg[i] != '\0')
 	{
-		quote_status(msh, arg[i]);
-		if (msh->quote->single_count == 2 || msh->quote->double_count == 2)
-				msh->quote->is_closed = TRUE;
+		if (arg[i] == '\'')
+			q->single_count++;
+		else if (arg[i] == '\"')
+			q->double_count++;
 		i++;
 	}
-	return (msh->quote->is_closed);
+	if (q->single_count == 0 && q->double_count % 2 == 0)
+	{
+		q->active_quote = SINGLE_QUOTE;
+		return (TRUE);
+	}
+	if (q->double_count == 0 && q->single_count % 2 == 0)
+	{
+		q->active_quote = DOUBLE_QUOTE;
+		return (TRUE);
+	}
+	printf("SD %% 2 = %d\nDC %% 2 = %d\n", msh->quote->single_count % 2,
+		msh->quote->double_count % 2);
+	printf("is_closed = %d\n", q->is_closed);
+	return (FALSE);
 }
 
 void	handle_quotes(t_msh *msh, t_quote *q, int i)
 {
 	char	*str;
-	int		quote_status;
 
 	msh->quote = init_quotes();
 	q = msh->quote;
 	if (!q || !msh || !msh->tkns || !msh->tkns->args[i])
-		return;
-	quote_status = analyze_quotes(msh, msh->tkns->args[i]);
-	if (quote_status == TRUE)
+		return ;
+	if (analyze_quotes(msh, msh->tkns->args[i]))
 	{
-		if (q->single_count == 2)
+		if (q->active_quote == SINGLE_QUOTE)
 		{
 			str = remove_quotes(msh->tkns->args[i], '\'');
 			ft_putstr_fd(str, 1);
 			free(str);
 		}
-		else if (q->double_count == 2)
+		else if (q->active_quote == DOUBLE_QUOTE)
 			expand_and_remove_quotes(msh->tkns->args[i], msh);
 		else
 			ft_putstr_fd(msh->tkns->args[i], 1);
 	}
+	else
+		ft_fd_printf(2, E_CMD);
 }
+//(!(analyze_quotes(msh, msh->tkns->args[i])))

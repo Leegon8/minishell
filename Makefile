@@ -6,7 +6,7 @@
 #    By: leegon <leegon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2025/01/13 17:12:05 by lauriago         ###   ########.fr        #
+#    Updated: 2025/01/14 16:36:24 by lauriago         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,23 +15,34 @@ NAME = minishell
 CC = gcc -g
 LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lreadline #   LINUX    #
 #LDFLAGS = -L/usr/local/opt/readline/lib -lreadline #   MACOS   #
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -MMD #-fsanitize=address
 
 AR = ar -rcs
 RM = rm -rf
  
 # **************************************************************************** #
 
-SRCS = minishell.c cd_builting.c cd_utils.c echo_builting.c env_builting.c \
-	exit_builting.c export_builting.c export_utils.c ms_builtins.c ms_env.c \
-	ms_env_tools.c err_handle_ms.c ms_executor.c ms_free.c ms_init.c \
-	ms_lexer.c ms_parser.c ms_rline.c ms_signals.c ms_tokenizer.c ms_b_cd.c \
-	token_tools.c ms_tools.c ms_varenv.c pwd_builting.c unset_builting.c \
-	quote_lexer_ms.c quote_lexer_tools.c quote_expander.c\
+BUILTINS = cd cd_utils echo env exit export export_utils pwd unset
 
-SRC_PATH := ./src/
+ENV = ms_env ms_env_tools ms_varenv
+
+EXEC = executor
+
+MAIN = minishell init signals rline
+
+PARSER = builtins lexer parser quote_expander quote_lexer quote_lexer_tools \
+		token_tools tokenizer
+
+TOOLS = err_handle free tools
+
+SRCS = $(addsuffix .c, $(addprefix src/builtins/, $(BUILTINS))) \
+		$(addsuffix .c, $(addprefix src/env/, $(ENV))) \
+		$(addsuffix .c, $(addprefix src/exec/, $(EXEC))) \
+		$(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
+		$(addsuffix .c, $(addprefix src/parser/, $(PARSER))) \
+		$(addsuffix .c, $(addprefix src/tools/, $(TOOLS))) \
+
 OBJ_PATH := ./tmp/
-
 H_PATH := ./inc/
 HEADERS = -I$(H_PATH)
 
@@ -54,7 +65,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -L libft -lft $(LDFLAGS) -o $(NAME)
 	$(call show_progress)
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c Makefile libft/libft.a
+$(OBJ_PATH)%.o: %.c Makefile libft/libft.a
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(HEADERS) -MMD -c $< -o $@
 

@@ -18,13 +18,13 @@ static int	is_valid_identifier(char *str)
 
 	i = 0;
 	if (!str || !str[0])
-		return (0);
+		return (TRUE);
 	if (!ft_isalpha(str[0]) && str[0] != '_')
-		return (0);
+		return (TRUE);
 	while (str[i])
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (0);
+			return (TRUE);
 		i++;
 	}
 	return (1);
@@ -64,7 +64,7 @@ int	ft_unset(t_msh *msh, char **args)
 	int	status;
 
 	if (!args[1])
-		return (0);
+		return (TRUE);
 	status = 0;
 	i = 1;
 	while (args[i])

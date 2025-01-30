@@ -46,6 +46,7 @@ int	check_envs(void)
 		return (printf("Warning: modified env (PWD)\n") * -1);
 	return (0);
 }
+/* OJO CUIDAO que se borrara */
 
 void	update_shlvl(t_msh *msh)
 {

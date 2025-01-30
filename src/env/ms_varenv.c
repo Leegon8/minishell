@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 char	*search_env(char *var, t_msh *msh)
 {
 	int	i;
@@ -34,7 +33,7 @@ int	varenv_man(t_msh *msh, char *builting, char *var_name)
 {
 	char	*value;
 	char	*current_pwd;
-	
+
 	if (!var_name || !builting || !msh)
 		return (FALSE);
 	value = search_env(var_name, msh);

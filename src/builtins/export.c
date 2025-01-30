@@ -17,17 +17,41 @@ static int	is_valid_identifier(char *str)
 	int	i;
 
 	i = 0;
-	if (!str || !str[0])
-		return (0);
-	if (!ft_isalpha(str[0]) && str[0] != '_')
-		return (0);
-	while (str[i] && str[i] != '=')
+	while (str[i] && ft_isalnum(str[i]))
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (0);
-		i++;
+		if (ft_isalnum(str[i]))
+			i++;
+		if (str[i] == '=')
+			return (TRUE);
 	}
-	return (1);
+	return (FALSE);
+}
+
+int	add_env_var(t_msh *msh, char *name, char *value)
+{
+	int		count;
+	char	**new_names;
+	char	**new_values;
+
+	count = env_var_count(msh);
+	new_names = ft_calloc(count + 2, sizeof(char *));
+	new_values = ft_calloc(count + 2, sizeof(char *));
+	if (!new_names || !new_values)
+		return (FALSE);
+	count = -1;
+	while (msh->env->names[++count])
+	{
+		new_names[count] = ft_strdup(msh->env->names[count]);
+		new_values[count] = ft_strdup(msh->env->values[count]);
+	}
+	new_names[count] = ft_strdup(name);
+	new_values[count] = ft_strdup(value);
+	ft_free_array(msh->env->names);
+	ft_free_array(msh->env->values);
+	msh->env->names = new_names;
+	msh->env->values = new_values;
+	msh->env_var_count++;
+	return (TRUE);
 }
 
 static void	print_export_vars(t_msh *msh)
@@ -45,72 +69,39 @@ static void	print_export_vars(t_msh *msh)
 	}
 }
 
-int	add_env_var(t_msh *msh, char *name, char *value)
-{
-	int		count;
-	char	**new_names;
-	char	**new_values;
-
-	count = env_var_count(msh);
-	new_names = ft_calloc(count + 2, sizeof(char *));
-	new_values = ft_calloc(count + 2, sizeof(char *));
-	if (!new_names || !new_values)
-		return (0);
-	count = -1;
-	while (msh->env->names[++count])
-	{
-		new_names[count] = ft_strdup(msh->env->names[count]);
-		new_values[count] = ft_strdup(msh->env->values[count]);
-	}
-	new_names[count] = ft_strdup(name);
-	new_values[count] = ft_strdup(value);
-	ft_free_array(msh->env->names);
-	ft_free_array(msh->env->values);
-	msh->env->names = new_names;
-	msh->env->values = new_values;
-	msh->env_var_count++;
-	return (1);
-}
-
 static void	handle_export_arg(t_msh *msh, char *arg)
 {
 	char	*name;
 	char	*value;
 
-	if (!is_valid_identifier(arg))
+	if (is_valid_identifier(msh->tkns->args[1]))
 	{
 		ft_fd_printf(2, "export: `%s': not a valid identifier\n", arg);
 		return ;
 	}
-	name = get_var_name(arg);
-	if (!name)
-		return ;
-	value = get_var_value(arg);
-	if (!value)
-	{
-		free(name);
-		return ;
-	}
-	if (!update_env_variable(msh, name, value))
+	name = get_var_name(msh->tkns->args[1]);
+	value = get_var_value(msh->tkns->args[1]);
+	ft_fd_printf(2, "NOMBRE????: `%s'\n", name);
+	ft_fd_printf(2, "VALOR?????: `%s'\n", value);
+	if (!add_env_var(msh, name, value))
 		ft_fd_printf(2, "export: memory allocation error\n");
 	free(name);
 	free(value);
 }
 
-int	ft_export(t_msh *msh, char **args)
+int	ft_export(t_msh *msh, int tok_num)
 {
-	int	i;
-
-	if (!args[1])
+	if (tok_num == 1)
 	{
 		print_export_vars(msh);
-		return (0);
+		return (TRUE);
 	}
-	i = 1;
-	while (args[i])
+	if (tok_num != 2)
 	{
-		handle_export_arg(msh, args[i]);
-		i++;
+		ft_fd_printf(2, E_SYNTX);
+		return (TRUE);
 	}
-	return (0);
+	else
+		handle_export_arg(msh, msh->tkns->args[1]);
+	return (TRUE);
 }

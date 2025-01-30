@@ -36,6 +36,5 @@ int	ft_pwd(t_msh *msh)
 	msh->env->pwd = pwdpath;
 	if (ft_fd_printf(1, "%s\n", pwdpath) < 0)
 		status = -1;
-	//free(pwdpath); Si se libera el pwd, no se puede usar luego. 
 	return (status);
 }

@@ -41,7 +41,7 @@ int	lexer(char **tokens, t_msh *msh)
 		}
 		i++;
 	}
-	return (0);
+	return (TRUE);
 }
 
 static int	is_pipe(char *token)
@@ -60,8 +60,8 @@ static int	validate_pipe_syntax(t_tok *tok)
 		{
 			if (i == 0 || !tok->args[i + 1])
 			{
-				ft_fd_printf(2, "minishell: syntax error near unexpected token `|'\n");
-				return (0);
+				ft_fd_printf(2, E_PIP_SYNTX);
+				return (TRUE);
 			}
 		}
 		i++;
@@ -109,12 +109,12 @@ static int	split_commands(t_tok *tok, t_cmd *cmds)
 
 int	parse_and_validate_commands(t_tok *tok, t_cmd **commands)
 {
-	int			cmd_count;
+	int		cmd_count;
 	t_cmd	*cmds;
-	int			i;
+	int		i;
 
 	if (!validate_pipe_syntax(tok))
-		return (0);
+		return (TRUE);
 	cmd_count = 1;
 	i = 0;
 	while (tok->args[i])
@@ -125,11 +125,11 @@ int	parse_and_validate_commands(t_tok *tok, t_cmd **commands)
 	}
 	cmds = malloc(sizeof(t_cmd) * (cmd_count + 1));
 	if (!cmds)
-		return (0);
+		return (TRUE);
 	if (split_commands(tok, cmds) != cmd_count)
 	{
 		free(cmds);
-		return (0);
+		return (TRUE);
 	}
 	*commands = cmds;
 	return (cmd_count);

@@ -41,10 +41,10 @@ int	ft_varlen(char *str, int start)
 
 	len = 0;
 	while (str[start] && ((str[start] >= 'A' && str[start] <= 'Z')
-		|| (str[start] == '_')))
+			|| (str[start] == '_')))
 	{
-			len++;
-			start++;
+		len++;
+		start++;
 	}
 	return (len);
 }
@@ -58,7 +58,7 @@ char	*copy_var(char *str, int i, int len)
 	lola = 0;
 	if (!result)
 		return (NULL);
-	while(len--)
+	while (len--)
 	{
 		result[lola] = str[i];
 		i++;
@@ -72,7 +72,7 @@ void	look_existence(char *var, t_msh *msh)
 {
 	char	*value;
 
-	if (search_env(var, msh) != NULL) // La variable existe en el environment (es real hasta la muerte, no fake)
+	if (search_env(var, msh) != NULL)
 	{
 		value = malloc(sizeof(ft_strlen(search_env(var, msh))) + 1);
 		if (!value)
@@ -87,8 +87,8 @@ void	look_existence(char *var, t_msh *msh)
 
 void	expand_and_remove_quotes(char *str, t_msh *msh)
 {
-	int	i;
-	int	varlen;
+	int		i;
+	int		varlen;
 	char	*tmp;
 	char	*var_copy;
 
@@ -102,10 +102,10 @@ void	expand_and_remove_quotes(char *str, t_msh *msh)
 		if (tmp[i] == '$' && tmp[i + 1])
 		{
 			i++;
-			varlen = ft_varlen(tmp, i); // Funcion que calcula longitud del nombre de la variable
+			varlen = ft_varlen(tmp, i);
 			if (varlen > 0)
 			{
-				var_copy = copy_var(tmp, i, varlen); // Funcion que copia nombre de la variable	
+				var_copy = copy_var(tmp, i, varlen);
 				look_existence(var_copy, msh);
 				free(var_copy);
 				i += varlen - 1;

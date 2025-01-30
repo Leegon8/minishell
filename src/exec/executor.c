@@ -21,15 +21,8 @@ int	is_command_executable(char *fullpath)
 
 static void	child_process(t_msh *msh, char *fullpath)
 {
-    // printf("Debug args:\n");
-    // printf("cmd = %s\n", msh->tkns->cmd);
-    // printf("args[0] = %s\n", msh->tkns->args ? msh->tkns->args[0] : "NULL");
 	if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
 	{
-        // printf("execve error: %d\n", errno);
-        // perror("execve failed with error");
-        // printf("Command attempted: %s\n", fullpath);
-        // printf("First arg: %p\n", &msh->tkns->cmd);
 		cmd_not_found(msh);
 		free(fullpath);
 		exit(EXIT_FAILURE);
@@ -43,41 +36,6 @@ static void	parent_process(pid_t pid, char *fullpath)
 	waitpid(pid, &status, 0);
 	free(fullpath);
 }
-
-// // char	*make_path(char *tkn)
-// // {
-// // 	char	*fullpath;
-// // 	fullpath = malloc(strlen("/bin/") + strlen(tkn) + 1);
-// // 	if (tkn == NULL || !fullpath)
-// // 		return (NULL);
-// // 	ft_strcpy(fullpath, "/bin/");
-// // 	ft_strcat(fullpath, tkn);
-// // 	return (fullpath);
-// // }
-// char    *make_path(char *tkn)
-// {
-//     char    *fullpath;
-//     const char *paths[] = {"/bin/", "/usr/bin/", NULL};
-//     int     i;
-//     if (!tkn)
-//         return (NULL);
-//     i = 0;
-//     while (paths[i])
-//     {
-//         fullpath = malloc(ft_strlen(paths[i]) + ft_strlen(tkn) + 1);
-//         if (!fullpath)
-//             return (NULL);
-//         ft_strcpy(fullpath, paths[i]);
-//         ft_strcat(fullpath, tkn);
-//         // Si encontramos el comando en esta ruta, lo devolvemos
-//         if (access(fullpath, F_OK | X_OK) == 0)
-//             return (fullpath);
-//         // Si no lo encontramos, liberamos y probamos la siguiente ruta
-//         free(fullpath);
-//         i++;
-//     }
-//     return (NULL);
-// }
 
 int	execute_command(t_msh *msh, char *fullpath)
 {

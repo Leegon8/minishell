@@ -23,7 +23,7 @@ char	*update_env(t_msh *msh, char *name, char *value)
 	i = 0;
 	if (!value || !name)
 		return (NULL);
-	while(msh->env->names[i] && msh->env->values[i])
+	while (msh->env->names[i] && msh->env->values[i])
 	{
 		if (ft_strcmp(msh->env->names[i], name) == 0)
 		{

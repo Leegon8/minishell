@@ -59,5 +59,5 @@ int	ft_env(t_msh *msh)
 			msh->env->values[i]);
 		i++;
 	}
-	return (0);
+	return (TRUE);
 }
