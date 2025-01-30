@@ -244,20 +244,22 @@ int		parse_and_validate_commands(t_tok *tok, t_cmd **commands);
 char	*parse_path(char **env);
 char	*parse_pwd(char **env);
 
-/* ------------------------------------------------------- quote_expander.c */
-int		ft_varlen(char *str, int start);
-char	*copy_var(char *str, int i, int len);
-void	look_existence(char *var, t_msh *msh);
-void	expand_and_remove_quotes(char *str, t_msh *msh);
+/* ---------------------------------------------------------- quote_lexer.c */
+t_quote	*init_quotes(void);
+int		analyze_quotes(t_msh *msh, char *arg, char quote);
+void	handle_single_quotes(t_msh *msh, int i);
+void	handle_double_quotes(t_msh *msh, int i);
+//void	handle_quotes(t_msh *msh, t_quote *q, int i);
 
 /* ---------------------------------------------------- quote_lexer_tools.c */
 char	*remove_quotes(char *str, char quote_type);
 char	*search_value(t_msh *msh, char *name);
 
-/* ---------------------------------------------------------- quote_lexer.c */
-t_quote	*init_quotes(void);
-int		analyze_quotes(t_msh *msh, char *arg);
-void	handle_quotes(t_msh *msh, t_quote *q, int i);
+/* ------------------------------------------------------- quote_expander.c */
+int		ft_varlen(char *str, int start);
+char	*copy_var(char *str, int i, int len);
+int		look_existence(char *var, t_msh *msh);
+void	expand_and_remove_quotes(char *str, t_msh *msh);
 
 /* ---------------------------------------------------------- token_tools.c */
 int		is_quote(char c);
