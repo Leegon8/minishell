@@ -32,7 +32,7 @@ int	analyze_quotes(t_msh *msh, char *arg, char quote)
 	msh->quote = init_quotes();
 	q = msh->quote;
 	if (!arg || !msh || !msh->quote)
-		return(FALSE);
+		return (FALSE);
 	while (arg[i] != '\0')
 	{
 		if (arg[i] == '\'')
@@ -42,9 +42,9 @@ int	analyze_quotes(t_msh *msh, char *arg, char quote)
 		i++;
 	}
 	if (q->single_count % 2 == 0 && quote == '\'')
-		return (0);
+		return (TRUE);
 	if (q->double_count % 2 == 0 && quote == '\"')
-		return (0);
+		return (TRUE);
 	return (FALSE);
 }
 
@@ -75,6 +75,4 @@ void	handle_double_quotes(t_msh *msh, int i)
 		str = remove_quotes(str, '\"');
 		expand_and_remove_quotes(str, msh);
 	}
-		//ft_fd_printf(0, remove_quotes(str, '\"'));
-		//free(str);
 }

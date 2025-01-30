@@ -42,8 +42,8 @@ int	ft_varlen(char *str, int start)
 	len = 0;
 	while (str[start] && (ft_isalpha(str[start]) || (str[start] == '_')))
 	{
-			len++;
-			start++;
+		len++;
+		start++;
 	}
 	return (len);
 }
@@ -57,7 +57,7 @@ char	*copy_var(char *str, int i, int len)
 	lola = 0;
 	if (!result)
 		return (NULL);
-	while(len--)
+	while (len--)
 	{
 		result[lola] = str[i];
 		i++;
@@ -67,7 +67,8 @@ char	*copy_var(char *str, int i, int len)
 	return (result);
 }
 
-// Función  que verifica que la expansión existe y la imprime en caso de que exista
+// Función  que verifica que la expansión existe y la imprime en caso
+// de que exista
 int	look_existence(char *var, t_msh *msh)
 {
 	char	*env_value;
@@ -75,7 +76,7 @@ int	look_existence(char *var, t_msh *msh)
 	if (!var || !msh)
 		return (0);
 	env_value = search_env(var, msh);
-	if (env_value) // La variable existe en el environment (es real hasta la muerte, no fake)
+	if (env_value)
 	{
 		printf("%s", env_value);
 		return (1);
@@ -87,27 +88,25 @@ int	look_existence(char *var, t_msh *msh)
 // si existe la expande, si no, pues no hace na'
 void	expand_and_remove_quotes(char *str, t_msh *msh)
 {
-	int	i;
-	int	varlen;
+	int		i;
+	int		varlen;
 	char	*tmp;
 	char	*var_copy;
 
 	i = 0;
 	varlen = 0;
-	//printf("=====================Entra en expant ==========================\n");
 	if (!str || !msh || !msh->env)
 		return ;
-//	tmp = remove_quotes(str, '\"');
 	tmp = ft_strdup(str);
 	while (tmp[i])
 	{
 		if (tmp[i] == '$' && tmp[i + 1])
 		{
 			i++;
-			varlen = ft_varlen(tmp, i); // Funcion que calcula longitud del nombre de la variable
+			varlen = ft_varlen(tmp, i);
 			if (varlen > 0)
 			{
-				var_copy = copy_var(tmp, i, varlen); // Funcion que copia nombre de la variable	
+				var_copy = copy_var(tmp, i, varlen);
 				look_existence(var_copy, msh);
 				free(var_copy);
 				i += varlen - 1;
@@ -117,5 +116,4 @@ void	expand_and_remove_quotes(char *str, t_msh *msh)
 			printf("%c", tmp[i]);
 		i++;
 	}
-
 }

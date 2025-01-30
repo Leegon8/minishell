@@ -14,9 +14,9 @@
 
 char	*remove_quotes(char *str, char quote_type)
 {
-	char *result;
-	int i;
-	int j;
+	char	*result;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -37,7 +37,7 @@ char	*search_value(t_msh *msh, char *name)
 {
 	char	*value;
 	int		i;
-	
+
 	i = 0;
 	value = NULL;
 	if (!msh || !msh->env || !msh->env->names || !msh->env->values || !name)
@@ -64,9 +64,3 @@ char	*search_value(t_msh *msh, char *name)
 	char *value = search_value(msh, env_var);
 	ft_putstr_fd(value, 1);
 }*/
-
-    // Aquí implementarías la expansión de variables
-    // Por ejemplo: $USER -> "username"
-    // Esta función debe manejar la expansión de variables
-    // cuando se encuentran dentro de comillas dobles
-    // return ; // Placeholder
