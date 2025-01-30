@@ -43,14 +43,14 @@ typedef struct s_minishell		t_msh;
 
 /******************************** Structs *********************************/
 
-typedef enum e_quote_type
+enum e_quote_type
 {
 	NO_QUOTE,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE
 };
 
-typedef enum types
+enum types
 {
 	T_WORD,
 	T_OPERATOR,
