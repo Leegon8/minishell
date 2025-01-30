@@ -31,13 +31,32 @@
 # include <string.h>
 
 /******************************** Structs Simplification ******************/
+
+typedef enum e_quote_type		t_quote_type;
+typedef enum types				t_tokty;
+
 typedef struct s_environment	t_env;
-typedef struct s_minishell		t_msh;
-typedef struct s_tokenizer		t_tok;
 typedef struct s_executor		t_exe;
 typedef struct s_quote			t_quote;
+typedef struct s_tokenizer		t_tok;
+typedef struct s_minishell		t_msh;
 
 /******************************** Structs *********************************/
+
+typedef enum e_quote_type
+{
+	NO_QUOTE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE
+};
+
+typedef enum types
+{
+	T_WORD,
+	T_OPERATOR,
+	T_WHITESPACE,
+	T_QUOTE
+};
 
 struct	s_environment
 {
@@ -50,42 +69,6 @@ struct	s_environment
 	int		env_count;
 	int		env_len;
 	int		exit_status;
-};
-
-typedef enum e_quote_type
-{
-	NO_QUOTE,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE
-}	t_quote_type;
-
-struct s_quote
-{
-	int				single_count;
-	int				double_count;
-	t_quote_type	active_quote;
-	int				is_closed;
-};
-
-typedef enum types
-{
-	T_WORD,
-	T_OPERATOR,
-	T_WHITESPACE,
-	T_QUOTE
-}	t_tokty;
-
-struct	s_tokenizer
-{
-	char				*cmd;
-	char				**args;
-	int					token_count;
-	int					len;
-	int					is_heredoc;
-	char				*heredoc_delim;
-	t_tokty				type;
-	struct s_tokenizer	*prev;
-	struct s_tokenizer	*next;
 };
 
 struct s_executor
@@ -102,6 +85,27 @@ typedef struct s_command
 	char	**args;
 	int		arg_count;
 }	t_cmd;
+
+struct s_quote
+{
+	int				single_count;
+	int				double_count;
+	t_quote_type	active_quote;
+	int				is_closed;
+};
+
+struct	s_tokenizer
+{
+	char				*cmd;
+	char				**args;
+	int					token_count;
+	int					len;
+	int					is_heredoc;
+	char				*heredoc_delim;
+	t_tokty				type;
+	struct s_tokenizer	*prev;
+	struct s_tokenizer	*next;
+};
 
 struct	s_minishell
 {
@@ -197,7 +201,7 @@ int		find_cmd(char *tkn, t_msh *msh);
 /*static char	*try_path(char *dir, char *cmd)*/
 char	*make_path(char *tkn, t_msh *msh);
 
-/* //////////////////////////////////////////////////////////////////////////////  MAIN */
+/* //////////////////////////////////////////////////////////////////////////////////  MAIN */
 
 /* ----------------------------------------------------------------- init.c */
 int		env_alloc_struct(t_env **env, t_msh *msh);
@@ -218,7 +222,7 @@ void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 void	init_signals(void);
 
-/* //////////////////////////////////////////////////////////////////////////////  PARSER */
+/* ////////////////////////////////////////////////////////////////////////////////  PARSER */
 
 /* ------------------------------------------------------------- builtins.c */
 void	cmd_not_found(t_msh *msh);
@@ -265,7 +269,7 @@ int		size_token(char *input, t_tok *tok);
 char	*create_token(char *input, int len, t_tok *tok);
 void	ft_token(char *input, t_tok *tok);
 
-/* //////////////////////////////////////////////////////////////////////////////  TOOLS */
+/* /////////////////////////////////////////////////////////////////////////////////  TOOLS */
 
 /* ---------------------------------------------------------- err_hanlde.c */
 void	handle_cd_error(char *path, int error_type);
@@ -298,15 +302,15 @@ void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 # define E_CDARG		"cd: $ARG: No such file or directory\n"
 # define E_SYNTX		"Error: syntax not accepted\n"
 # define E_PIP_SYNTX	"minishell: syntax error near unexpected token `|'\n"
-
-/******************************** Exec macros ****************************/
-
 # define E_PIPE			"Pipe error"
 # define E_FORK			"Fork error"
 # define E_DUP			"Dup2 error"
 # define E_EXECVE		"Execve error"
 # define E_NOCMD		"Command not found"
 # define E_NOEXEC		"Permission denied"
+
+/******************************** Exec macros ****************************/
+
 # define PIPE_READ		0
 # define PIPE_WRITE		1
 # define EXIT_SUCCESS	0
