@@ -324,8 +324,8 @@ void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 
 /******************************** General macros **************************/
 
-# define TRUE			0
-# define FALSE			1
+# define TRUE			1
+# define FALSE			0
 
 /******************************** Other macros ***************************/
 

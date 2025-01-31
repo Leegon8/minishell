@@ -74,14 +74,14 @@ int	look_existence(char *var, t_msh *msh)
 	char	*env_value;
 
 	if (!var || !msh)
-		return (0);
+		return (FALSE);
 	env_value = search_env(var, msh);
 	if (env_value)
 	{
 		printf("%s", env_value);
-		return (1);
+		return (TRUE);
 	}
-	return (0);
+	return (FALSE);
 }
 
 // Expande una variable, buscando si la variable dada como parametro existe

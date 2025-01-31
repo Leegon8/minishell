@@ -44,7 +44,7 @@ int	ft_env(t_msh *msh)
 	if (!msh || !msh->env || !msh->env->names || !msh->env->values)
 	{
 		ft_fd_printf(2, "env: environment not available\n");
-		return (0);
+		return (FALSE);
 	}
 	if (msh->tkns->args[1])
 	{
@@ -59,5 +59,5 @@ int	ft_env(t_msh *msh)
 			msh->env->values[i]);
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }

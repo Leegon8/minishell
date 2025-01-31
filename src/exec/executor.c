@@ -15,8 +15,8 @@
 int	is_command_executable(char *fullpath)
 {
 	if (access(fullpath, F_OK) == 0 && access(fullpath, X_OK) == 0)
-		return (FALSE);
-	return (TRUE);
+		return (TRUE);
+	return (FALSE);
 }
 
 static void	child_process(t_msh *msh, char *fullpath)
@@ -52,8 +52,8 @@ int	execute_command(t_msh *msh, char *fullpath)
 		child_process(msh, fullpath);
 	else
 		parent_process(pid, fullpath);
-	return (0);
-}
+	return (TRUE);
+}/*check true*/
 
 int	find_cmd(char *tkn, t_msh *msh)
 {
@@ -71,7 +71,7 @@ int	find_cmd(char *tkn, t_msh *msh)
 		return (-1);
 	}
 	return (TRUE);
-}
+}/*check true*/
 
 static char	**get_path_dirs(char **envs)
 {

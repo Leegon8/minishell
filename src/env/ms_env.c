@@ -36,17 +36,8 @@ int	find_env_var(t_msh *msh, char *var_name)
 			return (i);
 		i++;
 	}
-	return (FALSE);
+	return (-1);
 }
-
-/* Comprueba que las variables PWD, OLDPWD y HOME existan  */
-int	check_envs(void)
-{
-	if (getenv("PWD") == NULL || getenv("OLDPWD") == NULL)
-		return (printf("Warning: modified env (PWD)\n") * -1);
-	return (0);
-}
-/* OJO CUIDAO que se borrara */
 
 void	update_shlvl(t_msh *msh)
 {
@@ -80,7 +71,6 @@ int	env_init_values(t_env *env, t_msh *msh)
 	env->old_pwd = getenv("OLDPWD");
 	env->path = getenv("PATH");
 	getcwd(env->pwd, PATH_MAX);
-	check_envs();
 	while (msh->envs[i])
 	{
 		eq_sep = ft_strchr(msh->envs[i], '=');

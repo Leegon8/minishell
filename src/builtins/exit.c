@@ -18,18 +18,18 @@ static int	is_numeric_arg(char *str)
 
 	i = 0;
 	if (!str || !*str)
-		return (TRUE);
+		return (FALSE);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	if (!str[i])
-		return (TRUE);
+		return (FALSE);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			return (TRUE);
+			return (FALSE);
 		i++;
 	}
-	return (FALSE);
+	return (TRUE);
 }
 
 static void	handle_numeric_arg(t_msh *msh, char *arg)

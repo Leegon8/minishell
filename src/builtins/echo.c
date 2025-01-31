@@ -42,7 +42,7 @@ static int	check_n_flags(t_msh *msh, int *i)
 	curr_i = 1;
 	while (msh->tkns->args[curr_i])
 	{
-		if (is_n_flag(msh->tkns->args[curr_i]) == FALSE)
+		if (!is_n_flag(msh->tkns->args[curr_i]))
 			break ;
 		n_flag = TRUE;
 		curr_i++;
@@ -59,10 +59,10 @@ static int	echo_has_2_expand(char *str)
 	while (str[i])
 	{
 		if (str[i] == '$')
-			return (1);
+			return (TRUE);
 		i++;
 	}
-	return (0);
+	return (FALSE);
 }
 
 void	handle_echo_quotes(t_msh *msh, char k, int i)

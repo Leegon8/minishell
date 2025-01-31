@@ -30,7 +30,7 @@ void	check_tokens(char *input, t_msh *msh)
 	while (msh->tkns->args[count_tok])
 		count_tok++;
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
-	if (is_builtin(msh->tkns->cmd) == 0)
+	if (is_builtin(msh->tkns->cmd))
 		exc_cmd(msh, count_tok);
 	else if (find_cmd(msh->tkns->cmd, msh) == -1)
 		cmd_not_found(msh);

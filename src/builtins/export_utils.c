@@ -50,4 +50,4 @@ int	update_env_variable(t_msh *msh, char *name, char *value)
 		return (FALSE);
 	}
 	return (add_env_var(msh, name, value));
-}
+}/*REVISAR EL false*/

@@ -14,7 +14,7 @@
 
 int	is_operator(char c)
 {
-	return (c == '|' || c == '<' || c == '>' || c == '$');
+	return (c == '|' || c == '<' || c == '>'); //|| c == '$'
 }
 
 int	is_whitespace(char c)

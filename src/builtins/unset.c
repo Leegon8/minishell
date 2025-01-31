@@ -18,16 +18,16 @@ static int	is_valid_identifier(char *str)
 
 	i = 0;
 	if (!str || !str[0])
-		return (TRUE);
-	if (!ft_isalpha(str[0]) && str[0] != '_')
-		return (TRUE);
+		return (FALSE);
+	if (!ft_isalpha(str[0]) || str[0] != '_')
+		return (FALSE);
 	while (str[i])
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (TRUE);
+			return (FALSE);
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 static void	remove_var_from_env(t_msh *msh, int pos)
@@ -64,7 +64,7 @@ int	ft_unset(t_msh *msh, char **args)
 	int	status;
 
 	if (!args[1])
-		return (TRUE);
+		return (FALSE);
 	status = 0;
 	i = 1;
 	while (args[i])

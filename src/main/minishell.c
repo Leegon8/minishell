@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envs)
 		exit (ft_fd_printf(2, "%s", E_EXECARG) * 0);
 	ft_memset(&msh, 0, sizeof(t_msh));
 	msh.envs = envs;
-	if (init_structs(&env, &msh, &mpip, &tok) != 0)
+	if (init_structs(&env, &msh, &mpip, &tok) != TRUE)
 		return (ft_fd_printf(2, "%s", E_MEMASF));
 	if (envs != NULL)
 		msh.envs = envs;
