@@ -51,6 +51,7 @@ static int	check_n_flags(t_msh *msh, int *i)
 	return (n_flag);
 }
 
+// Verifica si se deberia expandir una variablle
 static int	echo_has_2_expand(char *str)
 {
 	int	i;
@@ -74,13 +75,6 @@ void	handle_echo_quotes(t_msh *msh, char k, int i)
 		if (k == '\"')
 			handle_double_quotes(msh, i);
 	}
-	else if (k != '\'' || k != '\"')
-	{
-		if (echo_has_2_expand(msh->tkns->args[i]))
-			expand_and_remove_quotes(msh->tkns->args[i], msh);
-		else
-			ft_putstr_fd(msh->tkns->args[i], 1);
-	}
 }
 
 void	ft_echo(t_msh *msh, int num_cmd)
@@ -97,19 +91,18 @@ void	ft_echo(t_msh *msh, int num_cmd)
 	n_flag = check_n_flags(msh, &i);
 	while (i < num_cmd)
 	{
-		if (msh->tkns->args[i][0] == '\'')
-			handle_single_quotes(msh, i);
-		if (msh->tkns->args[i][0] == '\"')
-			handle_double_quotes(msh, i);
+		if ((msh->tkns->args[i][0] == '\'') || (msh->tkns->args[i][0] == '\"'))
+			handle_echo_quotes(msh, msh->tkns->args[i][0], i);
 		else if (!is_quote(msh->tkns->args[i][0]))
 		{
 			if (echo_has_2_expand(msh->tkns->args[i]))
 				expand_and_remove_quotes(msh->tkns->args[i], msh);
 			else
-				ft_putstr_fd(msh->tkns->args[i], 1);
+				//ft_fd_printf(1, "%s", msh->tkns->args[i]);
+				printf("%s ", msh->tkns->args[i]);
 		}
 		if (i + 1 < num_cmd)
-			ft_putchar_fd(' ', 1);
+			ft_fd_printf(1, " ");
 		i++;
 	}
 	if (n_flag == FALSE)

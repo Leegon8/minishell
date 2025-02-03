@@ -54,13 +54,11 @@ void	handle_single_quotes(t_msh *msh, int i)
 	char	*str;
 
 	str = ft_strdup(msh->tkns->args[i]);
-	if (analyze_quotes(msh, msh->tkns->args[i], '\''))
+	if (!analyze_quotes(msh, msh->tkns->args[i], '\''))
 		ft_fd_printf(2, E_SYNTX);
 	else
 		ft_fd_printf(0, remove_quotes(str, '\''));
 }
-	//int y = analyze_quotes(msh, msh->tkns->args[i], '\'');
-	//printf("analize_quotes = %d\n", y);
 
 // 1.Verificar que hay minimo 2 comillas o numero multiple de 2
 void	handle_double_quotes(t_msh *msh, int i)
@@ -68,7 +66,7 @@ void	handle_double_quotes(t_msh *msh, int i)
 	char	*str;
 
 	str = ft_strdup(msh->tkns->args[i]);
-	if (analyze_quotes(msh, msh->tkns->args[i], '\"'))
+	if (!analyze_quotes(msh, msh->tkns->args[i], '\"'))
 		ft_fd_printf(2, E_SYNTX);
 	else
 	{

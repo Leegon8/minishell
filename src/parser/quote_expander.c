@@ -35,6 +35,7 @@
 
 */
 
+// Calculates the size of the variable
 int	ft_varlen(char *str, int start)
 {
 	int	len;
@@ -111,9 +112,13 @@ void	expand_and_remove_quotes(char *str, t_msh *msh)
 				free(var_copy);
 				i += varlen - 1;
 			}
+			//else
+			//	printf("%c%c", tmp[i - 1], tmp[i]);
+				//ft_fd_printf(1, "%c%c", tmp[i - 1], tmp[i]);
 		}
 		else
 			printf("%c", tmp[i]);
+		//	ft_fd_printf(1, "%c", tmp[i]);
 		i++;
 	}
 }

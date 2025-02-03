@@ -74,7 +74,7 @@ static void	handle_export_arg(t_msh *msh, char *arg)
 	char	*name;
 	char	*value;
 
-	if (is_valid_identifier(msh->tkns->args[1]))
+	if (!is_valid_identifier(msh->tkns->args[1]))
 	{
 		ft_fd_printf(2, "export: `%s': not a valid identifier\n", arg);
 		return ;
