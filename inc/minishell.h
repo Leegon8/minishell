@@ -165,7 +165,7 @@ int		update_env_var_p(t_msh *msh, char *name, char *value);
 /*static int	is_valid_identifier(char *str)*/
 int		add_env_var(t_msh *msh, char *name, char *value);
 /*static void	print_export_vars(t_msh *msh)*/
-/*static void	handle_export_arg(t_msh *msh, char *arg)*/
+/*static void	handle_export_arg(t_msh *msh)*/
 int		ft_export(t_msh *msh, int tok_num);
 
 /* ------------------------------------------------------------------ pwd.c */

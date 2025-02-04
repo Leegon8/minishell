@@ -51,9 +51,9 @@ void	handle_cd_path(t_msh *msh)
 {
 	char	*new_path;
 
-	if (ft_strcmp(msh->tkns->args[1], "$") == 0 && msh->tkns->args[2])
+	if (msh->tkns->args[1][0] == '$')
 	{
-		if (!varenv_man(msh, "cd", msh->tkns->args[2]))
+		if (!varenv_man(msh, "cd", msh->tkns->args[1]))
 			return ;
 	}
 	else if (msh->tkns->args[1][0] == '/')

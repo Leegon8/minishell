@@ -69,16 +69,13 @@ static void	print_export_vars(t_msh *msh)
 	}
 }
 
-static void	handle_export_arg(t_msh *msh, char *arg)
+static void	handle_export_arg(t_msh *msh)
 {
 	char	*name;
 	char	*value;
 
 	if (!is_valid_identifier(msh->tkns->args[1]))
-	{
-		ft_fd_printf(2, "export: `%s': not a valid identifier\n", arg);
 		return ;
-	}
 	name = get_var_name(msh->tkns->args[1]);
 	value = get_var_value(msh->tkns->args[1]);
 	ft_fd_printf(2, "NOMBRE????: `%s'\n", name);
@@ -99,6 +96,6 @@ int	ft_export(t_msh *msh, int tok_num)
 	if (tok_num != 2)
 		return (FALSE);
 	else
-		handle_export_arg(msh, msh->tkns->args[1]);
+		handle_export_arg(msh);
 	return (TRUE);
 }
