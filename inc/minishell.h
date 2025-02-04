@@ -141,6 +141,11 @@ void	ft_cd(t_msh *msh, int num_cmd);
 /*static int	check_n_flags(t_msh *msh, int *i)*/
 void	ft_echo(t_msh *msh, int num_cmd);
 
+/* ----------------------------------------------------------- echo_utils.c */
+int		echo_has_2_expand(char *str);
+void	handle_echo_quotes(t_msh *msh, char k, int i);
+void	print_echo_argument(t_msh *msh, char *arg, int is_last_arg);
+
 /* ------------------------------------------------------------------ env.c */
 int		update_env_var(t_msh *msh, char *name, char *value);
 int		ft_env(t_msh *msh);
@@ -174,9 +179,6 @@ int		ft_unset(t_msh *msh, char **new_var);
 
 /* //////////////////////////////////////////////////////////////////////////////  ENVIRONM */
 
-/* --------------------------------------------------------- ms_env_tools.c */
-char	*update_env(t_msh *msh, char *name, char *value);
-
 /* --------------------------------------------------------------- ms_env.c */
 int		env_var_count(t_msh *msh);
 int		find_env_var(t_msh *msh, char *var_name);
@@ -184,9 +186,10 @@ int		check_envs(void);
 void	update_shlvl(t_msh *msh);
 int		env_init_values(t_env *env, t_msh *msh);
 
-/* ----------------------------------------------------------- ms_var_env.c */
+/* ----------------------------------------------------------- ms_varenv.c */
 char	*search_env(char *var, t_msh *msh);
 int		varenv_man(t_msh *msh, char *builting, char *var_name);
+char	*update_env(t_msh *msh, char *name, char *value); // -------> REPETIDO!!!
 
 /* //////////////////////////////////////////////////////////////////////////////  EXECUTOR */
 

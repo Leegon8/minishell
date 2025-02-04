@@ -68,14 +68,11 @@ char	*copy_var(char *str, int i, int len)
 	return (result);
 }
 
-// Función  que verifica que la expansión existe y la imprime en caso
-// de que exista
+// Imprime valor de variable de entorno si existe
 int	look_existence(char *var, t_msh *msh)
 {
 	char	*env_value;
 
-	if (!var || !msh)
-		return (FALSE);
 	env_value = search_env(var, msh);
 	if (env_value)
 	{
@@ -112,13 +109,9 @@ void	expand_and_remove_quotes(char *str, t_msh *msh)
 				free(var_copy);
 				i += varlen - 1;
 			}
-			//else
-			//	printf("%c%c", tmp[i - 1], tmp[i]);
-				//ft_fd_printf(1, "%c%c", tmp[i - 1], tmp[i]);
 		}
 		else
 			printf("%c", tmp[i]);
-		//	ft_fd_printf(1, "%c", tmp[i]);
 		i++;
 	}
 }

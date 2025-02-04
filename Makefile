@@ -22,9 +22,9 @@ RM = rm -rf
  
 # **************************************************************************** #
 
-BUILTINS = cd cd_utils echo env exit export export_utils pwd unset
+BUILTINS = cd cd_utils echo echo_utils env exit export export_utils pwd unset
 
-ENV = ms_env ms_env_tools ms_varenv
+ENV = ms_env ms_varenv
 
 EXEC = executor
 
