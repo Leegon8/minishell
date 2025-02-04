@@ -78,8 +78,6 @@ void	ft_cd(t_msh *msh, int num_cmd)
 		cd_home(msh);
 	if (num_cmd == 2)
 	{
-		//if (is_quote(msh->tkns->args[1[0]]))
-
 		if (msh->tkns->args[1][0] == '-' && msh->tkns->args[1][1] == '\0')
 			handle_cd_minus(msh);
 		else if (msh->tkns->args[1][0] == '~' && msh->tkns->args[1][1] == '\0')

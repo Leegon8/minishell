@@ -53,7 +53,7 @@ int	execute_command(t_msh *msh, char *fullpath)
 	else
 		parent_process(pid, fullpath);
 	return (TRUE);
-}/*check true*/
+}
 
 int	find_cmd(char *tkn, t_msh *msh)
 {
@@ -71,7 +71,7 @@ int	find_cmd(char *tkn, t_msh *msh)
 		return (-1);
 	}
 	return (TRUE);
-}/*check true*/
+}
 
 static char	**get_path_dirs(char **envs)
 {
