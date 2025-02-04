@@ -13,30 +13,30 @@
 #include "minishell.h"
 
 
-// int	update_env_var(t_msh *msh, char *name, char *value)
-// {
-// 	int		i;
-// 	char	*new_value;
+int	update_env_var(t_msh *msh, char *name, char *value)
+{
+	int		i;
+	char	*new_value;
 
-// 	i = 0;
-// 	if (!name || !value)
-// 		return (FALSE);
-// 	new_value = ft_strdup(value);
-// 	if (!new_value)
-// 		return (FALSE);
-// 	while (msh->env->names[i])
-// 	{
-// 		if (ft_strcmp(msh->env->names[i], name) == 0)
-// 		{
-// 			free(msh->env->values[i]);
-// 			msh->env->values[i] = new_value;
-// 			return (TRUE);
-// 		}
-// 		i++;
-// 	}
-// 	free(new_value);
-// 	return (FALSE);
-// }
+	i = 0;
+	if (!name || !value)
+		return (FALSE);
+	new_value = ft_strdup(value);
+	if (!new_value)
+		return (FALSE);
+	while (msh->env->names[i])
+	{
+		if (ft_strcmp(msh->env->names[i], name) == 0)
+		{
+			free(msh->env->values[i]);
+			msh->env->values[i] = new_value;
+			return (TRUE);
+		}
+		i++;
+	}
+	free(new_value);
+	return (FALSE);
+}
 
 int	ft_env(t_msh *msh)
 {

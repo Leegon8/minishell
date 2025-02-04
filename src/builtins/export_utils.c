@@ -38,16 +38,17 @@ char	*get_var_value(char *var)
 	return (value);
 }
 
-int	update_env_var_p(t_msh *msh, char *name, char *value)
-{
-	int	pos;
+// // Busca posicion de la variable, la actualiza y devuelve la posicion del valor actualizado
+// int	update_env_var_p(t_msh *msh, char *name, char *value)
+// {
+// 	int	pos;
 
-	pos = find_env_pos(msh, name);
-	if (pos >= 0)
-	{
-		free(msh->env->values[pos]);
-		msh->env->values[pos] = ft_strdup(value);
-		return (FALSE);
-	}
-	return (add_env_var(msh, name, value));
-}
+// 	pos = find_env_pos(msh, name);
+// 	if (pos >= 0)
+// 	{
+// 		free(msh->env->values[pos]);
+// 		msh->env->values[pos] = ft_strdup(value);
+// 		return (FALSE);
+// 	}
+// 	return (add_env_var(msh, name, value));
+// }

@@ -175,7 +175,7 @@ int		ft_pwd(t_msh *msh);
 /*static int	is_valid_identifier(char *str)*/
 /*static void	remove_var_from_env(t_msh *msh, int pos)*/
 /*static int	find_var_in_env(t_msh *msh, char *var_name)*/
-int		ft_unset(t_msh *msh, char **new_var);
+int		ft_unset(t_msh *msh, int tok_num);
 
 /* //////////////////////////////////////////////////////////////////////////////  ENVIRONM */
 

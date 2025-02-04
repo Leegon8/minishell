@@ -103,9 +103,6 @@ void	exc_cmd(t_msh *msh, int count_tok)
 		ft_fd_printf(1, "Envarcount: %d\n", msh->env_var_count);
 	else if (ft_strcmp(msh->tkns->cmd, "test2") == 0)
 		ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);
+	else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
+		ft_unset(msh, count_tok);
 }
-	// else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
-	// {
-	// 	char	*value[] = {"unset", "SHLVL", NULL};
-	// 	ft_unset(msh, value);
-	// }
