@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /* Busca el valor de una variable de entorno */
-char	*search_env(char *var, t_msh *msh)
+char	*search_value(t_msh *msh, char *var)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ int	varenv_man(t_msh *msh, char *builting, char *var_name)
 
 	if (!var_name || !builting || !msh)
 		return (FALSE);
-	value = search_env(var_name, msh);
+	value = search_value(msh, var_name);
 	if (!value)
 		return (FALSE);
 	if (ft_strcmp(builting, "cd") == 0)

@@ -147,7 +147,7 @@ void	handle_echo_quotes(t_msh *msh, char k, int i);
 void	print_echo_argument(t_msh *msh, char *arg, int is_last_arg);
 
 /* ------------------------------------------------------------------ env.c */
-int		update_env_var(t_msh *msh, char *name, char *value);
+//int		update_env_var(t_msh *msh, char *name, char *value); //REPETIDO
 int		ft_env(t_msh *msh);
 
 /* ----------------------------------------------------------------- exit.c */
@@ -159,7 +159,7 @@ void	ft_exit(t_msh *msh);
 /* --------------------------------------------------------- export_utils.c */
 char	*get_var_name(char *var);
 char	*get_var_value(char *var);
-int		update_env_variable(t_msh *msh, char *name, char *value);
+int		update_env_var_p(t_msh *msh, char *name, char *value);
 
 /* --------------------------------------------------------------- export.c */
 /*static int	is_valid_identifier(char *str)*/
@@ -181,13 +181,13 @@ int		ft_unset(t_msh *msh, char **new_var);
 
 /* --------------------------------------------------------------- ms_env.c */
 int		env_var_count(t_msh *msh);
-int		find_env_var(t_msh *msh, char *var_name);
+int		find_env_pos(t_msh *msh, char *var_name);
 int		check_envs(void);
 void	update_shlvl(t_msh *msh);
 int		env_init_values(t_env *env, t_msh *msh);
 
 /* ----------------------------------------------------------- ms_varenv.c */
-char	*search_env(char *var, t_msh *msh);
+char	*search_value(t_msh *msh, char *var);
 int		varenv_man(t_msh *msh, char *builting, char *var_name);
 char	*update_env(t_msh *msh, char *name, char *value); // -------> REPETIDO!!!
 
@@ -256,7 +256,7 @@ void	handle_double_quotes(t_msh *msh, int i);
 
 /* ---------------------------------------------------- quote_lexer_tools.c */
 char	*remove_quotes(char *str, char quote_type);
-char	*search_value(t_msh *msh, char *name);
+// char	*search_value(t_msh *msh, char *name); --> REPETIDO!!
 
 /* ------------------------------------------------------- quote_expander.c */
 int		ft_varlen(char *str, int start);
@@ -305,7 +305,7 @@ void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 # define E_TOKMEM		"Error: tok mem asignation failed\n"
 # define E_PIPMEM		"Error: mpip mem asignation failed\n"
 # define E_CDARG		"cd: $ARG: No such file or directory\n"
-# define E_SYNTX		"Error: syntax not accepted\n"
+# define E_SYNTX		"Error: syntax not accepted"
 # define E_PIP_SYNTX	"minishell: syntax error near unexpected token `|'\n"
 # define E_PIPE			"Pipe error"
 # define E_FORK			"Fork error"

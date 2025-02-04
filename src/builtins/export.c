@@ -97,10 +97,7 @@ int	ft_export(t_msh *msh, int tok_num)
 		return (TRUE);
 	}
 	if (tok_num != 2)
-	{
-		ft_fd_printf(2, E_SYNTX);
 		return (FALSE);
-	}
 	else
 		handle_export_arg(msh, msh->tkns->args[1]);
 	return (TRUE);

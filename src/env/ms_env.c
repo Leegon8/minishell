@@ -24,8 +24,8 @@ int	env_var_count(t_msh *msh)
 	return (i);
 }
 
-/* busca una variable especifica en el env y nos retorna el valor de su indice*/
-int	find_env_var(t_msh *msh, char *var_name)
+/* busca una variable especifica y nos retorna la pos*/
+int	find_env_pos(t_msh *msh, char *var_name)
 {
 	int	i;
 
@@ -44,7 +44,7 @@ void	update_shlvl(t_msh *msh)
 	char	*new_level;
 	int		i;
 
-	i = find_env_var(msh, "SHLVL");
+	i = find_env_pos(msh, "SHLVL");
 	if (i >= 0)
 		msh->shlvl = msh->shlvl + 1;
 	else

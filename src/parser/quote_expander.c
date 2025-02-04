@@ -73,7 +73,7 @@ int	look_existence(char *var, t_msh *msh)
 {
 	char	*env_value;
 
-	env_value = search_env(var, msh);
+	env_value = search_value(msh,var);
 	if (env_value)
 	{
 		printf("%s", env_value);

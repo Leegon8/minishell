@@ -33,26 +33,26 @@ char	*remove_quotes(char *str, char quote_type)
 	return (result);
 }
 
-char	*search_value(t_msh *msh, char *name)
-{
-	char	*value;
-	int		i;
+// char	*search_value(t_msh *msh, char *name)
+// {
+// 	char	*value;
+// 	int		i;
 
-	i = 0;
-	value = NULL;
-	if (!msh || !msh->env || !msh->env->names || !msh->env->values || !name)
-		return (NULL);
-	while (msh->env->names[i] && msh->env->values[i])
-	{
-		if (ft_strcmp(msh->env->names[i], name) == 0)
-		{
-			value = ft_strdup(msh->env->values[i]);
-			return (value);
-		}
-		i++;
-	}
-	return (NULL);
-}
+// 	i = 0;
+// 	value = NULL;
+// 	if (!msh || !msh->env || !msh->env->names || !msh->env->values || !name)
+// 		return (NULL);
+// 	while (msh->env->names[i] && msh->env->values[i])
+// 	{
+// 		if (ft_strcmp(msh->env->names[i], name) == 0)
+// 		{
+// 			value = ft_strdup(msh->env->values[i]);
+// 			return (value);
+// 		}
+// 		i++;
+// 	}
+// 	return (NULL);
+// }
 
 /*void	expand_and_remove_quotes(char *str, t_msh *msh)
 {

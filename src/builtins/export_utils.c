@@ -38,11 +38,11 @@ char	*get_var_value(char *var)
 	return (value);
 }
 
-int	update_env_variable(t_msh *msh, char *name, char *value)
+int	update_env_var_p(t_msh *msh, char *name, char *value)
 {
 	int	pos;
 
-	pos = find_env_var(msh, name);
+	pos = find_env_pos(msh, name);
 	if (pos >= 0)
 	{
 		free(msh->env->values[pos]);
