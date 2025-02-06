@@ -30,15 +30,22 @@ void	handle_echo_quotes(t_msh *msh, char k, int i)
 
 void	print_echo_argument(t_msh *msh, char *arg, int is_last_arg)
 {
+	int	i;
+
+	i = 0;
 	if (is_quote(arg[0]))
-		handle_echo_quotes(msh, arg[0], 1);
-	else
+		handle_echo_quotes(msh, arg[0], is_last_arg);
+	else if (!is_quote(arg[0]))
 	{
 		if (echo_has_2_expand(arg))
-			expand_and_remove_quotes(arg, msh);
+			ft_expander(arg, msh);
 		else
 			printf("%s", arg);
 	}
-	if (!is_last_arg)
+	//printf("WTF: %d", msh->tkns->token_count);
+	if (i < msh->tkns->token_count)
+	{
+		i++;
 		printf(" ");
+	}
 }

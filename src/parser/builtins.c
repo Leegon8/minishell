@@ -29,6 +29,7 @@ void	check_tokens(char *input, t_msh *msh)
 	count_tok = 0;
 	while (msh->tkns->args[count_tok])
 		count_tok++;
+	msh->tkns->token_count = count_tok;
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
 	if (is_builtin(msh->tkns->cmd))
 		exc_cmd(msh, count_tok);

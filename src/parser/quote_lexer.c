@@ -52,12 +52,12 @@ int	analyze_quotes(t_msh *msh, char *arg, char quote)
 void	handle_single_quotes(t_msh *msh, int i)
 {
 	char	*str;
-
+	
 	str = ft_strdup(msh->tkns->args[i]);
 	if (!analyze_quotes(msh, msh->tkns->args[i], '\''))
 		ft_fd_printf(2, E_SYNTX);
 	else
-		ft_fd_printf(0, remove_quotes(str, '\''));
+		printf("%s",remove_quotes(str, '\''));
 }
 
 // 1.Verificar que hay minimo 2 comillas o numero multiple de 2
@@ -71,6 +71,6 @@ void	handle_double_quotes(t_msh *msh, int i)
 	else
 	{
 		str = remove_quotes(str, '\"');
-		expand_and_remove_quotes(str, msh);
+		ft_expander(str, msh);
 	}
 }

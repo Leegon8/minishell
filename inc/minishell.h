@@ -91,7 +91,7 @@ struct s_quote
 	int				single_count;
 	int				double_count;
 	t_quote_type	active_quote;
-	int				is_closed;
+	int				to_expand;
 };
 
 struct	s_tokenizer
@@ -188,7 +188,8 @@ int		env_init_values(t_env *env, t_msh *msh);
 
 /* ----------------------------------------------------------- ms_varenv.c */
 char	*search_value(t_msh *msh, char *var);
-int		varenv_man(t_msh *msh, char *builting, char *var_name);
+char	*manage_cd_var(t_msh *msh, char *arg);
+int		cd_varman(t_msh *msh, char *var_name);
 char	*update_env(t_msh *msh, char *name, char *value); // -------> REPETIDO!!!
 
 /* //////////////////////////////////////////////////////////////////////////////  EXECUTOR */
@@ -261,8 +262,8 @@ char	*remove_quotes(char *str, char quote_type);
 /* ------------------------------------------------------- quote_expander.c */
 int		ft_varlen(char *str, int start);
 char	*copy_var(char *str, int i, int len);
-int		look_existence(char *var, t_msh *msh);
-void	expand_and_remove_quotes(char *str, t_msh *msh);
+void	print_variable(char *var, t_msh *msh);
+void	ft_expander(char *str, t_msh *msh);
 
 /* ---------------------------------------------------------- token_tools.c */
 int		is_quote(char c);

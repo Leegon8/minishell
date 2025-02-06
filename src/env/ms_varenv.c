@@ -27,27 +27,44 @@ char	*search_value(t_msh *msh, char *var)
 	return (NULL);
 }
 
+/*	Verifica sintaxis de cd expansion variables */
+char	*manage_cd_var(t_msh *msh, char *arg)
+{
+	char	*str;
+	int		len;
+
+	if ((arg[0] == '\"' && analyze_quotes(msh, arg, arg[0])) || arg[0] == '$')
+	{
+		str = ft_strdup(remove_quotes(arg, '\"'));
+		if(echo_has_2_expand(str))
+		{
+			len = ft_varlen(str, 1);
+			str = copy_var(str, 1, len);
+			return (str);
+		}
+		return (str);
+	}
+	return (NULL);
+}
+
 /* Función para manejar variables de entorno en "cd" */
-int	varenv_man(t_msh *msh, char *builting, char *var_name)
+int	cd_varman(t_msh *msh, char *var_name)
 {
 	char	*value;
 	char	*current_pwd;
 
-	if (!var_name || !builting || !msh)
+	if (!var_name || !msh)
 		return (FALSE);
 	value = search_value(msh, var_name);
 	if (!value)
 		return (FALSE);
-	if (ft_strcmp(builting, "cd") == 0)
+	if (chdir(value) != -1)
 	{
-		if (chdir(value) != -1)
-		{
-			current_pwd = getcwd(NULL, 0);
-			msh->env->old_pwd = update_env(msh, "OLDPWD", msh->env->pwd);
-			msh->env->pwd = update_env(msh, "PWD", current_pwd);
-			free(current_pwd);
-			return (TRUE);
-		}
+		current_pwd = getcwd(NULL, 0);
+		msh->env->old_pwd = update_env(msh, "OLDPWD", msh->env->pwd);
+		msh->env->pwd = update_env(msh, "PWD", current_pwd);
+		free(current_pwd);
+		return (TRUE);
 	}
 	return (FALSE);
 }

@@ -69,22 +69,18 @@ char	*copy_var(char *str, int i, int len)
 }
 
 // Imprime valor de variable de entorno si existe
-int	look_existence(char *var, t_msh *msh)
+void	print_variable(char *var, t_msh *msh)
 {
 	char	*env_value;
 
 	env_value = search_value(msh,var);
 	if (env_value)
-	{
 		printf("%s", env_value);
-		return (TRUE);
-	}
-	return (FALSE);
 }
 
 // Expande una variable, buscando si la variable dada como parametro existe
 // si existe la expande, si no, pues no hace na'
-void	expand_and_remove_quotes(char *str, t_msh *msh)
+void	ft_expander(char *str, t_msh *msh)
 {
 	int		i;
 	int		varlen;
@@ -93,6 +89,7 @@ void	expand_and_remove_quotes(char *str, t_msh *msh)
 
 	i = 0;
 	varlen = 0;
+	//printf("PORQUE NO VA??\n");
 	if (!str || !msh || !msh->env)
 		return ;
 	tmp = ft_strdup(str);
@@ -105,12 +102,12 @@ void	expand_and_remove_quotes(char *str, t_msh *msh)
 			if (varlen > 0)
 			{
 				var_copy = copy_var(tmp, i, varlen);
-				look_existence(var_copy, msh);
+				print_variable(var_copy, msh);
 				free(var_copy);
 				i += varlen - 1;
 			}
 		}
-		else
+		 else
 			printf("%c", tmp[i]);
 		i++;
 	}
