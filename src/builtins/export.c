@@ -69,18 +69,27 @@ static void	print_export_vars(t_msh *msh)
 	}
 }
 
-static void	handle_export_arg(t_msh *msh)
+void	handle_export_arg(t_msh *msh)
 {
 	char	*name;
 	char	*value;
+	int		pos;
 
+	pos = 0;
 	if (!is_valid_identifier(msh->tkns->args[1]))
 		return ;
 	name = get_var_name(msh->tkns->args[1]);
 	value = get_var_value(msh->tkns->args[1]);
 	ft_fd_printf(2, "NOMBRE????: `%s'\n", name);
 	ft_fd_printf(2, "VALOR?????: `%s'\n", value);
-	if (!add_env_var(msh, name, value))
+	if (env_var_exist(msh))
+	{
+		printf("handle de otro modo\n");
+		pos = env_var_pos(msh);
+		update_env_var_value(msh, pos, value);
+		return ;
+	}
+		if (!add_env_var(msh, name, value))
 		ft_fd_printf(2, "export: memory allocation error\n");
 	free(name);
 	free(value);

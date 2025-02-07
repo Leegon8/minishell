@@ -19,20 +19,29 @@ int	env_var_exist(t_msh *msh)
 
 	i = 0;
 	name = get_var_name(msh->tkns->args[1]);
-	printf("primer valor > token:%s - name:%s\n", msh->tkns->args[1] , name);
+	// printf("primer valor > token:%s - name:%s\n", msh->tkns->args[1] , name);
 	while (msh->env->names[i] && (ft_strcmp(msh->env->names[i], name) != 0))
-	{
-		msh->env->names[i] = msh->env->names[i + 1];
-		printf("searching %d\n", i);
 		i++;
-	}
 	if (i < msh->env_var_count)
 	{
-		printf("TRUE\n");
+		printf("TRUE: %d\n", i);
 		return (TRUE);
 	}
 	printf("FALSE\n");
 	return (FALSE);
+}
+
+int	env_var_pos(t_msh *msh)
+{
+	int pos;
+	char *name;
+
+	pos = 0;
+	name = get_var_name(msh->tkns->args[1]);
+	while (msh->env->names[pos] && (ft_strcmp(msh->env->names[pos], name) != 0))
+		pos++;
+	printf("TRUE: %d\n", pos);
+	return (pos);
 }
 
 char	*get_var_name(char *var)
@@ -61,17 +70,17 @@ char	*get_var_value(char *var)
 	return (value);
 }
 
-// // Busca posicion de la variable, la actualiza y devuelve la posicion del valor actualizado
-// int	update_env_var_p(t_msh *msh, char *name, char *value)
-// {
-// 	int	pos;
+int	update_env_var_value(t_msh *msh, int pos, char *value)
+{
+	char	*new_values;
 
-// 	pos = find_env_pos(msh, name);
-// 	if (pos >= 0)
-// 	{
-// 		free(msh->env->values[pos]);
-// 		msh->env->values[pos] = ft_strdup(value);
-// 		return (FALSE);
-// 	}
-// 	return (add_env_var(msh, name, value));
-// }
+	// new_values = ft_calloc(pos + 2, sizeof(char *));
+	// if (!new_values)
+	// 	return (FALSE);
+	// pos = -1;
+	free(msh->env->values[pos]);
+	new_values = ft_strdup(value);
+	msh->env->values[pos] = new_values;
+	printf("maravilla %s\n", msh->env->values[pos]);
+	return (TRUE);
+}

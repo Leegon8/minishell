@@ -158,15 +158,16 @@ void	ft_exit(t_msh *msh);
 
 /* --------------------------------------------------------- export_utils.c */
 int		env_var_exist(t_msh *msh);
+int		env_var_pos(t_msh *msh);
 char	*get_var_name(char *var);
 char	*get_var_value(char *var);
-int		update_env_var_p(t_msh *msh, char *name, char *value);
+int		update_env_var_value(t_msh *msh, int pos, char *value);
 
 /* --------------------------------------------------------------- export.c */
 /*static int	is_valid_identifier(char *str)*/
 int		add_env_var(t_msh *msh, char *name, char *value);
 /*static void	print_export_vars(t_msh *msh)*/
-/*static void	handle_export_arg(t_msh *msh)*/
+void	handle_export_arg(t_msh *msh);
 int		ft_export(t_msh *msh, int tok_num);
 
 /* ------------------------------------------------------------------ pwd.c */
