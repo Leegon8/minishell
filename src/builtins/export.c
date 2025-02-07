@@ -84,12 +84,13 @@ void	handle_export_arg(t_msh *msh)
 	ft_fd_printf(2, "VALOR?????: `%s'\n", value);
 	if (env_var_exist(msh))
 	{
-		printf("handle de otro modo\n");
 		pos = env_var_pos(msh);
 		update_env_var_value(msh, pos, value);
+		free(name);
+		free(value);
 		return ;
 	}
-		if (!add_env_var(msh, name, value))
+	if (!add_env_var(msh, name, value))
 		ft_fd_printf(2, "export: memory allocation error\n");
 	free(name);
 	free(value);

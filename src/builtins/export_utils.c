@@ -19,15 +19,14 @@ int	env_var_exist(t_msh *msh)
 
 	i = 0;
 	name = get_var_name(msh->tkns->args[1]);
-	// printf("primer valor > token:%s - name:%s\n", msh->tkns->args[1] , name);
 	while (msh->env->names[i] && (ft_strcmp(msh->env->names[i], name) != 0))
 		i++;
 	if (i < msh->env_var_count)
 	{
-		printf("TRUE: %d\n", i);
+		free(name);
 		return (TRUE);
 	}
-	printf("FALSE\n");
+	free (name);
 	return (FALSE);
 }
 
@@ -40,7 +39,7 @@ int	env_var_pos(t_msh *msh)
 	name = get_var_name(msh->tkns->args[1]);
 	while (msh->env->names[pos] && (ft_strcmp(msh->env->names[pos], name) != 0))
 		pos++;
-	printf("TRUE: %d\n", pos);
+	free (name);
 	return (pos);
 }
 
@@ -74,10 +73,6 @@ int	update_env_var_value(t_msh *msh, int pos, char *value)
 {
 	char	*new_values;
 
-	// new_values = ft_calloc(pos + 2, sizeof(char *));
-	// if (!new_values)
-	// 	return (FALSE);
-	// pos = -1;
 	free(msh->env->values[pos]);
 	new_values = ft_strdup(value);
 	msh->env->values[pos] = new_values;
