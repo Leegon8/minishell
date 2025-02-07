@@ -34,14 +34,11 @@ char	*manage_cd_var(t_msh *msh, char *arg)
 	int		len;
 
 	if ((arg[0] == '\"' && analyze_quotes(msh, arg, arg[0])) || arg[0] == '$')
-	{
 		str = ft_strdup(remove_quotes(arg, '\"'));
-		if(echo_has_2_expand(str))
-		{
-			len = ft_varlen(str, 1);
-			str = copy_var(str, 1, len);
-			return (str);
-		}
+	if(echo_has_2_expand(str))
+	{
+		len = ft_varlen(str, 1);
+		str = copy_var(str, 1, len);
 		return (str);
 	}
 	return (NULL);
