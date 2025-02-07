@@ -157,6 +157,7 @@ int		ft_env(t_msh *msh);
 void	ft_exit(t_msh *msh);
 
 /* --------------------------------------------------------- export_utils.c */
+int		env_var_exist(t_msh *msh);
 char	*get_var_name(char *var);
 char	*get_var_value(char *var);
 int		update_env_var_p(t_msh *msh, char *name, char *value);

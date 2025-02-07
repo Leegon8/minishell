@@ -39,27 +39,27 @@ void	check_tokens(char *input, t_msh *msh)
 	msh->tkns->cmd = NULL;
 }
 
-void	cleanup_commands(t_msh *msh)
-{
-	int	i;
-	int	j;
+// void	cleanup_commands(t_msh *msh)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (i < msh->cmd_count)
-	{
-		j = 0;
-		while (msh->cmds[i].args[j])
-		{
-			free(msh->cmds[i].args[j]);
-			j++;
-		}
-		free(msh->cmds[i].args);
-		i++;
-	}
-	free(msh->cmds);
-	msh->cmds = NULL;
-	msh->cmd_count = 0;
-}
+// 	i = 0;
+// 	while (i < msh->cmd_count)
+// 	{
+// 		j = 0;
+// 		while (msh->cmds[i].args[j])
+// 		{
+// 			free(msh->cmds[i].args[j]);
+// 			j++;
+// 		}
+// 		free(msh->cmds[i].args);
+// 		i++;
+// 	}
+// 	free(msh->cmds);
+// 	msh->cmds = NULL;
+// 	msh->cmd_count = 0;
+// }
 
 int	is_builtin(char	*token)
 {
@@ -103,7 +103,9 @@ void	exc_cmd(t_msh *msh, int count_tok)
 	else if (ft_strcmp(msh->tkns->cmd, "test") == 0)
 		ft_fd_printf(1, "Envarcount: %d\n", msh->env_var_count);
 	else if (ft_strcmp(msh->tkns->cmd, "test2") == 0)
-		ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);
+		env_var_exist(msh);
+		// printf("test ejecuta: \n");
+		// ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);
 	else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
 		ft_unset(msh, count_tok);
 }

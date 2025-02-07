@@ -12,6 +12,29 @@
 
 #include "minishell.h"
 
+int	env_var_exist(t_msh *msh)
+{
+	int i;
+	char *name;
+
+	i = 0;
+	name = get_var_name(msh->tkns->args[1]);
+	printf("primer valor > token:%s - name:%s\n", msh->tkns->args[1] , name);
+	while (msh->env->names[i] && (ft_strcmp(msh->env->names[i], name) != 0))
+	{
+		msh->env->names[i] = msh->env->names[i + 1];
+		printf("searching %d\n", i);
+		i++;
+	}
+	if (i < msh->env_var_count)
+	{
+		printf("TRUE\n");
+		return (TRUE);
+	}
+	printf("FALSE\n");
+	return (FALSE);
+}
+
 char	*get_var_name(char *var)
 {
 	int		i;
