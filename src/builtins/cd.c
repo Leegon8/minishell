@@ -73,13 +73,13 @@ void	ft_cd(t_msh *msh, int num_cmd)
 		cd_home(msh);
 	if (num_cmd == 2)
 	{
+		if (cd_varman(msh, manage_cd_var(msh, msh->tkns->args[1])))
+			return ;
 		if (msh->tkns->args[1][0] == '-' && msh->tkns->args[1][1] == '\0')
 			handle_cd_minus(msh);
 		else if (msh->tkns->args[1][0] == '~' && msh->tkns->args[1][1] == '\0')
 			cd_home(msh);
-		if (cd_varman(msh, manage_cd_var(msh, msh->tkns->args[1])))
-			return ;
-		else 
+		else
 			handle_cd_path(msh);
 	}
 	else if (num_cmd == 3)

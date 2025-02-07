@@ -42,7 +42,6 @@ void	print_echo_argument(t_msh *msh, char *arg, int is_last_arg)
 		else
 			printf("%s", arg);
 	}
-	//printf("WTF: %d", msh->tkns->token_count);
 	if (i < msh->tkns->token_count)
 	{
 		i++;

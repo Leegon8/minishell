@@ -65,7 +65,7 @@ void	ft_echo(t_msh *msh, int num_cmd)
 	n_flag = check_n_flags(msh, &i);
 	while (i < num_cmd)
 	{
-		print_echo_argument(msh, msh->tkns->args[i], i);//(i + 1 == num_cmd)
+		print_echo_argument(msh, msh->tkns->args[i], i);
 		i++;
 	}
 	if (n_flag == FALSE)

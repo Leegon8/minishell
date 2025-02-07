@@ -17,7 +17,6 @@ void	shell_loop(t_msh *msh)
 {
 	char	*input;
 	int		i;
-	int		j;
 
 	while (msh->end_sig == 0)
 	{
@@ -32,12 +31,11 @@ void	shell_loop(t_msh *msh)
 			add_history(input);
 		check_tokens(input, msh);
 		free(input);
-		j = 0;
-		while (j < i)
+		while (i < msh->tkns->token_count)
 		{
-			if (msh->tkns[j].cmd)
-				free(msh->tkns[j].cmd);
-			j++;
+			if (msh->tkns->args[i])
+				free(msh->tkns->args[i]);
+			i++;
 		}
 	}
 }

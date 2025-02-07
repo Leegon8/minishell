@@ -33,9 +33,10 @@ char	*manage_cd_var(t_msh *msh, char *arg)
 	char	*str;
 	int		len;
 
+	str = ft_strdup(arg);
 	if ((arg[0] == '\"' && analyze_quotes(msh, arg, arg[0])) || arg[0] == '$')
-		str = ft_strdup(remove_quotes(arg, '\"'));
-	if(echo_has_2_expand(str))
+		str = remove_quotes(arg, '\"');
+	if (echo_has_2_expand(str))
 	{
 		len = ft_varlen(str, 1);
 		str = copy_var(str, 1, len);

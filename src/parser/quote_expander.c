@@ -12,9 +12,7 @@
 
 #include "minishell.h"
 
-/*
-
-	expand_and_remove function must do:
+/*	expand_and_remove function must do:
 
 	1. REMOVE QUOTES
 
@@ -34,7 +32,6 @@
 				just ignore the random environment variable.
 
 */
-
 // Calculates the size of the variable
 int	ft_varlen(char *str, int start)
 {
@@ -73,7 +70,7 @@ void	print_variable(char *var, t_msh *msh)
 {
 	char	*env_value;
 
-	env_value = search_value(msh,var);
+	env_value = search_value(msh, var);
 	if (env_value)
 		printf("%s", env_value);
 }
@@ -89,7 +86,6 @@ void	ft_expander(char *str, t_msh *msh)
 
 	i = 0;
 	varlen = 0;
-	//printf("PORQUE NO VA??\n");
 	if (!str || !msh || !msh->env)
 		return ;
 	tmp = ft_strdup(str);
@@ -106,9 +102,12 @@ void	ft_expander(char *str, t_msh *msh)
 				free(var_copy);
 				i += varlen - 1;
 			}
+			else
+				printf("%c%c", tmp[i - 1], tmp[i]);
 		}
-		 else
+		else
 			printf("%c", tmp[i]);
 		i++;
 	}
 }
+// --> MAS DE 25 LINEAS

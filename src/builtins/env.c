@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 int	update_env_var(t_msh *msh, char *name, char *value)
 {
 	int		i;
