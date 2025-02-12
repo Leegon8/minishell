@@ -45,7 +45,7 @@
 	return (TRUE);
 }*/
 
-static int	is_pipe(char *token)
+static int	has_pipe(char *token)
 {
 	return (token && ft_strcmp(token, "|") == 0);
 }
@@ -57,7 +57,7 @@ static int	validate_pipe_syntax(t_tok *tok)
 	i = 0;
 	while (tok->args[i])
 	{
-		if (is_pipe(tok->args[i]))
+		if (has_pipe(tok->args[i]))
 		{
 			if (i == 0 || !tok->args[i + 1])
 			{
@@ -91,7 +91,7 @@ static int	split_commands(t_tok *tok, t_cmd *cmds)
 	init_command_struct(&cmds[cmd_idx]);
 	while (tok->args[i])
 	{
-		if (is_pipe(tok->args[i]))
+		if (has_pipe(tok->args[i]))
 		{
 			cmds[cmd_idx].args[arg_idx] = NULL;
 			cmd_idx++;
@@ -120,7 +120,7 @@ int	parse_and_validate_commands(t_tok *tok, t_cmd **commands)
 	i = 0;
 	while (tok->args[i])
 	{
-		if (is_pipe(tok->args[i]))
+		if (has_pipe(tok->args[i]))
 			cmd_count++;
 		i++;
 	}

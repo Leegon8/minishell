@@ -241,7 +241,7 @@ void	exc_cmd(t_msh *msh, int count_tok);
 /* ---------------------------------------------------------------- lexer.c */
 // int		quote_lexer(char *arg);
 int		lexer(char **tokens, t_msh *msh);
-/*static int	is_pipe(char *token)*/
+/*static int	has_pipe(char *token)*/
 /*static int	validate_pipe_syntax(t_tok *tok)*/
 /*static void	init_command_struct(t_cmd *cmd)*/
 /*static int	split_commands(t_tok *tok, t_cmd *cmds)*/
