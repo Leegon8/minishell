@@ -23,9 +23,14 @@ int	size_token(char *input, t_tok *tok)
 	{
 		if (is_operator(input[i]))
 		{
+			if (is_operator(input[i + 1]))
+				i += 1;
+		}
+		if (is_pipe(input[i]))
+		{
 			if (i == 0)
 				return (TRUE);
-			break ;
+			break;
 		}
 		if (is_quote(input[i]))
 		{
@@ -39,6 +44,7 @@ int	size_token(char *input, t_tok *tok)
 		}
 		i++;
 	}
+	printf("size_token = %d\n", i);
 	return (i);
 }
 

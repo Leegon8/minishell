@@ -14,9 +14,14 @@
 
 int	is_operator(char c)
 {
-	return (c == '|' || c == '<' || c == '>');
+	return (c == '<' || c == '>');
 }
 /* || c == '$' */
+
+int	is_pipe(char c)
+{
+	return (c == '|');
+}
 
 int	is_whitespace(char c)
 {

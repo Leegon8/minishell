@@ -270,6 +270,7 @@ void	ft_expander(char *str, t_msh *msh);
 
 /* ---------------------------------------------------------- token_tools.c */
 int		is_quote(char c);
+int		is_pipe(char c);
 int		is_whitespace(char c);
 int		is_operator(char c);
 
