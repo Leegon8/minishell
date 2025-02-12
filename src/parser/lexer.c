@@ -13,7 +13,8 @@
 #include "minishell.h"
 
 /* Comprueba cada token y su siguiente para operador (incompleta) */
-int	lexer(char **tokens, t_msh *msh)
+// --> NO SE ESTA USANDO!!
+/*int	lexer(char **tokens, t_msh *msh)
 {
 	int	i;
 
@@ -42,7 +43,7 @@ int	lexer(char **tokens, t_msh *msh)
 		i++;
 	}
 	return (TRUE);
-}
+}*/
 
 static int	is_pipe(char *token)
 {

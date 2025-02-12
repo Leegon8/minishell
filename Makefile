@@ -26,7 +26,7 @@ BUILTINS = cd cd_utils echo echo_utils env exit export export_utils pwd unset
 
 ENV = ms_env ms_varenv
 
-EXEC = executor
+EXEC = executor executor_utils
 
 MAIN = minishell init signals rline
 

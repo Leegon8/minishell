@@ -16,11 +16,11 @@
 void	shell_loop(t_msh *msh)
 {
 	char	*input;
-	int		i;
+	//int		i;
 
 	while (msh->end_sig == 0)
 	{
-		i = 0;
+		//i = 0;
 		input = readline("\033[0;96m🛸 Space_shell 👽:\e[0m");
 		if (!input)
 		{
@@ -31,12 +31,12 @@ void	shell_loop(t_msh *msh)
 			add_history(input);
 		check_tokens(input, msh);
 		free(input);
-		while (i < msh->tkns->token_count)
+		/*while (i < msh->tkns->token_count)
 		{
 			if (msh->tkns->args[i])
 				free(msh->tkns->args[i]);
 			i++;
-		}
+		}*/
 	}
 }
 

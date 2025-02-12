@@ -202,6 +202,7 @@ int		is_command_executable(char *fullpath);
 /*static void	parent_process(pid_t pid, char *fullpath)*/
 int		execute_command(t_msh *msh, char *fullpath);
 int		find_cmd(char *tkn, t_msh *msh);
+/* ------------------------------------------------------- executor_utils.c */
 /*static char	**get_path_dirs(char **envs)*/
 /*static char	*check_absolute_path(char *cmd)*/
 /*static char	*try_path(char *dir, char *cmd)*/
