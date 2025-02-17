@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/02/17 15:33:48 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:39:24 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,13 @@ struct s_executor
 	int		status_2;
 	int		fd_in;
 	int		fd_out;
+	int     backup_in;      /* Backup del fd de entrada original */
+    int     backup_out;     /* Backup del fd de salida original */
+    char    *infile;        /* Nombre del archivo de entrada */
+    char    *outfile;       /* Nombre del archivo de salida */
+    int     append;         /* Flag para modo append (>>) */
+    int     heredoc;        /* Flag para heredoc (<<) */
+    char    *delimiter;     /* Delimitador para heredoc */
 };
 
 typedef struct s_command
