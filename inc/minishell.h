@@ -35,6 +35,7 @@
 typedef enum e_quote_type		t_quote_type;
 typedef enum types				t_tokty;
 
+
 typedef struct s_environment	t_env;
 typedef struct s_executor		t_exe;
 typedef struct s_quote			t_quote;

@@ -19,6 +19,7 @@ int	is_command_executable(char *fullpath)
 	return (FALSE);
 }
 
+// Afegir una verificacio de redireccions i pipes
 static void	child_process(t_msh *msh, char *fullpath)
 {
 	if (execve(fullpath, msh->tkns->args, msh->envs) == -1)

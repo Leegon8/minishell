@@ -12,3 +12,22 @@
 
 #include "minishell.h"
 
+int	handle_output_redir(t_tok *tok, char *file, int append)
+{
+	int	flags;
+
+	if (tok->out_fd > 2)
+		close(tok->out_fd);
+	flags = O_WRONLY | O_CREAT;
+	if (append)
+		flags |= O_APPEND;
+	else
+		flags |= O_TRUNC;
+	tok->out_fd = open(file, flags, 0644);
+	if (tok->out_fd == -1)
+	{
+		ft_fd_printf(2, "minishell: %s: Permission denied\n", file);
+		return (FALSE);
+	}
+	return (TRUE);
+}

@@ -67,10 +67,10 @@ char	*make_path(char *cmd, t_msh *msh)
 		return (NULL);
 	cmd_path = check_absolute_path(cmd);
 	if (cmd_path)
-		return (cmd_path);
+	return (cmd_path);
 	paths = get_path_dirs(msh->envs);
 	if (!paths)
-		return (NULL);
+	return (NULL);
 	i = 0;
 	while (paths[i])
 	{

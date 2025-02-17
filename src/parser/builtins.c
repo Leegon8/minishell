@@ -17,6 +17,23 @@ void	cmd_not_found(t_msh *msh)
 	ft_fd_printf(2, "Error: %s : command not found\n", msh->tkns->cmd);
 }
 
+static int	is_there_redir(t_msh *msh)
+{
+	int	i;
+	int	pos_redir;
+
+	i = 0;
+	while (msh->tkns->args[i])
+	{
+		if (is_pipe(msh->tkns->args[i][0]))
+			return (i);
+		if (is_operator(msh->tkns->args[i][0]))
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
 void	check_tokens(char *input, t_msh *msh)
 {
 	int	count_tok;
@@ -31,6 +48,7 @@ void	check_tokens(char *input, t_msh *msh)
 		count_tok++;
 	msh->tkns->token_count = count_tok;
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
+	printf(">>>>>> %d\n", is_there_redir(msh));
 	if (is_builtin(msh->tkns->cmd))
 		exc_cmd(msh, count_tok);
 	else if (find_cmd(msh->tkns->cmd, msh) == -1)
@@ -109,3 +127,4 @@ void	exc_cmd(t_msh *msh, int count_tok)
 }
 // printf("test ejecuta: \n");
 // ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);
+

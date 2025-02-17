@@ -44,7 +44,6 @@ int	size_token(char *input, t_tok *tok)
 		}
 		i++;
 	}
-	printf("size_token = %d\n", i);
 	return (i);
 }
 
