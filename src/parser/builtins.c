@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_builtins.c                                      :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2025/01/13 18:33:58 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/02/19 02:06:01 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,51 @@ void	cmd_not_found(t_msh *msh)
 	ft_fd_printf(2, "Error: %s : command not found\n", msh->tkns->cmd);
 }
 
-static int	is_there_redir(t_msh *msh)
+static t_redir	is_there_redir(t_msh *msh, int *pos)
 {
-	int	i;
-	int	pos_redir;
+	int		i;
+	char	*arg;
 
 	i = 0;
 	while (msh->tkns->args[i])
 	{
-		if (is_pipe(msh->tkns->args[i][0]))
-			return (i);
-		if (is_operator(msh->tkns->args[i][0]))
-			return (i);
+		arg = msh->tkns->args[i];
+		if (arg[0] == '|')
+		{
+			*pos = i;
+			return (PIPE);
+		}
+		if (arg[0] == '<' && arg[1] == '<')
+		{
+			*pos = i;
+			return (REDIR_HERE);
+		}
+		if (arg[0] == '>' && arg[1] == '>')
+		{
+			*pos = i;
+			return (REDIR_APPEND);
+		}
+		if (arg[0] == '<')
+		{
+			*pos = i;
+			return (REDIR_IN);
+		}
+		if (arg[0] == '>')
+		{
+			*pos = i;
+			return (REDIR_OUT);
+		}
 		i++;
 	}
-	return (i);
+	*pos = i;
+	return (NO_REDIR);
 }
 
 void	check_tokens(char *input, t_msh *msh)
 {
 	int	count_tok;
+	int		redir_pos;
+	t_redir	redir_type;
 
 	if (!input || !*input)
 		return ;
@@ -48,7 +73,21 @@ void	check_tokens(char *input, t_msh *msh)
 		count_tok++;
 	msh->tkns->token_count = count_tok;
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
-	printf(">>>>>> %d\n", is_there_redir(msh));
+	redir_type = is_there_redir(msh, &redir_pos);
+	printf("Tipo de redirección: ");
+	if (redir_type == NO_REDIR)
+    	printf("No hay redirección\n");
+	else if (redir_type == REDIR_IN)
+		printf("de entrada (<)\n");
+	else if (redir_type == REDIR_OUT)
+		printf("de salida (>)\n");
+	else if (redir_type == REDIR_APPEND)
+		printf("de salida con append (>>)\n");
+	else if (redir_type == REDIR_HERE)
+		printf("Heredoc (<<)\n");
+	else if (redir_type == PIPE)
+		printf("Pipe (|)\n");
+	printf("Posición del token: %d\n", redir_pos);
 	if (is_builtin(msh->tkns->cmd))
 		exc_cmd(msh, count_tok);
 	else if (find_cmd(msh->tkns->cmd, msh) == -1)
@@ -118,12 +157,12 @@ void	exc_cmd(t_msh *msh, int count_tok)
 		ft_exit(msh);
 	else if (ft_strcmp(msh->tkns->cmd, "export") == 0)
 		ft_export(msh, count_tok);
+	else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
+		ft_unset(msh, count_tok);
 	else if (ft_strcmp(msh->tkns->cmd, "test") == 0)
 		ft_fd_printf(1, "Envarcount: %d\n", msh->env_var_count);
 	else if (ft_strcmp(msh->tkns->cmd, "test2") == 0)
 		env_var_exist(msh);
-	else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
-		ft_unset(msh, count_tok);
 }
 // printf("test ejecuta: \n");
 // ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);

@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_executor.c                                      :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:13:10 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/13 17:46:16 by leegon           ###   ########.fr       */
+/*   Updated: 2025/02/17 15:54:49 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int setup_redirections(t_msh *msh)
+{
+    if (msh->mpip->outfile && !handle_output_file(msh, msh->mpip->outfile))
+        return (FALSE);
+    if (msh->mpip->infile && !handle_input_file(msh, msh->mpip->infile))
+        return (FALSE);
+    return (TRUE);
+}
 
 int	is_command_executable(char *fullpath)
 {
@@ -20,14 +29,29 @@ int	is_command_executable(char *fullpath)
 }
 
 // Afegir una verificacio de redireccions i pipes
-static void	child_process(t_msh *msh, char *fullpath)
+// static void	child_process(t_msh *msh, char *fullpath)
+// {
+// 	if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
+// 	{
+// 		cmd_not_found(msh);
+// 		free(fullpath);
+// 		exit(EXIT_FAILURE);
+// 	}
+// }
+
+static void  child_process(t_msh *msh, char *fullpath)
 {
-	if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
-	{
-		cmd_not_found(msh);
-		free(fullpath);
-		exit(EXIT_FAILURE);
-	}
+    if (!setup_redirections(msh))  // Añadir esta línea
+    {
+        free(fullpath);
+        exit(EXIT_FAILURE);
+    }
+    if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
+    {
+        cmd_not_found(msh);
+        free(fullpath);
+        exit(EXIT_FAILURE);
+    }
 }
 
 static void	parent_process(pid_t pid, char *fullpath)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_tokenizer.c                                     :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:35:57 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/01/13 18:40:11 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/02/19 02:04:55 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	ft_token(char *input, t_tok *tok)
 		else
 			i++;
 	}
-	 for (i=0; i < arg_index; i++){
-	 	printf("tok[%d] = %s\n", i, tok->args[i]);
-	 }
+	//  for (i=0; i < arg_index; i++){
+	//  	printf("tok[%d] = %s\n", i, tok->args[i]);
+	//  }
 	tok->args[arg_index] = NULL;
 }
