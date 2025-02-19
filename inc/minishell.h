@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/02/19 01:46:20 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/02/19 02:30:45 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,11 @@ char	*cmd_match(const char *text, int state);
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 void	init_signals(void);
+void	handle_sigint_heredoc(int sig);
+void	handle_heredoc_signals(void);
+void	restore_signals(void);
+
+
 
 /* ////////////////////////////////////////////////////////////////////////////////  PARSER */
 
@@ -311,6 +316,10 @@ void	ft_free_array(char **array);
 void	free_env(t_env *env);
 void	free_tok(t_tok *tok);
 void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
+
+/* ---------------------------------------------------------------- heredoc.c */
+int	handle_heredoc(t_msh *msh, char *delimiter);
+
 
 /******************************* Error macros *****************************/
 

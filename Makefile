@@ -6,7 +6,7 @@
 #    By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2025/02/19 00:58:13 by lprieto-         ###   ########.fr        #
+#    Updated: 2025/02/19 02:31:02 by lprieto-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ MAIN = minishell init signals rline
 PARSER = builtins lexer parser quote_expander quote_lexer quote_lexer_tools \
 		token_tools tokenizer
 
-TOOLS = err_handle free tools
+TOOLS = err_handle free tools heredoc
 
 SRCS = $(addsuffix .c, $(addprefix src/builtins/, $(BUILTINS))) \
 		$(addsuffix .c, $(addprefix src/env/, $(ENV))) \

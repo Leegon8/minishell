@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2025/02/19 02:06:01 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/02/19 02:23:24 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,24 @@ static t_redir	is_there_redir(t_msh *msh, int *pos)
 	return (NO_REDIR);
 }
 
+static void	print_redir_info(t_redir redir_type, int redir_pos)
+{
+	printf("Tipo de redirección: ");
+	if (redir_type == NO_REDIR)
+		printf("No hay redirección\n");
+	else if (redir_type == REDIR_IN)
+		printf("de entrada (<)\n");
+	else if (redir_type == REDIR_OUT)
+		printf("de salida (>)\n");
+	else if (redir_type == REDIR_APPEND)
+		printf("de salida con append (>>)\n");
+	else if (redir_type == REDIR_HERE)
+		printf("Heredoc (<<)\n");
+	else if (redir_type == PIPE)
+		printf("Pipe (|)\n");
+	printf("Posición del token: %d\n", redir_pos);
+}
+
 void	check_tokens(char *input, t_msh *msh)
 {
 	int	count_tok;
@@ -74,24 +92,12 @@ void	check_tokens(char *input, t_msh *msh)
 	msh->tkns->token_count = count_tok;
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
 	redir_type = is_there_redir(msh, &redir_pos);
-	printf("Tipo de redirección: ");
-	if (redir_type == NO_REDIR)
-    	printf("No hay redirección\n");
-	else if (redir_type == REDIR_IN)
-		printf("de entrada (<)\n");
-	else if (redir_type == REDIR_OUT)
-		printf("de salida (>)\n");
-	else if (redir_type == REDIR_APPEND)
-		printf("de salida con append (>>)\n");
-	else if (redir_type == REDIR_HERE)
-		printf("Heredoc (<<)\n");
-	else if (redir_type == PIPE)
-		printf("Pipe (|)\n");
-	printf("Posición del token: %d\n", redir_pos);
+	print_redir_info(redir_type, redir_pos);
 	if (is_builtin(msh->tkns->cmd))
 		exc_cmd(msh, count_tok);
 	else if (find_cmd(msh->tkns->cmd, msh) == -1)
 		cmd_not_found(msh);
+	restore_signals();
 	free(msh->tkns->cmd);
 	msh->tkns->cmd = NULL;
 }
