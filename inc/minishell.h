@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/02/17 15:39:24 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/02/19 01:46:20 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 
 typedef enum e_quote_type		t_quote_type;
 typedef enum types				t_tokty;
+typedef enum redir				t_redir;
 
 
 typedef struct s_environment	t_env;
@@ -57,6 +58,16 @@ enum types
 	T_OPERATOR,
 	T_WHITESPACE,
 	T_QUOTE
+};
+
+enum redir
+{
+	NO_REDIR = 0,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	REDIR_HERE,
+	PIPE
 };
 
 struct	s_environment
@@ -213,6 +224,10 @@ int		find_cmd(char *tkn, t_msh *msh);
 /*static char	*check_absolute_path(char *cmd)*/
 /*static char	*try_path(char *dir, char *cmd)*/
 char	*make_path(char *tkn, t_msh *msh);
+/* ----------------------------------------------------------output_redir.c */
+int  handle_output_file(t_msh *msh, char *filename);
+int  handle_input_file(t_msh *msh, char *filename);
+void    restore_redirections(t_msh *msh);
 
 /* //////////////////////////////////////////////////////////////////////////////////  MAIN */
 
