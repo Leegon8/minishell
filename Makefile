@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leegon <leegon@student.42.fr>              +#+  +:+       +#+         #
+#    By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2025/01/14 16:36:24 by lauriago         ###   ########.fr        #
+#    Updated: 2025/02/19 00:58:13 by lprieto-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ BUILTINS = cd cd_utils echo echo_utils env exit export export_utils pwd unset
 
 ENV = ms_env ms_varenv
 
-EXEC = executor executor_utils
+EXEC = executor executor_utils output_redir
 
 MAIN = minishell init signals rline
 
