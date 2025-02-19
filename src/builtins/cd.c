@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_builting.c                                      :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:41:10 by lauriago          #+#    #+#             */
-/*   Updated: 2025/01/13 18:28:22 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/02/19 02:12:49 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,14 @@ void	handle_cd_path(t_msh *msh)
 	if (!new_path)
 		return ;
 	if (chdir(new_path) == -1)
-		perror("cd");
+	{
+		if (errno == EACCES)        // No tenemos permisos
+			handle_cd_error(new_path, EACCES);
+		else if (errno == ENOTDIR)  // No es un directorio
+			handle_cd_error(new_path, ENOTDIR);
+		else                        // No existe o cualquier otro error
+			handle_cd_error(new_path, errno);
+	}
 	else
 	{
 		msh->env->old_pwd = update_env(msh, "OLDPWD", msh->env->pwd);
