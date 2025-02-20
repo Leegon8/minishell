@@ -53,10 +53,11 @@ int	ft_env(t_msh *msh)
 		return (ft_err(msh, EXIT_NOFOUND));
 	}
 	i = 0;
-	while (msh->env->names[i]) //&& msh->env->values[i]
+	while (msh->env->names[i])
 	{
-			if (msh->env->values[i])
-			ft_fd_printf(1, "%s=%s\n", msh->env->names[i], msh->env->values[i]);
+		if (msh->env->values[i])
+			ft_fd_printf(1, "%s=%s\n", msh->env->names[i],
+				msh->env->values[i]);
 		else
 			ft_fd_printf(1, "%s=\n", msh->env->names[i]);
 		i++;
@@ -66,7 +67,8 @@ int	ft_env(t_msh *msh)
 // while (msh->env->names[i])
 // {
 // 	// comprovació de longitud names i values...
-// 	printf("len name --> %ld\nlen val --> %ld\n", ft_strlen(msh->env->names[i]), ft_strlen(msh->env->values[i]));
+// 	printf("len name --> %ld\nlen val --> %ld\n",
+// 		ft_strlen(msh->env->names[i]), ft_strlen(msh->env->values[i]));
 // 	// comprovació inicialització value i name
 // 	printf("NAME --> %s\n", msh->env->names[i]);
 // 	printf("VALUE --> %s\n", msh->env->values[i]);

@@ -17,7 +17,7 @@ void	cmd_not_found(t_msh *msh)
 	ft_fd_printf(2, "Error: %s : command not found\n", msh->tkns->cmd);
 }
 
-static t_redir	is_there_redir(t_msh *msh, int *pos)
+/* static t_redir	is_there_redir(t_msh *msh, int *pos)
 {
 	int		i;
 	char	*arg;
@@ -55,9 +55,9 @@ static t_redir	is_there_redir(t_msh *msh, int *pos)
 	}
 	*pos = i;
 	return (NO_REDIR);
-}
+} */
 
-static void	print_redir_info(t_redir redir_type, int redir_pos)
+/* static void	print_redir_info(t_redir redir_type, int redir_pos)
 {
 	printf("Tipo de redirección: ");
 	if (redir_type == NO_REDIR)
@@ -73,13 +73,13 @@ static void	print_redir_info(t_redir redir_type, int redir_pos)
 	else if (redir_type == PIPE)
 		printf("Pipe (|)\n");
 	printf("Posición del token: %d\n", redir_pos);
-}
+} */
 
 void	check_tokens(char *input, t_msh *msh)
 {
 	int	count_tok;
-	int		redir_pos;
-	t_redir	redir_type;
+	/* int		redir_pos;
+	t_redir	redir_type; */
 
 	if (!input || !*input)
 		return ;
@@ -91,8 +91,8 @@ void	check_tokens(char *input, t_msh *msh)
 		count_tok++;
 	msh->tkns->token_count = count_tok;
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
-	redir_type = is_there_redir(msh, &redir_pos);
-	print_redir_info(redir_type, redir_pos);
+	/* redir_type = is_there_redir(msh, &redir_pos);
+	print_redir_info(redir_type, redir_pos); */
 	if (is_builtin(msh->tkns->cmd))
 		exc_cmd(msh, count_tok);
 	else if (find_cmd(msh->tkns->cmd, msh) == -1)
@@ -167,8 +167,8 @@ void	exc_cmd(t_msh *msh, int count_tok)
 		ft_unset(msh, count_tok);
 	else if (ft_strcmp(msh->tkns->cmd, "test") == 0)
 		ft_fd_printf(1, "Envarcount: %d\n", msh->env_var_count);
-	else if (ft_strcmp(msh->tkns->cmd, "test2") == 0)
-		env_var_exist(msh);
+/* 	else if (ft_strcmp(msh->tkns->cmd, "test2") == 0)
+		env_var_exist(msh); */
 }
 // printf("test ejecuta: \n");
 // ft_fd_printf(1, "sig_out: %d\n", msh->last_exit_code);

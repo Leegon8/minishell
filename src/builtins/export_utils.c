@@ -12,28 +12,26 @@
 
 #include "minishell.h"
 
-int	env_var_exist(t_msh *msh)
+int	env_var_exist(t_msh *msh, char *name)
 {
-	int i;
-	char *name;
+	int	i;
 
 	i = 0;
-	name = get_var_name(msh->tkns->args[1]);
-	while (msh->env->names[i] && (ft_strcmp(msh->env->names[i], name) != 0))
-		i++;
-	if (i < msh->env_var_count)
+	if (!name)
+		return (FALSE);
+	while (msh->env->names[i])
 	{
-		free(name);
-		return (TRUE);
+		if (ft_strcmp(msh->env->names[i], name) == 0)
+			return (TRUE);
+		i++;
 	}
-	free (name);
 	return (FALSE);
 }
 
 int	env_var_pos(t_msh *msh)
 {
-	int pos;
-	char *name;
+	int		pos;
+	char	*name;
 
 	pos = 0;
 	name = get_var_name(msh->tkns->args[1]);

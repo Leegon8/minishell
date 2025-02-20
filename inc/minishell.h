@@ -174,8 +174,8 @@ int		ft_env(t_msh *msh);
 void	ft_exit(t_msh *msh);
 
 /* --------------------------------------------------------- export_utils.c */
-int		env_var_exist(t_msh *msh);
-int		env_var_pos(t_msh *msh);
+int		env_var_exist(t_msh *msh, char *name);
+int		env_var_pos(t_msh *msh); // -------> REPETIDO!!!
 char	*get_var_name(char *var);
 char	*get_var_value(char *var);
 int		update_env_var_value(t_msh *msh, int pos, char *value);
@@ -200,7 +200,7 @@ int		ft_unset(t_msh *msh, int tok_num);
 
 /* --------------------------------------------------------------- ms_env.c */
 int		env_var_count(t_msh *msh);
-int		find_env_pos(t_msh *msh, char *var_name);
+int		find_env_pos(t_msh *msh, char *var_name); // -------> REPETIDO!!!
 int		check_envs(void);
 void	update_shlvl(t_msh *msh);
 int		env_init_values(t_env *env, t_msh *msh);

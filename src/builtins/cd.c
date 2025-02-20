@@ -59,11 +59,11 @@ void	handle_cd_path(t_msh *msh)
 		return ;
 	if (chdir(new_path) == -1)
 	{
-		if (errno == EACCES)        // No tenemos permisos
+		if (errno == EACCES)
 			handle_cd_error(new_path, EACCES);
-		else if (errno == ENOTDIR)  // No es un directorio
+		else if (errno == ENOTDIR)
 			handle_cd_error(new_path, ENOTDIR);
-		else                        // No existe o cualquier otro error
+		else
 			handle_cd_error(new_path, errno);
 	}
 	else
