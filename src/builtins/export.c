@@ -34,10 +34,15 @@ int	add_env_var(t_msh *msh, char *name, char *value)
 	char	**new_values;
 
 	count = env_var_count(msh);
-	new_names = ft_calloc(count + 2, sizeof(char *));
-	new_values = ft_calloc(count + 2, sizeof(char *));
+	new_names = malloc(sizeof(char *) * (count + 2));
+	new_values = malloc(sizeof(char *) * (count + 2));
+	// new_names = ft_calloc(count * 2, sizeof(char *));
+	// new_values = ft_calloc(count * 2, sizeof(char *));
 	if (!new_names || !new_values)
+	{
+		printf("Allocation error!!! <<<<<<<<<<<<<<<<<<<\n");
 		return (FALSE);
+	}
 	count = -1;
 	while (msh->env->names[++count])
 	{
@@ -80,8 +85,10 @@ void	handle_export_arg(t_msh *msh)
 		return ;
 	name = get_var_name(msh->tkns->args[1]);
 	value = get_var_value(msh->tkns->args[1]);
-	ft_fd_printf(2, "NOMBRE????: `%s'\n", name);
-	ft_fd_printf(2, "VALOR?????: `%s'\n", value);
+	//ft_fd_printf(2, "NOMBRE????: `%s'\n", name);
+	//ft_fd_printf(2, "VALOR?????: `%s'\n", value);
+	if (!name)
+		return ;
 	if (env_var_exist(msh))
 	{
 		pos = env_var_pos(msh);
@@ -100,7 +107,7 @@ int	ft_export(t_msh *msh, int tok_num)
 {
 	if (tok_num == 1)
 	{
-		print_export_vars(msh);
+		print_export_vars(msh); //PROBLEM
 		return (TRUE);
 	}
 	if (tok_num != 2)

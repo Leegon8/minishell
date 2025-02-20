@@ -63,9 +63,11 @@ void	update_shlvl(t_msh *msh)
 int	env_init_values(t_env *env, t_msh *msh)
 {
 	int		i;
+	int		j;
 	char	*eq_sep;
 
 	i = 0;
+	j = 0;
 	eq_sep = NULL;
 	env->home = getenv("HOME");
 	env->old_pwd = getenv("OLDPWD");
@@ -76,13 +78,16 @@ int	env_init_values(t_env *env, t_msh *msh)
 		eq_sep = ft_strchr(msh->envs[i], '=');
 		if (eq_sep)
 		{
-			env->names[i] = ft_strndup(msh->envs[i], (eq_sep - msh->envs[i]));
-			env->values[i] = ft_strdup(eq_sep + 1);
-			if (!env->names[i] || !env->values[i])
+			env->names[j] = ft_strndup(msh->envs[i], (eq_sep - msh->envs[i]));
+			env->values[j] = ft_strdup(eq_sep + 1);
+			if (!env->names[j] || !env->values[j])
 				return (ft_fd_printf(2, "%s", E_ENVGET), ft_err(msh, -1));
+			j++;
 		}
 		i++;
 	}
+	env->names[j] = NULL;
+	env->values[j] = NULL;
 	update_shlvl(msh);
 	return (TRUE);
 }
