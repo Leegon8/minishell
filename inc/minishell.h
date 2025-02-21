@@ -67,7 +67,8 @@ enum redir
 	REDIR_OUT,
 	REDIR_APPEND,
 	REDIR_HERE,
-	PIPE
+	PIPE,
+	REDIR_ERROR
 };
 
 struct	s_environment
@@ -304,6 +305,13 @@ int		is_operator(char c);
 int		size_token(char *input, t_tok *tok);
 char	*create_token(char *input, int len, t_tok *tok);
 void	ft_token(char *input, t_tok *tok);
+//static void	print_error_msg(char c);
+
+/* --------------------------------------------------------- redirections.c */
+void	redir_checker(t_msh *msh);
+t_redir	check_syntax_redir(char **tkn, int pos);
+int	has_redirection(t_tok *tok);
+
 
 /* /////////////////////////////////////////////////////////////////////////////////  TOOLS */
 

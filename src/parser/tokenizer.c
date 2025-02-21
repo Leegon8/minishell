@@ -30,7 +30,7 @@ int	size_token(char *input, t_tok *tok)
 		{
 			if (i == 0)
 				return (TRUE);
-			break;
+			break ;
 		}
 		if (is_quote(input[i]))
 		{

@@ -31,7 +31,7 @@ EXEC = executor executor_utils output_redir
 MAIN = minishell init signals rline
 
 PARSER = builtins lexer parser quote_expander quote_lexer quote_lexer_tools \
-		token_tools tokenizer
+		token_tools tokenizer redirections
 
 TOOLS = err_handle free tools heredoc
 
