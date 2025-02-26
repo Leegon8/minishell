@@ -18,7 +18,7 @@ static void	print_error_msg(char c)
 	ft_fd_printf(2, "minishell: syntax error near unexpected token `%c'\n", c);
 }
 
-// Función que verifica si hay redirección 
+// Verifies if it has a redirection and returns the position
 int	has_redirection(t_tok *tok)
 {
 	int	i;
@@ -33,6 +33,7 @@ int	has_redirection(t_tok *tok)
 	return (-1);
 }
 
+// Returns the redirection type
 t_redir	check_syntax_redir(char **tkn, int pos)
 {
 	int		len;
