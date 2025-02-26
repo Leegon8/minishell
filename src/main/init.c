@@ -50,6 +50,8 @@ int	tok_alloc_struct(t_tok **tok)
 	(*tok)->type = T_WORD;
 	(*tok)->is_heredoc = 0;
 	(*tok)->heredoc_delim = NULL;
+	(*tok)->redir_pos = -1;
+	(*tok)->redir_type = NO_REDIR;
 	(*tok)->prev = NULL;
 	(*tok)->next = NULL;
 	return (TRUE);

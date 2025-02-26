@@ -31,11 +31,13 @@ void	check_tokens(char *input, t_msh *msh)
 		count_tok++;
 	msh->tkns->token_count = count_tok;
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
-	redir_checker(msh);
-	if (is_builtin(msh->tkns->cmd))
-		exc_cmd(msh, count_tok);
-	else if (find_cmd(msh->tkns->cmd, msh) == -1)
-		cmd_not_found(msh);
+	if (!redir_checker(msh))
+	{
+		if (is_builtin(msh->tkns->cmd))
+			exc_cmd(msh, count_tok);
+		else if (find_cmd(msh->tkns->cmd, msh) == -1)
+			cmd_not_found(msh);
+	}
 	restore_signals();
 	free(msh->tkns->cmd);
 	msh->tkns->cmd = NULL;
@@ -106,6 +108,8 @@ void	exc_cmd(t_msh *msh, int count_tok)
 		ft_unset(msh, count_tok);
 	else if (ft_strcmp(msh->tkns->cmd, "test") == 0)
 		ft_fd_printf(1, "Envarcount: %d\n", msh->env_var_count);
+	else
+		return ;
 /* 	else if (ft_strcmp(msh->tkns->cmd, "test2") == 0)
 		env_var_exist(msh); */
 }

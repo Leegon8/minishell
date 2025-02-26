@@ -36,28 +36,25 @@ int	has_redirection(t_tok *tok)
 t_redir	check_syntax_redir(char **tkn, int pos)
 {
 	int		len;
-	char	*arg;
 
 	if (!tkn || !tkn[pos] || pos < 0)
 		return (NO_REDIR);
 	len = ft_strlen(tkn[pos]);
-	arg = tkn[pos];
-	if (len == 2)
+	if (len == 2 || len == 1)
 	{
-		if (arg[0] == '<' && arg[1] == '<')
-			return (REDIR_HERE);
-		if (arg[0] == '>' && arg[1] == '>')
-			return (REDIR_APPEND);
-	}
-	if (len == 1)
-	{
-		if (arg[0] == '<')
-			return (REDIR_IN);
-		if (arg[0] == '>')
+		if (ft_strcmp(tkn[pos], ">") == 0)
 			return (REDIR_OUT);
-		if (arg[0] == '|')
+		if (ft_strcmp(tkn[pos], ">>") == 0)
+			return (REDIR_APPEND);
+		if (ft_strcmp(tkn[pos], "<") == 0)
+			return (REDIR_IN);
+		if (ft_strcmp(tkn[pos], "<<") == 0)
+			return (REDIR_HERE);
+		if (ft_strcmp(tkn[pos], "|") == 0)
 			return (PIPE);
 	}
+	if (len > 2)
+		print_error_msg(tkn[pos][1]);
 	return (REDIR_ERROR);
 }
 
@@ -76,27 +73,50 @@ static void	print_redir_info(t_redir redir_type, int redir_pos)
 		printf("Heredoc (<<)\n");
 	else if (redir_type == PIPE)
 		printf("Pipe (|)\n");
-	printf("Posición del token: %d\n", redir_pos);
+	printf("Posición redirección: %d\n", redir_pos);
+}
+
+void	manage_redir(t_msh *msh, t_redir type)
+{
+	int	file_pos;
+
+	file_pos = msh->tkns->redir_pos + 1;
+	// Output redirection
+	if (type == REDIR_OUT || type == REDIR_APPEND)
+	{
+		msh->mpip->outfile = msh->tkns->args[file_pos];
+		if (msh->mpip->outfile == NULL)
+		{
+			ft_fd_printf(2, E_NW);
+			return ;	
+		}
+		if (!handle_output_file(msh, msh->mpip->outfile))
+			printf("prueba\n");//exec_redir(msh)//TO DO
+		else
+			return ;
+	}
+	restore_redirections(msh);
 }
 
 // Función generica para verificar sintaxis redirecciones
-void	redir_checker(t_msh *msh)
+int	redir_checker(t_msh *msh)
 {
 	int		redir_pos;
 	t_redir	redir_type;
 
 	if (!msh || !msh->tkns || !msh->tkns->args)
-		return ;
+		return (FALSE);
 	redir_pos = has_redirection(msh->tkns);
+	msh->tkns->redir_pos = redir_pos;
+	redir_type = check_syntax_redir(msh->tkns->args, redir_pos);
 	if (redir_pos >= 0)
 	{
-		redir_type = check_syntax_redir(msh->tkns->args, redir_pos);
-		if (redir_type == REDIR_ERROR)
-		{
-			if (msh->tkns->args[redir_pos]
-				&& ft_strlen(msh->tkns->args[redir_pos]) > 1)
-				print_error_msg(msh->tkns->args[redir_pos][1]);
-		}
+		if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
+			return (FALSE);
+		else
+			manage_redir(msh, redir_type);
 		print_redir_info(redir_type, redir_pos);
+		return (TRUE);
 	}
+	return (FALSE);
 }

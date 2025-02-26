@@ -74,6 +74,5 @@ int	update_env_var_value(t_msh *msh, int pos, char *value)
 	free(msh->env->values[pos]);
 	new_values = ft_strdup(value);
 	msh->env->values[pos] = new_values;
-	printf("maravilla %s\n", msh->env->values[pos]);
 	return (TRUE);
 }

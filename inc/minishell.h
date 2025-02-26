@@ -89,13 +89,13 @@ struct s_executor
 	int		status_2;
 	int		fd_in;
 	int		fd_out;
-	int     backup_in;      /* Backup del fd de entrada original */
-    int     backup_out;     /* Backup del fd de salida original */
-    char    *infile;        /* Nombre del archivo de entrada */
-    char    *outfile;       /* Nombre del archivo de salida */
-    int     append;         /* Flag para modo append (>>) */
-    int     heredoc;        /* Flag para heredoc (<<) */
-    char    *delimiter;     /* Delimitador para heredoc */
+	int		backup_in;		/* Backup del fd de entrada original */
+	int		backup_out;		/* Backup del fd de salida original */
+	char	*infile;		/* Nombre del archivo de entrada */
+	char	*outfile;		/* Nombre del archivo de salida */
+	int		append;			/* Flag para modo append (>>) */
+	int		heredoc;		/* Flag para heredoc (<<) */
+	char	*delimiter;		/* Delimitador para heredoc */
 };
 
 typedef struct s_command
@@ -118,9 +118,11 @@ struct	s_tokenizer
 	char				**args;
 	int					token_count;
 	int					len;
+	t_tokty				type;
 	int					is_heredoc;
 	char				*heredoc_delim;
-	t_tokty				type;
+	int					redir_pos;
+	t_redir				redir_type;
 	struct s_tokenizer	*prev;
 	struct s_tokenizer	*next;
 };
@@ -308,9 +310,14 @@ void	ft_token(char *input, t_tok *tok);
 //static void	print_error_msg(char c);
 
 /* --------------------------------------------------------- redirections.c */
-void	redir_checker(t_msh *msh);
-t_redir	check_syntax_redir(char **tkn, int pos);
-int	has_redirection(t_tok *tok);
+// static void	print_error_msg(char c)
+int			has_redirection(t_tok *tok);
+t_redir		check_syntax_redir(char **tkn, int pos);
+// static void	init_redir(t_msh *msh)
+// static void	print_redir_info(t_redir redir_type, int redir_pos)
+void	manage_redir(t_msh *msh, t_redir type);
+int		redir_checker(t_msh *msh);
+
 
 
 /* /////////////////////////////////////////////////////////////////////////////////  TOOLS */
@@ -350,6 +357,7 @@ int	handle_heredoc(t_msh *msh, char *delimiter);
 # define E_CDARG		"cd: $ARG: No such file or directory\n"
 # define E_SYNTX		"Error: syntax not accepted"
 # define E_PIP_SYNTX	"minishell: syntax error near unexpected token `|'\n"
+# define E_NW			"minishell: syntax error near unexpected token `newline'\n"
 # define E_PIPE			"Pipe error"
 # define E_FORK			"Fork error"
 # define E_DUP			"Dup2 error"

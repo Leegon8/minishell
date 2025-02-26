@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+
 int setup_redirections(t_msh *msh)
 {
     if (msh->mpip->outfile && !handle_output_file(msh, msh->mpip->outfile))
@@ -39,19 +40,19 @@ int	is_command_executable(char *fullpath)
 // 	}
 // }
 
-static void  child_process(t_msh *msh, char *fullpath)
+static void	child_process(t_msh *msh, char *fullpath)
 {
-    if (!setup_redirections(msh))  // Añadir esta línea
-    {
-        free(fullpath);
-        exit(EXIT_FAILURE);
-    }
-    if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
-    {
-        cmd_not_found(msh);
-        free(fullpath);
-        exit(EXIT_FAILURE);
-    }
+	if (!setup_redirections(msh))  // Añadir esta línea
+	{
+		free(fullpath);
+		exit(EXIT_FAILURE);
+	}
+	if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
+	{
+		cmd_not_found(msh);
+		free(fullpath);
+		exit(EXIT_FAILURE);
+	}
 }
 
 static void	parent_process(pid_t pid, char *fullpath)
