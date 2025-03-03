@@ -26,14 +26,14 @@ BUILTINS = cd cd_utils echo echo_utils env exit export export_utils pwd unset
 
 ENV = ms_env ms_varenv
 
-EXEC = executor executor_utils output_redir input_redir
+EXEC = executor executor_utils output_redir input_redir exec_redir
 
 MAIN = minishell init signals rline
 
 PARSER = builtins lexer parser quote_expander quote_lexer quote_lexer_tools \
 		token_tools tokenizer redirections
 
-TOOLS = err_handle free tools heredoc
+TOOLS = err_handle free tools heredoc manage_redir
 
 SRCS = $(addsuffix .c, $(addprefix src/builtins/, $(BUILTINS))) \
 		$(addsuffix .c, $(addprefix src/env/, $(ENV))) \

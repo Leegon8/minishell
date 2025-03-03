@@ -24,7 +24,6 @@ int handle_output_file(t_msh *msh, char *filename)
 	if (fd == -1)
 	{
 		perror ("minishell");
-		close(msh->mpip->backup_out);
 		return (FALSE);
 	}
 	if (dup2(fd, STDOUT_FILENO) == -1)
@@ -35,8 +34,6 @@ int handle_output_file(t_msh *msh, char *filename)
 		return (FALSE);
 	}
 	close(fd);
-	dup2(msh->mpip->backup_out, STDOUT_FILENO);
-	close(msh->mpip->backup_out);
 	return (TRUE);
 }
 

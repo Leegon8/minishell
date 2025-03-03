@@ -38,7 +38,7 @@ t_redir	check_syntax_redir(char **tkn, int pos)
 {
 	int		len;
 
-	if (!tkn || !tkn[pos] || pos < 0)
+	if (!tkn || pos < 0 || !tkn[pos])
 		return (NO_REDIR);
 	len = ft_strlen(tkn[pos]);
 	if (len == 2 || len == 1)
@@ -77,27 +77,31 @@ static void	print_redir_info(t_redir redir_type, int redir_pos)
 	printf("Posición redirección: %d\n", redir_pos);
 }
 
-void	manage_redir(t_msh *msh, t_redir type)
-{
-	int	file_pos;
+// void	handle_redir(t_msh *msh, t_redir type)
+// {
+// 	int	file_pos;
 
-	file_pos = msh->tkns->redir_pos + 1;
-	// Output redirection
-	if (type == REDIR_OUT || type == REDIR_APPEND)
-	{
-		msh->mpip->outfile = msh->tkns->args[file_pos];
-		if (msh->mpip->outfile == NULL)
-		{
-			ft_fd_printf(2, E_NW);
-			return ;	
-		}
-		if (!handle_output_file(msh, msh->mpip->outfile))
-			printf("prueba\n");//exec_redir(msh)//TO DO
-		else
-			return ;
-	}
-	restore_redirections(msh);
-}
+// 	file_pos = msh->tkns->redir_pos + 1;
+// 	// Output redirection
+// 	if (type == REDIR_OUT || type == REDIR_APPEND)
+// 	{
+// 		msh->mpip->outfile = msh->tkns->args[file_pos];
+// 		if (msh->mpip->outfile == NULL)
+// 		{
+// 			ft_fd_printf(2, E_NW);
+// 			return ;	
+// 		}
+// 		if (!handle_output_file(msh, msh->mpip->outfile))
+// 		{
+// 			printf("HANDLE_OUTPUT IS FALSE\n");
+// 			//redirection_manager(msh);
+// 		}
+// 		else
+// 			return ;
+// 	}
+// 	restore_redirections(msh);
+// }
+
 
 // Función generica para verificar sintaxis redirecciones
 int	redir_checker(t_msh *msh)
@@ -115,7 +119,7 @@ int	redir_checker(t_msh *msh)
 		if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
 			return (FALSE);
 		else
-			manage_redir(msh, redir_type);
+			handle_redir(msh, redir_type);
 		print_redir_info(redir_type, redir_pos);
 		return (TRUE);
 	}

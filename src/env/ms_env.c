@@ -69,7 +69,9 @@ int	env_init_values(t_env *env, t_msh *msh)
 	i = 0;
 	j = 0;
 	eq_sep = NULL;
-	env->home = getenv("HOME");
+	env->home = ft_strdup(getenv("HOME"));
+	if (!env->home)
+		return (ft_fd_printf(2, "%s", E_MEMASF) * 0);
 	env->old_pwd = getenv("OLDPWD");
 	env->path = getenv("PATH");
 	getcwd(env->pwd, PATH_MAX);

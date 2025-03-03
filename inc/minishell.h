@@ -216,6 +216,9 @@ char	*update_env(t_msh *msh, char *name, char *value); // -------> REPETIDO!!!
 
 /* //////////////////////////////////////////////////////////////////////////////  EXECUTOR */
 
+/* ----------------------------------------------------------- exec_redir.c */
+
+
 /* ------------------------------------------------------------- executor.c */
 int		is_command_executable(char *fullpath);
 /*static void	child_process(t_msh *msh, char *fullpath)*/
@@ -315,7 +318,7 @@ int			has_redirection(t_tok *tok);
 t_redir		check_syntax_redir(char **tkn, int pos);
 // static void	init_redir(t_msh *msh)
 // static void	print_redir_info(t_redir redir_type, int redir_pos)
-void	manage_redir(t_msh *msh, t_redir type);
+void	handle_redir(t_msh *msh, t_redir type);
 int		redir_checker(t_msh *msh);
 
 
@@ -333,8 +336,10 @@ void	free_tok(t_tok *tok);
 void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 
 /* ---------------------------------------------------------------- heredoc.c */
-int	handle_heredoc(t_msh *msh, char *delimiter);
+int		handle_heredoc(t_msh *msh, char *delimiter);
 
+/* ------------------------------------------------------------ manage_redir.c */
+void	redirection_manager(t_msh *msh);
 
 /******************************* Error macros *****************************/
 

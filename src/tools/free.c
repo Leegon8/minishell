@@ -32,24 +32,10 @@ void	ft_free_array(char **array)
 /* libera la memoria reservada para la estructura de env */
 void	free_env(t_env *env)
 {
-	int	i;
-
 	free(env->pwd);
 	free(env->home);
-	if (env->names)
-	{
-		i = 0;
-		while (env->names[i])
-			free(env->names[i++]);
-		free(env->names);
-	}
-	if (env->values)
-	{
-		i = 0;
-		while (env->values[i])
-			free(env->values[i++]);
-		free(env->values);
-	}
+	ft_free_array(env->names);
+	ft_free_array(env->values);
 	free(env);
 }
 
