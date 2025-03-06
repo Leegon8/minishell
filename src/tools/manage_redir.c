@@ -38,7 +38,7 @@
 // 	} 
 // }
 
-static char **extract_command(char **args, int redir_pos)
+/* static char **extract_command(char **args, int redir_pos)
 {
     char **cmd_args = malloc(sizeof(char *) * (redir_pos + 1));
     if (cmd_args == NULL)
@@ -110,6 +110,6 @@ void handle_redir(t_msh *msh, t_redir type)
         dup2(msh->mpip->backup_out, STDOUT_FILENO);
         close(msh->mpip->backup_out);
     }
-}
+} */
 
 

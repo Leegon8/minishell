@@ -33,7 +33,7 @@ int handle_output_file(t_msh *msh, char *filename)
 		close(fd);
 		return (FALSE);
 	}
-	close(fd);
+	// close(fd);
 	return (TRUE);
 }
 

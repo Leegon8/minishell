@@ -13,14 +13,14 @@
 #include "minishell.h"
 
 
-int setup_redirections(t_msh *msh)
+/* int setup_redirections(t_msh *msh)
 {
     if (msh->mpip->outfile && !handle_output_file(msh, msh->mpip->outfile))
         return (FALSE);
     if (msh->mpip->infile && !handle_input_file(msh, msh->mpip->infile))
         return (FALSE);
     return (TRUE);
-}
+} */
 
 int	is_command_executable(char *fullpath)
 {
@@ -29,24 +29,13 @@ int	is_command_executable(char *fullpath)
 	return (FALSE);
 }
 
-// Afegir una verificacio de redireccions i pipes
-// static void	child_process(t_msh *msh, char *fullpath)
-// {
-// 	if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
-// 	{
-// 		cmd_not_found(msh);
-// 		free(fullpath);
-// 		exit(EXIT_FAILURE);
-// 	}
-// }
-
 static void	child_process(t_msh *msh, char *fullpath)
 {
-	if (!setup_redirections(msh))  // Añadir esta línea
-	{
-		free(fullpath);
-		exit(EXIT_FAILURE);
-	}
+	// if (!setup_redirections(msh))  // Añadir esta línea
+	// {
+	// 	free(fullpath);
+	// 	exit(EXIT_FAILURE);
+	// }
 	if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
 	{
 		cmd_not_found(msh);
@@ -70,7 +59,7 @@ int	execute_command(t_msh *msh, char *fullpath)
 	pid = fork();
 	if (pid == -1)
 	{
-		printf("Error fork\n");
+		ft_fd_printf(2, "bash: fork: Cannot allocate memory\n");
 		free(fullpath);
 		return (-1);
 	}
