@@ -13,29 +13,31 @@
 #include "minishell.h"
 
 
-/* int setup_redirections(t_msh *msh)
+int setup_redirections(t_msh *msh)
 {
     if (msh->mpip->outfile && !handle_output_file(msh, msh->mpip->outfile))
         return (FALSE);
     if (msh->mpip->infile && !handle_input_file(msh, msh->mpip->infile))
         return (FALSE);
     return (TRUE);
-} */
+}
 
 int	is_command_executable(char *fullpath)
 {
 	if (access(fullpath, F_OK) == 0 && access(fullpath, X_OK) == 0)
 		return (TRUE);
+	else
+		printf("ERROOOOOOOOR\n");
 	return (FALSE);
 }
 
 static void	child_process(t_msh *msh, char *fullpath)
 {
-	// if (!setup_redirections(msh))  // Añadir esta línea
-	// {
-	// 	free(fullpath);
-	// 	exit(EXIT_FAILURE);
-	// }
+	if (!setup_redirections(msh))  // Añadir esta línea
+	{
+		free(fullpath);
+		exit(EXIT_FAILURE);
+	}
 	if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
 	{
 		cmd_not_found(msh);
@@ -74,9 +76,14 @@ int	find_cmd(char *tkn, t_msh *msh)
 {
 	char	*fullpath;
 
-	fullpath = make_path(tkn, msh);
+	//printf("fullpath = %s\ntkn = %s\n", fullpath, tkn);
+	if (msh->tkns->redir_pos >= 0)
+		fullpath = ft_strdup(tkn);
+	else
+		fullpath = make_path(tkn, msh);
 	if (is_command_executable(fullpath))
 	{
+		printf("IAODJFPIJFSPJFSPIJFJSIPFPIIIIIIIIIII\n");
 		if (!execute_command(msh, fullpath))
 			return (-1);
 	}

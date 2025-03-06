@@ -59,7 +59,7 @@ t_redir	check_syntax_redir(char **tkn, int pos)
 	return (REDIR_ERROR);
 }
 
-static void	print_redir_info(t_redir redir_type, int redir_pos)
+/* static void	print_redir_info(t_redir redir_type, int redir_pos)
 {
 	printf("Tipo de redirección: ");
 	if (redir_type == NO_REDIR)
@@ -74,8 +74,8 @@ static void	print_redir_info(t_redir redir_type, int redir_pos)
 		printf("Heredoc (<<)\n");
 	else if (redir_type == PIPE)
 		printf("Pipe (|)\n");
-	printf("Posición redirección: %d\n", redir_pos);
-}
+	//printf("Posición redirección: %d\n", redir_pos);
+} */
 
 void	handle_redir(t_msh *msh, t_redir type)
 {
@@ -91,12 +91,12 @@ void	handle_redir(t_msh *msh, t_redir type)
 			ft_fd_printf(2, E_NW);
 			return ;	
 		}
-		if (handle_output_file(msh, msh->mpip->outfile))
+/* 		if (handle_output_file(msh, msh->mpip->outfile))
 			exec_redir(msh);
 		if (!handle_output_file(msh, msh->mpip->outfile))
-			printf("HANDLE_OUTPUT IS FALSE\n");
+			printf("HANDLE_OUTPUT IS FALSE\n"); */
 	}
-	restore_redirections(msh);
+	//restore_redirections(msh);
 }
 
 
@@ -116,8 +116,12 @@ int	redir_checker(t_msh *msh)
 		if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
 			return (FALSE);
 		else
-			handle_redir(msh, redir_type);
-		print_redir_info(redir_type, redir_pos);
+		{
+			char  *cmd = extract_command(msh->tkns->args, redir_pos);
+			printf("-------------> CMD = %s\n", cmd);
+			find_cmd(cmd, msh);//handle_redir(msh, redir_type);
+		}
+		//print_redir_info(redir_type, redir_pos);
 		return (TRUE);
 	}
 	return (FALSE);

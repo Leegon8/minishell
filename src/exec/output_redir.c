@@ -15,12 +15,12 @@
 int handle_output_file(t_msh *msh, char *filename)
 {
 	int fd;
-
-	printf("ENTRA EN HANDLE_OUTPUT______________________\n");
+	
 	msh->mpip->backup_out = dup (STDOUT_FILENO);
 	if (msh->mpip->backup_out == -1)
 		return (FALSE);
 	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	printf("AQUI1111111111111 --`----> out = %d\n", fd);
 	if (fd == -1)
 	{
 		perror ("minishell");
@@ -33,10 +33,9 @@ int handle_output_file(t_msh *msh, char *filename)
 		close(fd);
 		return (FALSE);
 	}
-	// close(fd);
-	return (TRUE);
+	close(fd);
+	return (1);
 }
-
 
 void	restore_redirections(t_msh *msh)
 {
@@ -52,4 +51,33 @@ void	restore_redirections(t_msh *msh)
 		close(msh->mpip->backup_in);
 		msh->mpip->backup_in = -1;
 	}
+}
+
+char	*extract_command(char**args, int redir_pos)
+{
+	char	*fullpath;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	fullpath = NULL;
+	tmp = NULL;
+	if (!args || !args[0])
+		return (NULL);
+ 	fullpath = ft_strdup(args[0]);
+	if (!fullpath)
+		return (NULL); 
+	while (i < redir_pos && args[i])
+	{
+		if (args[0])
+			i++;
+		tmp = ft_strjoin(fullpath, " ");
+		free(fullpath);
+		fullpath = NULL;
+		fullpath = ft_strjoin(tmp, args[i]);
+		free(tmp);
+		tmp = NULL;
+		i++;
+	}
+	return (fullpath);
 }

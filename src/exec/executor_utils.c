@@ -59,6 +59,7 @@ static char	*try_path(char *dir, char *cmd)
 	return (NULL);
 }
 
+// make the path of executable
 char	*make_path(char *cmd, t_msh *msh)
 {
 	char	**paths;
