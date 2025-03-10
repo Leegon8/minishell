@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/03/06 22:29:57 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/10 10:14:24 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ struct	s_minishell
 	int		env_var_count;
 	int		shlvl;
 	char	*heredoc_file;
+	int		saved_stdout;
 };
 
 /* //////////////////////////////////////////////////////////////////////////////  BUILTINS */

@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:13:10 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/03/07 01:04:15 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/10 10:19:58 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,41 +80,88 @@ int	execute_command(t_msh *msh, char *fullpath)
 	return (TRUE);
 }
 
-int	find_cmd(char *tkn, t_msh *msh)
+// int	find_cmd(char *tkn, t_msh *msh)
+// {
+// 	char	*fullpath;
+// 	char	*cmd;
+// 	int		i;
+	
+// 	i = 0;
+// 	while (tkn[i] != '>' && tkn[i] != '<' && tkn[i] != '\0')
+// 	{
+// 		printf("token string %s\n", tkn);
+// 		printf("token [%d]: %d\n", i, tkn[i]);
+// 		printf("1 token poition FIND_CMD = %d\n", i);
+//         i++;
+// 		if (tkn[i] == ' ')
+// 			i--;
+// 	}
+
+// 	printf("2 token poition FIND_CMD = %d\n", i);
+
+//     cmd = ft_strndup(tkn, i);
+// 	//printf("fullpath = %s\ntkn = %s\n", fullpath, tkn);
+// 	printf("CMD = %s .\n", cmd);
+// 	if (msh->tkns->redir_pos >= 0)
+// 		fullpath = ft_strdup(cmd);
+// 	else
+// 		fullpath = make_path(tkn, msh);
+// 	free(cmd);
+// 	if (is_command_executable(fullpath))
+// 	{
+// 		printf("IAODJFPIJFSPJFSPIJFJSIPFPIIIIIIIIIII\n");
+// 		if (!execute_command(msh, fullpath))
+// 			return (-1);
+// 	}
+// 	else
+// 	{
+// 		free(fullpath);
+// 		return (-1);
+// 	}
+// 	return (TRUE);
+// }
+
+int find_cmd(char *tkn, t_msh *msh)
 {
-	char	*fullpath;
-	char *cmd;
-	int		i;
+    char *fullpath;
+    char *cmd;
+    int i;
+    int end;
 
-	i = 0;
-	while (tkn[i] != '>' && tkn[i] != '<')
-	{
-		printf("token string %s\n", tkn);
-
-		printf("token [%d]: %d\n", i, tkn[i]);
-		printf("1 token poition FIND_CMD = %d\n", i);
+    i = 0;
+    while (tkn[i] != '>' && tkn[i] != '<' && tkn[i] != '\0')
+    {
+        // printf("token string %s\n", tkn);
+        // printf("token [%d]: %d\n", i, tkn[i]);
+        // printf("1 token poition FIND_CMD = %d\n", i);
         i++;
-	}
+    }
+    printf("token poition FIND_CMD = %d\n", i);
 
-	printf("2 token poition FIND_CMD = %d\n", i);
+    // Encontrar el último carácter no espacio
+    end = i - 1;
+    while (end >= 0 && tkn[end] == ' ')
+        end--;
 
-    cmd = ft_strndup(tkn, i);
-	//printf("fullpath = %s\ntkn = %s\n", fullpath, tkn);
-	if (msh->tkns->redir_pos >= 0)
-		fullpath = ft_strdup(tkn);
-	else
-		fullpath = make_path(tkn, msh);
-	free(cmd);
-	if (is_command_executable(fullpath))
-	{
-		printf("IAODJFPIJFSPJFSPIJFJSIPFPIIIIIIIIIII\n");
-		if (!execute_command(msh, fullpath))
-			return (-1);
-	}
-	else
-	{
-		free(fullpath);
-		return (-1);
-	}
-	return (TRUE);
+    cmd = ft_strndup(tkn, end + 1);
+    printf("CMD = %s.\n", cmd);
+	
+    if (msh->tkns->redir_pos >= 0)
+        fullpath = ft_strdup(cmd);
+    else
+        fullpath = make_path(cmd, msh);
+    free(cmd);
+
+    if (is_command_executable(fullpath))
+    {
+        printf("IAODJFPIJFSPJFSPIJFJSIPFPIIIIIIIIIII\n");
+        if (!execute_command(msh, fullpath))
+            return (-1);
+    }
+    else
+    {
+        free(fullpath);
+        return (-1);
+    }
+    return (TRUE);
 }
