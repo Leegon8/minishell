@@ -12,29 +12,32 @@
 
 #include "minishell.h"
 
-int handle_output_file(t_msh *msh, char *filename)
+int handle_output_file(t_msh *msh, char *filename, t_redir type)
 {
 	int fd;
 	
-	msh->mpip->backup_out = dup (STDOUT_FILENO);
+	msh->mpip->backup_out = dup(STDOUT_FILENO);
+	fd = 0;
 	if (msh->mpip->backup_out == -1)
 		return (FALSE);
-	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	printf("AQUI1111111111111 --`----> out = %d\n", fd);
+	if (type == REDIR_OUT)
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (type == REDIR_APPEND) // REDIR_APPEND
+		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		perror ("minishell");
+		perror ("Error opening file");
 		return (FALSE);
 	}
 	if (dup2(fd, STDOUT_FILENO) == -1)
 	{
-		perror("dup2");
-		close(msh->mpip->backup_out);
+		perror("Error redirecting soutput");
+		close(msh->mpip->backup_out); 
 		close(fd);
 		return (FALSE);
 	}
 	close(fd);
-	return (1);
+	return (TRUE);
 }
 
 void	restore_redirections(t_msh *msh)
@@ -53,7 +56,6 @@ void	restore_redirections(t_msh *msh)
 	}
 }
 
-
 // void restore_redirections(t_msh *msh)
 // {
 //     // Restaurar stdout si fue cambiado
@@ -65,32 +67,3 @@ void	restore_redirections(t_msh *msh)
 //     }
 //     // Agregar más restauraciones según sea necesario
 // }
-
-char	*extract_command(char**args, int redir_pos)
-{
-	char	*fullpath;
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	fullpath = NULL;
-	tmp = NULL;
-	if (!args || !args[0])
-		return (NULL);
- 	fullpath = ft_strdup(args[0]);
-	if (!fullpath)
-		return (NULL); 
-	while (i < redir_pos && args[i])
-	{
-		if (args[0])
-			i++;
-		tmp = ft_strjoin(fullpath, " ");
-		free(fullpath);
-		fullpath = NULL;
-		fullpath = ft_strjoin(tmp, args[i]);
-		free(tmp);
-		tmp = NULL;
-		i++;
-	}
-	return (fullpath);
-}

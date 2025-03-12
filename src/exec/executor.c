@@ -13,39 +13,34 @@
 #include "minishell.h"
 
 
-int setup_redirections(t_msh *msh)
-{
-    if (msh->mpip->outfile)
-    {
-        printf("Redirecting output to: %s\n", msh->mpip->outfile);
-        if (!handle_output_file(msh, msh->mpip->outfile))
-            return (FALSE);
-    }
-    if (msh->mpip->infile)
-    {
-        printf("Redirecting input from: %s\n", msh->mpip->infile);
-        if (!handle_input_file(msh, msh->mpip->infile))
-            return (FALSE);
-    }
-    return (TRUE);
-}
+// int setup_redirections(t_msh *msh)
+// {
+//     if (msh->mpip->outfile)
+//     {
+//         printf("Redirecting output to: %s\n", msh->mpip->outfile);
+//         if (!handle_output_file(msh, msh->mpip->outfile))
+//             return (FALSE);
+//     }
+//     if (msh->mpip->infile)
+//     {
+//         printf("Redirecting input from: %s\n", msh->mpip->infile);
+//         if (!handle_input_file(msh, msh->mpip->infile))
+//             return (FALSE);
+//     }
+//     return (TRUE);
+// }
 
 int	is_command_executable(char *fullpath)
 {
 	if (access(fullpath, F_OK) == 0 && access(fullpath, X_OK) == 0)
 		return (TRUE);
 	else
-		printf("COMANDO NO EJECUTABLE\n");
+		printf("COMANDO NO EJECUTABLE: %s\n", fullpath);
 	return (FALSE);
 }
 
 static void	child_process(t_msh *msh, char *fullpath)
 {
-	if (!setup_redirections(msh))  // Añadir esta línea
-	{
-		free(fullpath);
-		exit(EXIT_FAILURE);
-	}
 	if (execve(fullpath, msh->tkns->args, msh->envs) == -1)
 	{
 		cmd_not_found(msh);
@@ -80,88 +75,20 @@ int	execute_command(t_msh *msh, char *fullpath)
 	return (TRUE);
 }
 
-// int	find_cmd(char *tkn, t_msh *msh)
-// {
-// 	char	*fullpath;
-// 	char	*cmd;
-// 	int		i;
-	
-// 	i = 0;
-// 	while (tkn[i] != '>' && tkn[i] != '<' && tkn[i] != '\0')
-// 	{
-// 		printf("token string %s\n", tkn);
-// 		printf("token [%d]: %d\n", i, tkn[i]);
-// 		printf("1 token poition FIND_CMD = %d\n", i);
-//         i++;
-// 		if (tkn[i] == ' ')
-// 			i--;
-// 	}
-
-// 	printf("2 token poition FIND_CMD = %d\n", i);
-
-//     cmd = ft_strndup(tkn, i);
-// 	//printf("fullpath = %s\ntkn = %s\n", fullpath, tkn);
-// 	printf("CMD = %s .\n", cmd);
-// 	if (msh->tkns->redir_pos >= 0)
-// 		fullpath = ft_strdup(cmd);
-// 	else
-// 		fullpath = make_path(tkn, msh);
-// 	free(cmd);
-// 	if (is_command_executable(fullpath))
-// 	{
-// 		printf("IAODJFPIJFSPJFSPIJFJSIPFPIIIIIIIIIII\n");
-// 		if (!execute_command(msh, fullpath))
-// 			return (-1);
-// 	}
-// 	else
-// 	{
-// 		free(fullpath);
-// 		return (-1);
-// 	}
-// 	return (TRUE);
-// }
-
 int find_cmd(char *tkn, t_msh *msh)
 {
-    char *fullpath;
-    char *cmd;
-    int i;
-    int end;
+	char *fullpath;
 
-    i = 0;
-    while (tkn[i] != '>' && tkn[i] != '<' && tkn[i] != '\0')
-    {
-        // printf("token string %s\n", tkn);
-        // printf("token [%d]: %d\n", i, tkn[i]);
-        // printf("1 token poition FIND_CMD = %d\n", i);
-        i++;
-    }
-    printf("token poition FIND_CMD = %d\n", i);
-
-    // Encontrar el último carácter no espacio
-    end = i - 1;
-    while (end >= 0 && tkn[end] == ' ')
-        end--;
-
-    cmd = ft_strndup(tkn, end + 1);
-    printf("CMD = %s.\n", cmd);
-	
-    if (msh->tkns->redir_pos >= 0)
-        fullpath = ft_strdup(cmd);
-    else
-        fullpath = make_path(cmd, msh);
-    free(cmd);
-
-    if (is_command_executable(fullpath))
-    {
-        printf("IAODJFPIJFSPJFSPIJFJSIPFPIIIIIIIIIII\n");
-        if (!execute_command(msh, fullpath))
-            return (-1);
-    }
-    else
-    {
-        free(fullpath);
-        return (-1);
-    }
-    return (TRUE);
+	fullpath = make_path(tkn, msh);
+	if (is_command_executable(fullpath))
+	{
+		if (!execute_command(msh, fullpath))
+			return (-1);
+	}
+	else
+	{
+		free(fullpath);
+		return (-1);
+	}
+	return (TRUE);
 }
