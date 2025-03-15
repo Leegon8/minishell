@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 08:13:41 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/02/19 02:21:13 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/15 18:56:26 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	handle_sigint(int sig)
 /* aqui ignoramos el Ctrl - */
 void	handle_sigquit(int sig)
 {
+	exit_ft();
 	(void)sig;
 }
 

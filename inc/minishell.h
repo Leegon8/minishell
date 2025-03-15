@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/03/10 10:14:24 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/15 18:56:10 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,6 +344,10 @@ int		handle_heredoc(t_msh *msh, char *delimiter);
 
 /* ------------------------------------------------------------ manage_redir.c */
 void	redirection_manager(t_msh *msh);
+
+
+void	exit_ft(void);
+
 
 /******************************* Error macros *****************************/
 
