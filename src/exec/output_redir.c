@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:16:01 by lauriago          #+#    #+#             */
-/*   Updated: 2025/03/10 10:22:36 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/16 19:52:42 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,6 @@ void	restore_redirections(t_msh *msh)
 		msh->mpip->backup_in = -1;
 	}
 }
-
-
-// void restore_redirections(t_msh *msh)
-// {
-//     // Restaurar stdout si fue cambiado
-//     if (msh->saved_stdout > 0)
-//     {
-//         dup2(msh->saved_stdout, STDOUT_FILENO);
-//         close(msh->saved_stdout);
-//         msh->saved_stdout = -1;
-//     }
-//     // Agregar más restauraciones según sea necesario
-// }
 
 char	*extract_command(char**args, int redir_pos)
 {
