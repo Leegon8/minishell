@@ -30,7 +30,6 @@ static char	**redir_args(char** args, int redir_pos)
 	while ( i < redir_pos && args[i])
 	{
 		result[i] = ft_strdup(args[i]);
-		printf("result[i] = %s\n", result[i]);
 		if (!result[i])
 		{
 			ft_free_array(result);
@@ -63,6 +62,9 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type)
 	char 	*fullpath;
 	int		status;
 
+	// printf("DEBUG: Guardando descriptor original (STDOUT_FILENO=%d)\n", STDOUT_FILENO);
+	msh->mpip->backup_out = dup(STDOUT_FILENO);
+    // printf("DEBUG: Descriptor guardado en backup_out=%d\n", msh->mpip->backup_out);
 	fullpath = make_path(tkn, msh);
 	pid = fork();
 	if (pid == -1)

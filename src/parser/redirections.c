@@ -85,6 +85,7 @@ void	handle_redir(t_msh *msh, t_redir type)
 	// Output redirection
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 	{
+		msh->mpip->backup_out = 0;
 		msh->mpip->outfile = msh->tkns->args[file_pos];
 		if (msh->mpip->outfile == NULL)
 		{

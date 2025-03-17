@@ -19,7 +19,6 @@ void	shell_loop(t_msh *msh)
 
 	while (msh->end_sig == 0)
 	{
-		printf("Entra en el loop...\n");
 		input = readline("\033[0;96m🛸 Space_shell 👽:\e[0m");
 		if (!input)
 			msh->end_sig = 1;
@@ -28,7 +27,6 @@ void	shell_loop(t_msh *msh)
 		check_tokens(input, msh);
 		free(input);
 	}
-	printf("Sale del loop...\n");
 }
 
 int	main(int argc, char **argv, char **envs)

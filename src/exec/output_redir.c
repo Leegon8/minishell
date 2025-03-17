@@ -16,12 +16,13 @@ int handle_output_file(t_msh *msh, char *filename, t_redir type)
 {
 	int fd;
 	
+	printf("DEBUG: Guardando descriptor original (STDOUT_FILENO=%d)\n", STDOUT_FILENO);
 	msh->mpip->backup_out = dup(STDOUT_FILENO);
+	printf("DEBUG: Descriptor guardado en backup_out=%d\n", msh->mpip->backup_out);
 	fd = 0;
-	printf("Entra a handle_output_file\n");
 	if (msh->mpip->backup_out == -1)
 	{
-		printf("No hay backup_out ERROR!\n");
+		perror("ERROR: No se pudo duplicar STDOUT_FILENO");
 		return (FALSE);
 	}
 	if (type == REDIR_OUT)
@@ -55,7 +56,11 @@ void	restore_redirections(t_msh *msh)
 {
 	if (msh->mpip->backup_out != -1)
 	{
-		dup2(msh->mpip->backup_out, STDOUT_FILENO);
+		printf("DEBUG: Restaurando STDOUT_FILENO desde backup_out=%d\n", msh->mpip->backup_out);
+		int result = dup2(msh->mpip->backup_out, STDOUT_FILENO);
+		printf("DEBUG: Resultado de dup2: %d\n", result);
+		if (result == -1)
+            perror("ERROR: No se pudo restaurar STDOUT_FILENO");
 		close(msh->mpip->backup_out);
 		msh->mpip->backup_out = -1;
 	}
@@ -66,15 +71,3 @@ void	restore_redirections(t_msh *msh)
 		msh->mpip->backup_in = -1;
 	}
 }
-
-// void restore_redirections(t_msh *msh)
-// {
-//     // Restaurar stdout si fue cambiado
-//     if (msh->saved_stdout > 0)
-//     {
-//         dup2(msh->saved_stdout, STDOUT_FILENO);
-//         close(msh->saved_stdout);
-//         msh->saved_stdout = -1;
-//     }
-//     // Agregar más restauraciones según sea necesario
-// }

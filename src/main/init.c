@@ -64,6 +64,8 @@ int	mpip_alloc_struct(t_exe **mpip)
 	if (!*mpip)
 		return (FALSE);
 	ft_memset(*mpip, 0, sizeof(t_exe));
+	(*mpip)->backup_in = -1;
+	(*mpip)->backup_out = -1;
 	return (TRUE);
 }
 
