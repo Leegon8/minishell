@@ -392,7 +392,7 @@ void	redirection_manager(t_msh *msh);
 
 /******************************** Other macros ***************************/
 
-//# define PATH_MAX		4096
+# define PATH_MAX		4096
 # define MAX_ARGS		4096
 # define MAX_ENV_VARS	4096
 

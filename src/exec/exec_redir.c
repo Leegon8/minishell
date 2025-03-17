@@ -20,7 +20,7 @@ static char	**redir_args(char** args, int redir_pos)
 
 	if (!args || redir_pos <= 0)
 		return (NULL);
-		result = (char **)malloc(sizeof(char *) * (redir_pos + 1));
+	result = (char **)malloc(sizeof(char *) * (redir_pos + 1));
 	if (!result)
 	{
 		ft_fd_printf(2, "malloc failed");
