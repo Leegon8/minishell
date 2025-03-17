@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:31:02 by lauriago          #+#    #+#             */
-/*   Updated: 2025/03/15 17:42:07 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:45:02 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static char	**redir_args(char** args, int redir_pos)
 	{
 		result[i] = ft_strdup(args[i]);
 		if (!result[i])
-			ft_free_array(result);
+		{
+        	ft_free_array(result);
+            return (NULL);
+        }    
 		i++;
 	}
 	result[i] = NULL;
@@ -96,5 +99,4 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type)
             printf("Proceso hijo terminó debido a una señal: %d.\n", WTERMSIG(status));
     }
     printf("TERMINANDO EXEC_REDIR\n");
-    restore_redirections(msh);
 }

@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/03/15 18:59:32 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:46:00 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,14 @@ void	shell_loop(t_msh *msh)
         if (feof(stdin))
         {
             printf("EOF detectado en stdin.\n");
-            break;
+            break ;
         }
+		if (!input)
+		{
+			fprintf(stderr, "DEBUG: readline devolvió NULL\n");
+			msh->end_sig = 1;
+			break ;
+		}
 		if (!input)
 		{
 			msh->end_sig = 1;
