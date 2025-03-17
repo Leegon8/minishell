@@ -32,16 +32,3 @@ int	is_quote(char c)
 {
 	return (c == '\"' || c == '\'');
 }
-
-// token_type_t	type_token_def(t_tok *tok, char c)
-// {
-// 	if (is_quote(c))
-// 		tok->type = T_QUOTE;
-// 	if (is_operator(c))
-// 		tok->type = T_OPERATOR;
-// 	if (is_whitespace(c))
-// 		tok->type = T_WHITESPACE;
-// 	else if (!is_operator(c) && !is_quote(c) && !is_whitespace(c))
-// 		tok->type = T_WORD;
-// 	return (tok->type);
-// }

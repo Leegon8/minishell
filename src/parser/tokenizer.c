@@ -50,21 +50,9 @@ int	size_token(char *input, t_tok *tok)
 char	*create_token(char *input, int len, t_tok *tok)
 {
 	char	*new_token;
-	//int		i;
 
 	new_token = ft_strndup(input, len);
 	(void)tok;
-/* 	new_token = malloc(sizeof(char) * (len + 1));
-	if (!new_token)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		new_token[i] = input[i];
-		i++;
-	}
-	new_token[i] = '\0';
-	tok->cmd = new_token; */
 	return (new_token);
 }
 
@@ -73,7 +61,7 @@ void	ft_token(char *input, t_tok *tok)
 	int		i;
 	int		arg_index;
 
-	tok->args = malloc(MAX_ARGS * sizeof(char *));
+	tok->args = malloc(sizeof(char *) * MAX_ARGS);
 	if (!tok->args)
 		return ;
 	i = 0;
@@ -103,4 +91,9 @@ void	ft_token(char *input, t_tok *tok)
 	 	printf("tok[%d] = %s\n", i, tok->args[i]);
 	 }
 	tok->args[arg_index] = NULL;
+	if (arg_index == 0)
+	{
+		free(tok->args);
+		tok->args = NULL;
+	}
 }

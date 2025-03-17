@@ -18,12 +18,22 @@ int handle_output_file(t_msh *msh, char *filename, t_redir type)
 	
 	msh->mpip->backup_out = dup(STDOUT_FILENO);
 	fd = 0;
+	printf("Entra a handle_output_file\n");
 	if (msh->mpip->backup_out == -1)
+	{
+		printf("No hay backup_out ERROR!\n");
 		return (FALSE);
+	}
 	if (type == REDIR_OUT)
+	{
+		printf("Es REDIR_OUT\n");
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	}
 	else if (type == REDIR_APPEND) // REDIR_APPEND
+	{
+		printf("Es REDIR_APPEND!\n");
 		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	}
 	if (fd == -1)
 	{
 		perror ("Error opening file");
@@ -36,6 +46,7 @@ int handle_output_file(t_msh *msh, char *filename, t_redir type)
 		close(fd);
 		return (FALSE);
 	}
+	printf("Sale de handle_output_file with success exit\n");
 	close(fd);
 	return (TRUE);
 }

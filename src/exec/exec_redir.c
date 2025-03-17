@@ -30,8 +30,12 @@ static char	**redir_args(char** args, int redir_pos)
 	while ( i < redir_pos && args[i])
 	{
 		result[i] = ft_strdup(args[i]);
+		printf("result[i] = %s\n", result[i]);
 		if (!result[i])
+		{
 			ft_free_array(result);
+			return (NULL);
+		}
 		i++;
 	}
 	result[i] = NULL;
@@ -60,16 +64,18 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type)
 	int		status;
 
 	fullpath = make_path(tkn, msh);
-	printf("tkn = %s.\n", fullpath);
 	pid = fork();
 	if (pid == -1)
 	{
 		ft_fd_printf(2, "bash: fork: Cannot allocate memory\n");
 		return ;
 	}
-	if (pid == 0)
+	else if (pid == 0)
 		child_process_redir(msh, fullpath, type);
 	else
+	{
 		waitpid(pid, &status, 0);
+		free (fullpath);
+	}
 	printf("TERMINANDO EXEC_REDIR\n");
 }

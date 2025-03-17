@@ -16,28 +16,19 @@
 void	shell_loop(t_msh *msh)
 {
 	char	*input;
-	//int		i;
 
 	while (msh->end_sig == 0)
 	{
-		//i = 0;
+		printf("Entra en el loop...\n");
 		input = readline("\033[0;96m🛸 Space_shell 👽:\e[0m");
 		if (!input)
-		{
 			msh->end_sig = 1;
-			break ;
-		}
-		if (*input)
+		else
 			add_history(input);
 		check_tokens(input, msh);
 		free(input);
-		/*while (i < msh->tkns->token_count)
-		{
-			if (msh->tkns->args[i])
-				free(msh->tkns->args[i]);
-			i++;
-		}*/
 	}
+	printf("Sale del loop...\n");
 }
 
 int	main(int argc, char **argv, char **envs)

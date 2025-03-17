@@ -12,24 +12,6 @@
 
 #include "minishell.h"
 
-
-// int setup_redirections(t_msh *msh)
-// {
-//     if (msh->mpip->outfile)
-//     {
-//         printf("Redirecting output to: %s\n", msh->mpip->outfile);
-//         if (!handle_output_file(msh, msh->mpip->outfile))
-//             return (FALSE);
-//     }
-//     if (msh->mpip->infile)
-//     {
-//         printf("Redirecting input from: %s\n", msh->mpip->infile);
-//         if (!handle_input_file(msh, msh->mpip->infile))
-//             return (FALSE);
-//     }
-//     return (TRUE);
-// }
-
 int	is_command_executable(char *fullpath)
 {
 	if (access(fullpath, F_OK) == 0 && access(fullpath, X_OK) == 0)
