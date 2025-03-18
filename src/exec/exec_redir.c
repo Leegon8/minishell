@@ -62,9 +62,7 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type)
 	char 	*fullpath;
 	int		status;
 
-	// printf("DEBUG: Guardando descriptor original (STDOUT_FILENO=%d)\n", STDOUT_FILENO);
 	msh->mpip->backup_out = dup(STDOUT_FILENO);
-    // printf("DEBUG: Descriptor guardado en backup_out=%d\n", msh->mpip->backup_out);
 	fullpath = make_path(tkn, msh);
 	pid = fork();
 	if (pid == -1)
