@@ -76,7 +76,8 @@ char	*update_env(t_msh *msh, char *name, char *value)
 	int		i;
 
 	i = 0;
-	if (!value || !name)
+	if (!value || !name || !msh->env || !msh->env->names
+		|| !msh->env->values)
 		return (NULL);
 	while (msh->env->names[i] && msh->env->values[i])
 	{
@@ -87,9 +88,9 @@ char	*update_env(t_msh *msh, char *name, char *value)
 				return (NULL);
 			free(msh->env->values[i]);
 			msh->env->values[i] = new_value;
-			break ;
+			return (msh->env->values[i]);
 		}
 		i++;
 	}
-	return (msh->env->values[i]);
+	return (NULL);
 }

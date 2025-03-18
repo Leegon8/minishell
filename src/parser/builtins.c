@@ -39,31 +39,32 @@ void	check_tokens(char *input, t_msh *msh)
 			cmd_not_found(msh);
 	}
 	restore_signals();
-	free(msh->tkns->cmd);
-	msh->tkns->cmd = NULL;
+	cleanup_commands(msh);
+	// free(msh->tkns->cmd);
+	// msh->tkns->cmd = NULL;
 }
 
-// void	cleanup_commands(t_msh *msh)
-// {
-// 	int	i;
-// 	int	j;
+void	cleanup_commands(t_msh *msh)
+{
+	int	i;
+	int	j;
 
-// 	i = 0;
-// 	while (i < msh->cmd_count)
-// 	{
-// 		j = 0;
-// 		while (msh->cmds[i].args[j])
-// 		{
-// 			free(msh->cmds[i].args[j]);
-// 			j++;
-// 		}
-// 		free(msh->cmds[i].args);
-// 		i++;
-// 	}
-// 	free(msh->cmds);
-// 	msh->cmds = NULL;
-// 	msh->cmd_count = 0;
-// }
+	i = 0;
+	while (i < msh->cmd_count)
+	{
+		j = 0;
+		while (msh->cmds[i].args[j])
+		{
+			free(msh->cmds[i].args[j]);
+			j++;
+		}
+		free(msh->cmds[i].args);
+		i++;
+	}
+	free(msh->cmds);
+	msh->cmds = NULL;
+	msh->cmd_count = 0;
+}
 
 int	is_builtin(char	*token)
 {

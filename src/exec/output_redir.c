@@ -12,36 +12,55 @@
 
 #include "minishell.h"
 
-int handle_output_file(t_msh *msh, char *filename)
+int handle_output_file(t_msh *msh, char *filename, t_redir type)
 {
 	int fd;
 	
-	msh->mpip->backup_out = dup (STDOUT_FILENO);
+	printf("DEBUG: Guardando descriptor original (STDOUT_FILENO=%d)\n", STDOUT_FILENO);
+	msh->mpip->backup_out = dup(STDOUT_FILENO);
+	printf("DEBUG: Descriptor guardado en backup_out=%d\n", msh->mpip->backup_out);
+	fd = 0;
 	if (msh->mpip->backup_out == -1)
+	{
+		perror("ERROR: No se pudo duplicar STDOUT_FILENO");
 		return (FALSE);
-	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	printf("AQUI1111111111111 --`----> out = %d\n", fd);
+	}
+	if (type == REDIR_OUT)
+	{
+		printf("Es REDIR_OUT\n");
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	}
+	else if (type == REDIR_APPEND) // REDIR_APPEND
+	{
+		printf("Es REDIR_APPEND!\n");
+		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	}
 	if (fd == -1)
 	{
-		perror ("minishell");
+		perror ("Error opening file");
 		return (FALSE);
 	}
 	if (dup2(fd, STDOUT_FILENO) == -1)
 	{
-		perror("dup2");
-		close(msh->mpip->backup_out);
+		perror("Error redirecting soutput");
+		close(msh->mpip->backup_out); 
 		close(fd);
 		return (FALSE);
 	}
+	printf("Sale de handle_output_file with success exit\n");
 	close(fd);
-	return (1);
+	return (TRUE);
 }
 
 void	restore_redirections(t_msh *msh)
 {
 	if (msh->mpip->backup_out != -1)
 	{
-		dup2(msh->mpip->backup_out, STDOUT_FILENO);
+		printf("DEBUG: Restaurando STDOUT_FILENO desde backup_out=%d\n", msh->mpip->backup_out);
+		int result = dup2(msh->mpip->backup_out, STDOUT_FILENO);
+		printf("DEBUG: Resultado de dup2: %d\n", result);
+		if (result == -1)
+            perror("ERROR: No se pudo restaurar STDOUT_FILENO");
 		close(msh->mpip->backup_out);
 		msh->mpip->backup_out = -1;
 	}
@@ -53,31 +72,3 @@ void	restore_redirections(t_msh *msh)
 	}
 }
 
-char	*extract_command(char**args, int redir_pos)
-{
-	char	*fullpath;
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	fullpath = NULL;
-	tmp = NULL;
-	if (!args || !args[0])
-		return (NULL);
- 	fullpath = ft_strdup(args[0]);
-	if (!fullpath)
-		return (NULL); 
-	while (i < redir_pos && args[i])
-	{
-		if (args[0])
-			i++;
-		tmp = ft_strjoin(fullpath, " ");
-		free(fullpath);
-		fullpath = NULL;
-		fullpath = ft_strjoin(tmp, args[i]);
-		free(tmp);
-		tmp = NULL;
-		i++;
-	}
-	return (fullpath);
-}
