@@ -59,41 +59,29 @@ t_redir	check_syntax_redir(char **tkn, int pos)
 	return (REDIR_ERROR);
 }
 
-/* static void	print_redir_info(t_redir redir_type, int redir_pos)
-{
-	printf("Tipo de redirección: ");
-	if (redir_type == NO_REDIR)
-		printf("No hay redirección\n");
-	else if (redir_type == REDIR_IN)
-		printf("de entrada (<)\n");
-	else if (redir_type == REDIR_OUT)
-		printf("de salida (>)\n");
-	else if (redir_type == REDIR_APPEND)
-		printf("de salida con append (>>)\n");
-	else if (redir_type == REDIR_HERE)
-		printf("Heredoc (<<)\n");
-	else if (redir_type == PIPE)
-		printf("Pipe (|)\n");
-	//printf("Posición redirección: %d\n", redir_pos);
-} */
-
 void	handle_redir(t_msh *msh, t_redir type)
 {
 	int	file_pos;
 	
 	file_pos = msh->tkns->redir_pos + 1;
+	msh->mpip->outfile = msh->tkns->args[file_pos];
+	if (msh->mpip->outfile == NULL)
+	{
+		ft_fd_printf(2, E_NW);
+		return ;
+	}
+	if (is_builtin(msh->tkns->cmd))
+	{
+		manage_builting_redir(msh, type);
+		return ;
+	}
 	// Output redirection
 	if (type == REDIR_OUT || type == REDIR_APPEND)
-	{
 		msh->mpip->backup_out = 0;
-		msh->mpip->outfile = msh->tkns->args[file_pos];
-		if (msh->mpip->outfile == NULL)
-		{
-			ft_fd_printf(2, E_NW);
-			return ;
-		}
-		exec_redir(msh, msh->tkns->cmd, type);
-	}
+	// Input redirection
+	if (type == REDIR_IN || type == REDIR_HERE)
+		msh->mpip->backup_in = 0;
+	exec_redir(msh, msh->tkns->cmd, type);
 	restore_redirections(msh);
 }
 
@@ -114,7 +102,6 @@ int	redir_checker(t_msh *msh)
 			return (FALSE);
 		else
 			handle_redir(msh, redir_type);
-		//print_redir_info(redir_type, redir_pos);
 		return (TRUE);
 	}
 	return (FALSE);

@@ -12,17 +12,22 @@
 
 #include "minishell.h"
 
-int	handle_input_file(t_msh *msh, char *filename)
+int	handle_input_file(t_msh *msh, char *filename, t_redir type)
 {
 	int	fd;
 
-	fd = open(filename, O_RDONLY);
+	msh->mpip->backup_in = dup(STDIN_FILENO);
+	if (msh->mpip->backup_in == -1)
+		return (FALSE);
+	if (type == REDIR_IN)
+		fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
 		if (access(filename, F_OK) == 0)
 			ft_fd_printf(2, "minishell: %s: Permission denied\n", filename);
 		else
-			ft_fd_printf(2, "minishell: %s: No such file or directory\n", filename);
+			ft_fd_printf(2, "minishell: %s: No such file or directory\n",
+				filename);
 		return (FALSE);
 	}
 	msh->mpip->backup_in = dup(STDIN_FILENO);

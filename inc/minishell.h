@@ -221,6 +221,7 @@ char	*update_env(t_msh *msh, char *name, char *value); // -------> REPETIDO!!!
 /* ----------------------------------------------------------- exec_redir.c */
 // static char	**extract_command(char**args, int redir_pos)
 void		exec_redir(t_msh *msh, char *tkn, t_redir type);
+void		manage_builting_redir(t_msh *msh, t_redir type);
 
 /* ------------------------------------------------------------- executor.c */
 int		is_command_executable(char *fullpath);
@@ -234,10 +235,10 @@ int		find_cmd(char *tkn, t_msh *msh);
 /*static char	*try_path(char *dir, char *cmd)*/
 char	*make_path(char *tkn, t_msh *msh);
 /* ----------------------------------------------------------output_redir.c */
-int  handle_output_file(t_msh *msh, char *filename, t_redir type);
-void    restore_redirections(t_msh *msh);
+int  	handle_output_file(t_msh *msh, char *filename, t_redir type);
+void	restore_redirections(t_msh *msh);
 char	*extract_command(char**args, int redir_pos);
-int  handle_input_file(t_msh *msh, char *filename);
+int 	handle_input_file(t_msh *msh, char *filename, t_redir type);
 
 /* //////////////////////////////////////////////////////////////////////////////////  MAIN */
 

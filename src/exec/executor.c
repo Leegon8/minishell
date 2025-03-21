@@ -57,9 +57,9 @@ int	execute_command(t_msh *msh, char *fullpath)
 	return (TRUE);
 }
 
-int find_cmd(char *tkn, t_msh *msh)
+int	find_cmd(char *tkn, t_msh *msh)
 {
-	char *fullpath;
+	char	*fullpath;
 
 	fullpath = make_path(tkn, msh);
 	if (is_command_executable(fullpath))
