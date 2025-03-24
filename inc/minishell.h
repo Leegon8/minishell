@@ -225,13 +225,11 @@ char	*update_env(t_msh *msh, char *name, char *value); // ---> REPETIDO!!!
 /* ******************************** [ EXECUTOR ] **************************** */
 /* ************************************************************************** */
 
-/* exec_redir.c - - - - - - - - - - - - */
 /* -------------------------------------------------------------------------- */
 // static char	**extract_command(char**args, int redir_pos)
 void	exec_redir(t_msh *msh, char *tkn, t_redir type);
 int		manage_builting_redir(t_msh *msh, t_redir type);
 
-/* executor.c - - - - - - - - - - - - */
 /* ----------------------------------------------------------------executor.c */
 int		is_command_executable(char *fullpath);
 /*static void	child_process(t_msh *msh, char *fullpath)*/
@@ -307,7 +305,6 @@ void	handle_single_quotes(t_msh *msh, int i);
 void	handle_double_quotes(t_msh *msh, int i);
 //void	handle_quotes(t_msh *msh, t_quote *q, int i);
 
-/* quote_lexer_tools.c - - - - - - - - - - - - */
 /* -------------------------------------------------------quote_lexer_tools.c */
 char	*remove_quotes(char *str, char quote_type);
 // char	*search_value(t_msh *msh, char *name); --> REPETIDO!!
