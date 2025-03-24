@@ -195,11 +195,9 @@ int		add_env_var(t_msh *msh, char *name, char *value);
 void	handle_export_arg(t_msh *msh);
 int		ft_export(t_msh *msh, int tok_num);
 
-/* pwd.c - - - - - - - - - - - - */
 /* ---------------------------------------------------------------------pwd.c */
 int		ft_pwd(t_msh *msh);
 
-/* unset.c - - - - - - - - - - - - */
 /* -------------------------------------------------------------------unset.c */
 /*static int	is_valid_identifier(char *str)*/
 /*static void	remove_var_from_env(t_msh *msh, int pos)*/
@@ -210,15 +208,14 @@ int		ft_unset(t_msh *msh, int tok_num);
 /* ******************************** [ ENV ] ********************************* */
 /* ************************************************************************** */
 
-/* ----------------------------------------------------------------------env.c */
+/* ---------------------------------------------------------------------env.c */
 int		env_var_count(t_msh *msh);
 int		find_env_pos(t_msh *msh, char *var_name); // -------> REPETIDO!!!
 int		check_envs(void);
 void	update_shlvl(t_msh *msh);
 int		env_init_values(t_env *env, t_msh *msh);
 
-/* varenv.c - - - - - - - - - - - - */
-/* -------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------varenv.c */
 char	*search_value(t_msh *msh, char *var);
 char	*manage_cd_var(t_msh *msh, char *arg);
 int		cd_varman(t_msh *msh, char *var_name);
@@ -235,13 +232,13 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type);
 void	manage_builting_redir(t_msh *msh, t_redir type);
 
 /* executor.c - - - - - - - - - - - - */
-/* -------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------executor.c */
 int		is_command_executable(char *fullpath);
 /*static void	child_process(t_msh *msh, char *fullpath)*/
 /*static void	parent_process(pid_t pid, char *fullpath)*/
 int		execute_command(t_msh *msh, char *fullpath);
 int		find_cmd(char *tkn, t_msh *msh);
-/* executor_utils.c - - - - - - - - - - - - */
+
 /* ----------------------------------------------------------executor_utils.c */
 /*static char	**get_path_dirs(char **envs)*/
 /*static char	*check_absolute_path(char *cmd)*/
@@ -315,29 +312,25 @@ void	handle_double_quotes(t_msh *msh, int i);
 char	*remove_quotes(char *str, char quote_type);
 // char	*search_value(t_msh *msh, char *name); --> REPETIDO!!
 
-/* quote_expander.c - - - - - - - - - - - - */
-/* -------------------------------------------------------------------------- */
+/* ----------------------------------------------------------quote_expander.c */
 int		ft_varlen(char *str, int start);
 char	*copy_var(char *str, int i, int len);
 void	print_variable(char *var, t_msh *msh);
 void	ft_expander(char *str, t_msh *msh);
 
-/* token_tools.c - - - - - - - - - - - - */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------token_tools.c */
 int		is_quote(char c);
 int		is_pipe(char c);
 int		is_whitespace(char c);
 int		is_operator(char c);
 
-/* tokenizer.c - - - - - - - - - - - - */
-/* -------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------tokenizer.c */
 int		size_token(char *input, t_tok *tok);
 char	*create_token(char *input, int len, t_tok *tok);
 void	ft_token(char *input, t_tok *tok);
 //static void	print_error_msg(char c);
 
-/* redirections.c - - - - - - - - - - - - */
-/* -------------------------------------------------------------------------- */
+/* ------------------------------------------------------------redirections.c */
 // static void	print_error_msg(char c)
 int		has_redirection(t_tok *tok);
 t_redir	check_syntax_redir(char **tkn, int pos);
@@ -350,24 +343,20 @@ int		redir_checker(t_msh *msh);
 /* ******************************* [ TOOLS ] ******************************** */
 /* ************************************************************************** */
 
-/* err_hanlde.c - - - - - - - - - - - - */
-/* -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------err_hanlde.c */
 void	handle_cd_error(char *path, int error_type);
 int		ft_err(t_msh *msh, int err_code);
 
-/* free.c - - - - - - - - - - - - */
-/* -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------free.c */
 void	ft_free_array(char **array);
 void	free_env(t_env *env);
 void	free_tok(t_tok *tok);
 void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 
-/* heredoc.c - - - - - - - - - - - - */
-/* -------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------heredoc.c */
 int		handle_heredoc(t_msh *msh, char *delimiter);
 
-/* manage_redir.c - - - - - - - - - - - - */
-/* -------------------------------------------------------------------------- */
+/* ------------------------------------------------------------manage_redir.c */
 void	redirection_manager(t_msh *msh);
 
 /* ----------------------------- Error macros ------------------------------- */
