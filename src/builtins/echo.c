@@ -63,7 +63,9 @@ void	ft_echo(t_msh *msh, int num_cmd)
 		return ;
 	}
 	n_flag = check_n_flags(msh, &i);
-	while (i < num_cmd)
+	printf("n_flag = %d\n", n_flag);
+	printf("cmd = %d\n", num_cmd);
+	while (i < num_cmd && has_redirection(msh->tkns))
 	{
 		print_echo_argument(msh, msh->tkns->args[i], i);
 		i++;
