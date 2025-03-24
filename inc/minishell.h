@@ -154,6 +154,7 @@ char	*make_relative(char *arg, t_msh *msh);
 /* ------------------------------------------------------------------- cd.c */
 /*static void	handle_cd_minus(t_msh *msh)*/
 /*static void	cd_home(t_msh *msh)*/
+/*static void	update_pwd_opwd(t_msh *msh, char *new_path)*/
 void	handle_cd_path(t_msh *msh);
 void	ft_cd(t_msh *msh, int num_cmd);
 
@@ -202,14 +203,14 @@ int		ft_unset(t_msh *msh, int tok_num);
 
 /* >>>>>>> ENVIRONMENT >>>>>>> ENVIRONMENT >>>>>>> ENVIRONMENT >>>>>>>      */
 
-/* --------------------------------------------------------------- ms_env.c */
+/* ------------------------------------------------------------------ env.c */
 int		env_var_count(t_msh *msh);
 int		find_env_pos(t_msh *msh, char *var_name); // -------> REPETIDO!!!
 int		check_envs(void);
 void	update_shlvl(t_msh *msh);
 int		env_init_values(t_env *env, t_msh *msh);
 
-/* ----------------------------------------------------------- ms_varenv.c */
+/* -------------------------------------------------------------- varenv.c */
 char	*search_value(t_msh *msh, char *var);
 char	*manage_cd_var(t_msh *msh, char *arg);
 int		cd_varman(t_msh *msh, char *var_name);
