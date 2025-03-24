@@ -14,6 +14,7 @@
 
 static void	error_fd(char *filename)
 {
+	printf("DEBUG: enter to the error fd function\n");
 	if (access(filename, F_OK) == 0)
 		ft_fd_printf(2, "minishell: %s: Permission denied\n", filename);
 	else
@@ -31,9 +32,12 @@ int	handle_output_file(t_msh *msh, char *filename, t_redir type)
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == REDIR_APPEND)
 		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	printf("DEBUG: fd value is %d\n", fd);
 	if (fd == -1)
 	{
+		printf("DEBUG: fd failed\n");
 		error_fd(filename);
+		printf("DEBUG: sale del mensaje de error\n");
 		return (FALSE);
 	}
 	if (dup2(fd, STDOUT_FILENO) == -1)

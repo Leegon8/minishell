@@ -221,7 +221,7 @@ char	*update_env(t_msh *msh, char *name, char *value); // -------> REPETIDO!!!
 /* ----------------------------------------------------------- exec_redir.c */
 // static char	**extract_command(char**args, int redir_pos)
 void		exec_redir(t_msh *msh, char *tkn, t_redir type);
-void		manage_builting_redir(t_msh *msh, t_redir type);
+int			manage_builting_redir(t_msh *msh, t_redir type);
 
 /* ------------------------------------------------------------- executor.c */
 int		is_command_executable(char *fullpath);

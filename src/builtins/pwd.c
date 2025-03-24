@@ -18,7 +18,7 @@ int	ft_pwd(t_msh *msh)
 	int		status;
 
 	status = 0;
-	if (msh->tkns->args[1])
+	if (msh->tkns->args[1] && !redir_checker(msh))
 	{
 		ft_fd_printf(2, "pwd: too many arguments\n");
 		status = -1;

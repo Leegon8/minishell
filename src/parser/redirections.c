@@ -70,11 +70,6 @@ void	handle_redir(t_msh *msh, t_redir type)
 		ft_fd_printf(2, E_NW);
 		return ;
 	}
-	if (is_builtin(msh->tkns->cmd))
-	{
-		manage_builting_redir(msh, type);
-		return ;
-	}
 	// Output redirection
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 		msh->mpip->backup_out = 0;
@@ -90,16 +85,18 @@ int	redir_checker(t_msh *msh)
 {
 	int		redir_pos;
 	t_redir	redir_type;
-
+	
 	if (!msh || !msh->tkns || !msh->tkns->args)
-		return (FALSE);
+	return (FALSE);
 	redir_pos = has_redirection(msh->tkns);
 	msh->tkns->redir_pos = redir_pos;
-	redir_type = check_syntax_redir(msh->tkns->args, redir_pos);
 	if (redir_pos >= 0)
 	{
+		redir_type = check_syntax_redir(msh->tkns->args, redir_pos);
 		if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
 			return (FALSE);
+		if (is_builtin(msh->tkns->cmd))
+			return (manage_builting_redir(msh, redir_type));
 		else
 			handle_redir(msh, redir_type);
 		return (TRUE);
