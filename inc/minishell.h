@@ -36,7 +36,6 @@ typedef enum e_quote_type		t_quote_type;
 typedef enum types				t_tokty;
 typedef enum redir				t_redir;
 
-
 typedef struct s_environment	t_env;
 typedef struct s_executor		t_exe;
 typedef struct s_quote			t_quote;
@@ -52,7 +51,7 @@ enum e_quote_type
 	DOUBLE_QUOTE
 };
 
-enum types
+enum e_types
 {
 	T_WORD,
 	T_OPERATOR,
@@ -60,7 +59,7 @@ enum types
 	T_QUOTE
 };
 
-enum redir
+enum e_redir
 {
 	NO_REDIR = 0,
 	REDIR_IN,
@@ -144,7 +143,7 @@ struct	s_minishell
 	int		saved_stdout;
 };
 
-/* //////////////////////////////////////////////////////////////////////////////  BUILTINS */
+/* >>>>>>> BUILTINS >>>>>>> BUILTINS >>>>>>> BUILTINS >>>>>>> BUILTINS  >>>>>*/
 
 /* -------------------------------------------------------------- cd_utils.c */
 char	*built_abspath(char *relative_path, char *pwd);
@@ -201,7 +200,7 @@ int		ft_pwd(t_msh *msh);
 /*static int	find_var_in_env(t_msh *msh, char *var_name)*/
 int		ft_unset(t_msh *msh, int tok_num);
 
-/* //////////////////////////////////////////////////////////////////////////////  ENVIRONM */
+/* >>>>>>> ENVIRONMENT >>>>>>> ENVIRONMENT >>>>>>> ENVIRONMENT >>>>>>>      */
 
 /* --------------------------------------------------------------- ms_env.c */
 int		env_var_count(t_msh *msh);
@@ -214,14 +213,14 @@ int		env_init_values(t_env *env, t_msh *msh);
 char	*search_value(t_msh *msh, char *var);
 char	*manage_cd_var(t_msh *msh, char *arg);
 int		cd_varman(t_msh *msh, char *var_name);
-char	*update_env(t_msh *msh, char *name, char *value); // -------> REPETIDO!!!
+char	*update_env(t_msh *msh, char *name, char *value); // ---> REPETIDO!!!
 
-/* //////////////////////////////////////////////////////////////////////////////  EXECUTOR */
+/* >>>>>>> EXECUTOR */
 
 /* ----------------------------------------------------------- exec_redir.c */
 // static char	**extract_command(char**args, int redir_pos)
-void		exec_redir(t_msh *msh, char *tkn, t_redir type);
-void		manage_builting_redir(t_msh *msh, t_redir type);
+void	exec_redir(t_msh *msh, char *tkn, t_redir type);
+void	manage_builting_redir(t_msh *msh, t_redir type);
 
 /* ------------------------------------------------------------- executor.c */
 int		is_command_executable(char *fullpath);
@@ -235,12 +234,12 @@ int		find_cmd(char *tkn, t_msh *msh);
 /*static char	*try_path(char *dir, char *cmd)*/
 char	*make_path(char *tkn, t_msh *msh);
 /* ----------------------------------------------------------output_redir.c */
-int  	handle_output_file(t_msh *msh, char *filename, t_redir type);
+int		handle_output_file(t_msh *msh, char *filename, t_redir type);
 void	restore_redirections(t_msh *msh);
 char	*extract_command(char**args, int redir_pos);
-int 	handle_input_file(t_msh *msh, char *filename, t_redir type);
+int		handle_input_file(t_msh *msh, char *filename, t_redir type);
 
-/* //////////////////////////////////////////////////////////////////////////////////  MAIN */
+/* >>>>>>>  MAIN */
 
 /* ----------------------------------------------------------------- init.c */
 int		env_alloc_struct(t_env **env, t_msh *msh);
@@ -264,9 +263,7 @@ void	handle_sigint_heredoc(int sig);
 void	handle_heredoc_signals(void);
 void	restore_signals(void);
 
-
-
-/* ////////////////////////////////////////////////////////////////////////////////  PARSER */
+/* >>>>>>>  PARSER */
 
 /* ------------------------------------------------------------- builtins.c */
 void	cmd_not_found(t_msh *msh);
@@ -319,16 +316,14 @@ void	ft_token(char *input, t_tok *tok);
 
 /* --------------------------------------------------------- redirections.c */
 // static void	print_error_msg(char c)
-int			has_redirection(t_tok *tok);
-t_redir		check_syntax_redir(char **tkn, int pos);
+int		has_redirection(t_tok *tok);
+t_redir	check_syntax_redir(char **tkn, int pos);
 // static void	init_redir(t_msh *msh)
 // static void	print_redir_info(t_redir redir_type, int redir_pos)
 void	handle_redir(t_msh *msh, t_redir type);
 int		redir_checker(t_msh *msh);
 
-
-
-/* /////////////////////////////////////////////////////////////////////////////////  TOOLS */
+/* >>>>>>>  TOOLS */
 
 /* ---------------------------------------------------------- err_hanlde.c */
 void	handle_cd_error(char *path, int error_type);
@@ -340,40 +335,40 @@ void	free_env(t_env *env);
 void	free_tok(t_tok *tok);
 void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 
-/* ---------------------------------------------------------------- heredoc.c */
+/* ------------------------------------------------------------- heredoc.c */
 int		handle_heredoc(t_msh *msh, char *delimiter);
 
-/* ------------------------------------------------------------ manage_redir.c */
+/* -------------------------------------------------------- manage_redir.c */
 void	redirection_manager(t_msh *msh);
 
 /******************************* Error macros *****************************/
 
-# define E_ARG			"Invalid number of parameters\n"
-# define E_MALLOC		"Malloc failure\n"
-# define E_ENV			"Error: No environment\n"
-# define E_PATH			"No such path\n"
-# define E_CMD			"Error: Command not found\n"
-# define E_OPEN			"Can't open file\n"
-# define E_WR			"W Permission denied\n"
-# define E_RD			"R Permission denied\n"
-# define E_X			"X Permission denied\n"
-# define E_NOFILE		"No such file or directory\n"
-# define E_DIRECTORY	"Is a directory\n"
-# define E_EXECARG		"Error: minishell doesn't accept arguments\n"
-# define E_MEMASF		"Error: memory assignment failed\n"
-# define E_ENVGET		"Error: env var retrieval failed\n"
-# define E_TOKMEM		"Error: tok mem asignation failed\n"
-# define E_PIPMEM		"Error: mpip mem asignation failed\n"
-# define E_CDARG		"cd: $ARG: No such file or directory\n"
-# define E_SYNTX		"Error: syntax not accepted"
-# define E_PIP_SYNTX	"minishell: syntax error near unexpected token `|'\n"
-# define E_NW			"minishell: syntax error near unexpected token `newline'\n"
-# define E_PIPE			"Pipe error"
-# define E_FORK			"Fork error"
-# define E_DUP			"Dup2 error"
-# define E_EXECVE		"Execve error"
-# define E_NOCMD		"Command not found"
-# define E_NOEXEC		"Permission denied"
+# define E_ARG		"Invalid number of parameters\n"
+# define E_MALLOC	"Malloc failure\n"
+# define E_ENV		"Error: No environment\n"
+# define E_PATH		"No such path\n"
+# define E_CMD		"Error: Command not found\n"
+# define E_OPEN		"Can't open file\n"
+# define E_WR		"W Permission denied\n"
+# define E_RD		"R Permission denied\n"
+# define E_X		"X Permission denied\n"
+# define E_NOFILE	"No such file or directory\n"
+# define E_DIRCTRY	"Is a directory\n"
+# define E_EXECARG	"Error: minishell doesn't accept arguments\n"
+# define E_MEMASF	"Error: memory assignment failed\n"
+# define E_ENVGET	"Error: env var retrieval failed\n"
+# define E_TOKMEM	"Error: tok mem asignation failed\n"
+# define E_PIPMEM	"Error: mpip mem asignation failed\n"
+# define E_CDARG	"cd: $ARG: No such file or directory\n"
+# define E_SYNTX	"Error: syntax not accepted"
+# define E_PIP_SNTX	"minishell: syntax error near unexpected token `|'\n"
+# define E_NW		"minishell: syntax error near unexpected token `newline'\n"
+# define E_PIPE		"Pipe error"
+# define E_FORK		"Fork error"
+# define E_DUP		"Dup2 error"
+# define E_EXECVE	"Execve error"
+# define E_NOCMD	"Command not found"
+# define E_NOEXEC	"Permission denied"
 
 /******************************** Exec macros ****************************/
 
