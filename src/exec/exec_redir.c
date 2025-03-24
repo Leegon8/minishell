@@ -93,18 +93,19 @@ int	manage_builting_redir(t_msh *msh, t_redir type)
 	printf("DEBUG: Filename set up is %s\n", msh->mpip->outfile);
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 	{
+		printf("estamos en redir OUT !!!\n");
 		msh->mpip->backup_out = 0;
 		msh->mpip->backup_out = dup(STDOUT_FILENO);
 		printf("DEBUG: STDOUT duplicated\n");
 		if (!handle_output_file(msh, msh->mpip->outfile, type))
 		{
-			close(msh->mpip->backup_out);
-			msh->mpip->backup_out = -1;
+			restore_redirections(msh);
 			return (FALSE);
 		}
 	}
 	if (type == REDIR_IN || type == REDIR_HERE)
 	{
+		printf("estamos en redir IN !!!\n");
 		msh->mpip->backup_in = 0;
 		if (!handle_input_file(msh, msh->mpip->outfile, type))
 		{
@@ -112,7 +113,6 @@ int	manage_builting_redir(t_msh *msh, t_redir type)
 			msh->mpip->backup_in = -1;
 			return (FALSE);
 		}
-		// exc_cmd(msh, msh->tkns->token_count);
 	}
 	exc_cmd(msh, msh->tkns->redir_pos);
 	restore_redirections(msh);

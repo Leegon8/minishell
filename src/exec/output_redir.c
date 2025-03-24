@@ -15,10 +15,10 @@
 static void	error_fd(char *filename)
 {
 	printf("DEBUG: enter to the error fd function\n");
-	if (access(filename, F_OK) == 0)
+	if (!access(filename, F_OK) == 0)
 		ft_fd_printf(2, "minishell: %s: Permission denied\n", filename);
-	else
-		ft_fd_printf(2, "minishell: %s: No such file or directory\n", filename);
+	// else
+	// 	ft_fd_printf(2, "minishell: %s: No such file or directory\n", filename);
 }
 
 int	handle_output_file(t_msh *msh, char *filename, t_redir type)

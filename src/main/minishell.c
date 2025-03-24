@@ -26,7 +26,9 @@ void	shell_loop(t_msh *msh)
 			add_history(input);
 		if (ft_strlen(input) > 0)
 			check_tokens(input, msh);
+		printf("...\n");
 		free(input);
+		printf("input liberado\n");
 	}
 }
 
