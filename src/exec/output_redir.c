@@ -14,7 +14,7 @@
 
 static void	error_fd(char *filename)
 {
-	if (access(filename, F_OK) == 0)
+	if (!access(filename, F_OK))
 		ft_fd_printf(2, "minishell: %s: Permission denied\n", filename);
 	else
 		ft_fd_printf(2, "minishell: %s: No such file or directory\n", filename);
