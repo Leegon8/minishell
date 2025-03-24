@@ -62,7 +62,7 @@ t_redir	check_syntax_redir(char **tkn, int pos)
 void	handle_redir(t_msh *msh, t_redir type)
 {
 	int	file_pos;
-	
+
 	file_pos = msh->tkns->redir_pos + 1;
 	msh->mpip->outfile = msh->tkns->args[file_pos];
 	if (msh->mpip->outfile == NULL)
@@ -75,10 +75,8 @@ void	handle_redir(t_msh *msh, t_redir type)
 		manage_builting_redir(msh, type);
 		return ;
 	}
-	// Output redirection
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 		msh->mpip->backup_out = 0;
-	// Input redirection
 	if (type == REDIR_IN || type == REDIR_HERE)
 		msh->mpip->backup_in = 0;
 	exec_redir(msh, msh->tkns->cmd, type);

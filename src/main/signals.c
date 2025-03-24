@@ -51,5 +51,5 @@ void	restore_signals(void)
 {
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);
-	//rl_catch_signals = 0;
+	rl_catch_signals = 0;
 }

@@ -13,10 +13,10 @@
 #include "minishell.h"
 
 //This function copy all the args without the redirection token 
-static char	**redir_args(char** args, int redir_pos)
+static char	**redir_args(char **args, int redir_pos)
 {
 	char	**result;
-	int	i;
+	int		i;
 
 	if (!args || redir_pos <= 0)
 		return (NULL);
@@ -27,7 +27,7 @@ static char	**redir_args(char** args, int redir_pos)
 		return (NULL);
 	}
 	i = 0;
-	while ( i < redir_pos && args[i])
+	while (i < redir_pos && args[i])
 	{
 		result[i] = ft_strdup(args[i]);
 		if (!result[i])
@@ -62,7 +62,7 @@ static void	child_process_redir(t_msh *msh, char *fullpath, t_redir type)
 void	exec_redir(t_msh *msh, char *tkn, t_redir type)
 {
 	pid_t	pid;
-	char 	*fullpath;
+	char	*fullpath;
 	int		status;
 
 	msh->mpip->backup_out = dup(STDOUT_FILENO);

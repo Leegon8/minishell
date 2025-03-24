@@ -31,7 +31,7 @@ void	ft_free_array(char **array)
 }
 
 /* libera la memoria reservada para la estructura de env */
-void free_env(t_env *env)
+void	free_env(t_env *env)
 {
 	if (env)
 	{
