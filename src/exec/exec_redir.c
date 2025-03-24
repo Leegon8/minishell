@@ -88,7 +88,7 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type)
 int	manage_builting_redir(t_msh *msh, t_redir type)
 {
 	int	file_pos;
-	
+
 	file_pos = msh->tkns->redir_pos + 1;
 	msh->mpip->outfile = msh->tkns->args[file_pos];
 	if (type == REDIR_OUT || type == REDIR_APPEND)

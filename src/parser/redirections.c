@@ -83,7 +83,6 @@ void	handle_redir_out(t_msh *msh, t_redir type)
 	restore_redirections(msh);
 }
 
-
 // Función generica para verificar sintaxis redirecciones
 int	redir_checker(t_msh *msh)
 {
