@@ -35,9 +35,7 @@ int	handle_output_file(t_msh *msh, char *filename, t_redir type)
 	printf("DEBUG: fd value is %d\n", fd);
 	if (fd == -1)
 	{
-		printf("DEBUG: fd failed\n");
 		error_fd(filename);
-		printf("DEBUG: sale del mensaje de error\n");
 		return (FALSE);
 	}
 	if (dup2(fd, STDOUT_FILENO) == -1)
