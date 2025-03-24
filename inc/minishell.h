@@ -33,8 +33,8 @@
 /******************************** Structs Simplification ******************/
 
 typedef enum e_quote_type		t_quote_type;
-typedef enum types				t_tokty;
-typedef enum redir				t_redir;
+typedef enum e_types			t_tokty;
+typedef enum e_redir			t_redir;
 
 typedef struct s_environment	t_env;
 typedef struct s_executor		t_exe;

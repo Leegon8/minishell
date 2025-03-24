@@ -56,7 +56,10 @@ void	handle_cd_path(t_msh *msh)
 	else
 		new_path = make_relative(msh->tkns->args[1], msh);
 	if (!new_path)
-		return (ft_fd_printf(2, "Error updating PWD environment variable\n"));
+	{
+		ft_fd_printf(2, "Error updating PWD environment variable\n");
+		return ;
+	}
 	if (chdir(new_path) == -1)
 	{
 		if (errno == EACCES)
