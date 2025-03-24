@@ -246,7 +246,10 @@ char	*make_path(char *tkn, t_msh *msh);
 int		handle_output_file(t_msh *msh, char *filename, t_redir type);
 void	restore_redirections(t_msh *msh);
 char	*extract_command(char**args, int redir_pos);
+
+/* -------------------------------------------------------------input_redir.c */
 int		handle_input_file(t_msh *msh, char *filename, t_redir type);
+void	handle_redir_in(t_msh *msh, t_redir type);
 
 /* ************************************************************************** */
 /* ******************************* [ MAIN ] ********************************* */
@@ -333,7 +336,7 @@ int		has_redirection(t_tok *tok);
 t_redir	check_syntax_redir(char **tkn, int pos);
 // static void	init_redir(t_msh *msh)
 // static void	print_redir_info(t_redir redir_type, int redir_pos)
-void	handle_redir(t_msh *msh, t_redir type);
+void	handle_redir_out(t_msh *msh, t_redir type);
 int		redir_checker(t_msh *msh);
 
 /* ************************************************************************** */

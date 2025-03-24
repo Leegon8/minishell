@@ -27,7 +27,11 @@ int	has_redirection(t_tok *tok)
 	while (tok->args[i])
 	{
 		if (is_operator(tok->args[i][0]) || is_pipe(tok->args[i][0]))
+		{
+			if (is_operator(tok->args[i++][0]) || is_pipe(tok->args[i++][0]))
+				return (-1);
 			return (i);
+		}
 		i++;
 	}
 	return (-1);
@@ -59,7 +63,7 @@ t_redir	check_syntax_redir(char **tkn, int pos)
 	return (REDIR_ERROR);
 }
 
-void	handle_redir(t_msh *msh, t_redir type)
+void	handle_redir_out(t_msh *msh, t_redir type)
 {
 	int	file_pos;
 
@@ -75,13 +79,10 @@ void	handle_redir(t_msh *msh, t_redir type)
 		manage_builting_redir(msh, type);
 		return ;
 	}
-	if (type == REDIR_OUT || type == REDIR_APPEND)
-		msh->mpip->backup_out = 0;
-	if (type == REDIR_IN || type == REDIR_HERE)
-		msh->mpip->backup_in = 0;
 	exec_redir(msh, msh->tkns->cmd, type);
 	restore_redirections(msh);
 }
+
 
 // Función generica para verificar sintaxis redirecciones
 int	redir_checker(t_msh *msh)
@@ -98,8 +99,10 @@ int	redir_checker(t_msh *msh)
 	{
 		if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
 			return (FALSE);
-		else
-			handle_redir(msh, redir_type);
+		else if (redir_type == REDIR_OUT || redir_type == REDIR_APPEND)
+			handle_redir_out(msh, redir_type);
+		else if (redir_type == REDIR_IN || redir_type == REDIR_HERE)
+			handle_redir_in(msh, redir_type);
 		return (TRUE);
 	}
 	return (FALSE);

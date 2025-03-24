@@ -56,7 +56,7 @@ DEPS = $(OBJS:.o=.d)
 all: makelib $(OBJ_PATH) $(NAME)
 
 makelib: 
-	$(MAKE) --silent -C libft  --no-print-directory
+	$(MAKE) --silent -C libft  
 
 $(OBJ_PATH):
 	mkdir -p $(OBJ_PATH)
