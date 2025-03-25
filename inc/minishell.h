@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/03/16 19:52:56 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:28:08 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void	ft_echo(t_msh *msh, int num_cmd);
 /* --------------------------------------------------------------echo_utils.c */
 int		echo_has_2_expand(char *str);
 void	handle_echo_quotes(t_msh *msh, char k, int i);
-void	print_echo_argument(t_msh *msh, char *arg, int is_last_arg);
+void	print_echo_argument(t_msh *msh, char *arg, int i, int is_last_arg);
 
 /* ---------------------------------------------------------------------env.c */
 //int		update_env_var(t_msh *msh, char *name, char *value); //REPETIDO

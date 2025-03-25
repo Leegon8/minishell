@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:50:55 by lauriago          #+#    #+#             */
-/*   Updated: 2025/03/10 10:20:48 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:26:56 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	has_redirection(t_tok *tok)
 	{
 		if (is_operator(tok->args[i][0]) || is_pipe(tok->args[i][0]))
 		{
-			if (is_operator(tok->args[i++][0]) || is_pipe(tok->args[i++][0]))
+			if (is_operator(tok->args[i + 1][0]) || is_pipe(tok->args[i + 1][0]))
 				return (-1);
 			return (i);
 		}
