@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 21:21:27 by lauriago          #+#    #+#             */
-/*   Updated: 2025/03/25 18:27:48 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:35:36 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void	ft_echo(t_msh *msh, int num_cmd)
 		return ;
 	}
 	n_flag = check_n_flags(msh, &i);
-	printf("n_flag = %d\n", n_flag);
-	printf("cmd = %d\n", num_cmd);
 	while (i < num_cmd && has_redirection(msh->tkns))
 	{
 		is_last_arg = (num_cmd - 1);

@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:49:40 by lauriago          #+#    #+#             */
-/*   Updated: 2025/03/25 18:28:50 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/25 19:14:57 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	print_echo_argument(t_msh *msh, char *arg, int i, int is_last_arg)
 {
 	if (is_quote(arg[0]))
 		handle_echo_quotes(msh, arg[0], i);
-	else if (!is_quote(arg[0]))
+	if (!is_quote(arg[0]))
 	{
 		if (echo_has_2_expand(arg))
 			ft_expander(arg, msh);
 		else
 			printf("%s", arg);
+		if (i != is_last_arg)
+			printf(" ");
 	}
-	if (!is_last_arg)
-		printf(" ");
 }
