@@ -98,10 +98,12 @@ int	redir_checker(t_msh *msh)
 	{
 		if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
 			return (FALSE);
-		else if (redir_type == REDIR_OUT || redir_type == REDIR_APPEND)
+		if (redir_type == REDIR_OUT || redir_type == REDIR_APPEND)
 			handle_redir_out(msh, redir_type);
-		else if (redir_type == REDIR_IN || redir_type == REDIR_HERE)
+		if (redir_type == REDIR_IN || redir_type == REDIR_HERE)
 			handle_redir_in(msh, redir_type);
+		//if (redir_type == REDIR_HERE)
+
 		return (TRUE);
 	}
 	return (FALSE);

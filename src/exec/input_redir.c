@@ -16,23 +16,27 @@ int	handle_input_file(t_msh *msh, char *filename, t_redir type)
 {
 	int	fd;
 
-	msh->mpip->backup_in = dup(STDIN_FILENO);
 	if (msh->mpip->backup_in == -1)
 		return (FALSE);
 	if (type == REDIR_IN)
 		fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
-		if (access(filename, F_OK) == 0)
+		if (!access(filename, R_OK))
 			ft_fd_printf(2, "minishell: %s: Permission denied\n", filename);
 		else
 			ft_fd_printf(2, "minishell: %s: No such file or directory\n",
 				filename);
 		return (FALSE);
 	}
-	msh->mpip->backup_in = dup(STDIN_FILENO);
 	if (dup2(fd, STDIN_FILENO) == -1)
+	{
+		perror("Error redirecting input");
+		close(msh->mpip->backup_in);
+		restore_redirections(msh);
+		close(fd);
 		return (FALSE);
+	}
 	close(fd);
 	return (TRUE);
 }

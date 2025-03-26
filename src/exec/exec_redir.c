@@ -49,7 +49,7 @@ static void	child_process_redir(t_msh *msh, char *fullpath, t_redir type)
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 		handle_output_file(msh, msh->mpip->outfile, type);
 	else if (type == REDIR_IN || type == REDIR_HERE)
-		handle_input_file(msh, msh->mpip->outfile, type);
+		handle_input_file(msh, msh->mpip->infile, type);
 	if (execve(fullpath, new_args, msh->envs) == -1)
 	{
 		cmd_not_found(msh);
@@ -81,7 +81,6 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type)
 		waitpid(pid, &status, 0);
 		free (fullpath);
 	}
-	printf("TERMINANDO EXEC_REDIR\n");
 }
 
 // Función que maneja las redirecciones usando builtings 

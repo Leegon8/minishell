@@ -56,10 +56,10 @@ void	restore_redirections(t_msh *msh)
 		close(msh->mpip->backup_out);
 		msh->mpip->backup_out = -1;
 	}
-	if (msh->mpip->backup_in != -1)
+	if (msh->mpip->backup_in == -1)
 	{
 		dup2(msh->mpip->backup_in, STDIN_FILENO);
 		close(msh->mpip->backup_in);
-		msh->mpip->backup_in = -1;
+		msh->mpip->backup_in = 0;
 	}
 }
