@@ -189,9 +189,9 @@ char	*get_var_value(char *var);
 int		update_env_var_value(t_msh *msh, int pos, char *value);
 
 /* ------------------------------------------------------------------export.c */
-/*static int	is_valid_identifier(char *str)*/
+/*static int	is_valid_identifier(t_msh *msh, char *str)*/
 int		add_env_var(t_msh *msh, char *name, char *value);
-/*static void	print_export_vars(t_msh *msh)*/
+void	print_export_vars(t_msh *msh);
 void	handle_export_arg(t_msh *msh);
 int		ft_export(t_msh *msh, int tok_num);
 
