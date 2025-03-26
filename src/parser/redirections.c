@@ -28,8 +28,12 @@ int	has_redirection(t_tok *tok)
 	{
 		if (is_operator(tok->args[i][0]) || is_pipe(tok->args[i][0]))
 		{
-			if (is_operator(tok->args[i + 1][0]) || is_pipe(tok->args[i + 1][0]))
-				return (-1);
+			if (tok->args[i + 1])
+			{
+				if (is_operator(tok->args[i + 1][0])
+					|| is_pipe(tok->args[i + 1][0]))
+					return (-1);
+			}
 			return (i);
 		}
 		i++;
@@ -100,10 +104,10 @@ int	redir_checker(t_msh *msh)
 			return (FALSE);
 		if (redir_type == REDIR_OUT || redir_type == REDIR_APPEND)
 			handle_redir_out(msh, redir_type);
-		if (redir_type == REDIR_IN || redir_type == REDIR_HERE)
+		if (redir_type == REDIR_IN)
 			handle_redir_in(msh, redir_type);
-		//if (redir_type == REDIR_HERE)
-
+		// if (redir_type == REDIR_HERE)
+		// 	handle_heredoc(t_msh *msh, char *delimiter);
 		return (TRUE);
 	}
 	return (FALSE);

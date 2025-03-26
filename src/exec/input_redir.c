@@ -12,14 +12,13 @@
 
 #include "minishell.h"
 
-int	handle_input_file(t_msh *msh, char *filename, t_redir type)
+int	handle_input_file(t_msh *msh, char *filename)
 {
 	int	fd;
 
 	if (msh->mpip->backup_in == -1)
 		return (FALSE);
-	if (type == REDIR_IN)
-		fd = open(filename, O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
 		if (!access(filename, R_OK))
@@ -47,7 +46,7 @@ void	handle_redir_in(t_msh *msh, t_redir type)
 
 	file_pos = msh->tkns->redir_pos + 1;
 	msh->mpip->infile = msh->tkns->args[file_pos];
-	if (msh->mpip->infile == NULL && type == REDIR_IN)
+	if (msh->mpip->infile == NULL)
 	{
 		ft_fd_printf(2, E_NW);
 		return ;

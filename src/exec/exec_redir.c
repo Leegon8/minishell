@@ -48,8 +48,8 @@ static void	child_process_redir(t_msh *msh, char *fullpath, t_redir type)
 	new_args = redir_args(msh->tkns->args, msh->tkns->redir_pos);
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 		handle_output_file(msh, msh->mpip->outfile, type);
-	else if (type == REDIR_IN || type == REDIR_HERE)
-		handle_input_file(msh, msh->mpip->infile, type);
+	else if (type == REDIR_IN)
+		handle_input_file(msh, msh->mpip->infile);
 	if (execve(fullpath, new_args, msh->envs) == -1)
 	{
 		cmd_not_found(msh);
@@ -104,7 +104,7 @@ int	manage_builting_redir(t_msh *msh, t_redir type)
 	{
 		msh->mpip->backup_in = 0;
 		msh->mpip->backup_in = dup(STDIN_FILENO);
-		if (!handle_input_file(msh, msh->mpip->outfile, type))
+		if (!handle_input_file(msh, msh->mpip->outfile))
 		{
 			restore_redirections(msh);
 			return (FALSE);

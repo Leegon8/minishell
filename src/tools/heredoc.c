@@ -87,8 +87,6 @@ int redirect_input_output(t_msh *msh)
 	return (TRUE);
 }
 
-
-
 void cleanup_heredoc(t_msh *msh)
 {
 	if (msh->heredoc_file)

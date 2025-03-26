@@ -214,6 +214,7 @@ int		find_env_pos(t_msh *msh, char *var_name); // -------> REPETIDO!!!
 int		check_envs(void);
 void	update_shlvl(t_msh *msh);
 int		env_init_values(t_env *env, t_msh *msh);
+int		env_init(t_env *env, t_msh *msh);
 
 /* ------------------------------------------------------------------varenv.c */
 char	*search_value(t_msh *msh, char *var);
@@ -248,7 +249,7 @@ void	restore_redirections(t_msh *msh);
 char	*extract_command(char**args, int redir_pos);
 
 /* -------------------------------------------------------------input_redir.c */
-int		handle_input_file(t_msh *msh, char *filename, t_redir type);
+int		handle_input_file(t_msh *msh, char *filename);
 void	handle_redir_in(t_msh *msh, t_redir type);
 
 /* ************************************************************************** */
