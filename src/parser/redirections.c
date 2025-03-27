@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:50:55 by lauriago          #+#    #+#             */
-/*   Updated: 2025/03/26 10:48:21 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:34:57 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,13 @@ int	redir_checker(t_msh *msh)
 			return (FALSE);
 		if (redir_type == REDIR_OUT || redir_type == REDIR_APPEND)
 			handle_redir_out(msh, redir_type);
-		if (redir_type == REDIR_IN || redir_type == REDIR_HERE)
+		if (redir_type == REDIR_IN)
 			handle_redir_in(msh, redir_type);
-		//if (redir_type == REDIR_HERE)
-
+		if (redir_type == REDIR_HERE)
+		{
+			if (!handle_heredoc(msh, msh->tkns->args[redir_pos + 1]))
+				return (FALSE);
+		}
 		return (TRUE);
 	}
 	return (FALSE);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauriago <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:31:02 by lauriago          #+#    #+#             */
-/*   Updated: 2025/02/26 16:31:16 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:39:33 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type)
 	else
 	{
 		waitpid(pid, &status, 0);
+		cleanup_heredoc(msh);
 		free (fullpath);
 	}
 }
