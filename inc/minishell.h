@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/03/25 18:28:08 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:04:08 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,6 +346,7 @@ int		redir_checker(t_msh *msh);
 /* --------------------------------------------------------------err_hanlde.c */
 void	handle_cd_error(char *path, int error_type);
 int		ft_err(t_msh *msh, int err_code);
+void	handle_exit_status(t_msh *msh);
 
 /* --------------------------------------------------------------------free.c */
 void	ft_free_array(char **array);

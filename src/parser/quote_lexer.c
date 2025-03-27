@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:00:22 by lauriago          #+#    #+#             */
-/*   Updated: 2025/03/26 11:07:05 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:09:34 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,16 @@ void	handle_single_quotes(t_msh *msh, int i)
 // 1.Verificar que hay minimo 2 comillas o numero multiple de 2
 void	handle_double_quotes(t_msh *msh, int i)
 {
-	char	*str;
+	char	*cleaned;
 
-	str = ft_strdup(msh->tkns->args[i]);
 	if (!analyze_quotes(msh, msh->tkns->args[i], '\"'))
-		ft_fd_printf(2, E_SYNTX);
-	else
 	{
-		str = remove_quotes(str, '\"');
-		ft_expander(str, msh);
+		ft_fd_printf(2, E_SYNTX);
+		return ;
 	}
+	cleaned = remove_quotes(msh->tkns->args[i], '\"');
+	if (!cleaned)
+		return ;
+	ft_expander(cleaned, msh);
+	free(cleaned);
 }

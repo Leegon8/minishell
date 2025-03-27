@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err_handle_ms.c                                    :+:      :+:    :+:   */
+/*   err_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:32:36 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/01/13 18:30:30 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:02:09 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,13 @@ int	ft_err(t_msh *msh, int err_code)
 		final_err += 256;
 	msh->last_exit_code = final_err;
 	return (final_err);
+}
+
+void	handle_exit_status(t_msh *msh)
+{
+	char	*code;
+
+	code = ft_itoa(msh->last_exit_code);
+	ft_putstr(code);
+	free(code);
 }
