@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/03/27 10:40:37 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/28 10:58:21 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,6 +360,10 @@ void	cleanup_heredoc(t_msh *msh);
 
 /* ------------------------------------------------------------manage_redir.c */
 void	redirection_manager(t_msh *msh);
+
+/* -------------------------------------------------------------------tools.c */
+int	has_pipe_in_args(char **args);
+int	execute_pipeline(t_msh *msh);
 
 /* ----------------------------- Error macros ------------------------------- */
 

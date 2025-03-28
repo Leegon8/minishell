@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2025/02/19 02:23:24 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/03/28 11:14:10 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ void	check_tokens(char *input, t_msh *msh)
 	ft_token(input, msh->tkns);
 	if (!msh->tkns->args || !msh->tkns->args[0])
 		return ;
+/* PIPES CHECK */
+	if (has_pipe_in_args(msh->tkns->args))
+	{
+		msh->cmd_count = parse_and_validate_commands(msh->tkns, &msh->cmds);
+		execute_pipeline(msh);
+		restore_signals();
+		cleanup_commands(msh);
+		return ;
+	}	
+/* PIPES CHECK */
+	
 	count_tok = 0;
 	while (msh->tkns->args[count_tok])
 		count_tok++;
