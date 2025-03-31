@@ -46,24 +46,15 @@ void	handle_redir_in(t_msh *msh, t_redir type)
 	int	file_pos;
 
 	file_pos = msh->tkns->redir_pos + 1;
-
 	if (type == REDIR_HERE)
 		msh->mpip->infile = msh->heredoc_file;
 	else
 		msh->mpip->infile = msh->tkns->args[file_pos];
-
 	if (msh->mpip->infile == NULL)
 	{
 		ft_fd_printf(2, E_NW);
 		return ;
 	}
-
-	// if (is_builtin(msh->tkns->cmd))
-	// {
-	// 	manage_builting_redir(msh, type);
-	// 	return ;
-	// }
-
 	exec_redir(msh, msh->tkns->cmd, type);
 	restore_redirections(msh);
 }

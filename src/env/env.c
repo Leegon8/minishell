@@ -59,7 +59,6 @@ void	update_shlvl(t_msh *msh)
 	}
 }
 
-/* Inicializa las variables de entorno con los valores del env (si existe) */
 int	env_init_values(t_env *env, t_msh *msh)
 {
 	int		i;
@@ -68,13 +67,6 @@ int	env_init_values(t_env *env, t_msh *msh)
 
 	i = 0;
 	j = 0;
-	eq_sep = NULL;
-	env->home = ft_strdup(getenv("HOME"));
-	if (!env->home)
-		return (ft_fd_printf(2, "%s", E_MEMASF) * 0);
-	env->old_pwd = getenv("OLDPWD");
-	env->path = getenv("PATH");
-	getcwd(env->pwd, PATH_MAX);
 	while (msh->envs[i])
 	{
 		eq_sep = ft_strchr(msh->envs[i], '=');
@@ -90,6 +82,19 @@ int	env_init_values(t_env *env, t_msh *msh)
 	}
 	env->names[j] = NULL;
 	env->values[j] = NULL;
+	return (TRUE);
+}
+
+/* Inicializa las variables de entorno con los valores del env (si existe) */
+int	env_init(t_env *env, t_msh *msh)
+{
+	env->home = getenv("HOME");
+	if (!env->home)
+		return (ft_fd_printf(2, "%s", E_MEMASF) * 0);
+	env->old_pwd = getenv("OLDPWD");
+	env->path = getenv("PATH");
+	getcwd(env->pwd, PATH_MAX);
+	env_init_values(env, msh);
 	update_shlvl(msh);
 	return (TRUE);
 }

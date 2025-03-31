@@ -26,17 +26,6 @@ void	check_tokens(char *input, t_msh *msh)
 	ft_token(input, msh->tkns);
 	if (!msh->tkns->args || !msh->tkns->args[0])
 		return ;
-/* PIPES CHECK */
-	if (has_pipe_in_args(msh->tkns->args))
-	{
-		msh->cmd_count = parse_and_validate_commands(msh->tkns, &msh->cmds);
-		execute_pipeline(msh);
-		restore_signals();
-		cleanup_commands(msh);
-		return ;
-	}	
-/* PIPES CHECK */
-	
 	count_tok = 0;
 	while (msh->tkns->args[count_tok])
 		count_tok++;

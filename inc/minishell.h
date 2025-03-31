@@ -214,6 +214,7 @@ int		find_env_pos(t_msh *msh, char *var_name); // -------> REPETIDO!!!
 int		check_envs(void);
 void	update_shlvl(t_msh *msh);
 int		env_init_values(t_env *env, t_msh *msh);
+int		env_init(t_env *env, t_msh *msh);
 
 /* ------------------------------------------------------------------varenv.c */
 char	*search_value(t_msh *msh, char *var);
@@ -250,6 +251,10 @@ char	*extract_command(char**args, int redir_pos);
 /* -------------------------------------------------------------input_redir.c */
 int		handle_input_file(t_msh *msh, char *filename, t_redir type);
 void	handle_redir_in(t_msh *msh, t_redir type);
+
+/* -------------------------------------------------------------------pipes.c */
+void	handle_pipes(t_msh *msh);
+int	execute_pipeline(t_msh *msh);
 
 /* ************************************************************************** */
 /* ******************************* [ MAIN ] ********************************* */
@@ -360,10 +365,6 @@ void	cleanup_heredoc(t_msh *msh);
 
 /* ------------------------------------------------------------manage_redir.c */
 void	redirection_manager(t_msh *msh);
-
-/* -------------------------------------------------------------------tools.c */
-int	has_pipe_in_args(char **args);
-int	execute_pipeline(t_msh *msh);
 
 /* ----------------------------- Error macros ------------------------------- */
 

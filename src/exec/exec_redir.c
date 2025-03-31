@@ -84,6 +84,19 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type)
 	}
 }
 
+// Preparación de STDIN_FIELNO en caso builtins 
+static int	manage_builting_redir_out(t_msh *msh, t_redir type)
+{
+	msh->mpip->backup_in = 0;
+	msh->mpip->backup_in = dup(STDIN_FILENO);
+	if (!handle_input_file(msh, msh->mpip->outfile, type))
+	{
+		restore_redirections(msh);
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
 // Función que maneja las redirecciones usando builtings 
 int	manage_builting_redir(t_msh *msh, t_redir type)
 {
@@ -102,15 +115,8 @@ int	manage_builting_redir(t_msh *msh, t_redir type)
 		}
 	}
 	if (type == REDIR_IN || type == REDIR_HERE)
-	{
-		msh->mpip->backup_in = 0;
-		msh->mpip->backup_in = dup(STDIN_FILENO);
-		if (!handle_input_file(msh, msh->mpip->outfile, type))
-		{
-			restore_redirections(msh);
+		if (!manage_builting_redir_out(msh, type))
 			return (FALSE);
-		}
-	}
 	exc_cmd(msh, msh->tkns->redir_pos);
 	restore_redirections(msh);
 	return (TRUE);

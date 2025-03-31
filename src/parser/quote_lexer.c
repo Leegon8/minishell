@@ -52,7 +52,7 @@ int	analyze_quotes(t_msh *msh, char *arg, char quote)
 void	handle_single_quotes(t_msh *msh, int i)
 {
 	char	*str;
-	char 	*str_rmv;
+	char	*str_rmv;
 
 	str = ft_strdup(msh->tkns->args[i]);
 	if (!analyze_quotes(msh, msh->tkns->args[i], '\''))

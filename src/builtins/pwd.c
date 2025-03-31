@@ -18,13 +18,12 @@ int	ft_pwd(t_msh *msh)
 	int		status;
 
 	status = 0;
-	if (!has_redirection(msh->tkns))
+	if (has_redirection(msh->tkns) == -1)
 	{
 		if (msh->tkns->args[1])
 		{
 			ft_fd_printf(2, "pwd: too many arguments\n");
-			status = -1;
-			return (status);
+			return (-1);
 		}
 	}
 	pwdpath = NULL;
