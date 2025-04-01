@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 static int	has_pipe(char *token)
 {
@@ -27,9 +26,10 @@ static int	validate_pipe_syntax(t_tok *tok)
 	{
 		if (has_pipe(tok->args[i]))
 		{
-			if (i == 0 || !tok->args[i + 1])
+			if (i == 0 || !tok->args[i + 1]) // Hay que actualizar el estado de salida!!
 			{
 				ft_fd_printf(2, E_PIP_SNTX);
+				// msh->last_exit_code = 2;
 				return (TRUE);
 			}
 		}

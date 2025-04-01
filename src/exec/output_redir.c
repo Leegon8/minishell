@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 static void	error_fd(char *filename)
 {
@@ -19,7 +18,6 @@ static void	error_fd(char *filename)
 		ft_fd_printf(2, "minishell: %s: Permission denied\n", filename);
 	else
 		ft_fd_printf(2, "minishell: %s: No such file or directory\n", filename);
-	set_exit_status(1);
 }
 
 int	handle_output_file(t_msh *msh, char *filename, t_redir type)
@@ -36,6 +34,7 @@ int	handle_output_file(t_msh *msh, char *filename, t_redir type)
 	if (fd == -1)
 	{
 		error_fd(filename);
+		msh->last_exit_code = 1;
 		return (FALSE);
 	}
 	if (dup2(fd, STDOUT_FILENO) == -1)

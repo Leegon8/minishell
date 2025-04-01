@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 //This function copy all the args without the redirection token 
 static char	**redir_args(char **args, int redir_pos)
@@ -66,9 +65,9 @@ static void	parent_process_redir(t_msh *msh, pid_t pid, char *fullpath)
 
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		set_exit_status(WEXITSTATUS(status));
+		msh->last_exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		set_exit_status(128 + WTERMSIG(status));
+		msh->last_exit_code = 128 + WTERMSIG(status);
 	cleanup_heredoc(msh);
 	free (fullpath);
 }
@@ -85,7 +84,7 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type)
 	if (pid == -1)
 	{
 		ft_fd_printf(2, "bash: fork: Cannot allocate memory\n");
-		set_exit_status(1);
+		msh->last_exit_code = 1;
 		return ;
 	}
 	else if (pid == 0)

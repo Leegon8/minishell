@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 // Busca la variable PATH en el env
 static char	**get_path_dirs(char **envs)

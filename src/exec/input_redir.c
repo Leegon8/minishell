@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 static void	error_fd(char *filename)
 {
@@ -20,7 +19,6 @@ static void	error_fd(char *filename)
 	else
 		ft_fd_printf(2, "minishell: %s: No such file or directory\n",
 			filename);
-	set_exit_status(1);
 }
 
 int	handle_input_file(t_msh *msh, char *filename, t_redir type)
@@ -34,6 +32,7 @@ int	handle_input_file(t_msh *msh, char *filename, t_redir type)
 	if (fd == -1)
 	{
 		error_fd(filename);
+		msh->last_exit_code = 1;
 		return (FALSE);
 	}
 	if (dup2(fd, STDIN_FILENO) == -1)
@@ -60,7 +59,7 @@ void	handle_redir_in(t_msh *msh, t_redir type)
 	if (msh->mpip->infile == NULL)
 	{
 		ft_fd_printf(2, E_NW);
-		set_exit_status(2);
+		msh->last_exit_code = 2;
 		return ;
 	}
 	exec_redir(msh, msh->tkns->cmd, type);

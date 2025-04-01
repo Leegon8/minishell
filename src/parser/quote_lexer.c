@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 t_quote	*init_quotes(void)
 {
@@ -59,7 +58,10 @@ void	handle_single_quotes(t_msh *msh, int i)
 
 	str = ft_strdup(msh->tkns->args[i]);
 	if (!analyze_quotes(msh, msh->tkns->args[i], '\''))
+	{
 		ft_fd_printf(2, E_SYNTX);
+		msh->last_exit_code = 2;
+	}
 	else
 	{
 		str_rmv = remove_quotes(str, '\'');
@@ -74,6 +76,7 @@ void	handle_double_quotes(t_msh *msh, int i)
 	if (!analyze_quotes(msh, msh->tkns->args[i], '\"'))
 	{
 		ft_fd_printf(2, E_SYNTX);
+		msh->last_exit_code = 2;
 		return ;
 	}
 	cleaned = remove_quotes(msh->tkns->args[i], '\"');

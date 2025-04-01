@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 void	handle_cd_error(t_msh *msh, int error_type)
 {
@@ -21,7 +20,7 @@ void	handle_cd_error(t_msh *msh, int error_type)
 		ft_fd_printf(2, "cd: %s: Not a directory\n", msh->tkns->args[1]);
 	else
 		ft_fd_printf(2, "cd: %s: No such file or directory\n", msh->tkns->args[1]);
-	set_exit_status(1);
+	msh->last_exit_code = 1;
 }
 
 int	ft_err(t_msh *msh, int err_code)
@@ -39,8 +38,7 @@ void	handle_exit_status(t_msh *msh)
 {
 	char	*code;
 
-	(void)msh;
-	code = ft_itoa(get_exit_status());
+	code = ft_itoa(msh->last_exit_code);
 	ft_putstr(code);
 	free(code);
 }

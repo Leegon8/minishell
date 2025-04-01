@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 void	cmd_not_found(t_msh *msh)
 {
 	ft_fd_printf(2, "Error: %s : command not found\n", msh->tkns->cmd);
-	set_exit_status(127);
+	msh->last_exit_code = 127;
 }
 
 void	check_tokens(char *input, t_msh *msh)

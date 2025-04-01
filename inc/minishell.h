@@ -235,7 +235,7 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type);
 /* ----------------------------------------------------------------executor.c */
 int		is_command_executable(char *fullpath);
 /*static void	child_process(t_msh *msh, char *fullpath)*/
-/*static void	parent_process(pid_t pid, char *fullpath)*/
+/*static void	parent_process(t_msh *msh, pid_t pid, char *fullpath)*/
 int		execute_command(t_msh *msh, char *fullpath);
 int		find_cmd(char *tkn, t_msh *msh);
 
@@ -349,7 +349,7 @@ void	ft_token(char *input, t_tok *tok);
 /* ------------------------------------------------------------redirections.c */
 // static void	print_error_msg(char c)
 int		has_redirection(t_tok *tok);
-t_redir	check_syntax_redir(char **tkn, int pos);
+t_redir	check_syntax_redir(t_msh *msh, char **tkn, int pos);
 // static void	init_redir(t_msh *msh)
 // static void	print_redir_info(t_redir redir_type, int redir_pos)
 void	handle_redir_out(t_msh *msh, t_redir type);

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 // Calculates the size of the variable
 int	ft_varlen(char *str, int start)

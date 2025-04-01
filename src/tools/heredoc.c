@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 static char	*read_until_delimiter(char *delimiter)
 {

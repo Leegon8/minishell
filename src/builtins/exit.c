@@ -53,14 +53,15 @@ static void	handle_numeric_arg(t_msh *msh, char *arg)
 		i++;
 	}
 	exit_code *= sign;
-	msh->end_sig = (exit_code % 256 + 256) % 256;
+	msh->last_exit_code = (exit_code % 256 + 256) % 256;
 }
 
 static void	handle_exit_error(t_msh *msh, char *arg)
 {
 	ft_fd_printf(2, "minishell: exit: %s: numeric argument required\n", arg);
 	if (msh->env)
-		free_structs(msh->env, msh->tkns, msh->mpip);
+	free_structs(msh->env, msh->tkns, msh->mpip);
+	msh->last_exit_code = 2;
 	exit(2);
 }
 
@@ -81,5 +82,5 @@ void	ft_exit(t_msh *msh)
 	}
 	handle_numeric_arg(msh, msh->tkns[1].cmd);
 	free_structs(msh->env, msh->tkns, msh->mpip);
-	exit(msh->end_sig);
+	exit(msh->last_exit_code);
 }

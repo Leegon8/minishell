@@ -11,13 +11,11 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "status.h"
 
 // print error message
 static void	print_error_msg(char c)
 {
 	ft_fd_printf(2, "minishell: syntax error near unexpected token `%c'\n", c);
-	set_exit_status(2);
 }
 
 // Verifies if it has a redirection and returns the position
@@ -44,7 +42,7 @@ int	has_redirection(t_tok *tok)
 }
 
 // Returns the redirection type
-t_redir	check_syntax_redir(char **tkn, int pos)
+t_redir	check_syntax_redir(t_msh *msh, char **tkn, int pos)
 {
 	int		len;
 
@@ -65,7 +63,10 @@ t_redir	check_syntax_redir(char **tkn, int pos)
 			return (PIPE);
 	}
 	if (len > 2)
+	{
 		print_error_msg(tkn[pos][1]);
+		msh->last_exit_code = 2;
+	}
 	return (REDIR_ERROR);
 }
 
@@ -78,7 +79,7 @@ void	handle_redir_out(t_msh *msh, t_redir type)
 	if (msh->mpip->outfile == NULL)
 	{
 		ft_fd_printf(2, E_NW);
-		set_exit_status(2);
+		msh->last_exit_code = 2;
 		return ;
 	}
 	if (is_builtin(msh->tkns->cmd))
@@ -100,7 +101,7 @@ int	redir_checker(t_msh *msh)
 		return (FALSE);
 	redir_pos = has_redirection(msh->tkns);
 	msh->tkns->redir_pos = redir_pos;
-	redir_type = check_syntax_redir(msh->tkns->args, redir_pos);
+	redir_type = check_syntax_redir(msh, msh->tkns->args, redir_pos);
 	if (redir_pos >= 0)
 	{
 		if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
