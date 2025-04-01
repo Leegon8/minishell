@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "status.h"
 
 static int	has_pipe(char *token)
 {

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "status.h"
 
 void	handle_pipes(t_msh *msh)
 {

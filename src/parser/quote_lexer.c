@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "status.h"
 
 t_quote	*init_quotes(void)
 {
@@ -23,6 +24,7 @@ t_quote	*init_quotes(void)
 	return (quote);
 }
 
+// Analiza una string en busca de qué tipo de comillas tiene o si no tiene
 int	analyze_quotes(t_msh *msh, char *arg, char quote)
 {
 	t_quote	*q;
@@ -48,7 +50,8 @@ int	analyze_quotes(t_msh *msh, char *arg, char quote)
 	return (FALSE);
 }
 
-// 1.Verificar que hay minimo 2 comillas o numero multiple de 2
+// Verifica que hay minimo 2 comillas o numero multiple de 2
+// y elimina comillas de la string
 void	handle_single_quotes(t_msh *msh, int i)
 {
 	char	*str;
@@ -64,7 +67,6 @@ void	handle_single_quotes(t_msh *msh, int i)
 	}
 }
 
-// 1.Verificar que hay minimo 2 comillas o numero multiple de 2
 void	handle_double_quotes(t_msh *msh, int i)
 {
 	char	*cleaned;

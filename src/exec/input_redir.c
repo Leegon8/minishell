@@ -11,6 +11,17 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "status.h"
+
+static void	error_fd(char *filename)
+{
+	if (!access(filename, R_OK))
+		ft_fd_printf(2, "minishell: %s: Permission denied\n", filename);
+	else
+		ft_fd_printf(2, "minishell: %s: No such file or directory\n",
+			filename);
+	set_exit_status(1);
+}
 
 int	handle_input_file(t_msh *msh, char *filename, t_redir type)
 {
@@ -22,11 +33,7 @@ int	handle_input_file(t_msh *msh, char *filename, t_redir type)
 		fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
-		if (!access(filename, R_OK))
-			ft_fd_printf(2, "minishell: %s: Permission denied\n", filename);
-		else
-			ft_fd_printf(2, "minishell: %s: No such file or directory\n",
-				filename);
+		error_fd(filename);
 		return (FALSE);
 	}
 	if (dup2(fd, STDIN_FILENO) == -1)
@@ -53,6 +60,7 @@ void	handle_redir_in(t_msh *msh, t_redir type)
 	if (msh->mpip->infile == NULL)
 	{
 		ft_fd_printf(2, E_NW);
+		set_exit_status(2);
 		return ;
 	}
 	exec_redir(msh, msh->tkns->cmd, type);

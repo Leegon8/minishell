@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "status.h"
 
 /* Bucle principal gestiona la entrada del usuario y ejecuta comandos */
 void	shell_loop(t_msh *msh)

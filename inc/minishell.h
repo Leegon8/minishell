@@ -226,10 +226,11 @@ char	*update_env(t_msh *msh, char *name, char *value); // ---> REPETIDO!!!
 /* ******************************** [ EXECUTOR ] **************************** */
 /* ************************************************************************** */
 
-/* -------------------------------------------------------------------------- */
-// static char	**extract_command(char**args, int redir_pos)
+/* --------------------------------------------------------------exec_redir.c */
+// static char	**redir_args(char **args, int redir_pos)
+// static void	child_process_redir(t_msh *msh, char *fullpath, t_redir type)
+// static void	parent_process_redir(t_msh *msh, pid_t pid, char *fullpath)
 void	exec_redir(t_msh *msh, char *tkn, t_redir type);
-int		manage_builting_redir(t_msh *msh, t_redir type);
 
 /* ----------------------------------------------------------------executor.c */
 int		is_command_executable(char *fullpath);
@@ -244,17 +245,19 @@ int		find_cmd(char *tkn, t_msh *msh);
 /*static char	*try_path(char *dir, char *cmd)*/
 char	*make_path(char *tkn, t_msh *msh);
 /* ------------------------------------------------------------output_redir.c */
+// static void	error_fd(char *filename)
 int		handle_output_file(t_msh *msh, char *filename, t_redir type);
 void	restore_redirections(t_msh *msh);
-char	*extract_command(char**args, int redir_pos);
 
 /* -------------------------------------------------------------input_redir.c */
+// static void	error_fd(char *filename)
 int		handle_input_file(t_msh *msh, char *filename, t_redir type);
 void	handle_redir_in(t_msh *msh, t_redir type);
 
 /* -------------------------------------------------------------------pipes.c */
 void	handle_pipes(t_msh *msh);
-int	execute_pipeline(t_msh *msh);
+// static void	child_process(t_msh *msh, int i, int prev_fd, int pipe_fd[2])
+int		execute_pipeline(t_msh *msh);
 
 /* ************************************************************************** */
 /* ******************************* [ MAIN ] ********************************* */
@@ -282,9 +285,17 @@ void	handle_sigint_heredoc(int sig);
 void	handle_heredoc_signals(void);
 void	restore_signals(void);
 
+/* ------------------------------------------------------------------status.c */
+void	set_exit_status(int status);
+int		get_exit_status(void);
+
 /* ************************************************************************** */
 /* ******************************* [ PARSER ] ******************************* */
 /* ************************************************************************** */
+
+/* -----------------------------------------------------------builtin_redir.c */
+// static int	manage_builting_redir_out(t_msh *msh, t_redir type)
+int		manage_builting_redir(t_msh *msh, t_redir type);
 
 /* ----------------------------------------------------------------builtins.c */
 void	cmd_not_found(t_msh *msh);
@@ -349,7 +360,7 @@ int		redir_checker(t_msh *msh);
 /* ************************************************************************** */
 
 /* --------------------------------------------------------------err_hanlde.c */
-void	handle_cd_error(char *path, int error_type);
+void	handle_cd_error(t_msh *msh, int error_type);
 int		ft_err(t_msh *msh, int err_code);
 void	handle_exit_status(t_msh *msh);
 

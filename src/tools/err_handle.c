@@ -11,15 +11,17 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "status.h"
 
-void	handle_cd_error(char *path, int error_type)
+void	handle_cd_error(t_msh *msh, int error_type)
 {
 	if (error_type == EACCES)
-		ft_fd_printf(2, "cd: %s: Permission denied\n", path);
+		ft_fd_printf(2, "cd: %s: Permission denied\n", msh->tkns->args[1]);
 	else if (error_type == ENOTDIR)
-		ft_fd_printf(2, "cd: %s: Not a directory\n", path);
+		ft_fd_printf(2, "cd: %s: Not a directory\n", msh->tkns->args[1]);
 	else
-		ft_fd_printf(2, "cd: %s: No such file or directory\n", path);
+		ft_fd_printf(2, "cd: %s: No such file or directory\n", msh->tkns->args[1]);
+	set_exit_status(1);
 }
 
 int	ft_err(t_msh *msh, int err_code)
@@ -37,7 +39,8 @@ void	handle_exit_status(t_msh *msh)
 {
 	char	*code;
 
-	code = ft_itoa(msh->last_exit_code);
+	(void)msh;
+	code = ft_itoa(get_exit_status());
 	ft_putstr(code);
 	free(code);
 }

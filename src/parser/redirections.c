@@ -11,11 +11,13 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "status.h"
 
 // print error message
 static void	print_error_msg(char c)
 {
 	ft_fd_printf(2, "minishell: syntax error near unexpected token `%c'\n", c);
+	set_exit_status(2);
 }
 
 // Verifies if it has a redirection and returns the position
@@ -76,6 +78,7 @@ void	handle_redir_out(t_msh *msh, t_redir type)
 	if (msh->mpip->outfile == NULL)
 	{
 		ft_fd_printf(2, E_NW);
+		set_exit_status(2);
 		return ;
 	}
 	if (is_builtin(msh->tkns->cmd))
