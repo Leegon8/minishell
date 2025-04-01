@@ -28,7 +28,7 @@ ENV = env varenv
 
 EXEC = executor executor_utils output_redir input_redir exec_redir pipes
 
-MAIN = minishell init signals rline status
+MAIN = minishell init signals rline
 
 PARSER = builtins lexer parser quote_expander quote_lexer quote_lexer_tools \
 		token_tools tokenizer redirections builtin_redir
