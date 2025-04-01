@@ -49,7 +49,7 @@ int	handle_heredoc(t_msh *msh, char *delimiter)
 	if (!delimiter)
 	{
 		ft_fd_printf(2, E_NW);
-		set_exit_status(2);
+		msh->last_exit_code = 2;
 		return (FALSE);
 	}
 	temp_file_path = "/tmp/heredoc_temp";
