@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:23 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/02 18:25:11 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:25:28 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ int	ft_pwd(t_msh *msh)
 	char	*pwdpath;
 	int		status;
 
-	if (builtin_redir_check(msh) == 0)
-	{
-			ft_fd_printf(2, "pwd: too many arguments\n");
-				return (1);
-	}
 	status = 0;
 	pwdpath = NULL;
 	pwdpath = (char *)malloc(sizeof(char) * PATH_MAX);
