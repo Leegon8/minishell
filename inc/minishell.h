@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/02 15:28:59 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:23:18 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ int		ft_export(t_msh *msh, int tok_num);
 
 /* ---------------------------------------------------------------------pwd.c */
 int		ft_pwd(t_msh *msh);
+int		builtin_redir_check(t_msh *msh);
 
 /* -------------------------------------------------------------------unset.c */
 /*static int	is_valid_identifier(char *str)*/

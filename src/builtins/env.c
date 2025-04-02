@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_builting.c                                     :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:13:40 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/11 17:56:49 by leegon           ###   ########.fr       */
+/*   Updated: 2025/04/02 18:28:11 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_env(t_msh *msh)
 		ft_fd_printf(2, "env: environment not available\n");
 		return (FALSE);
 	}
-	if (msh->tkns->args[1] && !has_redirection(msh->tkns))
+	if (msh->tkns->args[1] && builtin_redir_check(msh) == 0)
 	{
 		ft_fd_printf(2, "env: '%s': No such file or directory\n",
 			msh->tkns->args[1]);
