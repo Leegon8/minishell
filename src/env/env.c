@@ -88,7 +88,11 @@ int	env_init_values(t_env *env, t_msh *msh)
 /* Inicializa las variables de entorno con los valores del env (si existe) */
 int	env_init(t_env *env, t_msh *msh)
 {
+<<<<<<< HEAD
 	env->home = getenv("HOME");
+=======
+	env->home = ft_strdup(getenv("HOME"));
+>>>>>>> main
 	if (!env->home)
 		return (ft_fd_printf(2, "%s", E_MEMASF) * 0);
 	env->old_pwd = getenv("OLDPWD");

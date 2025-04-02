@@ -250,8 +250,12 @@ int		handle_output_file(t_msh *msh, char *filename, t_redir type);
 void	restore_redirections(t_msh *msh);
 
 /* -------------------------------------------------------------input_redir.c */
+<<<<<<< HEAD
 // static void	error_fd(char *filename)
 int		handle_input_file(t_msh *msh, char *filename, t_redir type);
+=======
+int		handle_input_file(t_msh *msh, char *filename);
+>>>>>>> main
 void	handle_redir_in(t_msh *msh, t_redir type);
 
 /* -------------------------------------------------------------------pipes.c */

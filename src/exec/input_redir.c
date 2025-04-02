@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+<<<<<<< HEAD
 static void	error_fd(char *filename)
 {
 	if (!access(filename, R_OK))
@@ -22,13 +23,15 @@ static void	error_fd(char *filename)
 }
 
 int	handle_input_file(t_msh *msh, char *filename, t_redir type)
+=======
+int	handle_input_file(t_msh *msh, char *filename)
+>>>>>>> main
 {
 	int	fd;
 
 	if (msh->mpip->backup_in == -1)
 		return (FALSE);
-	if (type == REDIR_IN)
-		fd = open(filename, O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
 		error_fd(filename);
@@ -52,10 +55,14 @@ void	handle_redir_in(t_msh *msh, t_redir type)
 	int	file_pos;
 
 	file_pos = msh->tkns->redir_pos + 1;
+<<<<<<< HEAD
 	if (type == REDIR_HERE)
 		msh->mpip->infile = msh->heredoc_file;
 	else
 		msh->mpip->infile = msh->tkns->args[file_pos];
+=======
+	msh->mpip->infile = msh->tkns->args[file_pos];
+>>>>>>> main
 	if (msh->mpip->infile == NULL)
 	{
 		ft_fd_printf(2, E_NW);
