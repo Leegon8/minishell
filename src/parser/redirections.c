@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:50:55 by lauriago          #+#    #+#             */
-/*   Updated: 2025/03/27 10:34:57 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:54:42 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,12 @@ int	redir_checker(t_msh *msh)
 		if (redir_type == REDIR_IN)
 			handle_redir_in(msh, redir_type);
 		if (redir_type == REDIR_HERE)
-			handle_heredoc(msh, msh->tkns->args[redir_pos + 1]);
+		{
+			if (!handle_heredoc(msh, msh->tkns->args[redir_pos + 1]))
+				return (TRUE);
+			exec_redir(msh, msh->tkns->cmd, redir_type);
+			return (TRUE);
+		}
 		if (redir_type == PIPE)
 			handle_pipes(msh);
 		return (TRUE);

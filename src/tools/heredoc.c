@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 02:29:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/03/06 23:17:07 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:36:21 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	handle_heredoc(t_msh *msh, char *delimiter)
 	close(fd);
 	free(content);
 	msh->heredoc_file = ft_strdup(temp_file_path);
+	msh->mpip->infile = msh->heredoc_file;
 	return (TRUE);
 }
 
@@ -77,8 +78,16 @@ int	redirect_input_output(t_msh *msh)
 	{
 		fd = open(msh->heredoc_file, O_RDONLY);
 		if (fd < 0)
+		{
+			perror("open heredoc");
 			return (FALSE);
-		dup2(fd, STDIN_FILENO);
+		}
+		if (dup2(fd, STDIN_FILENO) == -1)
+		{
+			perror("dup2 heredoc -> STDIN");
+			close(fd);
+			return (FALSE);
+		}
 		close(fd);
 	}
 	return (TRUE);
