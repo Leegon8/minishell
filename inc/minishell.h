@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/03 21:39:46 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/03 21:44:41 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,7 +334,6 @@ int		size_token(char *input, t_tok *tok);
 char	*create_token(char *input, int len, t_tok *tok);
 void	ft_token(char *input, t_tok *tok);
 //static void	print_error_msg(char c);
-
 
 /* ************************************************************************** */
 /* ******************************* [ REDIR ] ******************************** */
