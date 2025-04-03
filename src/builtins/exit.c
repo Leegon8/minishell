@@ -60,7 +60,7 @@ static void	handle_exit_error(t_msh *msh, char *arg)
 {
 	ft_fd_printf(2, "minishell: exit: %s: numeric argument required\n", arg);
 	if (msh->env)
-	free_structs(msh->env, msh->tkns, msh->mpip);
+		free_structs(msh->env, msh->tkns, msh->mpip);
 	msh->last_exit_code = 2;
 	exit(2);
 }
