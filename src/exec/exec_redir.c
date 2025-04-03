@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:31:02 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/02 16:36:08 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/03 19:33:54 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	child_process_redir(t_msh *msh, char *fullpath, t_redir type)
 	char	**new_args;
 
 	new_args = redir_args(msh->tkns->args, msh->tkns->redir_pos);
-
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 		handle_output_file(msh, msh->mpip->outfile, type);
 	else if (type == REDIR_IN)
@@ -59,7 +58,6 @@ static void	child_process_redir(t_msh *msh, char *fullpath, t_redir type)
 			exit(EXIT_FAILURE);
 		}
 	}
-
 	if (execve(fullpath, new_args, msh->envs) == -1)
 	{
 		cmd_not_found(msh);
@@ -86,7 +84,7 @@ void	exec_redir(t_msh *msh, char *tkn, t_redir type)
 {
 	pid_t	pid;
 	char	*fullpath;
-	
+
 	msh->mpip->backup_out = dup(STDOUT_FILENO);
 	msh->mpip->backup_in = dup(STDIN_FILENO);
 	fullpath = make_path(tkn, msh);

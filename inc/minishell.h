@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/03 19:23:04 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/03 19:43:13 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,7 @@ void	handle_redir_in(t_msh *msh, t_redir type);
 void	handle_pipes(t_msh *msh);
 // static void	child_process(t_msh *msh, int i, int prev_fd, int pipe_fd[2])
 int		execute_pipeline(t_msh *msh);
+void	save_pipe_and_close(int *prev_fd, int *pipe_fd);
 
 /* ************************************************************************** */
 /* ******************************* [ MAIN ] ********************************* */

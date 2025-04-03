@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauriago <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 16:49:04 by lauriago          #+#    #+#             */
-/*   Updated: 2025/02/28 16:49:28 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/04/03 19:49:08 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,10 @@ void	handle_pipes(t_msh *msh)
 	return ;
 }
 
-static void	child_process(t_msh *msh, int i, int prev_fd, int pipe_fd[2])
+static void	exec_command(t_msh *msh, int i)
 {
 	char	*path;
 
-	if (prev_fd != -1)
-	{
-		dup2(prev_fd, STDIN_FILENO);
-		close(prev_fd);
-	}
-	if (i < msh->cmd_count - 1)
-	{
-		close(pipe_fd[0]);
-		dup2(pipe_fd[1], STDOUT_FILENO);
-		close(pipe_fd[1]);
-	}
 	if (is_builtin(msh->cmds[i].args[0]))
 	{
 		msh->tkns->cmd = ft_strdup(msh->cmds[i].args[0]);
@@ -53,6 +42,22 @@ static void	child_process(t_msh *msh, int i, int prev_fd, int pipe_fd[2])
 		ft_fd_printf(2, E_EXECVE);
 	}
 	exit(EXIT_FAILURE);
+}
+
+static void	child_process(t_msh *msh, int i, int prev_fd, int pipe_fd[2])
+{
+	if (prev_fd != -1)
+	{
+		dup2(prev_fd, STDIN_FILENO);
+		close(prev_fd);
+	}
+	if (i < msh->cmd_count - 1)
+	{
+		close(pipe_fd[0]);
+		dup2(pipe_fd[1], STDOUT_FILENO);
+		close(pipe_fd[1]);
+	}
+	exec_command(msh, i);
 }
 
 int	execute_pipeline(t_msh *msh)
@@ -76,13 +81,16 @@ int	execute_pipeline(t_msh *msh)
 		if (prev_fd != -1)
 			close(prev_fd);
 		if (i < msh->cmd_count - 1)
-		{
-			close(pipe_fd[1]);
-			prev_fd = pipe_fd[0];
-		}
+			save_pipe_and_close(&prev_fd, pipe_fd);
 		i++;
 	}
 	while (wait(NULL) > 0)
 		;
 	return (0);
+}
+
+void	save_pipe_and_close(int *prev_fd, int *pipe_fd)
+{
+	close(pipe_fd[1]);
+	*prev_fd = pipe_fd[0];
 }

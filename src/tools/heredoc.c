@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 02:29:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/02 16:36:21 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/03 19:58:03 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ int	handle_heredoc(t_msh *msh, char *delimiter)
 	if (fd < 0 || write(fd, content, ft_strlen(content)) < 0)
 	{
 		close(fd);
-		free(content);
-		return (FALSE);
+		return (free(content), FALSE);
 	}
 	close(fd);
 	free(content);
