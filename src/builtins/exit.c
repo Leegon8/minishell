@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:01 by lauriago          #+#    #+#             */
-/*   Updated: 2025/03/16 19:00:04 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/03 19:30:37 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	handle_exit_error(t_msh *msh, char *arg)
 {
 	ft_fd_printf(2, "minishell: exit: %s: numeric argument required\n", arg);
 	if (msh->env)
-	free_structs(msh->env, msh->tkns, msh->mpip);
+		free_structs(msh->env, msh->tkns, msh->mpip);
 	msh->last_exit_code = 2;
 	exit(2);
 }
