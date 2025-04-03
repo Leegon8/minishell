@@ -110,15 +110,10 @@ int	redir_checker(t_msh *msh)
 			handle_redir_out(msh, redir_type);
 		if (redir_type == REDIR_IN)
 			handle_redir_in(msh, redir_type);
-<<<<<<< HEAD
 		if (redir_type == REDIR_HERE)
 			handle_heredoc(msh, msh->tkns->args[redir_pos + 1]);
 		if (redir_type == PIPE)
 			handle_pipes(msh);
-=======
-		// if (redir_type == REDIR_HERE)
-		// 	handle_heredoc(t_msh *msh, char *delimiter);
->>>>>>> main
 		return (TRUE);
 	}
 	return (FALSE);
