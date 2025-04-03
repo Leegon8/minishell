@@ -122,6 +122,7 @@ struct	s_tokenizer
 	t_tokty				type;
 	int					is_heredoc;
 	char				*heredoc_delim;
+	int					count_redir;
 	int					redir_pos;
 	t_redir				redir_type;
 	struct s_tokenizer	*prev;
@@ -346,6 +347,10 @@ char	*create_token(char *input, int len, t_tok *tok);
 void	ft_token(char *input, t_tok *tok);
 //static void	print_error_msg(char c);
 
+/* -------------------------------------------------------------redir_tools.c */
+int		count_redir(t_msh *msh);
+int 	handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type);
+
 /* ------------------------------------------------------------redirections.c */
 // static void	print_error_msg(char c)
 int		has_redirection(t_tok *tok);
@@ -373,9 +378,6 @@ void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 /* -----------------------------------------------------------------heredoc.c */
 int		handle_heredoc(t_msh *msh, char *delimiter);
 void	cleanup_heredoc(t_msh *msh);
-
-/* ------------------------------------------------------------manage_redir.c */
-void	redirection_manager(t_msh *msh);
 
 /* ----------------------------- Error macros ------------------------------- */
 
