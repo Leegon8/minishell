@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/03 21:44:41 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:21:29 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,8 +212,6 @@ int		ft_unset(t_msh *msh, int tok_num);
 /* ---------------------------------------------------------------------env.c */
 int		env_var_count(t_msh *msh);
 int		find_env_pos(t_msh *msh, char *var_name);
-int		check_envs(void);
-void	update_shlvl(t_msh *msh);
 int		env_init_values(t_env *env, t_msh *msh);
 int		env_init(t_env *env, t_msh *msh);
 
@@ -294,8 +292,6 @@ void	restore_signals(void);
 /* ************************************************************************** */
 
 /* -------------------------------------------------------------------lexer.c */
-// int		quote_lexer(char *arg);
-int		lexer(char **tokens, t_msh *msh);
 /*static int	has_pipe(char *token)*/
 /*static int	validate_pipe_syntax(t_tok *tok)*/
 /*static void	init_command_struct(t_cmd *cmd)*/
@@ -321,7 +317,6 @@ t_quote	*init_quotes(void);
 int		analyze_quotes(t_msh *msh, char *arg, char quote);
 void	handle_single_quotes(t_msh *msh, int i);
 void	handle_double_quotes(t_msh *msh, int i);
-//void	handle_quotes(t_msh *msh, t_quote *q, int i);
 
 /* -------------------------------------------------------------token_tools.c */
 int		is_quote(char c);

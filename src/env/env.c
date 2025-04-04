@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/11 17:46:39 by leegon           ###   ########.fr       */
+/*   Updated: 2025/04/04 10:16:50 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,6 @@ int	find_env_pos(t_msh *msh, char *var_name)
 		i++;
 	}
 	return (-1);
-}
-
-void	update_shlvl(t_msh *msh)
-{
-	char	*new_level;
-	int		i;
-
-	i = find_env_pos(msh, "SHLVL");
-	if (i >= 0)
-		msh->shlvl = msh->shlvl + 1;
-	else
-		msh->shlvl = 1;
-	new_level = ft_itoa(msh->shlvl);
-	if (!new_level)
-		return ;
-	if (i >= 0)
-	{
-		free(msh->env->values[i]);
-		msh->env->values[i] = new_level;
-	}
 }
 
 int	env_init_values(t_env *env, t_msh *msh)
@@ -95,6 +75,5 @@ int	env_init(t_env *env, t_msh *msh)
 	env->path = getenv("PATH");
 	getcwd(env->pwd, PATH_MAX);
 	env_init_values(env, msh);
-	update_shlvl(msh);
 	return (TRUE);
 }

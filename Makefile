@@ -6,7 +6,7 @@
 #    By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2025/04/03 20:16:43 by lprieto-         ###   ########.fr        #
+#    Updated: 2025/04/04 10:35:38 by lprieto-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ PARSER = lexer parser quote_expander quote_lexer quote_lexer_tools \
 
 REDIR = builtin_redir input_redir output_redir redirections
 
-TOOLS = err_handle free tools
+TOOLS = err_handle free
 
 SRCS = $(addsuffix .c, $(addprefix src/builtins/, $(BUILTINS))) \
 		$(addsuffix .c, $(addprefix src/env/, $(ENV))) \
