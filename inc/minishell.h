@@ -350,6 +350,7 @@ void	ft_token(char *input, t_tok *tok);
 /* -------------------------------------------------------------redir_tools.c */
 int		count_redir(t_msh *msh);
 int 	handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type);
+int		handle_multiple_redir(t_msh *msh, int count, int redir_pos, t_redir type);
 
 /* ------------------------------------------------------------redirections.c */
 // static void	print_error_msg(char c)

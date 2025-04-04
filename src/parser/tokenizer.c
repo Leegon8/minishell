@@ -174,6 +174,7 @@ void	ft_token(char *input, t_tok *tok)
 	int	i;
 	int	arg_index;
 
+	tok->args = NULL;
 	tok->args = malloc(sizeof(char *) * MAX_ARGS);
 	if (!tok->args)
 		return ;
@@ -189,9 +190,6 @@ void	ft_token(char *input, t_tok *tok)
 		if (i == -1)
 			return ;
 	}
-	for (i=0; i < arg_index; i++){
-		printf("tok[%d] = %s\n", i, tok->args[i]);
-	}
 	tok->args[arg_index] = NULL;
 	if (arg_index == 0)
 	{
@@ -199,3 +197,7 @@ void	ft_token(char *input, t_tok *tok)
 		tok->args = NULL;
 	}
 }
+
+// for (i=0; i < arg_index; i++){
+// 	printf("tok[%d] = %s\n", i, tok->args[i]);
+// }
