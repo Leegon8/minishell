@@ -37,9 +37,11 @@ static void	exec_command(t_msh *msh, int i)
 		cmd_not_found(msh);
 	else
 	{
-		execve(path, msh->cmds[i].args, msh->envs);
-		free(path);
-		ft_fd_printf(2, E_EXECVE);
+		if (execve(path, msh->cmds[i].args, msh->envs) == -1)
+		{
+			free(path);
+			ft_fd_printf(2, E_EXECVE);
+		}
 	}
 	exit(EXIT_FAILURE);
 }

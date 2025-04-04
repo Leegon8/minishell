@@ -21,6 +21,7 @@ static void	handle_cd_minus(t_msh *msh)
 	if (!msh->env->old_pwd)
 	{
 		ft_fd_printf(2, "cd: OLDPWD not set\n");
+		msh->last_exit_code = 1;
 		return ;
 	}
 	new_path = ft_strdup(msh->env->old_pwd);
@@ -37,7 +38,10 @@ static void	handle_cd_minus(t_msh *msh)
 static void	cd_home(t_msh *msh)
 {
 	if (!msh->env->home)
+	{
 		ft_fd_printf(2, "cd: HOME not set\n");
+		msh->last_exit_code = 1;
+	}
 	if (chdir(msh->env->home) == -1)
 		perror("cd");
 	else

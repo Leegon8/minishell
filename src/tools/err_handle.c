@@ -19,7 +19,8 @@ void	handle_cd_error(t_msh *msh, int error_type)
 	else if (error_type == ENOTDIR)
 		ft_fd_printf(2, "cd: %s: Not a directory\n", msh->tkns->args[1]);
 	else
-		ft_fd_printf(2, "cd: %s: No such file or directory\n", msh->tkns->args[1]);
+		ft_fd_printf(2, "cd: %s: No such file or directory\n",
+			msh->tkns->args[1]);
 	msh->last_exit_code = 1;
 }
 
@@ -41,4 +42,5 @@ void	handle_exit_status(t_msh *msh)
 	code = ft_itoa(msh->last_exit_code);
 	ft_putstr(code);
 	free(code);
+	msh->last_exit_code = 0;
 }
