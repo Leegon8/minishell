@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:01 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/03 19:30:37 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/05 10:59:46 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	ft_exit(t_msh *msh)
 	if (!msh)
 		exit(1);
 	ft_fd_printf(2, "exit\n");
-	if (!msh || !msh->tkns[1].cmd)
+	if (!msh || !msh->tkns || !msh->tkns->next || !msh->tkns->next->cmd)
 		exit(msh->last_exit_code);
 	if (!is_numeric_arg(msh->tkns[1].cmd))
 		handle_exit_error(msh, msh->tkns[1].cmd);
-	if (msh->tkns[2].cmd)
+	if (msh->tkns->next && msh->tkns->next->next && msh->tkns->next->next->cmd)
 	{
 		ft_fd_printf(2, "minishell: exit: too many arguments\n");
 		msh->end_sig = 1;
