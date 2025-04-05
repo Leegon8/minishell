@@ -88,3 +88,25 @@ char	*make_relative(char *arg, t_msh *msh)
 		new_path = built_abspath(arg, msh->env->pwd);
 	return (new_path);
 }
+
+void	expand_cd_home(t_msh *msh)
+{
+	char	*home_path;
+	char	*full_path;
+	
+	if (!msh->env->home)
+	{
+		ft_fd_printf(2, "cd: HOME not set\n");
+		msh->last_exit_code = 1;
+		return ;
+	}
+	home_path = msh->env->home;
+	full_path = ft_strjoin(home_path, msh->tkns->args[1] + 1);
+	if (!full_path)
+		return ;
+	if (chdir(full_path) == -1)
+			handle_cd_error(msh, errno);
+	else
+		update_pwd_opwd(msh, full_path);
+	free(full_path);
+}

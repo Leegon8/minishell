@@ -51,7 +51,7 @@ static void	cd_home(t_msh *msh)
 	}
 }
 
-static void	update_pwd_opwd(t_msh *msh, char *new_path)
+void	update_pwd_opwd(t_msh *msh, char *new_path)
 {
 	msh->env->old_pwd = update_env(msh, "OLDPWD", msh->env->pwd);
 	msh->env->pwd = update_env(msh, "PWD", new_path);
@@ -94,11 +94,19 @@ void	ft_cd(t_msh *msh, int num_cmd)
 			return ;
 		if (msh->tkns->args[1][0] == '-' && msh->tkns->args[1][1] == '\0')
 			handle_cd_minus(msh);
-		else if (msh->tkns->args[1][0] == '~' && msh->tkns->args[1][1] == '\0')
-			cd_home(msh);
+		else if (msh->tkns->args[1][0] == '~')
+		{
+			if (msh->tkns->args[1][1] == '\0')
+				cd_home(msh);
+			else if (msh->tkns->args[1][1] == '/')
+				expand_cd_home(msh);
+		}
 		else
 			handle_cd_path(msh);
 	}
 	else if (num_cmd == 3)
-		handle_cd_path(msh);
+	{
+		ft_fd_printf(2, "minishell: cd: too many arguments\n");
+		msh->last_exit_code = 1;
+	}
 }

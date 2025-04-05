@@ -155,11 +155,12 @@ char	*built_abspath(char *relative_path, char *pwd);
 /*static char	*go_back_dir(char *pwd)*/
 /*static char	*handle_multiple_back(char *path, t_msh *msh)*/
 char	*make_relative(char *arg, t_msh *msh);
+void	expand_cd_home(t_msh *msh);
 
 /* ----------------------------------------------------------------------cd.c */
 /*static void	handle_cd_minus(t_msh *msh)*/
 /*static void	cd_home(t_msh *msh)*/
-/*static void	update_pwd_opwd(t_msh *msh, char *new_path)*/
+void	update_pwd_opwd(t_msh *msh, char *new_path);
 void	handle_cd_path(t_msh *msh);
 void	ft_cd(t_msh *msh, int num_cmd);
 
