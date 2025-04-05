@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:50:55 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/03 19:56:20 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/05 10:33:41 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,9 @@ int	redir_checker(t_msh *msh)
 {
 	int		redir_pos;
 	t_redir	redir_type;
-
+	int 	redir_count;
+	
+	redir_count = msh->tkns->count_redir;
 	if (!msh || !msh->tkns || !msh->tkns->args)
 		return (FALSE);
 	redir_pos = has_redirection(msh->tkns);
@@ -127,6 +129,6 @@ int	redir_checker(t_msh *msh)
 	if (count_redir(msh) == 1)
 		return (handle_one_redir(msh, redir_pos, redir_type));
 	if (count_redir(msh) > 1)
-		return (handle_multiple_redir(msh, msh->tkns->count_redir, redir_pos, redir_type));
+		return (handle_multip_redir(msh, redir_count, redir_pos, redir_type));
 	return (FALSE);
 }

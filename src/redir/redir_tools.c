@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauriago <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:28:23 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/03 16:28:38 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/04/05 10:26:17 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	find_next_redir(t_msh *msh, int start_pos)
 	return (-1);
 }
 
-int	handle_multiple_redir(t_msh *msh, int count, int redir_pos, t_redir type)
+int	handle_multip_redir(t_msh *msh, int count, int redir_pos, t_redir type)
 {
 	int		i;
 	int		current_pos;

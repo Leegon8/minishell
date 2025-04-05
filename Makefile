@@ -6,7 +6,7 @@
 #    By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2025/04/04 10:35:38 by lprieto-         ###   ########.fr        #
+#    Updated: 2025/04/05 10:42:49 by lprieto-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ EXEC = builtins executor executor_utils exec_redir pipes
 
 HEREDOC = heredoc
 
-MAIN = minishell init signals
+MAIN = minishell init signals signals2
 
 PARSER = lexer parser quote_expander quote_lexer quote_lexer_tools \
 		token_tools tokenizer

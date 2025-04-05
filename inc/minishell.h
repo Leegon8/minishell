@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/04 10:21:29 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/05 10:44:42 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,9 +284,11 @@ void	shell_loop(t_msh *msh);
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 void	init_signals(void);
+void	restore_signals(void);
+
+/* ----------------------------------------------------------------signals2.c */
 void	handle_sigint_heredoc(int sig);
 void	handle_heredoc_signals(void);
-void	restore_signals(void);
 
 /* ************************************************************************** */
 /* ******************************* [ PARSER ] ******************************* */
@@ -311,7 +313,7 @@ void	ft_expander(char *str, t_msh *msh);
 
 /* -------------------------------------------------------quote_lexer_tools.c */
 char	*remove_quotes(char *str, char quote_type);
-// char	*search_value(t_msh *msh, char *name); --> REPETIDO!!
+// char	*search_value(t_msh *msh, char *name);
 
 /* -------------------------------------------------------------quote_lexer.c */
 t_quote	*init_quotes(void);
@@ -350,10 +352,10 @@ int		handle_output_file(t_msh *msh, char *filename, t_redir type);
 void	restore_redirections(t_msh *msh);
 
 /* -------------------------------------------------------------redir_tools.c */
-int	count_redir(t_msh *msh);
-int	handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type);
+int		count_redir(t_msh *msh);
+int		handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type);
 // static int	find_next_redir(t_msh *msh, int start_pos)
-int	handle_multiple_redir(t_msh *msh, int count, int redir_pos, t_redir type);
+int		handle_multip_redir(t_msh *msh, int count, int redir_pos, t_redir type);
 
 /* ------------------------------------------------------------redirections.c */
 // static void	print_error_msg(char c)
