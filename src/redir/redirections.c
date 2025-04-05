@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:50:55 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/05 11:26:31 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/05 11:35:21 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,25 +74,20 @@ void	handle_redir_out(t_msh *msh, t_redir type)
 {
 	int	file_pos;
 
-	if (!msh || !msh->tkns || !msh->mpip)
-		return ;
 	file_pos = msh->tkns->redir_pos + 1;
 	msh->mpip->outfile = msh->tkns->args[file_pos];
-	msh->tkns->redir_type = type;
-	if (!msh->mpip->outfile)
+	if (msh->mpip->outfile == NULL)
 	{
 		ft_fd_printf(2, E_NW);
 		msh->last_exit_code = 2;
 		return ;
 	}
-	if (msh->tkns->args[file_pos + 1])
-		msh->tkns->args[file_pos] = NULL;
-	if (msh->has_pipe)
-		return ;
 	if (is_builtin(msh->tkns->cmd))
+	{
 		manage_builting_redir(msh, type);
-	else
-		exec_redir(msh, msh->tkns->cmd, type);
+		return ;
+	}
+	exec_redir(msh, msh->tkns->cmd, type);
 	restore_redirections(msh);
 }
 
