@@ -118,7 +118,7 @@ int	redir_checker(t_msh *msh)
 	t_redir	redir_type;
 	int		redir_count;
 
-	redir_count = msh->tkns->count_redir;
+	redir_count = count_redir(msh);
 	if (!msh || !msh->tkns || !msh->tkns->args)
 		return (FALSE);
 	redir_pos = has_redirection(msh->tkns);
@@ -126,9 +126,9 @@ int	redir_checker(t_msh *msh)
 	redir_type = check_syntax_redir(msh, msh->tkns->args, redir_pos);
 	// if (redir_pos >= 0)
 	// 	return (check_redir_type(msh, redir_pos, redir_type));
-	if (count_redir(msh) == 1)
+	if (redir_count == 1)
 		return (handle_one_redir(msh, redir_pos, redir_type));
-	if (count_redir(msh) > 1)
+	if (redir_count > 1)
 		return (handle_multip_redir(msh, redir_count, redir_pos, redir_type));
 	return (FALSE);
 }

@@ -37,6 +37,7 @@ int	count_redir(t_msh *msh)
 
 int	handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type)
 {
+	printf("DEBUG: Entra en handle_ONE_redir\n");
 	if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
 		return (FALSE);
 	if (redir_type == REDIR_OUT || redir_type == REDIR_APPEND)
@@ -82,6 +83,7 @@ int	handle_multip_redir(t_msh *msh, int count, int redir_pos, t_redir type)
 	i = 0;
 	current_pos = redir_pos;
 	current_type = type;
+	printf("DEBUG: Entra en handle_multiple_redir\n");
 	printf("Tiene %d redirecciones\n", count);
 	while (i < count)
 	{
