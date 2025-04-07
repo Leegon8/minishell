@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   varenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/12 12:41:13 by leegon           ###   ########.fr       */
+/*   Updated: 2025/04/07 20:11:14 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,26 @@ char	*search_value(t_msh *msh, char *var)
 char	*manage_cd_var(t_msh *msh, char *arg)
 {
 	char	*str;
+	char	*tmp;
 	int		len;
 
 	str = ft_strdup(arg);
+	if (!str)
+		return (NULL);
 	if ((arg[0] == '\"' && analyze_quotes(msh, arg, arg[0])) || arg[0] == '$')
-		str = remove_quotes(arg, '\"');
+	{
+		tmp = remove_quotes(arg, '\"');
+		free(str);
+		str = tmp;
+	}
 	if (echo_has_2_expand(str))
 	{
 		len = ft_varlen(str, 1);
-		str = copy_var(str, 1, len);
-		return (str);
+		tmp = copy_var(str, 1, len);
+		free(str);
+		return (tmp);
 	}
+	free(str);
 	return (NULL);
 }
 

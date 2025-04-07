@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_b_export.c                                      :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:15:46 by lauriago          #+#    #+#             */
-/*   Updated: 2024/11/03 11:44:34 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:37:49 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int	add_env_var(t_msh *msh, char *name, char *value)
 		new_values[count] = ft_strdup(msh->env->values[count]);
 	}
 	new_names[count] = ft_strdup(name);
-	new_values[count] = ft_strdup(value);
+	if (value)
+		new_values[count] = ft_strdup(value);
+	else
+		new_values[count] = ft_strdup("");
 	new_names[count + 1] = NULL;
 	new_values[count + 1] = NULL;
 	ft_free_array(msh->env->names);
@@ -60,6 +63,7 @@ int	add_env_var(t_msh *msh, char *name, char *value)
 	msh->env_var_count++;
 	return (TRUE);
 }
+
 
 void	print_export_vars(t_msh *msh)
 {

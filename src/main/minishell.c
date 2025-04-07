@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/03/16 18:58:23 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:35:40 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,19 @@ int	main(int argc, char **argv, char **envs)
 	ft_memset(&msh, 0, sizeof(t_msh));
 	msh.envs = envs;
 	if (init_structs(&env, &msh, &mpip, &tok) != TRUE)
+	{
+		if (env)
+			free_env(env);
 		return (ft_fd_printf(2, "%s", E_MEMASF));
+	}
 	if (envs != NULL)
 		msh.envs = envs;
 	msh.env_var_count = env_var_count(&msh);
-	env_init(env, &msh);
+	if (env_init(env, &msh) != TRUE)
+	{
+		free_env(env);
+		return (ft_fd_printf(2, "%s", E_MEMASF));
+	}
 	init_signals();
 	shell_loop(&msh);
 	free_structs(env, tok, mpip);

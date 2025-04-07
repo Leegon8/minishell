@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2025/03/28 11:14:10 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:33:11 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ void	check_tokens(char *input, t_msh *msh)
 
 	if (!input || !*input)
 		return ;
+	if (msh->tkns->cmd)
+	{
+		free(msh->tkns->cmd);
+		msh->tkns->cmd = NULL;
+	}
+	if (msh->tkns->args)
+	{
+		ft_free_array(msh->tkns->args);
+		msh->tkns->args = NULL;
+	}
 	ft_token(input, msh->tkns);
 	if (!msh->tkns->args || !msh->tkns->args[0])
 		return ;

@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:23 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/03 19:30:52 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:29:22 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_pwd(t_msh *msh)
 
 	status = 0;
 	pwdpath = NULL;
-	pwdpath = (char *)malloc(sizeof(char) * PATH_MAX);
+	pwdpath = malloc(PATH_MAX);
 	if (!pwdpath)
 		return (FALSE);
 	if (!getcwd(pwdpath, PATH_MAX))
@@ -27,9 +27,10 @@ int	ft_pwd(t_msh *msh)
 		free(pwdpath);
 		return (FALSE);
 	}
-	msh->env->pwd = pwdpath;
+	update_env(msh, "PWD", pwdpath);
 	if (ft_fd_printf(1, "%s\n", pwdpath) < 0)
 		status = -1;
+	free(pwdpath);
 	return (status);
 }
 
