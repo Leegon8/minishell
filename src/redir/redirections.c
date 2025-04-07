@@ -116,8 +116,8 @@ int	redir_checker(t_msh *msh)
 {
 	int		redir_pos;
 	t_redir	redir_type;
-	int 	redir_count;
-	
+	int		redir_count;
+
 	redir_count = msh->tkns->count_redir;
 	if (!msh || !msh->tkns || !msh->tkns->args)
 		return (FALSE);

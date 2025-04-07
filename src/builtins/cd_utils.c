@@ -93,7 +93,7 @@ void	expand_cd_home(t_msh *msh)
 {
 	char	*home_path;
 	char	*full_path;
-	
+
 	if (!msh->env->home)
 	{
 		ft_fd_printf(2, "cd: HOME not set\n");
@@ -105,7 +105,7 @@ void	expand_cd_home(t_msh *msh)
 	if (!full_path)
 		return ;
 	if (chdir(full_path) == -1)
-			handle_cd_error(msh, errno);
+		handle_cd_error(msh, errno);
 	else
 		update_pwd_opwd(msh, full_path);
 	free(full_path);
