@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:41:30 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/08 09:50:01 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:18:53 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	free_env(t_env *env)
 		free(env->home);
 	if (env->old_pwd)
 		free(env->old_pwd);
+	if (env->path)
+		free(env->path);
 	if (env->names)
 		ft_free_array(env->names);
 	if (env->values)

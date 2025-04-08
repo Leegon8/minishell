@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/07 20:35:40 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:12:38 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ void	shell_loop(t_msh *msh)
 		if (!input)
 			msh->end_sig = 1;
 		else
+		{
 			add_history(input);
-		if (ft_strlen(input) > 0)
-			check_tokens(input, msh);
-		free(input);
+			if (ft_strlen(input) > 0)
+				check_tokens(input, msh);
+			free(input);
+		}
 	}
 }
 
