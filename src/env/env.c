@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/07 23:15:17 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:19:57 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ int	env_init(t_env *env, t_msh *msh)
 		return (ft_fd_printf(2, "%s", E_MEMASF) * 0);
 	env->old_pwd = getenv("OLDPWD");
 	env->path = getenv("PATH");
-	env->pwd = malloc(PATH_MAX);
+	env->pwd = getcwd(NULL, 0);
 	if (!env->pwd)
 		return (ft_fd_printf(2, "%s", E_MEMASF) * 0);
-	getcwd(env->pwd, PATH_MAX);
+	// getcwd(env->pwd, PATH_MAX);
 	env_init_values(env, msh);
 	return (TRUE);
 }

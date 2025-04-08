@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:41:10 by lauriago          #+#    #+#             */
-/*   Updated: 2025/02/19 02:12:49 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:49:26 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	handle_cd_minus(t_msh *msh)
 {
-	char	*new_path;
+	char	*tmp_oldpwd;
+	char	*tmp_pwd;
 
 	if (!msh->tkns->args[1])
 		return ;
@@ -24,37 +25,73 @@ static void	handle_cd_minus(t_msh *msh)
 		msh->last_exit_code = 1;
 		return ;
 	}
-	new_path = ft_strdup(msh->env->old_pwd);
-	if (chdir(msh->env->old_pwd) == -1)
+	tmp_oldpwd = ft_strdup(msh->env->old_pwd);
+	tmp_pwd = ft_strdup(msh->env->pwd);
+	if (!tmp_oldpwd || !tmp_pwd)
+	{
+		free(tmp_oldpwd);
+		free(tmp_pwd);
+		ft_fd_printf(2, "%s", E_MEMASF);
+		return ;
+	}
+	if (chdir(tmp_oldpwd) == -1)
 		perror("cd");
 	else
 	{
-		msh->env->old_pwd = update_env(msh, "OLDPWD", msh->env->pwd);
-		msh->env->pwd = update_env(msh, "PWD", new_path);
-		ft_fd_printf(1, "%s\n", new_path);
+		msh->env->old_pwd = update_env(msh, "OLDPWD", tmp_pwd);
+		msh->env->pwd = update_env(msh, "PWD", tmp_oldpwd);
+		ft_fd_printf(1, "%s\n", tmp_oldpwd);
 	}
+	free(tmp_oldpwd);
+	free(tmp_pwd);
 }
 
 static void	cd_home(t_msh *msh)
 {
+	char	*tmp_pwd;
+
 	if (!msh->env->home)
 	{
 		ft_fd_printf(2, "cd: HOME not set\n");
 		msh->last_exit_code = 1;
+		return ;
 	}
 	if (chdir(msh->env->home) == -1)
 		perror("cd");
 	else
 	{
-		msh->env->old_pwd = update_env(msh, "OLDPWD", msh->env->pwd);
+		tmp_pwd = ft_strdup(msh->env->pwd);
+		if (!tmp_pwd)
+			return ;
+		msh->env->old_pwd = update_env(msh, "OLDPWD", tmp_pwd);
 		msh->env->pwd = update_env(msh, "PWD", msh->env->home);
+		free(tmp_pwd);
 	}
 }
 
 void	update_pwd_opwd(t_msh *msh, char *new_path)
 {
-	msh->env->old_pwd = update_env(msh, "OLDPWD", msh->env->pwd);
-	msh->env->pwd = update_env(msh, "PWD", new_path);
+	char	*tmp_pwd;
+	char	*tmp_new;
+	char	*res;
+
+	tmp_pwd = ft_strdup(msh->env->pwd);
+	tmp_new = ft_strdup(new_path);
+	if (!tmp_pwd || !tmp_new)
+	{
+		free(tmp_pwd);
+		free(tmp_new);
+		ft_fd_printf(2, "%s", E_MEMASF);
+		return ;
+	}
+	res = update_env(msh, "OLDPWD", tmp_pwd);
+	if (res != tmp_pwd)
+		free(tmp_pwd);
+	msh->env->old_pwd = res;
+	res = update_env(msh, "PWD", tmp_new);
+	if (res != tmp_new)
+		free(tmp_new);
+	msh->env->pwd = res;
 }
 
 void	handle_cd_path(t_msh *msh)

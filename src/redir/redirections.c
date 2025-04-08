@@ -6,17 +6,11 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:50:55 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/05 11:35:21 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:51:04 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// print error message
-static void	print_error_msg(char c)
-{
-	ft_fd_printf(2, "minishell: syntax error near unexpected token `%c'\n", c);
-}
 
 // Verifies if it has a redirection and returns the position
 int	has_redirection(t_tok *tok)

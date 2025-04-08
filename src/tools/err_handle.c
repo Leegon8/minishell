@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:32:36 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/03/27 10:02:09 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:52:16 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,10 @@ void	handle_exit_status(t_msh *msh)
 	ft_putstr(code);
 	free(code);
 	msh->last_exit_code = 0;
+}
+
+// print error message
+void	print_error_msg(char c)
+{
+	ft_fd_printf(2, "minishell: syntax error near unexpected token `%c'\n", c);
 }

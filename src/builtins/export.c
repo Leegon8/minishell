@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:15:46 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/07 20:37:49 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:34:18 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,51 @@ static int	is_valid_identifier(t_msh *msh, char *str)
 	return (FALSE);
 }
 
+// int	add_env_var(t_msh *msh, char *name, char *value)
+// {
+// 	int		count;
+// 	char	**new_names;
+// 	char	**new_values;
+
+// 	count = env_var_count(msh) + 1;
+// 	new_names = malloc(sizeof(char *) * (count * 2));
+// 	new_values = malloc(sizeof(char *) * (count * 2));
+// 	if (!new_names || !new_values)
+// 		return (FALSE);
+// 	count = -1;
+// 	while (msh->env->names[++count])
+// 	{
+// 		new_names[count] = ft_strdup(msh->env->names[count]);
+// 		new_values[count] = ft_strdup(msh->env->values[count]);
+// 	}
+// 	new_names[count] = ft_strdup(name);
+// 	if (value)
+// 		new_values[count] = ft_strdup(value);
+// 	else
+// 		new_values[count] = ft_strdup("");
+// 	new_names[count + 1] = NULL;
+// 	new_values[count + 1] = NULL;
+// 	ft_free_array(msh->env->names);
+// 	ft_free_array(msh->env->values);
+// 	msh->env->names = new_names;
+// 	msh->env->values = new_values;
+// 	msh->env_var_count++;
+// 	return (TRUE);
+// }
+
+static int	copy_env_vars(t_msh *msh, char **new_names, char **new_values)
+{
+	int	i;
+
+	i = -1;
+	while (msh->env->names[++i])
+	{
+		new_names[i] = ft_strdup(msh->env->names[i]);
+		new_values[i] = ft_strdup(msh->env->values[i]);
+	}
+	return (i);
+}
+
 int	add_env_var(t_msh *msh, char *name, char *value)
 {
 	int		count;
@@ -43,12 +88,7 @@ int	add_env_var(t_msh *msh, char *name, char *value)
 	new_values = malloc(sizeof(char *) * (count * 2));
 	if (!new_names || !new_values)
 		return (FALSE);
-	count = -1;
-	while (msh->env->names[++count])
-	{
-		new_names[count] = ft_strdup(msh->env->names[count]);
-		new_values[count] = ft_strdup(msh->env->values[count]);
-	}
+	count = copy_env_vars(msh, new_names, new_values);
 	new_names[count] = ft_strdup(name);
 	if (value)
 		new_values[count] = ft_strdup(value);
@@ -63,7 +103,6 @@ int	add_env_var(t_msh *msh, char *name, char *value)
 	msh->env_var_count++;
 	return (TRUE);
 }
-
 
 void	print_export_vars(t_msh *msh)
 {

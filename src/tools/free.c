@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:41:30 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/07 20:35:07 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:50:01 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_free_array(char **array)
 void	free_env(t_env *env)
 {
 	if (!env)
-		return;
+		return ;
 	if (env->pwd)
 		free(env->pwd);
 	if (env->home)

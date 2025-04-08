@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:37 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/08 08:02:02 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:25:21 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	remove_var_from_env(t_msh *msh, int pos)
 
 	free(msh->env->names[pos]);
 	free(msh->env->values[pos]);
-
 	i = pos;
 	while (msh->env->names[i + 1])
 	{
@@ -28,7 +27,6 @@ static void	remove_var_from_env(t_msh *msh, int pos)
 	}
 	msh->env->names[i] = NULL;
 	msh->env->values[i] = NULL;
-
 	msh->env_var_count--;
 }
 
@@ -47,4 +45,3 @@ int	ft_unset(t_msh *msh, int tok_num)
 	}
 	return (FALSE);
 }
-

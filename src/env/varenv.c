@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/07 20:11:14 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:48:54 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ char	*update_env(t_msh *msh, char *name, char *value)
 	{
 		if (ft_strcmp(msh->env->names[i], name) == 0)
 		{
+			if (ft_strcmp(msh->env->values[i], value) == 0)
+				return (msh->env->values[i]);
 			new_value = ft_strdup(value);
 			if (!new_value)
 				return (NULL);

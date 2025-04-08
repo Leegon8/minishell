@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/05 11:35:13 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:51:47 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,7 +332,6 @@ int		is_operator(char c);
 int		size_token(char *input, t_tok *tok);
 char	*create_token(char *input, int len, t_tok *tok);
 void	ft_token(char *input, t_tok *tok);
-//static void	print_error_msg(char c);
 
 /* ************************************************************************** */
 /* ******************************* [ REDIR ] ******************************** */
@@ -375,6 +374,7 @@ int		redir_checker(t_msh *msh);
 void	handle_cd_error(t_msh *msh, int error_type);
 int		ft_err(t_msh *msh, int err_code);
 void	handle_exit_status(t_msh *msh);
+void	print_error_msg(char c);
 
 /* --------------------------------------------------------------------free.c */
 void	ft_free_array(char **array);

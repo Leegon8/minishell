@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:00:22 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/08 08:07:17 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:52:42 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,3 @@ void	handle_double_quotes(t_msh *msh, int i)
 		msh->quote = NULL;
 	}
 }
-

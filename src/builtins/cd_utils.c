@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:26:15 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/11 23:49:57 by leegon           ###   ########.fr       */
+/*   Updated: 2025/04/08 08:37:16 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,28 @@ static char	*handle_multiple_back(char *path, t_msh *msh)
 char	*make_relative(char *arg, t_msh *msh)
 {
 	char	*new_path;
+	char	*tmp_pwd;
 
+	tmp_pwd = ft_strdup(msh->env->pwd);
+	if (!tmp_pwd)
+		return (NULL);
 	if (arg[0] == '.' && arg[1] == '\0')
 		new_path = ft_strdup(".");
 	else if (arg[0] == '.' && arg[1] == '.' && arg[2] == '\0')
+	{
+		free(tmp_pwd);
 		return (go_back_dir(msh->env->pwd));
+	}
 	else if (arg[0] == '.' && arg[1] == '.' && arg[2] == '/')
+	{
+		free(tmp_pwd);
 		return (handle_multiple_back(arg, msh));
+	}
 	else if (arg[0] == '.' && arg[1] == '/')
-		new_path = built_abspath(arg + 2, msh->env->pwd);
+		new_path = built_abspath(arg + 2, tmp_pwd);
 	else
-		new_path = built_abspath(arg, msh->env->pwd);
+		new_path = built_abspath(arg, tmp_pwd);
+	free(tmp_pwd);
 	return (new_path);
 }
 
