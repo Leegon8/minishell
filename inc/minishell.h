@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/08 09:51:47 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:05:04 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,7 @@ void	shell_loop(t_msh *msh);
 
 /* -----------------------------------------------------------------signals.c */
 void	handle_sigint(int sig);
-void	handle_sigquit(int sig);
+// void	handle_sigquit(int sig);
 void	init_signals(void);
 void	restore_signals(void);
 

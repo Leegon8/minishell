@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 08:13:41 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/05 10:42:14 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:04:37 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@ void	handle_sigint(int sig)
 }
 
 /* aqui ignoramos el Ctrl - */
-void	handle_sigquit(int sig)
-{
-	(void)sig;
-}
+// void	handle_sigquit(int sig)
+// {
+// 	(void)sig;
+// }
 
 /* Inicializa las señales del shell */
 void	init_signals(void)
 {
 	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, handle_sigquit);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	restore_signals(void)
 {
 	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, handle_sigquit);
+	signal(SIGQUIT, SIG_IGN);
 	rl_catch_signals = 0;
 }

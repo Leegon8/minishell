@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/08 10:17:02 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:03:57 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,27 @@ int	env_init_values(t_env *env, t_msh *msh)
 /* Inicializa las variables de entorno con los valores del env (si existe) */
 int	env_init(t_env *env, t_msh *msh)
 {
-	env->home = ft_strdup(getenv("HOME"));
-	if (!env->home)
-		return (ft_fd_printf(2, "%s", E_MEMASF) * 0);
-	env->old_pwd = ft_strdup(getenv("OLDPWD"));
-	env->path = ft_strdup(getenv("PATH"));
+	char	*tmp;
+
+	tmp = getenv("HOME");
+	if (tmp)
+		env->home = ft_strdup(tmp);
+	else
+		env->home = NULL;
+	tmp = getenv("OLDPWD");
+	if (tmp)
+		env->old_pwd = ft_strdup(tmp);
+	else
+		env->old_pwd = NULL;
+	tmp = getenv("PATH");
+	if (tmp)
+		env->path = ft_strdup(tmp);
+	else
+		env->path = NULL;
 	env->pwd = getcwd(NULL, 0);
 	if (!env->pwd)
-		return (ft_fd_printf(2, "%s", E_MEMASF) * 0);
-	// getcwd(env->pwd, PATH_MAX);
+		return (ft_fd_printf(2, "%s", E_MEMASF), FALSE);
 	env_init_values(env, msh);
 	return (TRUE);
 }
+
