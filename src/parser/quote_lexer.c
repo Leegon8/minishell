@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:00:22 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/04 10:19:36 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:07:17 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ void	handle_single_quotes(t_msh *msh, int i)
 	{
 		str_rmv = remove_quotes(str, '\'');
 		ft_putstr(str_rmv);
+		free(str_rmv);
+	}
+	free(str);
+	if (msh->quote)
+	{
+		free(msh->quote);
+		msh->quote = NULL;
 	}
 }
 
@@ -77,11 +84,19 @@ void	handle_double_quotes(t_msh *msh, int i)
 	{
 		ft_fd_printf(2, E_SYNTX);
 		msh->last_exit_code = 2;
-		return ;
 	}
-	cleaned = remove_quotes(msh->tkns->args[i], '\"');
-	if (!cleaned)
-		return ;
-	ft_expander(cleaned, msh);
-	free(cleaned);
+	else
+	{
+		cleaned = remove_quotes(msh->tkns->args[i], '\"');
+		if (!cleaned)
+			return ;
+		ft_expander(cleaned, msh);
+		free(cleaned);
+	}
+	if (msh->quote)
+	{
+		free(msh->quote);
+		msh->quote = NULL;
+	}
 }
+
