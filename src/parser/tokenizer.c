@@ -37,6 +37,8 @@ int	size_token(char *input, t_tok *tok)
 		{
 			if (is_operator(input[i + 1]))
 				i += 1;
+			if (i == 0)
+				return (TRUE);
 		}
 		if (is_pipe(input[i]))
 		{

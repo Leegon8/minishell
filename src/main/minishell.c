@@ -32,6 +32,29 @@ void	shell_loop(t_msh *msh)
 	}
 }
 
+static char	**create_minimal_env(void)
+{
+	char	**new_env;
+	char	*cwd;
+
+	new_env = malloc(sizeof(char *) * 5);
+	if (!new_env)
+		return (NULL);
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+	{
+		free(new_env);
+		return (NULL);
+	}
+	new_env[0] = ft_strjoin("PWD=", cwd);
+	new_env[1] = ft_strdup("SHLVL=1");
+	new_env[2] = ft_strdup("PATH=/usr/bin:/bin");
+	new_env[3] = ft_strdup("HOME=/");
+	new_env[4] = NULL;
+	free(cwd);
+	return (new_env);
+}
+
 int	main(int argc, char **argv, char **envs)
 {
 	t_env	*env;
@@ -44,14 +67,14 @@ int	main(int argc, char **argv, char **envs)
 		exit (ft_fd_printf(2, "%s", E_EXECARG) * 0);
 	ft_memset(&msh, 0, sizeof(t_msh));
 	msh.envs = envs;
+	if (!envs || !msh.envs[0])
+		msh.envs = create_minimal_env();
 	if (init_structs(&env, &msh, &mpip, &tok) != TRUE)
 	{
 		if (env)
 			free_env(env);
 		return (ft_fd_printf(2, "%s", E_MEMASF));
 	}
-	if (envs != NULL)
-		msh.envs = envs;
 	msh.env_var_count = env_var_count(&msh);
 	if (env_init(env, &msh) != TRUE)
 	{

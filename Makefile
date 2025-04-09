@@ -35,7 +35,8 @@ MAIN = minishell init signals signals2
 PARSER = lexer parser quote_expander quote_lexer quote_lexer_tools \
 		token_tools tokenizer
 
-REDIR = builtin_redir input_redir output_redir redirections redir_tools
+REDIR = builtin_redir input_redir output_redir redirections redir_tools \
+		multiple_redir
 
 TOOLS = err_handle free
 

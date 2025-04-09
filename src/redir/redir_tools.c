@@ -37,7 +37,6 @@ int	count_redir(t_msh *msh)
 
 int	handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type)
 {
-	printf("DEBUG: Entra en handle_ONE_redir\n");
 	if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
 		return (FALSE);
 	if (redir_type == REDIR_OUT || redir_type == REDIR_APPEND)
@@ -76,35 +75,27 @@ static int	find_next_redir(t_msh *msh, int start_pos)
 
 int	handle_multip_redir(t_msh *msh, int count, int redir_pos, t_redir type)
 {
-	int		i;
-	int		current_pos;
-	t_redir	current_type;
-
+	int	i;
+	int	current_pos;
+	int	is_last_redir;
+	
 	i = 0;
 	current_pos = redir_pos;
-	current_type = type;
-	printf("DEBUG: Entra en handle_multiple_redir\n");
-	printf("Tiene %d redirecciones\n", count);
+	is_last_redir = FALSE;
 	while (i < count)
 	{
-		if (current_type == REDIR_ERROR || current_type == NO_REDIR)
-			return (FALSE);
 		msh->tkns->redir_pos = current_pos;
-		// Manejar la redirección actual
-		if (current_type == REDIR_OUT || current_type == REDIR_APPEND)
-			handle_redir_out(msh, current_type);
-		else if (current_type == REDIR_IN)
-			handle_redir_in(msh, current_type);
-		else if (current_type == REDIR_HERE)
-			handle_heredoc(msh, msh->tkns->args[current_pos + 1]);
-		else if (current_type == PIPE)
-			handle_pipes(msh);
-		// Buscar la siguiente redirección
+		if (process_redirection(msh, type, current_pos) == FALSE)
+			return (FALSE);
 		current_pos = find_next_redir(msh, current_pos + 2);
 		if (current_pos == -1)
+		{
+			is_last_redir = TRUE;
 			break ;
-		current_type = check_syntax_redir(msh, msh->tkns->args, current_pos);
+		}
+		type = check_syntax_redir(msh, msh->tkns->args, current_pos);
 		i++;
 	}
+	handle_last_redirection(msh, is_last_redir, type);
 	return (TRUE);
 }

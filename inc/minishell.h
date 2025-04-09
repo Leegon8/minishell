@@ -346,6 +346,11 @@ int		manage_builting_redir(t_msh *msh, t_redir type);
 int		handle_input_file(t_msh *msh, char *filename, t_redir type);
 void	handle_redir_in(t_msh *msh, t_redir type);
 
+/* ----------------------------------------------------------multiple_redir.c */
+void	open_files(t_msh *msh, t_redir type, char *file);
+int		process_redirection(t_msh *msh, t_redir type, int current_pos);
+void	handle_last_redirection(t_msh *msh, int is_last_redir, t_redir type);
+
 /* ------------------------------------------------------------output_redir.c */
 // static void	error_fd(char *filename)
 int		handle_output_file(t_msh *msh, char *filename, t_redir type);

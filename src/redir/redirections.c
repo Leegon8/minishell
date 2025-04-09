@@ -85,26 +85,6 @@ void	handle_redir_out(t_msh *msh, t_redir type)
 	restore_redirections(msh);
 }
 
-/* static int	check_redir_type(t_msh *msh, int redir_pos, t_redir type)
-{
-	if (type == REDIR_ERROR || type == NO_REDIR)
-		return (FALSE);
-	if (type == REDIR_OUT || type == REDIR_APPEND)
-		handle_redir_out(msh, type);
-	if (type == REDIR_IN)
-		handle_redir_in(msh, type);
-	if (type == REDIR_HERE)
-	{
-		if (!handle_heredoc(msh, msh->tkns->args[redir_pos + 1]))
-			return (TRUE);
-		exec_redir(msh, msh->tkns->cmd, type);
-		return (TRUE);
-	}
-	if (type == PIPE)
-		handle_pipes(msh);
-	return (TRUE);
-} */
-
 // Función generica para verificar sintaxis redirecciones
 int	redir_checker(t_msh *msh)
 {
@@ -118,8 +98,8 @@ int	redir_checker(t_msh *msh)
 	redir_pos = has_redirection(msh->tkns);
 	msh->tkns->redir_pos = redir_pos;
 	redir_type = check_syntax_redir(msh, msh->tkns->args, redir_pos);
-	// if (redir_pos >= 0)
-	// 	return (check_redir_type(msh, redir_pos, redir_type));
+	if (redir_type == NO_REDIR || redir_type == REDIR_ERROR)
+		return (FALSE);
 	if (redir_count == 1)
 		return (handle_one_redir(msh, redir_pos, redir_type));
 	if (redir_count > 1)
