@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/08 11:05:04 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/10 00:59:46 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,6 @@ int		ft_env(t_msh *msh);
 /* --------------------------------------------------------------------exit.c */
 /*static int	is_numeric_arg(char *str)*/
 /*static void	handle_numeric_arg(t_msh *msh, char *arg)*/
-/*static void	handle_exit_error(t_msh *msh, char *arg)*/
 void	ft_exit(t_msh *msh);
 
 /* ------------------------------------------------------------------export.c */
@@ -376,6 +375,7 @@ int		redir_checker(t_msh *msh);
 /* ************************************************************************** */
 
 /* --------------------------------------------------------------err_hanlde.c */
+void	handle_exit_error(t_msh *msh, char *arg);
 void	handle_cd_error(t_msh *msh, int error_type);
 int		ft_err(t_msh *msh, int err_code);
 void	handle_exit_status(t_msh *msh);

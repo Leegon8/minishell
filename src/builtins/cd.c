@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:41:10 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/08 09:49:26 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/10 01:14:54 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,16 @@ static void	handle_cd_minus(t_msh *msh)
 static void	cd_home(t_msh *msh)
 {
 	char	*tmp_pwd;
+	char	*home_path;
 
-	if (!msh->env->home)
+	home_path = search_value(msh, "HOME");
+	if (!home_path)
 	{
 		ft_fd_printf(2, "cd: HOME not set\n");
 		msh->last_exit_code = 1;
 		return ;
 	}
-	if (chdir(msh->env->home) == -1)
+	if (chdir(home_path) == -1)
 		perror("cd");
 	else
 	{
@@ -64,7 +66,7 @@ static void	cd_home(t_msh *msh)
 		if (!tmp_pwd)
 			return ;
 		msh->env->old_pwd = update_env(msh, "OLDPWD", tmp_pwd);
-		msh->env->pwd = update_env(msh, "PWD", msh->env->home);
+		msh->env->pwd = update_env(msh, "PWD", home_path);
 		free(tmp_pwd);
 	}
 }

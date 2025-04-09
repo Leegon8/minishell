@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/09 20:30:47 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/10 01:19:12 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	**create_minimal_env(void)
 	new_env[0] = ft_strjoin("PWD=", cwd);
 	new_env[1] = ft_strdup("SHLVL=1");
 	new_env[2] = ft_strdup("PATH=/usr/bin:/bin");
-	new_env[3] = ft_strdup("HOME=/");
+	new_env[3] = ft_strdup("HOME=/home");
 	new_env[4] = ft_strdup("OLDPWD=");
 	new_env[5] = NULL;
 	free(cwd);
