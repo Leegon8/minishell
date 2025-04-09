@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:01 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/10 01:06:40 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/10 01:23:14 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ static void	handle_numeric_arg(t_msh *msh, char *arg)
 	msh->last_exit_code = (exit_code % 256 + 256) % 256;
 }
 
-
 void	ft_exit(t_msh *msh)
 {
 	if (!msh)
@@ -111,5 +110,5 @@ void	ft_exit(t_msh *msh)
 	handle_numeric_arg(msh, msh->tkns->args[1]);
 	write(STDERR_FILENO, "exit\n", 5);
 	free_structs(msh->env, msh->tkns, msh->mpip);
-		exit(msh->last_exit_code);
+	exit(msh->last_exit_code);
 }

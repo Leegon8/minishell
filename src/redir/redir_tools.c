@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:28:23 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/05 10:26:17 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/10 01:21:57 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	handle_multip_redir(t_msh *msh, int count, int redir_pos, t_redir type)
 	int	i;
 	int	current_pos;
 	int	is_last_redir;
-	
+
 	i = 0;
 	current_pos = redir_pos;
 	is_last_redir = FALSE;

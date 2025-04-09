@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/09 20:35:08 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/10 01:27:02 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	env_init(t_env *env, t_msh *msh)
 {
 	char	*tmp;
 
-	tmp = search_value(msh, "HOME"); //memoria
+	tmp = search_value(msh, "HOME");
 	if (tmp)
 		env->home = ft_strdup(tmp);
 	else
@@ -91,4 +91,3 @@ int	env_init(t_env *env, t_msh *msh)
 	env_init_values(env, msh);
 	return (TRUE);
 }
-
