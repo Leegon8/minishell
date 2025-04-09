@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:25:04 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/08 10:12:38 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:30:47 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	**create_minimal_env(void)
 	char	**new_env;
 	char	*cwd;
 
-	new_env = malloc(sizeof(char *) * 5);
+	new_env = malloc(sizeof(char *) * 6);
 	if (!new_env)
 		return (NULL);
 	cwd = getcwd(NULL, 0);
@@ -50,7 +50,8 @@ static char	**create_minimal_env(void)
 	new_env[1] = ft_strdup("SHLVL=1");
 	new_env[2] = ft_strdup("PATH=/usr/bin:/bin");
 	new_env[3] = ft_strdup("HOME=/");
-	new_env[4] = NULL;
+	new_env[4] = ft_strdup("OLDPWD=");
+	new_env[5] = NULL;
 	free(cwd);
 	return (new_env);
 }

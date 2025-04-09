@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauriago <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:47:32 by lauriago          #+#    #+#             */
-/*   Updated: 2025/02/12 11:47:45 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:37:34 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,3 +88,36 @@ char	*make_path(char *cmd, t_msh *msh)
 	ft_free_array(paths);
 	return (NULL);
 }
+
+// char	*make_path(char *cmd, t_msh *msh)
+// {
+// 	char	**paths;
+// 	char	*cmd_path;
+// 	int		i;
+
+// 	if (!cmd || !msh || !msh->envs)
+// 		return (NULL);
+// 	cmd_path = check_absolute_path(cmd);
+// 	if (cmd_path)
+// 		return (cmd_path);
+// 	paths = get_path_dirs(msh->envs);
+// 	if (!paths)
+// 	{
+// 		ft_fd_printf(2, "%s: No such file or directory\n", cmd);
+// 		msh->last_exit_code = 127;
+// 		return (NULL);
+// 	}
+// 	i = 0;
+// 	while (paths[i])
+// 	{
+// 		cmd_path = try_path(paths[i], cmd);
+// 		if (cmd_path)
+// 		{
+// 			ft_free_array(paths);
+// 			return (cmd_path);
+// 		}
+// 		i++;
+// 	}
+// 	ft_free_array(paths);
+// 	return (NULL);
+// }

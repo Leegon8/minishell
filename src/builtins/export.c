@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:15:46 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/08 09:34:18 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/09 19:21:00 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ static int	is_valid_identifier(t_msh *msh, char *str)
 	int	i;
 
 	i = 0;
+	if (!str || (!ft_isalpha(str[0]) && str[0] != '_'))
+	{
+		ft_fd_printf(2, "export: `%s': not a valid identifier\n", str);
+		msh->last_exit_code = 1;
+		return (FALSE);
+	}
 	while (str[i])
 	{
 		if (str[i] == '$' || str[i] == '#')
@@ -155,7 +161,8 @@ int	ft_export(t_msh *msh, int tok_num)
 	}
 	if (tok_num != 2)
 		return (FALSE);
-	else
-		handle_export_arg(msh);
+	handle_export_arg(msh);
+	if (msh->last_exit_code != 0)
+		return (FALSE);
 	return (TRUE);
 }

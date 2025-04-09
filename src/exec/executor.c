@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:13:10 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/07 20:05:54 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:39:23 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	find_cmd(char *tkn, t_msh *msh)
 
 	fullpath = make_path(tkn, msh);
 	if (!fullpath && msh->tkns->args[0])
-		fullpath = ft_strdup(msh->tkns->args[0]); // ✅ copia segura
+		fullpath = ft_strdup(msh->tkns->args[0]);
 	if (is_command_executable(fullpath))
 	{
 		if (!execute_command(msh, fullpath))

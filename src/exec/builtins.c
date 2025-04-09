@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/07 19:33:11 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:40:08 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	cleanup_commands(t_msh *msh)
 
 int	is_builtin(char	*token)
 {
-	static char	*builtins[10];
+	static char	*builtins[8];
 	int			i;
 
 	builtins[0] = "echo";
@@ -87,9 +87,7 @@ int	is_builtin(char	*token)
 	builtins[4] = "exit";
 	builtins[5] = "export";
 	builtins[6] = "unset";
-	builtins[7] = "test";
-	builtins[8] = "test2";
-	builtins[9] = NULL;
+	builtins[7] = NULL;
 	i = 0;
 	while (builtins[i])
 	{
@@ -116,8 +114,6 @@ void	exc_cmd(t_msh *msh, int count_tok)
 		ft_export(msh, count_tok);
 	else if (ft_strcmp(msh->tkns->cmd, "unset") == 0)
 		ft_unset(msh, count_tok);
-	else if (ft_strcmp(msh->tkns->cmd, "test") == 0)
-		ft_fd_printf(1, "Envarcount: %d\n", msh->env_var_count);
 	else
 		return ;
 }
