@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-/* Imprime los argumentos de echo, opción -n para suprimir el \n final */
-// Hay que gestionar variable de entorno 
 static int	is_n_flag(char *str)
 {
 	int	i;

@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-//This function copy all the args without the redirection token 
 static char	**redir_args(char **args, int redir_pos)
 {
 	char	**result;

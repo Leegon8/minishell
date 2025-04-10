@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// Busca la variable PATH en el env
 static char	**get_path_dirs(char **envs)
 {
 	int		i;
@@ -27,7 +26,6 @@ static char	**get_path_dirs(char **envs)
 	return (NULL);
 }
 
-// 
 static char	*check_absolute_path(char *cmd)
 {
 	if (!cmd)
@@ -59,7 +57,6 @@ static char	*try_path(char *dir, char *cmd)
 	return (NULL);
 }
 
-// make the path of executable
 char	*make_path(char *cmd, t_msh *msh)
 {
 	char	**paths;
@@ -88,36 +85,3 @@ char	*make_path(char *cmd, t_msh *msh)
 	ft_free_array(paths);
 	return (NULL);
 }
-
-// char	*make_path(char *cmd, t_msh *msh)
-// {
-// 	char	**paths;
-// 	char	*cmd_path;
-// 	int		i;
-
-// 	if (!cmd || !msh || !msh->envs)
-// 		return (NULL);
-// 	cmd_path = check_absolute_path(cmd);
-// 	if (cmd_path)
-// 		return (cmd_path);
-// 	paths = get_path_dirs(msh->envs);
-// 	if (!paths)
-// 	{
-// 		ft_fd_printf(2, "%s: No such file or directory\n", cmd);
-// 		msh->last_exit_code = 127;
-// 		return (NULL);
-// 	}
-// 	i = 0;
-// 	while (paths[i])
-// 	{
-// 		cmd_path = try_path(paths[i], cmd);
-// 		if (cmd_path)
-// 		{
-// 			ft_free_array(paths);
-// 			return (cmd_path);
-// 		}
-// 		i++;
-// 	}
-// 	ft_free_array(paths);
-// 	return (NULL);
-// }

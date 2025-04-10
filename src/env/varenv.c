@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-/* Busca el valor de una variable de entorno */
 char	*search_value(t_msh *msh, char *var)
 {
 	int	i;
@@ -27,7 +26,6 @@ char	*search_value(t_msh *msh, char *var)
 	return (NULL);
 }
 
-/*	Verifica sintaxis de cd expansion variables */
 char	*manage_cd_var(t_msh *msh, char *arg)
 {
 	char	*str;
@@ -54,7 +52,6 @@ char	*manage_cd_var(t_msh *msh, char *arg)
 	return (NULL);
 }
 
-/* Función para manejar variables de entorno en "cd" */
 int	cd_varman(t_msh *msh, char *var_name)
 {
 	char	*value;
@@ -76,9 +73,6 @@ int	cd_varman(t_msh *msh, char *var_name)
 	return (FALSE);
 }
 
-/*	Actualiza las variables de entorno, buscando el nombre de la variable
-	que se le pasa como argumento. Devuelve el nuevo valor actualizado
-	*/
 char	*update_env(t_msh *msh, char *name, char *value)
 {
 	char	*new_value;

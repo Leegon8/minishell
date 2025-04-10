@@ -23,7 +23,6 @@ t_quote	*init_quotes(void)
 	return (quote);
 }
 
-// Analiza una string en busca de qué tipo de comillas tiene o si no tiene
 int	analyze_quotes(t_msh *msh, char *arg, char quote)
 {
 	t_quote	*q;
@@ -49,8 +48,6 @@ int	analyze_quotes(t_msh *msh, char *arg, char quote)
 	return (FALSE);
 }
 
-// Verifica que hay minimo 2 comillas o numero multiple de 2
-// y elimina comillas de la string
 void	handle_single_quotes(t_msh *msh, int i)
 {
 	char	*str;

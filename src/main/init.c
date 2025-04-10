@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-/* inicia la asignacion de memoria para env en relacion al envs (del sistema) */
 int	env_alloc_struct(t_env **env, t_msh *msh)
 {
 	size_t	env_count;
@@ -41,7 +40,6 @@ int	env_alloc_struct(t_env **env, t_msh *msh)
 	return (TRUE);
 }
 
-/* inicia la asignacion de memoria  para tok */
 int	tok_alloc_struct(t_tok **tok)
 {
 	*tok = malloc(sizeof(t_tok));
@@ -62,7 +60,6 @@ int	tok_alloc_struct(t_tok **tok)
 	return (TRUE);
 }
 
-/* inicia la asignacion de memoria  para mpip */
 int	mpip_alloc_struct(t_exe **mpip)
 {
 	*mpip = malloc(sizeof(t_exe));
@@ -74,7 +71,6 @@ int	mpip_alloc_struct(t_exe **mpip)
 	return (TRUE);
 }
 
-/* inicia las estructuras por separado y las enlaza a msh */
 int	init_structs(t_env **env, t_msh *msh, t_exe **mpip, t_tok **tok)
 {
 	if (!env_alloc_struct(env, msh))
