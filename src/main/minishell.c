@@ -56,6 +56,13 @@ static char	**create_minimal_env(void)
 	return (new_env);
 }
 
+static int	handle_init_error(t_env *env)
+{
+	if (env)
+		free_env(env);
+	return (ft_fd_printf(2, "%s", E_MEMASF));
+}
+
 int	main(int argc, char **argv, char **envs)
 {
 	t_env	*env;
@@ -65,23 +72,16 @@ int	main(int argc, char **argv, char **envs)
 
 	tok = NULL;
 	if (argc != 1 || argv[1])
-		exit (ft_fd_printf(2, "%s", E_EXECARG) * 0);
+		exit(ft_fd_printf(2, "%s", E_EXECARG) * 0);
 	ft_memset(&msh, 0, sizeof(t_msh));
 	msh.envs = envs;
 	if (!envs || !msh.envs[0])
 		msh.envs = create_minimal_env();
 	if (init_structs(&env, &msh, &mpip, &tok) != TRUE)
-	{
-		if (env)
-			free_env(env);
-		return (ft_fd_printf(2, "%s", E_MEMASF));
-	}
+		return (handle_init_error(env));
 	msh.env_var_count = env_var_count(&msh);
 	if (env_init(env, &msh) != TRUE)
-	{
-		free_env(env);
-		return (ft_fd_printf(2, "%s", E_MEMASF));
-	}
+		return (handle_init_error(env));
 	init_signals();
 	shell_loop(&msh);
 	free_structs(env, tok, mpip);

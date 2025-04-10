@@ -12,18 +12,8 @@
 
 #include "minishell.h"
 
-void	cmd_not_found(t_msh *msh)
+static void	reset_cmd_and_args(t_msh *msh)
 {
-	ft_fd_printf(2, "%s : command not found\n", msh->tkns->cmd);
-	msh->last_exit_code = 127;
-}
-
-void	check_tokens(char *input, t_msh *msh)
-{
-	int	count_tok;
-
-	if (!input || !*input)
-		return ;
 	if (msh->tkns->cmd)
 	{
 		free(msh->tkns->cmd);
@@ -34,6 +24,15 @@ void	check_tokens(char *input, t_msh *msh)
 		ft_free_array(msh->tkns->args);
 		msh->tkns->args = NULL;
 	}
+}
+
+void	check_tokens(char *input, t_msh *msh)
+{
+	int	count_tok;
+
+	if (!input || !*input)
+		return ;
+	reset_cmd_and_args(msh);
 	ft_token(input, msh->tkns);
 	if (!msh->tkns->args || !msh->tkns->args[0])
 		return ;

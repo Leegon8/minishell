@@ -168,6 +168,7 @@ void	ft_cd(t_msh *msh, int num_cmd);
 int		echo_has_2_expand(char *str);
 void	handle_echo_quotes(t_msh *msh, char k, int i);
 void	print_echo_argument(t_msh *msh, char *arg, int i, int is_last_arg);
+void	change_to_oldpwd(t_msh *msh, char *tmp_oldpwd, char *tmp_pwd);
 
 /* --------------------------------------------------------------------echo.c */
 /*static int	is_n_flag(char *str)*/
@@ -328,7 +329,7 @@ int		is_whitespace(char c);
 int		is_operator(char c);
 
 /* ---------------------------------------------------------------tokenizer.c */
-int		size_token(char *input, t_tok *tok);
+int		size_token(char *input);
 char	*create_token(char *input, int len, t_tok *tok);
 void	ft_token(char *input, t_tok *tok);
 
@@ -382,6 +383,7 @@ void	handle_exit_status(t_msh *msh);
 void	print_error_msg(char c);
 
 /* --------------------------------------------------------------------free.c */
+void	free_tmp_paths(char *tmp_oldpwd, char *tmp_pwd);
 void	ft_free_array(char **array);
 void	free_env(t_env *env);
 void	free_tok(t_tok *tok);

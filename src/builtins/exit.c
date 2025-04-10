@@ -25,18 +25,13 @@ static void	is_overflow(t_msh *msh, char *str)
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
+		sign = (str[i++] == '-') * -2 + 1;
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
 		prev = num;
-		num = num * 10 + (str[i] - '0');
+		num = num * 10 + (str[i++] - '0');
 		if (num < prev)
 			handle_exit_error(msh, str);
-		i++;
 	}
 	if ((sign == 1 && num < 0) || (sign == -1 && num > 0))
 		handle_exit_error(msh, str);

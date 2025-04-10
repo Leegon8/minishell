@@ -25,11 +25,10 @@ int	process_quote(char *input, int i)
 	return (i);
 }
 
-int	size_token(char *input, t_tok *tok)
+int	size_token(char *input)
 {
 	int	i;
 
-	(void)tok;
 	i = 0;
 	while (input[i] && !is_whitespace(input[i]))
 	{
@@ -44,7 +43,6 @@ int	size_token(char *input, t_tok *tok)
 		{
 			if (i == 0)
 				return (TRUE);
-			break ;
 		}
 		if (is_quote(input[i]))
 		{
@@ -67,7 +65,7 @@ char	*create_token(char *input, int len, t_tok *tok)
 
 int	process_token(char *input, int i, t_tok *tok, int *arg_index)
 {
-	tok->len = size_token(&input[i], tok);
+	tok->len = size_token(&input[i]);
 	if (tok->len > 0)
 	{
 		tok->args[*arg_index] = create_token(&input[i], tok->len, tok);

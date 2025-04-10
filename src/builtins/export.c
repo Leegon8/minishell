@@ -38,38 +38,6 @@ static int	is_valid_identifier(t_msh *msh, char *str)
 	return (FALSE);
 }
 
-// int	add_env_var(t_msh *msh, char *name, char *value)
-// {
-// 	int		count;
-// 	char	**new_names;
-// 	char	**new_values;
-
-// 	count = env_var_count(msh) + 1;
-// 	new_names = malloc(sizeof(char *) * (count * 2));
-// 	new_values = malloc(sizeof(char *) * (count * 2));
-// 	if (!new_names || !new_values)
-// 		return (FALSE);
-// 	count = -1;
-// 	while (msh->env->names[++count])
-// 	{
-// 		new_names[count] = ft_strdup(msh->env->names[count]);
-// 		new_values[count] = ft_strdup(msh->env->values[count]);
-// 	}
-// 	new_names[count] = ft_strdup(name);
-// 	if (value)
-// 		new_values[count] = ft_strdup(value);
-// 	else
-// 		new_values[count] = ft_strdup("");
-// 	new_names[count + 1] = NULL;
-// 	new_values[count + 1] = NULL;
-// 	ft_free_array(msh->env->names);
-// 	ft_free_array(msh->env->values);
-// 	msh->env->names = new_names;
-// 	msh->env->values = new_values;
-// 	msh->env_var_count++;
-// 	return (TRUE);
-// }
-
 static int	copy_env_vars(t_msh *msh, char **new_names, char **new_values)
 {
 	int	i;
@@ -108,21 +76,6 @@ int	add_env_var(t_msh *msh, char *name, char *value)
 	msh->env->values = new_values;
 	msh->env_var_count++;
 	return (TRUE);
-}
-
-void	print_export_vars(t_msh *msh)
-{
-	int	i;
-
-	i = 0;
-	while (msh->env->names[i])
-	{
-		ft_fd_printf(1, "declare -x %s", msh->env->names[i]);
-		if (msh->env->values[i][0])
-			ft_fd_printf(1, "=\"%s\"", msh->env->values[i]);
-		ft_fd_printf(1, "\n");
-		i++;
-	}
 }
 
 void	handle_export_arg(t_msh *msh)

@@ -22,11 +22,12 @@ RM = rm -rf
  
 # **************************************************************************** #
 
-BUILTINS = cd cd_utils echo echo_utils env exit export export_utils pwd unset
+BUILTINS = cd cd_utils cd_utils2 echo echo_utils env exit export export_utils \
+		pwd unset export_utils2
 
 ENV = env varenv
 
-EXEC = builtins executor executor_utils exec_redir pipes
+EXEC = builtins builtins_utils executor executor_utils exec_redir pipes
 
 HEREDOC = heredoc
 

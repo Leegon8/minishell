@@ -56,7 +56,6 @@ void	handle_exit_status(t_msh *msh)
 	msh->last_exit_code = 0;
 }
 
-// print error message
 void	print_error_msg(char c)
 {
 	ft_fd_printf(2, "minishell: syntax error near unexpected token `%c'\n", c);

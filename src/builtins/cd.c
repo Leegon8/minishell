@@ -29,21 +29,12 @@ static void	handle_cd_minus(t_msh *msh)
 	tmp_pwd = ft_strdup(msh->env->pwd);
 	if (!tmp_oldpwd || !tmp_pwd)
 	{
-		free(tmp_oldpwd);
-		free(tmp_pwd);
+		free_tmp_paths(tmp_oldpwd, tmp_pwd);
 		ft_fd_printf(2, "%s", E_MEMASF);
 		return ;
 	}
-	if (chdir(tmp_oldpwd) == -1)
-		perror("cd");
-	else
-	{
-		msh->env->old_pwd = update_env(msh, "OLDPWD", tmp_pwd);
-		msh->env->pwd = update_env(msh, "PWD", tmp_oldpwd);
-		ft_fd_printf(1, "%s\n", tmp_oldpwd);
-	}
-	free(tmp_oldpwd);
-	free(tmp_pwd);
+	change_to_oldpwd(msh, tmp_oldpwd, tmp_pwd);
+	free_tmp_paths(tmp_oldpwd, tmp_pwd);
 }
 
 static void	cd_home(t_msh *msh)

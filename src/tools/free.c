@@ -12,6 +12,12 @@
 
 #include "minishell.h"
 
+void	free_tmp_paths(char *tmp_oldpwd, char *tmp_pwd)
+{
+	free(tmp_oldpwd);
+	free(tmp_pwd);
+}
+
 /* libera la memoria reservada en un array */
 void	ft_free_array(char **array)
 {
