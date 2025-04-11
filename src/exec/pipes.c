@@ -14,7 +14,9 @@
 
 void	handle_pipes(t_msh *msh)
 {
-	msh->cmd_count = parse_and_validate_commands(msh->tkns, &msh->cmds);
+	if (parse_and_validate_commands(msh, msh->tkns, &msh->cmds) == FALSE)
+		return ;
+	msh->cmd_count = parse_and_validate_commands(msh, msh->tkns, &msh->cmds);
 	execute_pipeline(msh);
 	restore_signals();
 	cleanup_commands(msh);

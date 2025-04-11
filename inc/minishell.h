@@ -301,7 +301,7 @@ void	handle_heredoc_signals(void);
 /*static int	validate_pipe_syntax(t_tok *tok)*/
 /*static void	init_command_struct(t_cmd *cmd)*/
 /*static int	split_commands(t_tok *tok, t_cmd *cmds)*/
-int		parse_and_validate_commands(t_tok *tok, t_cmd **commands);
+int		parse_and_validate_commands(t_msh *msh, t_tok *tok, t_cmd **commands);
 
 /* ------------------------------------------------------------------parser.c */
 char	*parse_path(char **env);

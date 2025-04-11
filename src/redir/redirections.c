@@ -58,6 +58,7 @@ t_redir	check_syntax_redir(t_msh *msh, char **tkn, int pos)
 	{
 		print_error_msg(tkn[pos][1]);
 		msh->last_exit_code = 2;
+		return (REDIR_ERROR);
 	}
 	return (REDIR_ERROR);
 }
