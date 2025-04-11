@@ -12,7 +12,12 @@
 
 #include "minishell.h"
 
-/* libera la memoria reservada en un array */
+void	free_tmp_paths(char *tmp_oldpwd, char *tmp_pwd)
+{
+	free(tmp_oldpwd);
+	free(tmp_pwd);
+}
+
 void	ft_free_array(char **array)
 {
 	int	i;
@@ -30,7 +35,6 @@ void	ft_free_array(char **array)
 	}
 }
 
-/* libera la memoria reservada para la estructura de env */
 void	free_env(t_env *env)
 {
 	if (!env)
@@ -50,7 +54,6 @@ void	free_env(t_env *env)
 	free(env);
 }
 
-/* libera la memoria reservada para la estructura de token */
 void	free_tok(t_tok *tok)
 {
 	t_tok	*tmp;
@@ -69,7 +72,6 @@ void	free_tok(t_tok *tok)
 	}
 }
 
-/* libera la memoria reservada para las estructuras al final del programa */
 void	free_structs(t_env *env, t_tok *tok, t_exe *mpip)
 {
 	if (env)

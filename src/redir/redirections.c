@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// Verifies if it has a redirection and returns the position
 int	has_redirection(t_tok *tok)
 {
 	int	i;
@@ -35,7 +34,6 @@ int	has_redirection(t_tok *tok)
 	return (-1);
 }
 
-// Returns the redirection type
 t_redir	check_syntax_redir(t_msh *msh, char **tkn, int pos)
 {
 	int		len;
@@ -85,7 +83,6 @@ void	handle_redir_out(t_msh *msh, t_redir type)
 	restore_redirections(msh);
 }
 
-// Función generica para verificar sintaxis redirecciones
 int	redir_checker(t_msh *msh)
 {
 	int		redir_pos;

@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_tools.c                                      :+:      :+:    :+:   */
+/*   ms_b_export_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leegon <leegon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 09:19:26 by lprieto-          #+#    #+#             */
-/*   Updated: 2024/11/13 17:33:22 by leegon           ###   ########.fr       */
+/*   Created: 2024/11/05 10:40:25 by lprieto-          #+#    #+#             */
+/*   Updated: 2024/11/05 10:40:44 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_operator(char c)
+void	print_export_vars(t_msh *msh)
 {
-	return (c == '<' || c == '>');
-}
+	int	i;
 
-int	is_pipe(char c)
-{
-	return (c == '|');
-}
-
-int	is_whitespace(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n');
-}
-
-int	is_quote(char c)
-{
-	return (c == '\"' || c == '\'');
+	i = 0;
+	while (msh->env->names[i])
+	{
+		ft_fd_printf(1, "declare -x %s", msh->env->names[i]);
+		if (msh->env->values[i][0])
+			ft_fd_printf(1, "=\"%s\"", msh->env->values[i]);
+		ft_fd_printf(1, "\n");
+		i++;
+	}
 }

@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-/* para manejar el Ctrl-C y que no se salga del minishell */
 void	handle_sigint(int sig)
 {
 	(void)sig;
@@ -22,13 +21,6 @@ void	handle_sigint(int sig)
 	rl_redisplay();
 }
 
-/* aqui ignoramos el Ctrl - */
-// void	handle_sigquit(int sig)
-// {
-// 	(void)sig;
-// }
-
-/* Inicializa las señales del shell */
 void	init_signals(void)
 {
 	signal(SIGINT, handle_sigint);

@@ -6,13 +6,12 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/08 11:03:57 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/10 01:27:02 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* Cuenta las variables que hay en env (No modificar) trabajando en ella */
 int	env_var_count(t_msh *msh)
 {
 	int	i;
@@ -24,7 +23,6 @@ int	env_var_count(t_msh *msh)
 	return (i);
 }
 
-/* busca una variable especifica y nos retorna la pos*/
 int	find_env_pos(t_msh *msh, char *var_name)
 {
 	int	i;
@@ -65,12 +63,11 @@ int	env_init_values(t_env *env, t_msh *msh)
 	return (TRUE);
 }
 
-/* Inicializa las variables de entorno con los valores del env (si existe) */
 int	env_init(t_env *env, t_msh *msh)
 {
 	char	*tmp;
 
-	tmp = getenv("HOME");
+	tmp = search_value(msh, "HOME");
 	if (tmp)
 		env->home = ft_strdup(tmp);
 	else
