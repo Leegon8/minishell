@@ -38,16 +38,27 @@ static char	**redir_args(char **args, int redir_pos)
 	return (result);
 }
 
+static int	process_check(t_msh *msh, t_redir type)
+{
+	if (type == REDIR_OUT || type == REDIR_APPEND)
+		return (handle_output_file(msh, msh->mpip->outfile, type));
+	if (type == REDIR_IN)
+		return (handle_input_file(msh, msh->mpip->infile, type));
+	return (TRUE);
+}
+
 static void	child_process_redir(t_msh *msh, char *fullpath, t_redir type)
 {
 	char	**new_args;
 
-	new_args = redir_args(msh->tkns->args, has_redirection(msh->tkns));
-	if (type == REDIR_OUT || type == REDIR_APPEND)
-		handle_output_file(msh, msh->mpip->outfile, type);
-	else if (type == REDIR_IN)
-		handle_input_file(msh, msh->mpip->infile, type);
-	else if (type == REDIR_HERE)
+	if (type != msh->tkns->first_redir_type)
+		new_args = redir_args(msh->tkns->args, msh->tkns->redir_pos);
+	else if (type == msh->tkns->first_redir_type)
+		new_args = redir_args(msh->tkns->args, has_redirection(msh->tkns));
+	if (type == REDIR_OUT || type == REDIR_APPEND || type == REDIR_IN)
+		if (process_check(msh, type) == FALSE)
+			return ;
+	if (type == REDIR_HERE)
 	{
 		if (!redirect_input_output(msh))
 		{
@@ -58,17 +69,24 @@ static void	child_process_redir(t_msh *msh, char *fullpath, t_redir type)
 	if (execve(fullpath, new_args, msh->envs) == -1)
 	{
 		cmd_not_found(msh);
+		ft_free_array(new_args);
 		free(fullpath);
 		exit(EXIT_FAILURE);
 	}
-	ft_free_array(new_args);
 }
 
 static void	parent_process_redir(t_msh *msh, pid_t pid, char *fullpath)
 {
 	int		status;
+	int		wait_ret;
 
-	waitpid(pid, &status, 0);
+	status = 0;
+	wait_ret = waitpid(pid, &status, 0);
+	if (wait_ret == -1)
+	{
+		perror("waitpid failed");
+		msh->last_exit_code = 1;
+	}
 	if (WIFEXITED(status))
 		msh->last_exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))

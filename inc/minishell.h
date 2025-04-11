@@ -125,6 +125,7 @@ struct	s_tokenizer
 	int					count_redir;
 	int					redir_pos;
 	t_redir				redir_type;
+	t_redir				first_redir_type;
 	struct s_tokenizer	*prev;
 	struct s_tokenizer	*next;
 };

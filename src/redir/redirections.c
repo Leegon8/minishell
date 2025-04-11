@@ -95,6 +95,7 @@ int	redir_checker(t_msh *msh)
 	redir_pos = has_redirection(msh->tkns);
 	msh->tkns->redir_pos = redir_pos;
 	redir_type = check_syntax_redir(msh, msh->tkns->args, redir_pos);
+	msh->tkns->first_redir_type = redir_type;
 	if (redir_type == NO_REDIR || redir_type == REDIR_ERROR)
 		return (FALSE);
 	if (redir_count == 1)
