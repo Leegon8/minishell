@@ -29,7 +29,6 @@ static char	**redir_args(char **args, int redir_pos)
 	}
 	i = 0;
 	j = 0;
-	printf("redir_ps = %d\n", redir_pos);
 	while (i < redir_pos && args[i])
 	{
 		if (!is_operator(args[i][0]) && !is_pipe(args[i][0]))
@@ -44,7 +43,7 @@ static void	child_process_redir(t_msh *msh, char *fullpath, t_redir type)
 {
 	char	**new_args;
 
-	new_args = redir_args(msh->tkns->args, msh->tkns->redir_pos);
+	new_args = redir_args(msh->tkns->args, has_redirection(msh->tkns));
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 		handle_output_file(msh, msh->mpip->outfile, type);
 	else if (type == REDIR_IN)

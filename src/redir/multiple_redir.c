@@ -56,6 +56,7 @@ int	process_redirection(t_msh *msh, t_redir type, int current_pos)
 
 void	handle_last_redirection(t_msh *msh, int is_last_redir, t_redir type)
 {
+	printf("DEBUG: handle last redirection\n");
 	if (!is_last_redir)
 		return ;
 	// if (is_builtin(msh->tkns->cmd))

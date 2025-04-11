@@ -91,4 +91,3 @@ int	env_init(t_env *env, t_msh *msh)
 	env_init_values(env, msh);
 	return (TRUE);
 }
-

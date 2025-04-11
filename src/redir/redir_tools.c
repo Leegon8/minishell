@@ -78,7 +78,7 @@ int	handle_multip_redir(t_msh *msh, int count, int redir_pos, t_redir type)
 	int	i;
 	int	current_pos;
 	int	is_last_redir;
-	
+
 	i = 0;
 	current_pos = redir_pos;
 	is_last_redir = FALSE;

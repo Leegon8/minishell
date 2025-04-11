@@ -52,6 +52,7 @@ void	handle_redir_in(t_msh *msh, t_redir type)
 	int	file_pos;
 
 	file_pos = msh->tkns->redir_pos + 1;
+	printf("DEBUG: filename = %s\n", msh->tkns->args[file_pos]);
 	if (type == REDIR_HERE)
 		msh->mpip->infile = msh->heredoc_file;
 	else
