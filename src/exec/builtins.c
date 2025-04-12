@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/09 21:29:38 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/12 19:38:46 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	check_tokens(char *input, t_msh *msh)
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
 	if (!redir_checker(msh))
 	{
+		if (msh->tkns->first_redir_type == REDIR_ERROR)
+			return ;
 		if (is_builtin(msh->tkns->cmd))
 			exc_cmd(msh, count_tok);
 		else if (find_cmd(msh->tkns->cmd, msh) == -1)

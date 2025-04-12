@@ -58,8 +58,6 @@ void	handle_last_redirection(t_msh *msh, int is_last_redir, t_redir type)
 {
 	if (!is_last_redir)
 		return ;
-	// if (is_builtin(msh->tkns->cmd))
-	// 	manage_builting_redir(msh, type);
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 		handle_redir_out(msh, type);
 	if (type == REDIR_IN)

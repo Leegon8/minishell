@@ -91,6 +91,7 @@ int	redir_checker(t_msh *msh)
 	int		redir_count;
 
 	redir_count = count_redir(msh);
+	printf("DEBUG: redr_count = %d\n", redir_count);
 	if (!msh || !msh->tkns || !msh->tkns->args)
 		return (FALSE);
 	redir_pos = has_redirection(msh->tkns);
