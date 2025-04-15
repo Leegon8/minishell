@@ -56,7 +56,8 @@ void	handle_exit_status(t_msh *msh)
 	msh->last_exit_code = 0;
 }
 
-void	print_error_msg(char c)
+void	print_error_msg(t_msh *msh, char c)
 {
 	ft_fd_printf(2, "bash: syntax error near unexpected token `%c'\n", c);
+	msh->last_exit_code  = 2;
 }

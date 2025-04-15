@@ -21,13 +21,13 @@ int	*find_piperedir(t_msh *msh)
 	i = 0;
 	j = 0;
 	msh->tkns->countpip = malloc(sizeof(int) * 1024);
-	if (has_redirection(msh->tkns) != -1)
+	if (has_redirection(msh, msh->tkns) != -1)
 	{
 		while (msh->tkns->args[i])
 		{
 			if (i == 0)
 			{
-				msh->tkns->countpip[j] = has_redirection(msh->tkns);
+				msh->tkns->countpip[j] = has_redirection(msh, msh->tkns);
 				j++;
 			}
 			if (msh->tkns->countpip[j - 1] != find_next_redir(msh, i)
@@ -63,12 +63,12 @@ void	type_def(t_msh *msh)
 // Check syntax
 int	type_verif(t_msh *msh)
 {
-	// int	i;
+	// int	tokn;
 
-	// i = 0;
-	if (ft_strcmp(msh->tkns->args[0], "|"))
+	// tokn = msh->cmd_count;
+	if (ft_strcmp(msh->tkns->args[0], "|")  ==  0)
 	{
-		print_error_msg('|');
+		print_error_msg(msh, '|');
 		return (FALSE);
 	}
 	return (TRUE);

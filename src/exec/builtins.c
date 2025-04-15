@@ -41,7 +41,7 @@ void	check_tokens(char *input, t_msh *msh)
 		count_tok++;
 	msh->tkns->token_count = count_tok;
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
-	if (!redir_checker(msh))
+	if (!redir_checker(msh) && type_verif(msh) != FALSE)
 	{
 		if (msh->tkns->first_redir_type == REDIR_ERROR)
 			return ;

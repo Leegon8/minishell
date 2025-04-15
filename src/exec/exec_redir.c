@@ -54,7 +54,7 @@ static void	child_process_redir(t_msh *msh, char *fullpath, t_redir type)
 	if (type != msh->tkns->first_redir_type)
 		new_args = redir_args(msh->tkns->args, msh->tkns->redir_pos);
 	else if (type == msh->tkns->first_redir_type)
-		new_args = redir_args(msh->tkns->args, has_redirection(msh->tkns));
+		new_args = redir_args(msh->tkns->args, has_redirection(msh, msh->tkns));
 	if (type == REDIR_OUT || type == REDIR_APPEND || type == REDIR_IN)
 		if (process_check(msh, type) == FALSE)
 			return ;

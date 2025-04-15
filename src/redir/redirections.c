@@ -12,16 +12,21 @@
 
 #include "minishell.h"
 
-int	has_redirection(t_tok *tok)
+int	has_redirection(t_msh *msh, t_tok *tok)
 {
 	int	i;
 
 	i = 0;
+	// if (ft_strcmp(tok->args[i], "|") == 0)
+	// {
+	// 	print_error_msg(msh, '|');
+	// 	return (-2);
+	// }
+	(void)msh;
 	while (tok->args[i])
 	{
 		if (is_operator(tok->args[i][0]) || is_pipe(tok->args[i][0]))
 		{
-			printf("i = %d\n", i);
 			// if (tok->args[i + 1])
 			// {
 			// 	if (is_operator(tok->args[i + 1][0])
@@ -57,7 +62,7 @@ t_redir	check_syntax_redir(t_msh *msh, char **tkn, int pos)
 	}
 	if (len > 2)
 	{
-		print_error_msg(tkn[pos][1]);
+		print_error_msg(msh, tkn[pos][1]);
 		msh->last_exit_code = 2;
 		return (REDIR_ERROR);
 	}
@@ -94,21 +99,24 @@ int	redir_checker(t_msh *msh)
 	redir_count = count_redir(msh);
 	if (!msh || !msh->tkns || !msh->tkns->args)
 		return (FALSE);
-	redir_pos = has_redirection(msh->tkns);
-	msh->tkns->redir_pos = redir_pos;
-	find_piperedir(msh);
-	type_def(msh);
-	type_verif(msh);
-	// if (msh->tkns->countpip)
-	// 	return (printf("PUTABIDA\n") * -1);
-	return (FALSE);
-	redir_type = check_syntax_redir(msh, msh->tkns->args, redir_pos);
-	msh->tkns->first_redir_type = redir_type;
-	if (redir_type == NO_REDIR || redir_type == REDIR_ERROR)
+	if (type_verif(msh) == FALSE)
+	{
+		printf("efectivamente entra a FALSE type verif\n");
 		return (FALSE);
-	if (redir_count == 1)
-		return (handle_one_redir(msh, redir_pos, redir_type));
-	if (redir_count > 1)
+	}
+	else
+	{
+		redir_pos = has_redirection(msh, msh->tkns);
+		msh->tkns->redir_pos = redir_pos;
+		redir_type = check_syntax_redir(msh, msh->tkns->args, redir_pos);
+		msh->tkns->first_redir_type = redir_type;
+		if (redir_type == NO_REDIR || redir_type == REDIR_ERROR)
+			return (FALSE);
+		if (redir_count == 1)
+			return (handle_one_redir(msh, redir_pos, redir_type));
+		if (redir_count > 1)
 		return (handle_multip_redir(msh, redir_count, redir_pos, redir_type));
+	}
+	
 	return (FALSE);
 }

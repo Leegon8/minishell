@@ -1,0 +1,13 @@
+total 188
+drwxr-xr-x  7 lprieto- 2023_barcelona    143 Apr 15 17:36 .
+drwxr-xr-x  5 lprieto- 2023_barcelona    104 Apr 15 17:23 ..
+drwxr-xr-x  8 lprieto- 2023_barcelona   4096 Apr 15 16:36 .git
+-rw-r--r--  1 lprieto- 2023_barcelona     42 Apr 10 09:09 .gitignore
+drwxr-xr-x  2 lprieto- 2023_barcelona     40 Apr 15 17:08 inc
+drwxr-xr-x  4 lprieto- 2023_barcelona     59 Apr 15 17:08 libft
+-rw-r--r--  1 lprieto- 2023_barcelona   5723 Apr 15 16:34 Makefile
+-rwxr-xr-x  1 lprieto- 2023_barcelona 164912 Apr 15 17:34 minishell
+-rw-r--r--  1 lprieto- 2023_barcelona   5414 Apr 15 16:34 README.md
+drwxr-xr-x 10 lprieto- 2023_barcelona    112 Apr 15 16:34 src
+-rw-r--r--  1 lprieto- 2023_barcelona      0 Apr 15 17:37 tes
+drwxr-xr-x  3 lprieto- 2023_barcelona     17 Apr 15 16:30 tmp

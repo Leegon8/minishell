@@ -374,7 +374,7 @@ int		handle_multip_redir(t_msh *msh, int count, int redir_pos, t_redir type);
 
 /* ------------------------------------------------------------redirections.c */
 // static void	print_error_msg(char c)
-int		has_redirection(t_tok *tok);
+int		has_redirection(t_msh *msh, t_tok *tok);
 t_redir	check_syntax_redir(t_msh *msh, char **tkn, int pos);
 // static void	init_redir(t_msh *msh)
 // static void	print_redir_info(t_redir redir_type, int redir_pos)
@@ -390,7 +390,7 @@ void	handle_exit_error(t_msh *msh, char *arg);
 void	handle_cd_error(t_msh *msh, int error_type);
 int		ft_err(t_msh *msh, int err_code);
 void	handle_exit_status(t_msh *msh);
-void	print_error_msg(char c);
+void	print_error_msg(t_msh *msh, char c);
 
 /* --------------------------------------------------------------------free.c */
 void	free_tmp_paths(char *tmp_oldpwd, char *tmp_pwd);
