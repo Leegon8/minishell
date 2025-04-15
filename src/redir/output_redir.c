@@ -15,9 +15,9 @@
 static void	error_fd(char *filename)
 {
 	if (!access(filename, F_OK))
-		ft_fd_printf(2, "minishell: %s: Permission denied\n", filename);
+		ft_fd_printf(2, "bash: %s: Permission denied\n", filename);
 	else
-		ft_fd_printf(2, "minishell: %s: No such file or directory\n", filename);
+		ft_fd_printf(2, "bash: %s: No such file or directory\n", filename);
 }
 
 int	handle_output_file(t_msh *msh, char *filename, t_redir type)

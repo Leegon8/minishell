@@ -58,5 +58,5 @@ void	handle_exit_status(t_msh *msh)
 
 void	print_error_msg(char c)
 {
-	ft_fd_printf(2, "minishell: syntax error near unexpected token `%c'\n", c);
+	ft_fd_printf(2, "bash: syntax error near unexpected token `%c'\n", c);
 }

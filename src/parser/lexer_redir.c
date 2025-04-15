@@ -41,3 +41,35 @@ int	*find_piperedir(t_msh *msh)
 	}
 	return (msh->tkns->countpip);
 }
+
+// Definition of witch type is every redirection
+void	type_def(t_msh *msh)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	msh->tkns->typepip = malloc(sizeof(int) * 1024);
+	while (msh->tkns->countpip[i])
+	{
+		msh->tkns->typepip[j] = check_syntax_redir(msh, msh->tkns->args,
+			msh->tkns->countpip[i]);
+		j++;
+		i++;
+	}
+}
+
+// Check syntax
+int	type_verif(t_msh *msh)
+{
+	// int	i;
+
+	// i = 0;
+	if (ft_strcmp(msh->tkns->args[0], "|"))
+	{
+		print_error_msg('|');
+		return (FALSE);
+	}
+	return (TRUE);
+}

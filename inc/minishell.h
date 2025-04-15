@@ -300,8 +300,10 @@ void	handle_heredoc_signals(void);
 /* ******************************* [ PARSER ] ******************************* */
 /* ************************************************************************** */
 
-/* -------------------------------------------------------------------lexer.c */
+/* -------------------------------------------------------------lexer_redir.c */
 int		*find_piperedir(t_msh *msh);
+void	type_def(t_msh *msh);
+int		type_verif(t_msh *msh);
 
 /* -------------------------------------------------------------------lexer.c */
 /*static int	has_pipe(char *token)*/
@@ -417,8 +419,8 @@ void	free_structs(t_env *env, t_tok *tok, t_exe *mpip);
 # define E_PIPMEM	"Error: mpip mem asignation failed\n"
 # define E_CDARG	"cd: $ARG: No such file or directory\n"
 # define E_SYNTX	"Error: syntax not accepted"
-# define E_PIP_SNTX	"minishell: syntax error near unexpected token `|'\n"
-# define E_NW		"minishell: syntax error near unexpected token `newline'\n"
+# define E_PIP_SNTX	"bash: syntax error near unexpected token `|'\n"
+# define E_NW		"bash: syntax error near unexpected token `newline'\n"
 # define E_PIPE		"Pipe error"
 # define E_FORK		"Fork error"
 # define E_DUP		"Dup2 error"
