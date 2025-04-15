@@ -36,7 +36,7 @@ int	size_token(char *input)
 		return (1);
 	if (is_pipe(input[i]))
 		return (1);
-	while (input[i] && !is_whitespace(input[i]) && !is_operator(input[i]) 
+	while (input[i] && !is_whitespace(input[i]) && !is_operator(input[i])
 		&& !is_pipe(input[i]))
 	{
 		if (is_quote(input[i]))
@@ -101,7 +101,5 @@ void	ft_token(char *input, t_tok *tok)
 		free(tok->args);
 		tok->args = NULL;
 	}
-	for (i=0; i < arg_index; i++){
-			printf("tok[%d] = %s(%ld)\n", i, tok->args[i], ft_strlen(tok->args[i]));
-		}
 }
+// for (i = 0; i < arg_index; i++)	{printf("tok[%d] = %s(%ld)\n", i, tok->args[i], ft_strlen(tok->args[i]));}

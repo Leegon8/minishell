@@ -122,10 +122,14 @@ struct	s_tokenizer
 	t_tokty				type;
 	int					is_heredoc;
 	char				*heredoc_delim;
+	// ------------------------------------
 	int					count_redir;
 	int					redir_pos;
 	t_redir				redir_type;
+	int					*countpip;
+	t_redir				*typepip;
 	t_redir				first_redir_type;
+	// ------------------------------------
 	struct s_tokenizer	*prev;
 	struct s_tokenizer	*next;
 };
@@ -297,6 +301,9 @@ void	handle_heredoc_signals(void);
 /* ************************************************************************** */
 
 /* -------------------------------------------------------------------lexer.c */
+int		*find_piperedir(t_msh *msh);
+
+/* -------------------------------------------------------------------lexer.c */
 /*static int	has_pipe(char *token)*/
 /*static int	validate_pipe_syntax(t_tok *tok)*/
 /*static void	init_command_struct(t_cmd *cmd)*/
@@ -360,7 +367,7 @@ void	restore_redirections(t_msh *msh);
 /* -------------------------------------------------------------redir_tools.c */
 int		count_redir(t_msh *msh);
 int		handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type);
-// static int	find_next_redir(t_msh *msh, int start_pos)
+int		find_next_redir(t_msh *msh, int start_pos);
 int		handle_multip_redir(t_msh *msh, int count, int redir_pos, t_redir type);
 
 /* ------------------------------------------------------------redirections.c */

@@ -26,7 +26,7 @@ static int	validate_pipe_syntax(t_msh *msh, t_tok *tok)
 	{
 		if (has_pipe(tok->args[i]))
 		{
-			if (i == 0 || !tok->args[i + 1])
+			if (!tok->args[i + 1])
 			{
 				ft_fd_printf(2, E_PIP_SNTX);
 				msh->last_exit_code = 2;

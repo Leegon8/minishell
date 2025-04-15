@@ -88,3 +88,21 @@ int	env_init(t_env *env, t_msh *msh)
 	env_init_values(env, msh);
 	return (TRUE);
 }
+
+// int	env_init(t_env *env, t_msh *msh)
+// {
+// 	char	*tmp;
+
+// 	tmp = search_value(msh, "HOME");
+// 		env->home = tmp;
+// 	tmp = getenv("OLDPWD");
+// 	env->old_pwd = tmp;
+// 	tmp = getenv("PATH");
+// 	env->path = tmp;
+// 	tmp = getcwd(NULL, 0);
+// 	env->pwd = tmp;
+// 	if (!env->pwd)
+// 		return (ft_fd_printf(2, "%s", E_MEMASF), FALSE);
+// 	env_init_values(env, msh);
+// 	return (TRUE);
+// }
