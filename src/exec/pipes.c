@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 16:49:04 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/12 19:37:50 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:59:11 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 void	handle_pipes(t_msh *msh)
 {
-	if (parse_and_validate_commands(msh, msh->tkns, &msh->cmds) == FALSE)
+	int	count;
+
+	if (!msh || !msh->tkns)
 		return ;
-	msh->cmd_count = parse_and_validate_commands(msh, msh->tkns, &msh->cmds);
+	count = parse_and_validate_commands(msh, msh->tkns, &msh->cmds);
+	if (count <= 0)
+		return ;
+	msh->cmd_count = count;
 	execute_pipeline(msh);
 	restore_signals();
 	cleanup_commands(msh);
-	return ;
 }
 
 static void	exec_command(t_msh *msh, int i)

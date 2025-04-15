@@ -6,7 +6,7 @@
 #    By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 07:16:06 by lprieto-          #+#    #+#              #
-#    Updated: 2025/04/05 10:42:49 by lprieto-         ###   ########.fr        #
+#    Updated: 2025/04/15 23:09:17 by lprieto-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ HEREDOC = heredoc
 MAIN = minishell init signals signals2
 
 PARSER = lexer parser quote_expander quote_lexer quote_lexer_tools \
-		token_tools tokenizer lexer_redir
+		token_tools tokenizer lexer_redir lexer_syntax
 
 REDIR = builtin_redir input_redir output_redir redirections redir_tools \
 		multiple_redir

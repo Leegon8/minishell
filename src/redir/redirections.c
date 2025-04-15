@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:50:55 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/15 20:20:06 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/16 00:20:41 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,10 @@ int	has_redirection(t_msh *msh, t_tok *tok)
 	int	i;
 
 	i = 0;
-	// if (ft_strcmp(tok->args[i], "|") == 0)
-	// {
-	// 	print_error_msg(msh, '|');
-	// 	return (-2);
-	// }
 	(void)msh;
 	while (tok->args[i])
 	{
-		if (is_operator(tok->args[i][0]) || is_pipe(tok->args[i][0]))
+		if (is_operator(tok->args[i][i]) || is_pipe(tok->args[i][0]))
 		{
 			// if (tok->args[i + 1])
 			// {
@@ -100,10 +95,7 @@ int	redir_checker(t_msh *msh)
 	if (!msh || !msh->tkns || !msh->tkns->args)
 		return (FALSE);
 	if (type_verif(msh) == FALSE)
-	{
-		printf("efectivamente entra a FALSE type verif\n");
 		return (FALSE);
-	}
 	else
 	{
 		redir_pos = has_redirection(msh, msh->tkns);
@@ -119,110 +111,4 @@ int	redir_checker(t_msh *msh)
 	}
 	
 	return (FALSE);
-}
-
-// int	check_pipe_syntax(t_msh *msh)
-// {
-// 	int	i;
-
-// 	if (!msh || !msh->tkns || !msh->tkns->args)
-// 		return (TRUE);
-// 	i = 0;
-// 	while (msh->tkns->args[i])
-// 	{
-// 		if (ft_strcmp(msh->tkns->args[i], "|") == 0)
-// 		{
-// 			if (i == 0 || !msh->tkns->args[i + 1])
-// 			{
-// 				print_error_msg(msh, '|');
-// 				return (FALSE);
-// 			}
-// 		}
-// 		i++;
-// 	}
-// 	return (TRUE);
-// }
-
-int	check_double_pipe(t_msh *msh)
-{
-	int	i;
-
-	if (!msh || !msh->tkns || !msh->tkns->args)
-		return (TRUE);
-	i = 0;
-	while (msh->tkns->args[i])
-	{
-		if (ft_strcmp(msh->tkns->args[i], "|") == 0
-			&& msh->tkns->args[i + 1]
-			&& ft_strcmp(msh->tkns->args[i + 1], "|") == 0)
-		{
-			print_error_msg(msh, '|');
-			return (FALSE);
-		}
-		i++;
-	}
-	return (TRUE);
-}
-
-int	check_redir_edges(t_msh *msh)
-{
-	int	i;
-
-	if (!msh || !msh->tkns || !msh->tkns->args)
-		return (TRUE);
-	i = 0;
-	while (msh->tkns->args[i])
-	{
-		if (is_redir(msh->tkns->args[i]))
-		{
-			if (!msh->tkns->args[i + 1] || is_redir(msh->tkns->args[i + 1]))
-			{
-				print_error_msg(msh, '>');
-				return (FALSE);
-			}
-		}
-		i++;
-	}
-	return (TRUE);
-}
-
-int	check_unclosed_quotes(char *input)
-{
-	int i;
-	int single;
-	int dbl;
-
-	if (!input)
-		return (TRUE);
-	i = 0;
-	single = 0;
-	dbl = 0;
-	while (input[i])
-	{
-		if (input[i] == '\'' && dbl == 0)
-			single = !single;
-		else if (input[i] == '\"' && single == 0)
-			dbl = !dbl;
-		i++;
-	}
-	if (single || dbl)
-	{
-		printf("Error: Comillas sin cerrar.\n");
-		return (FALSE);
-	}
-	return (TRUE);
-}
-
-int	basic_syntax_checker(char *input, t_msh *msh)
-{
-	if (check_unclosed_quotes(input) == FALSE)
-		return (FALSE);
-	if (check_redir_edges(msh) == FALSE)
-		return (FALSE);
-	if (check_double_pipe(msh) == FALSE)
-		return (FALSE);
-	if (check_redir_edges(msh) == FALSE)
-		return (FALSE);
-	/* Puedes seguir añadiendo llamadas: check_otros(...) */
-	return (TRUE);
 }

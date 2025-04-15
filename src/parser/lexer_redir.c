@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauriago <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:21:38 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/15 13:21:51 by lauriago         ###   ########.fr       */
+/*   Updated: 2025/04/16 00:15:52 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	*find_piperedir(t_msh *msh)
 	int	i;
 	int	j;
 
+	// printf("find_piperedir\n");
 	i = 0;
 	j = 0;
 	msh->tkns->countpip = malloc(sizeof(int) * 1024);
@@ -48,6 +49,7 @@ void	type_def(t_msh *msh)
 	int	i;
 	int	j;
 
+	// printf("type_def\n");
 	i = 0;
 	j = 0;
 	msh->tkns->typepip = malloc(sizeof(int) * 1024);
@@ -66,6 +68,7 @@ int	type_verif(t_msh *msh)
 	// int	tokn;
 
 	// tokn = msh->cmd_count;
+	// printf("type_verif\n");
 	if (ft_strcmp(msh->tkns->args[0], "|")  ==  0)
 	{
 		print_error_msg(msh, '|');

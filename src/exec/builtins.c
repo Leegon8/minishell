@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:12:48 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/15 20:22:20 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:52:36 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	check_tokens(char *input, t_msh *msh)
 	reset_cmd_and_args(msh);
 	ft_token(input, msh->tkns);
 	if (basic_syntax_checker(input, msh) == FALSE)
+		return ;
+	if (check_pipe_edges(msh) == FALSE)
 		return ;
 	if (!msh->tkns->args || !msh->tkns->args[0])
 		return ;

@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:45:27 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/03 19:52:31 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:17:10 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	validate_pipe_syntax(t_msh *msh, t_tok *tok)
 	int	i;
 
 	i = 0;
-	
+
 	while (tok->args[i])
 	{
 		if (has_pipe(tok->args[i]))

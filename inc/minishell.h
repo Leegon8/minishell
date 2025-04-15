@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:26:23 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/15 20:22:29 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:54:21 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,14 @@ int		*find_piperedir(t_msh *msh);
 void	type_def(t_msh *msh);
 int		type_verif(t_msh *msh);
 
+/* ------------------------------------------------------------lexer_syntax.c */
+int		basic_syntax_checker(char *input, t_msh *msh);
+int		check_unclosed_quotes(char *input);
+int		check_redir_edges(t_msh *msh);
+int		check_double_pipe(t_msh *msh);
+int		is_redir(char *token);
+int		check_pipe_edges(t_msh *msh);
+
 /* -------------------------------------------------------------------lexer.c */
 /*static int	has_pipe(char *token)*/
 /*static int	validate_pipe_syntax(t_tok *tok)*/
@@ -380,16 +388,6 @@ t_redir	check_syntax_redir(t_msh *msh, char **tkn, int pos);
 // static void	print_redir_info(t_redir redir_type, int redir_pos)
 void	handle_redir_out(t_msh *msh, t_redir type);
 int		redir_checker(t_msh *msh);
-
-
-// int	check_pipe_syntax(t_msh *msh);
-int	basic_syntax_checker(char *input, t_msh *msh);
-int	check_unclosed_quotes(char *input);
-int	check_redir_edges(t_msh *msh);
-int	check_double_pipe(t_msh *msh);
-int	is_redir(char *token);
-
-
 
 /* ************************************************************************** */
 /* ******************************* [ TOOLS ] ******************************** */
