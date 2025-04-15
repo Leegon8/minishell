@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 21:50:55 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/08 09:51:04 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/15 20:20:06 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,110 @@ int	redir_checker(t_msh *msh)
 	}
 	
 	return (FALSE);
+}
+
+// int	check_pipe_syntax(t_msh *msh)
+// {
+// 	int	i;
+
+// 	if (!msh || !msh->tkns || !msh->tkns->args)
+// 		return (TRUE);
+// 	i = 0;
+// 	while (msh->tkns->args[i])
+// 	{
+// 		if (ft_strcmp(msh->tkns->args[i], "|") == 0)
+// 		{
+// 			if (i == 0 || !msh->tkns->args[i + 1])
+// 			{
+// 				print_error_msg(msh, '|');
+// 				return (FALSE);
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	return (TRUE);
+// }
+
+int	check_double_pipe(t_msh *msh)
+{
+	int	i;
+
+	if (!msh || !msh->tkns || !msh->tkns->args)
+		return (TRUE);
+	i = 0;
+	while (msh->tkns->args[i])
+	{
+		if (ft_strcmp(msh->tkns->args[i], "|") == 0
+			&& msh->tkns->args[i + 1]
+			&& ft_strcmp(msh->tkns->args[i + 1], "|") == 0)
+		{
+			print_error_msg(msh, '|');
+			return (FALSE);
+		}
+		i++;
+	}
+	return (TRUE);
+}
+
+int	check_redir_edges(t_msh *msh)
+{
+	int	i;
+
+	if (!msh || !msh->tkns || !msh->tkns->args)
+		return (TRUE);
+	i = 0;
+	while (msh->tkns->args[i])
+	{
+		if (is_redir(msh->tkns->args[i]))
+		{
+			if (!msh->tkns->args[i + 1] || is_redir(msh->tkns->args[i + 1]))
+			{
+				print_error_msg(msh, '>');
+				return (FALSE);
+			}
+		}
+		i++;
+	}
+	return (TRUE);
+}
+
+int	check_unclosed_quotes(char *input)
+{
+	int i;
+	int single;
+	int dbl;
+
+	if (!input)
+		return (TRUE);
+	i = 0;
+	single = 0;
+	dbl = 0;
+	while (input[i])
+	{
+		if (input[i] == '\'' && dbl == 0)
+			single = !single;
+		else if (input[i] == '\"' && single == 0)
+			dbl = !dbl;
+		i++;
+	}
+	if (single || dbl)
+	{
+		printf("Error: Comillas sin cerrar.\n");
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
+int	basic_syntax_checker(char *input, t_msh *msh)
+{
+	if (check_unclosed_quotes(input) == FALSE)
+		return (FALSE);
+	if (check_redir_edges(msh) == FALSE)
+		return (FALSE);
+	if (check_double_pipe(msh) == FALSE)
+		return (FALSE);
+	if (check_redir_edges(msh) == FALSE)
+		return (FALSE);
+	/* Puedes seguir añadiendo llamadas: check_otros(...) */
+	return (TRUE);
 }

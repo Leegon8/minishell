@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:32:36 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/10 00:58:04 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/15 20:59:48 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void	handle_exit_status(t_msh *msh)
 
 void	print_error_msg(t_msh *msh, char c)
 {
-	ft_fd_printf(2, "bash: syntax error near unexpected token `%c'\n", c);
+	ft_fd_printf(2, "minishell: syntax error near unexpected token `%c'\n", c);
 	msh->last_exit_code  = 2;
 }
