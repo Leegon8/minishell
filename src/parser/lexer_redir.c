@@ -18,28 +18,31 @@ int	*find_piperedir(t_msh *msh)
 	int	i;
 	int	j;
 
-	// printf("find_piperedir\n");
 	i = 0;
 	j = 0;
 	msh->tkns->countpip = malloc(sizeof(int) * 1024);
-	if (has_redirection(msh, msh->tkns) != -1)
+	// printf("DEBUG: has_redirection = %d\n", has_redirection(msh, msh->tkns));
+	if (has_redirection(msh, msh->tkns) == -1)
+		return (NULL);
+	while (msh->tkns->args[i])
 	{
-		while (msh->tkns->args[i])
+		if (i == 0)
 		{
-			if (i == 0)
-			{
-				msh->tkns->countpip[j] = has_redirection(msh, msh->tkns);
-				j++;
-			}
-			if (msh->tkns->countpip[j - 1] != find_next_redir(msh, i)
-				&& find_next_redir(msh, i) != -1)
-			{
-				msh->tkns->countpip[j] = find_next_redir(msh, i);
-				j++;
-			}
-			i++;
+			msh->tkns->countpip[j] = has_redirection(msh, msh->tkns);
+			// printf("DEBUG: countpip[%d] = %d\n", j , msh->tkns->countpip[j]);
+			j++;
 		}
+		if (msh->tkns->countpip[j - 1] != find_next_redir(msh, i)
+			&& find_next_redir(msh, i) != -1)
+		{
+			msh->tkns->countpip[j] = find_next_redir(msh, i);
+			// printf("DEBUG-2: countpip[%d] = %d\n", j , msh->tkns->countpip[j]);
+			j++;
+		}
+		i++;
 	}
+	msh->tkns->countpip[j] = -1;
+	// printf("DEBUG-3: countpip[%d] = %d\n", j , msh->tkns->countpip[j]);
 	return (msh->tkns->countpip);
 }
 
@@ -49,30 +52,29 @@ void	type_def(t_msh *msh)
 	int	i;
 	int	j;
 
-	// printf("type_def\n");
 	i = 0;
 	j = 0;
 	msh->tkns->typepip = malloc(sizeof(int) * 1024);
-	while (msh->tkns->countpip[i])
+	while (msh->tkns->countpip[i] != -1)
 	{
 		msh->tkns->typepip[j] = check_syntax_redir(msh, msh->tkns->args,
-			msh->tkns->countpip[i]);
+				msh->tkns->countpip[i]);
 		j++;
 		i++;
 	}
 }
 
-// Check syntax
-int	type_verif(t_msh *msh)
+int	is_redir(char *token)
 {
-	// int	tokn;
-
-	// tokn = msh->cmd_count;
-	// printf("type_verif\n");
-	if (ft_strcmp(msh->tkns->args[0], "|")  ==  0)
-	{
-		print_error_msg(msh, '|');
-		return (FALSE);
-	}
-	return (TRUE);
+	if (!token)
+		return (0);
+	if (ft_strcmp(token, "<") == 0)
+		return (1);
+	if (ft_strcmp(token, ">") == 0)
+		return (1);
+	if (ft_strcmp(token, "<<") == 0)
+		return (1);
+	if (ft_strcmp(token, ">>") == 0)
+		return (1);
+	return (0);
 }

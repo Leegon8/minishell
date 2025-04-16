@@ -45,9 +45,15 @@ int	handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type)
 	if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
 		return (FALSE);
 	if (redir_type == REDIR_OUT || redir_type == REDIR_APPEND)
+	{
+		printf("DEBUG: HOLAAAAA ROCKERO\nredir_type = %d\n", redir_type);
 		handle_redir_out(msh, redir_type);
+	}
 	if (redir_type == REDIR_IN)
+	{
+		printf("DEBUG: HOLAAAAA ROCKERO\nredir_type = %d\n", redir_type);
 		handle_redir_in(msh, redir_type);
+	}
 	if (redir_type == REDIR_HERE)
 	{
 		if (!handle_heredoc(msh, msh->tkns->args[redir_pos + 1]))

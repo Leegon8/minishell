@@ -28,29 +28,24 @@ static void	reset_cmd_and_args(t_msh *msh)
 
 void	check_tokens(char *input, t_msh *msh)
 {
-	int	count_tok;
-
 	if (!input || !*input)
 		return ;
 	reset_cmd_and_args(msh);
 	ft_token(input, msh->tkns);
 	if (basic_syntax_checker(input, msh) == FALSE)
 		return ;
-	if (check_pipe_edges(msh) == FALSE)
-		return ;
 	if (!msh->tkns->args || !msh->tkns->args[0])
 		return ;
-	count_tok = 0;
-	while (msh->tkns->args[count_tok])
-		count_tok++;
-	msh->tkns->token_count = count_tok;
+	msh->tkns->token_count = 0;
+	while (msh->tkns->args[msh->tkns->token_count])
+		msh->tkns->token_count++;
 	msh->tkns->cmd = ft_strdup(msh->tkns->args[0]);
-	if (!redir_checker(msh) && type_verif(msh) != FALSE)
+	if (!redir_checker(msh))
 	{
 		if (msh->tkns->first_redir_type == REDIR_ERROR)
 			return ;
 		if (is_builtin(msh->tkns->cmd))
-			exc_cmd(msh, count_tok);
+			exc_cmd(msh, msh->tkns->token_count);
 		else if (find_cmd(msh->tkns->cmd, msh) == -1)
 			cmd_not_found(msh);
 	}
@@ -121,19 +116,4 @@ void	exc_cmd(t_msh *msh, int count_tok)
 		ft_unset(msh, count_tok);
 	else
 		return ;
-}
-
-int	is_redir(char *token)
-{
-	if (!token)
-		return (0);
-	if (ft_strcmp(token, "<") == 0)
-		return (1);
-	if (ft_strcmp(token, ">") == 0)
-		return (1);
-	if (ft_strcmp(token, "<<") == 0)
-		return (1);
-	if (ft_strcmp(token, ">>") == 0)
-		return (1);
-	return (0);
 }

@@ -57,9 +57,9 @@ int	check_redir_edges(t_msh *msh)
 
 int	check_unclosed_quotes(char *input)
 {
-	int i;
-	int single;
-	int dbl;
+	int	i;
+	int	single;
+	int	dbl;
 
 	if (!input)
 		return (TRUE);
@@ -91,6 +91,8 @@ int	basic_syntax_checker(char *input, t_msh *msh)
 	if (check_double_pipe(msh) == FALSE)
 		return (FALSE);
 	if (check_redir_edges(msh) == FALSE)
+		return (FALSE);
+	if (check_pipe_edges(msh) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }

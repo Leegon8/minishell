@@ -22,7 +22,6 @@ static int	validate_pipe_syntax(t_msh *msh, t_tok *tok)
 	int	i;
 
 	i = 0;
-
 	while (tok->args[i])
 	{
 		if (has_pipe(tok->args[i]))

@@ -304,13 +304,13 @@ void	handle_heredoc_signals(void);
 int		*find_piperedir(t_msh *msh);
 void	type_def(t_msh *msh);
 int		type_verif(t_msh *msh);
+int		is_redir(char *token);
 
 /* ------------------------------------------------------------lexer_syntax.c */
 int		basic_syntax_checker(char *input, t_msh *msh);
 int		check_unclosed_quotes(char *input);
 int		check_redir_edges(t_msh *msh);
 int		check_double_pipe(t_msh *msh);
-int		is_redir(char *token);
 int		check_pipe_edges(t_msh *msh);
 
 /* -------------------------------------------------------------------lexer.c */
