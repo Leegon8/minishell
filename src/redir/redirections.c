@@ -105,7 +105,7 @@ int	redir_checker(t_msh *msh)
 	if (redir_count == 1)
 		return (handle_one_redir(msh, msh->tkns->countpip[0],
 				msh->tkns->typepip[0]));
-	// if (redir_count > 1)
-	// 	return (handle_multip_redir(msh, redir_count, redir_pos, redir_type));
+	if (redir_count > 1)
+		return (handle_multip_redir(msh, redir_count));
 	return (FALSE);
 }

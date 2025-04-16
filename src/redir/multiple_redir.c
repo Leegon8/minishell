@@ -54,10 +54,8 @@ int	process_redirection(t_msh *msh, t_redir type, int current_pos)
 	return (TRUE);
 }
 
-void	handle_last_redirection(t_msh *msh, int is_last_redir, t_redir type)
+void	handle_last_redirection(t_msh *msh, t_redir type)
 {
-	if (!is_last_redir)
-		return ;
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 		handle_redir_out(msh, type);
 	if (type == REDIR_IN)

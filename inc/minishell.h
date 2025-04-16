@@ -367,7 +367,7 @@ void	handle_redir_in(t_msh *msh, t_redir type);
 /* ----------------------------------------------------------multiple_redir.c */
 void	open_files(t_msh *msh, t_redir type, char *file);
 int		process_redirection(t_msh *msh, t_redir type, int current_pos);
-void	handle_last_redirection(t_msh *msh, int is_last_redir, t_redir type);
+void	handle_last_redirection(t_msh *msh, t_redir type);
 
 /* ------------------------------------------------------------output_redir.c */
 // static void	error_fd(char *filename)
@@ -378,7 +378,7 @@ void	restore_redirections(t_msh *msh);
 int		count_redir(t_msh *msh);
 int		handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type);
 int		find_next_redir(t_msh *msh, int start_pos);
-int		handle_multip_redir(t_msh *msh, int count, int redir_pos, t_redir type);
+int		handle_multip_redir(t_msh *msh, int count);
 
 /* ------------------------------------------------------------redirections.c */
 // static void	print_error_msg(char c)

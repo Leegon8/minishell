@@ -45,15 +45,9 @@ int	handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type)
 	if (redir_type == REDIR_ERROR || redir_type == NO_REDIR)
 		return (FALSE);
 	if (redir_type == REDIR_OUT || redir_type == REDIR_APPEND)
-	{
-		printf("DEBUG: HOLAAAAA ROCKERO\nredir_type = %d\n", redir_type);
 		handle_redir_out(msh, redir_type);
-	}
 	if (redir_type == REDIR_IN)
-	{
-		printf("DEBUG: HOLAAAAA ROCKERO\nredir_type = %d\n", redir_type);
 		handle_redir_in(msh, redir_type);
-	}
 	if (redir_type == REDIR_HERE)
 	{
 		if (!handle_heredoc(msh, msh->tkns->args[redir_pos + 1]))
@@ -84,29 +78,24 @@ int	find_next_redir(t_msh *msh, int start_pos)
 	return (-1);
 }
 
-int	handle_multip_redir(t_msh *msh, int count, int redir_pos, t_redir type)
+int	handle_multip_redir(t_msh *msh, int count)
 {
 	int	i;
-	int	current_pos;
-	int	is_last_redir;
+	int	j;
 
 	i = 0;
-	current_pos = redir_pos;
-	is_last_redir = FALSE;
+	j = 0;
 	while (i < count)
 	{
-		msh->tkns->redir_pos = current_pos;
-		if (process_redirection(msh, type, current_pos) == FALSE)
+		msh->tkns->redir_pos = msh->tkns->countpip[j];
+		if (!process_redirection(msh, msh->tkns->typepip[j],
+				msh->tkns->countpip[j]))
 			return (FALSE);
-		current_pos = find_next_redir(msh, current_pos + 2);
-		if (current_pos == -1)
-		{
-			is_last_redir = TRUE;
+		if (msh->tkns->countpip[j + 1] == -1)
 			break ;
-		}
-		type = check_syntax_redir(msh, msh->tkns->args, current_pos);
 		i++;
+		j++;
 	}
-	handle_last_redirection(msh, is_last_redir, type);
+	handle_last_redirection(msh, msh->tkns->typepip[j]);
 	return (TRUE);
 }
