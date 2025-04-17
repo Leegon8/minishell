@@ -92,8 +92,6 @@ int	execute_pipeline(t_msh *msh)
 			save_pipe_and_close(&prev_fd, pipe_fd);
 		i++;
 	}
-	while (wait(NULL) > 0)
-		;
 	return (0);
 }
 

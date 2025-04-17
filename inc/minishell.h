@@ -204,7 +204,7 @@ int		update_env_var_value(t_msh *msh, int pos, char *value);
 
 /* ---------------------------------------------------------------------pwd.c */
 int		ft_pwd(t_msh *msh);
-int		builtin_redir_check(t_msh *msh);
+// int		builtin_redir_check(t_msh *msh);
 
 /* -------------------------------------------------------------------unset.c */
 /*static int	is_valid_identifier(char *str)*/

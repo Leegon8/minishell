@@ -17,8 +17,7 @@ void	handle_exit_error(t_msh *msh, char *arg)
 	write(STDERR_FILENO, "exit: ", 6);
 	write(STDERR_FILENO, arg, ft_strlen(arg));
 	write(STDERR_FILENO, ": numeric argument required\n", 29);
-	if (msh->env)
-		free_structs(msh->env, msh->tkns, msh->mpip);
+	free_structs(msh->env, msh->tkns, msh->mpip);
 	msh->last_exit_code = 2;
 	exit(2);
 }

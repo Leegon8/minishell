@@ -37,7 +37,7 @@ static void	is_overflow(t_msh *msh, char *str)
 		handle_exit_error(msh, str);
 }
 
-static void	is_numeric_arg(t_msh *msh, char *str)
+static int	is_numeric_arg(t_msh *msh, char *str)
 {
 	int	i;
 
@@ -46,22 +46,19 @@ static void	is_numeric_arg(t_msh *msh, char *str)
 		handle_exit_error(msh, str);
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
-	if (!str[i])
-		handle_exit_error(msh, str);
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i + 1] == '-' || str[i + 1] == '+')
-			handle_exit_error(msh, str);
+			return (2);
 		i++;
 	}
-	if (!str[i])
-		handle_exit_error(msh, str);
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			handle_exit_error(msh, str);
+			return(2);
 		i++;
 	}
+	return (1);
 }
 
 static void	handle_numeric_arg(t_msh *msh, char *arg)
@@ -94,16 +91,16 @@ void	ft_exit(t_msh *msh)
 		exit(1);
 	if (!msh->tkns || !msh->tkns->args || !msh->tkns->args[1])
 		exit(msh->last_exit_code);
-	is_numeric_arg(msh, msh->tkns->args[1]);
-	is_overflow(msh, msh->tkns->args[1]);
 	if (msh->tkns->args[2])
 	{
-		write(STDERR_FILENO, "exit: too many arguments\n", 25);
-		msh->end_sig = 1;
+		write(STDERR_FILENO, "minishell: exit: too many arguments\n", 36);
 		return ;
 	}
+	is_overflow(msh, msh->tkns->args[1]);
 	handle_numeric_arg(msh, msh->tkns->args[1]);
 	write(STDERR_FILENO, "exit\n", 5);
+	if (is_numeric_arg(msh, msh->tkns->args[1]) != 1)
+		handle_exit_error(msh, msh->tkns->args[1]);
 	free_structs(msh->env, msh->tkns, msh->mpip);
 	exit(msh->last_exit_code);
 }
