@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:32:36 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/15 20:59:48 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:44:23 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	handle_exit_error(t_msh *msh, char *arg)
 {
 	write(STDERR_FILENO, "exit: ", 6);
 	write(STDERR_FILENO, arg, ft_strlen(arg));
-	write(STDERR_FILENO, ": numeric argument required\n", 29);
+	write(STDERR_FILENO, ": numeric argument required\n", 28);
 	free_structs(msh->env, msh->tkns, msh->mpip);
 	msh->last_exit_code = 2;
-	exit(2);
+	exit(255);
 }
 
 void	handle_cd_error(t_msh *msh, int error_type)
