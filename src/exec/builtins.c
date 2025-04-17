@@ -24,6 +24,16 @@ static void	reset_cmd_and_args(t_msh *msh)
 		ft_free_array(msh->tkns->args);
 		msh->tkns->args = NULL;
 	}
+	if (msh->tkns->countpip)
+	{
+		free(msh->tkns->countpip);
+		msh->tkns->countpip = NULL;
+	}
+	if (msh->tkns->typepip)
+	{
+		free(msh->tkns->typepip);
+		msh->tkns->typepip = NULL;
+	}
 }
 
 void	check_tokens(char *input, t_msh *msh)

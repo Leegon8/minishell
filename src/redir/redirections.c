@@ -21,15 +21,7 @@ int	has_redirection(t_msh *msh, t_tok *tok)
 	while (tok->args[i])
 	{
 		if (is_operator(tok->args[i][0]) || is_pipe(tok->args[i][0]))
-		{
-			// if (tok->args[i + 1])
-			// {
-			// 	if (is_operator(tok->args[i + 1][0])
-			// 		|| is_pipe(tok->args[i + 1][0]))
-			// 		return (-1);
-			// }
 			return (i);
-		}
 		i++;
 	}
 	return (-1);
@@ -88,24 +80,20 @@ void	handle_redir_out(t_msh *msh, t_redir type)
 int	redir_checker(t_msh *msh)
 {
 	int		redir_count;
-	// int		redir_pos;
-	// t_redir	redir_type;
+	int		result;
 
 	redir_count = count_redir(msh);
+	result = FALSE;
 	if (!msh || !msh->tkns || !msh->tkns->args)
 		return (FALSE);
 	if (find_piperedir(msh) == NULL)
 		return (FALSE);
 	type_def(msh);
 	msh->tkns->redir_pos = msh->tkns->countpip[0];
-
-	// redir_type = check_syntax_redir(msh, msh->tkns->args, redir_pos);
-	// if (redir_type == NO_REDIR || redir_type == REDIR_ERROR)
-	// 	return (FALSE);
 	if (redir_count == 1)
-		return (handle_one_redir(msh, msh->tkns->countpip[0],
-				msh->tkns->typepip[0]));
+		result = handle_one_redir(msh, msh->tkns->countpip[0],
+				msh->tkns->typepip[0]);
 	if (redir_count > 1)
-		return (handle_multip_redir(msh, redir_count));
-	return (FALSE);
+		result = handle_multip_redir(msh, redir_count);
+	return (result);
 }
