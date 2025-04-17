@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:01 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/17 19:35:19 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/17 19:59:30 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,15 @@
 static void	is_overflow(t_msh *msh, char *str)
 {
 	int			i;
-	int			sign;
 	long long	num;
 	long long	prev;
 
 	i = 0;
-	sign = 1;
 	num = 0;
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
 		i++;
-	}
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
 		prev = num;
@@ -66,33 +60,7 @@ static void	is_overflow(t_msh *msh, char *str)
 			handle_exit_error(msh, str);
 		i++;
 	}
-	if ((sign == 1 && num < 0) || (sign == -1 && num > 0))
-		handle_exit_error(msh, str);
 }
-
-
-static int	is_numeric_arg(t_msh *msh, char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str || !*str)
-		handle_exit_error(msh, str);
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
-		return (2);
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (2);
-		i++;
-	}
-	return (1);
-}
-
 
 static void	handle_numeric_arg(t_msh *msh, char *arg)
 {
@@ -114,8 +82,34 @@ static void	handle_numeric_arg(t_msh *msh, char *arg)
 		exit_code = exit_code * 10 + (arg[i] - '0');
 		i++;
 	}
-	exit_code *= sign;
+	exit_code = exit_code * sign;
 	msh->last_exit_code = (exit_code % 256 + 256) % 256;
+}
+
+static int	is_numeric_arg(t_msh *msh, char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str || !*str)
+		handle_exit_error(msh, str);
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		i++;
+		if (str[i] == '-' || str[i] == '+')
+			return (2);
+	}
+	if (!str[i])
+		return (2);
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (2);
+		i++;
+	}
+	return (1);
 }
 
 void	ft_exit(t_msh *msh)
