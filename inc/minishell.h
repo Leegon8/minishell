@@ -378,7 +378,6 @@ void	restore_redirections(t_msh *msh);
 int		count_redir(t_msh *msh);
 int		handle_one_redir(t_msh *msh, int redir_pos, t_redir	redir_type);
 int		find_next_redir(t_msh *msh, int start_pos);
-int		handle_multip_redir(t_msh *msh, int count);
 
 /* ------------------------------------------------------------redirections.c */
 // static void	print_error_msg(char c)
@@ -389,13 +388,11 @@ t_redir	check_syntax_redir(t_msh *msh, char **tkn, int pos);
 void	handle_redir_out(t_msh *msh, t_redir type);
 int		redir_checker(t_msh *msh);
 
-
-int just_redirs(t_msh *msh, int count);
-int just_pipes(t_msh *msh, int count);
-int handle_just_redirs(t_msh *msh, int count);
-
-
-
+/* ------------------------------------------------------------type_handler.c */
+int		handle_multip_redir(t_msh *msh, int count);
+int		just_redirs(t_msh *msh, int count);
+int		just_pipes(t_msh *msh, int count);
+int		handle_just_redirs(t_msh *msh, int count);
 
 /* ************************************************************************** */
 /* ******************************* [ TOOLS ] ******************************** */

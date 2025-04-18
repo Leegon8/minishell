@@ -31,13 +31,13 @@ EXEC = builtins builtins_utils executor executor_utils exec_redir pipes
 
 HEREDOC = heredoc
 
-MAIN = minishell init signals signals2
+MAIN = minishell init signals
 
 PARSER = lexer parser quote_expander quote_lexer quote_lexer_tools \
 		token_tools tokenizer lexer_redir lexer_syntax
 
 REDIR = builtin_redir input_redir output_redir redirections redir_tools \
-		multiple_redir
+		multiple_redir type_handler
 
 TOOLS = err_handle free
 

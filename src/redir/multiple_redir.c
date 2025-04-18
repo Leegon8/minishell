@@ -47,8 +47,6 @@ int	process_redirection(t_msh *msh, t_redir type, int current_pos)
 		open_files(msh, type, msh->tkns->args[current_pos + 1]);
 	else if (type == REDIR_HERE)
 		handle_heredoc(msh, msh->tkns->args[current_pos + 1]);
-	// else if (type == PIPE)
-	// 	handle_pipes(msh);
 	if (msh->last_exit_code == 2)
 		return (FALSE);
 	return (TRUE);
