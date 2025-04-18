@@ -12,34 +12,6 @@
 
 #include "minishell.h"
 
-// static void	is_overflow(t_msh *msh, char *str)
-// {
-// 	int			i;
-// 	int			sign;
-// 	long long	num;
-// 	long long	prev;
-
-// 	i = 0;
-// 	sign = 1;
-// 	num = 0;
-// 	while (str[i] == ' ' || str[i] == '\t')
-// 		i++;
-// 	if (str[i] == '-')
-// 	{
-// 		sign = -1;
-// 		i++;
-// 	}
-// 	while (str[i] && str[i] >= '0' && str[i] <= '9')
-// 	{
-// 		prev = num;
-// 		num = num * 10 + (str[i++] - '0');
-// 		if (num < prev)
-// 			handle_exit_error(msh, str);
-// 	}
-// 	if ((sign == 1 && num < 0) || (sign == -1 && num > 0))
-// 		handle_exit_error(msh, str);
-// }
-
 static void	is_overflow(t_msh *msh, char *str)
 {
 	int			i;
@@ -135,4 +107,3 @@ void	ft_exit(t_msh *msh)
 	free_structs(msh->env, msh->tkns, msh->mpip);
 	exit(msh->last_exit_code);
 }
-

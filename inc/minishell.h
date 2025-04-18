@@ -389,6 +389,14 @@ t_redir	check_syntax_redir(t_msh *msh, char **tkn, int pos);
 void	handle_redir_out(t_msh *msh, t_redir type);
 int		redir_checker(t_msh *msh);
 
+
+int just_redirs(t_msh *msh, int count);
+int just_pipes(t_msh *msh, int count);
+int handle_just_redirs(t_msh *msh, int count);
+
+
+
+
 /* ************************************************************************** */
 /* ******************************* [ TOOLS ] ******************************** */
 /* ************************************************************************** */

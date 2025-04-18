@@ -80,6 +80,46 @@ int	find_next_redir(t_msh *msh, int start_pos)
 
 int	handle_multip_redir(t_msh *msh, int count)
 {
+	if (just_pipes(msh, count))
+		handle_pipes(msh);
+	if (just_redirs(msh, count))
+		handle_just_redirs(msh, count);
+	// else
+	return (TRUE);
+}
+
+int just_pipes(t_msh *msh, int count)
+{
+	int	pipe;
+
+	pipe = 0;
+	while (pipe < count)
+	{
+		if (msh->tkns->typepip[pipe] == PIPE)
+			pipe++;
+		else
+			return (FALSE);
+	}
+	return (TRUE);
+}
+
+int just_redirs(t_msh *msh, int count)
+{
+	int	red;
+
+	red = 0;
+	while (red < count)
+	{
+		if (msh->tkns->typepip[red] != PIPE)
+			red++;
+		else
+			return (FALSE);
+	}
+	return (TRUE);
+}
+
+int handle_just_redirs(t_msh *msh, int count)
+{
 	int	i;
 	int	j;
 
