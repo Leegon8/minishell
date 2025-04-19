@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:01 by lauriago          #+#    #+#             */
-/*   Updated: 2025/04/17 19:59:30 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/19 18:52:24 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,16 @@ static int	is_numeric_arg(t_msh *msh, char *str)
 
 void	ft_exit(t_msh *msh)
 {
-	if (!msh)
+	if (msh == NULL)
 		exit(1);
-	if (!msh->tkns || !msh->tkns->args || !msh->tkns->args[1])
+	if (msh->tkns == NULL || msh->tkns->args == NULL
+		|| msh->tkns->args[1] == NULL)
 	{
 		write(STDERR_FILENO, "exit\n", 5);
+		free_structs(msh->env, msh->tkns, msh->mpip);
 		exit(msh->last_exit_code);
 	}
-	if (msh->tkns->args[2])
+	if (msh->tkns->args[2] != NULL)
 	{
 		write(STDERR_FILENO, "minishell: exit: too many arguments\n", 36);
 		msh->last_exit_code = 1;

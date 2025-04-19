@@ -6,7 +6,7 @@
 /*   By: lprieto- <lprieto-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:25:46 by lprieto-          #+#    #+#             */
-/*   Updated: 2025/04/10 01:27:02 by lprieto-         ###   ########.fr       */
+/*   Updated: 2025/04/19 19:38:41 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,21 +88,3 @@ int	env_init(t_env *env, t_msh *msh)
 	env_init_values(env, msh);
 	return (TRUE);
 }
-
-// int	env_init(t_env *env, t_msh *msh)
-// {
-// 	char	*tmp;
-
-// 	tmp = search_value(msh, "HOME");
-// 		env->home = tmp;
-// 	tmp = getenv("OLDPWD");
-// 	env->old_pwd = tmp;
-// 	tmp = getenv("PATH");
-// 	env->path = tmp;
-// 	tmp = getcwd(NULL, 0);
-// 	env->pwd = tmp;
-// 	if (!env->pwd)
-// 		return (ft_fd_printf(2, "%s", E_MEMASF), FALSE);
-// 	env_init_values(env, msh);
-// 	return (TRUE);
-// }
