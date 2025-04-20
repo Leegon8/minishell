@@ -13,9 +13,8 @@
 NAME = minishell
 
 CC = gcc -g
-LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lreadline #   LINUX    #
-#LDFLAGS = -L/usr/local/opt/readline/lib -lreadline #   MACOS   #
-CFLAGS = -Wall -Wextra -Werror -MMD #-fsanitize=address
+LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lreadline
+CFLAGS = -Wall -Wextra -Werror -MMD
 
 AR = ar -rcs
 RM = rm -rf
@@ -65,7 +64,7 @@ DEPS = $(OBJS:.o=.d)
 all: makelib $(OBJ_PATH) $(NAME)
 
 makelib: 
-	$(MAKE) --silent -C libft  
+	$(MAKE) -C libft  
 
 $(OBJ_PATH):
 	mkdir -p $(OBJ_PATH)
@@ -80,16 +79,16 @@ $(OBJ_PATH)%.o: %.c Makefile libft/libft.a
 
 clean :
 	$(RM) $(OBJ_PATH)
-	$(MAKE) --silent -C libft clean
+	$(MAKE) -C libft clean
 
 fclean :
 	$(RM) $(NAME) $(OBJ_PATH)
-	$(MAKE) --silent -C libft fclean
+	$(MAKE) -C libft fclean
 
 re :
-	make fclean --silent
-	make all --silent
-	$(MAKE) all --silent -C libft
+	make fclean
+	make all
+	$(MAKE) all -C libft
 
 .PHONY: all, clean, fclean, re
 

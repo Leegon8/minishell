@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// Counter of all the positions of redirections
 int	*find_piperedir(t_msh *msh)
 {
 	int	i;
@@ -42,7 +41,6 @@ int	*find_piperedir(t_msh *msh)
 	return (msh->tkns->countpip);
 }
 
-// Definition of witch type is every redirection
 void	type_def(t_msh *msh)
 {
 	int	i;
